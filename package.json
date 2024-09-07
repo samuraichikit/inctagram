@@ -12,6 +12,9 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.0.20",
+    "@fontsource/barlow": "^5.0.14",
+    "@fontsource/roboto": "^5.0.14",
     "next": "14.2.8",
     "react": "^18",
     "react-dom": "^18"
