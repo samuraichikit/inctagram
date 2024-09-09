@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import s from './typography.module.scss'
 
 type Props = {
-  asChild: boolean
+  asChild?: boolean
   className?: string
   variant?:
     | 'bold_text_14'
@@ -24,7 +24,7 @@ type Props = {
     | 'small_text'
 } & ComponentProps<'p'>
 export const Typography = ({
-  asChild,
+  asChild = false,
   className,
   variant = 'regular_text_14',
   ...props
