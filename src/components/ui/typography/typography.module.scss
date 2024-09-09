@@ -16,7 +16,7 @@
 }
 
 .h2 {
-  @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-bold))
+  @include typography(var(--font-size-l), var(--line-height-m), var(--font-weight-bold))
 }
 
 .h3 {
@@ -40,7 +40,7 @@
 }
 
 .bold_text_14 {
-  @include typography(var(--font-size-s), var(--font-weight-bold), var(--line-height-m))
+  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-bold))
 }
 
 .small_text {
