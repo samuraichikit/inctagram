@@ -4,17 +4,18 @@
   row-gap: 7px;
 }
 
+.iconWrapper {
+  position: relative;
+}
+
 .label {
   color: var(--color-light-900);
-
-  &:has(+ input:disabled) {
-    pointer-events: none;
-    color: var(--color-dark-100);
-  }
 }
 
 .input {
+  width: 100%;
   padding: 6px 12px;
+
   background-color: transparent;
   border: 1px solid var(--color-dark-100);
   border-radius: 2px;
@@ -49,10 +50,44 @@
   }
 }
 
+.button {
+  all: unset;
+
+  position: absolute;
+  right: 12px;
+  bottom: 50%;
+  transform: translateY(50%);
+
+  display: flex;
+}
+
 .error {
   color: var(--color-danger-500);
 }
 
 .errorInput {
   border-color: var(--color-danger-500);
+}
+
+.passwordInput {
+  padding-right: 41px;
+}
+
+svg *[fill] {
+  fill: var(--color-light-100);
+}
+
+.wrapper:has(input:disabled) {
+  & .label {
+    pointer-events: none;
+    color: var(--color-dark-100);
+  }
+
+  & .button {
+    pointer-events: none;
+
+    svg *[fill] {
+      fill: var(--color-dark-100);
+    }
+  }
 }

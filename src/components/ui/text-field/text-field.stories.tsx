@@ -17,7 +17,7 @@ export const Text: Story = {
     error: '',
     label: 'Email',
     placeholder: 'Hello',
-    type: 'email',
+    type: 'password',
   },
 }
 
