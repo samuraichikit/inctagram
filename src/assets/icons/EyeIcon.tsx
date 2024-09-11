@@ -1,10 +1,11 @@
 import { ComponentProps } from 'react'
 
-type Props = ComponentProps<'svg'>
+type Props = { className: string } & ComponentProps<'svg'>
 
-export const EyeIcon = ({ height, width, ...props }: Props) => {
+export const EyeIcon = ({ className, height, width, ...props }: Props) => {
   return (
     <svg
+      className={className}
       fill={'none'}
       height={height}
       viewBox={'0 0 24 24'}

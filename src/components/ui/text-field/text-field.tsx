@@ -1,6 +1,8 @@
 import { ComponentProps, forwardRef, useState } from 'react'
 
 import { EyeIcon } from '@/assets/icons/EyeIcon'
+import { EyeOffIcon } from '@/assets/icons/EyeOffIcon'
+import { SearchIcon } from '@/assets/icons/SearchIcon'
 import { Typography } from '@/components/ui/typography'
 import clsx from 'clsx'
 
@@ -40,6 +42,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>(
               s.input,
               !!error && s.errorInput,
               isPasswordType && s.passwordInput,
+              isSearchType && s.searchInput,
               className
             )}
             id={label}
@@ -49,9 +52,14 @@ export const TextField = forwardRef<HTMLInputElement, Props>(
           />
           {isPasswordType && (
             <button className={s.button} onClick={passwordHandler} type={'button'}>
-              <EyeIcon height={24} width={24} />
+              {showPassword ? (
+                <EyeOffIcon className={s.eyeIcon} height={24} width={24} />
+              ) : (
+                <EyeIcon className={s.eyeIcon} height={24} width={24} />
+              )}
             </button>
           )}
+          {isSearchType && <SearchIcon className={s.searchIcon} height={15} width={15} />}
         </div>
         {!!error && (
           <Typography className={s.error} variant={'regular_text_14'}>

@@ -15,9 +15,9 @@ export const Text: Story = {
   args: {
     disabled: false,
     error: '',
-    label: 'Email',
-    placeholder: 'Hello',
-    type: 'password',
+    label: '',
+    placeholder: 'Input search',
+    type: 'search',
   },
 }
 
