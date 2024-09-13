@@ -1,0 +1,58 @@
+button {
+  all: unset;
+}
+
+.DialogOverlay {
+  position: fixed;
+  inset: 0;
+  opacity: 0.5;
+}
+
+.DialogContent {
+  width: 300px;
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  background-color: var(--color-dark-300);
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
+}
+
+.DialogContent:focus {
+  outline: none;
+}
+
+.DialogTitle {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--color-light-100);
+}
+
+.IconButton {
+  width: 18px;
+  height: 18px;
+
+  font-family: inherit;
+  color: var(--color-light-100);
+
+  border-radius: 100%;
+}
+
+.IconButton:hover {
+  background-color: var(--color-dark-500);
+  transition: 10ms ease-in-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 25px;
+  border-bottom: 1px solid var(--color-dark-100);
+}
+
+.content {
+  padding: 24px 24px 36px;
+}
