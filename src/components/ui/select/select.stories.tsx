@@ -12,11 +12,13 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
+    disabled: false,
     label: 'Select-box',
     options: [
-      { label: 'banana', value: 'banana' },
-      { label: 'milk', value: 'milk' },
-      { label: 'bread', value: 'bread' },
+      { label: 'Select-box-1', value: 'Select-box-1' },
+      { label: 'Select-box-2', value: 'Select-box-2' },
+      { label: 'Select-box-3', value: 'Select-box-3' },
     ],
+    placeholder: 'Select-box',
   },
 }

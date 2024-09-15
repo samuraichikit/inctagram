@@ -24,8 +24,58 @@
   border: 1px solid var(--color-dark-100);
   border-radius: 2px;
 
-  &:hover {
+  &[data-state='open'] {
+    color: var(--color-light-100);
+    background-color: var(--color-dark-500);
+    border: 1px solid var(--color-light-100);
+
+    .dropDownArrowIcon {
+      rotate: 180deg;
+      transition: 0.2s;
+    }
+  }
+
+  &[data-state='closed'] {
+    .dropDownArrowIcon {
+      transition: 0.2s;
+    }
+  }
+
+  &:disabled {
+    pointer-events: none;
+    color: var(--color-dark-100);
+  }
+
+  &:not([disabled]):focus-visible {
+    outline: 2px solid var(--color-accent-500);
+  }
+
+  &:not([disabled]):hover {
     border-color: var(--color-light-900);
+  }
+}
+
+.content {
+  width: var(--radix-select-trigger-width);
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-light-100);
+  border-top: none;
+}
+
+.viewport {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  padding: 6px 12px;
+
+  &:hover,
+  &[data-highlighted] {
+    color: var(--color-accent-500);
+    background-color: var(--color-dark-300);
+    outline: none;
+    transition: 0.2s;
   }
 }
 

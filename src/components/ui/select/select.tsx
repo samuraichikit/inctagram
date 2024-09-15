@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 import { DropDownArrowIcon } from '@/assets/icons/DropDownArrow'
 import * as SelectRadix from '@radix-ui/react-select'
 
@@ -11,28 +13,30 @@ type Option = {
 }
 
 type Props = {
+  disabled?: boolean
   label?: string
   options: Option[]
+  placeholder?: ReactNode
 }
 
-export const Select = ({ label, options }: Props) => (
+export const Select = ({ disabled, label, options, placeholder }: Props) => (
   <div className={s.wrapper}>
     {!!label && (
       <Typography asChild className={s.label} variant={'regular_text_14'}>
         <label htmlFor={label}>{label}</label>
       </Typography>
     )}
-    <SelectRadix.Root>
+    <SelectRadix.Root disabled={disabled}>
       <SelectRadix.Trigger className={s.trigger} id={label}>
-        <SelectRadix.Value placeholder={'Select-box'} />
+        <SelectRadix.Value placeholder={placeholder} />
         <DropDownArrowIcon className={s.dropDownArrowIcon} height={8} width={20} />
       </SelectRadix.Trigger>
       <SelectRadix.Portal>
-        <SelectRadix.Content position={'popper'}>
-          <SelectRadix.Viewport>
+        <SelectRadix.Content className={s.content} position={'popper'}>
+          <SelectRadix.Viewport className={s.viewport}>
             {options.map(item => {
               return (
-                <SelectRadix.Item key={item.value} value={item.value}>
+                <SelectRadix.Item className={s.item} key={item.value} value={item.value}>
                   <SelectRadix.ItemText>{item.label}</SelectRadix.ItemText>
                 </SelectRadix.Item>
               )
