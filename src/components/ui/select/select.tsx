@@ -1,11 +1,10 @@
 import { ReactNode } from 'react'
 
 import { DropDownArrowIcon } from '@/assets/icons/DropDownArrow'
+import { Typography } from '@/components/ui/typography'
 import * as SelectRadix from '@radix-ui/react-select'
 
 import s from './select.module.scss'
-
-import { Typography } from '../typography'
 
 type Option = {
   label: string
