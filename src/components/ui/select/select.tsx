@@ -13,20 +13,36 @@ type Option = {
 }
 
 type Props = {
+  defaultValue?: string
   disabled?: boolean
   label?: string
+  onValueChange?: (value: string) => void
   options: Option[]
   placeholder?: ReactNode
+  value?: string
 }
 
-export const Select = ({ disabled, label, options, placeholder }: Props) => (
+export const Select = ({
+  defaultValue,
+  disabled,
+  label,
+  onValueChange,
+  options,
+  placeholder,
+  value,
+}: Props) => (
   <div className={s.wrapper}>
     {!!label && (
       <Typography asChild className={s.label} variant={'regular_text_14'}>
         <label htmlFor={label}>{label}</label>
       </Typography>
     )}
-    <SelectRadix.Root disabled={disabled}>
+    <SelectRadix.Root
+      defaultValue={defaultValue}
+      disabled={disabled}
+      onValueChange={onValueChange}
+      value={value}
+    >
       <SelectRadix.Trigger className={s.trigger} id={label}>
         <SelectRadix.Value placeholder={placeholder} />
         <DropDownArrowIcon className={s.dropDownArrowIcon} height={8} width={20} />
