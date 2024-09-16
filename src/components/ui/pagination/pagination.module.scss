@@ -1,0 +1,35 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  row-gap: 24px;
+  column-gap: 24px;
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  .dots {
+    display: grid;
+    place-items: center;
+
+    width: 24px;
+    height: 24px;
+
+    color: var(--color-light-100);
+  }
+
+  .selectBlock {
+    display: flex;
+    flex-direction: row;
+    row-gap: 0;
+    column-gap: 12px;
+    justify-content: center;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  row-gap: 0;
+  column-gap: 12px;
+  justify-content: center;
+}
