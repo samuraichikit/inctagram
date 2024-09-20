@@ -41,7 +41,7 @@ export const Controlled: Story = {
         {...args}
         checked={checked}
         label={'Controlled'}
-        onChange={() => setChecked(!checked)}
+        onCheckedChange={() => setChecked(!checked)}
       />
     )
   },

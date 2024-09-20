@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ComponentPropsWithoutRef, useId, useState } from 'react'
 
 import { CheckIcon } from '@/assets/icons/CheckIcon'
 import { Typography } from '@/components/ui/typography'
@@ -7,28 +7,24 @@ import clsx from 'clsx'
 
 import s from './checkbox.module.scss'
 
-type Props = {
-  checked?: boolean
-  className?: string
-  disabled?: boolean
-  id?: string
-  label?: string
-  onChange?: (checked: boolean) => void
-  required?: boolean
-}
+type Props = { className?: string; id?: string; label?: string } & ComponentPropsWithoutRef<
+  typeof CheckboxRadix.Root
+>
 
 export const Checkbox = ({
   checked,
   className,
   disabled,
-  id = 'c1',
+  id,
   label,
-  onChange,
+  onCheckedChange,
   required,
 }: Props) => {
   const [isChecked, setChecked] = useState(false)
+  const generatedId = useId()
+  const idToUse = id ?? generatedId
 
-  const onCheckHandler = () => {
+  const checkboxToggleHandler = () => {
     if (!disabled) {
       setChecked(!isChecked)
     }
@@ -47,9 +43,9 @@ export const Checkbox = ({
         checked={checked ?? isChecked}
         className={s.checkRoot}
         disabled={disabled}
-        id={id}
-        onCheckedChange={onChange}
-        onClick={onCheckHandler}
+        id={idToUse}
+        onCheckedChange={onCheckedChange}
+        onClick={checkboxToggleHandler}
         required={required}
       >
         <div className={classNames.indicatorWrapper}>
@@ -60,7 +56,7 @@ export const Checkbox = ({
       </CheckboxRadix.Root>
       {label && (
         <Typography asChild>
-          <label className={classNames.label} onClick={onCheckHandler}>
+          <label className={classNames.label} onClick={checkboxToggleHandler}>
             {label}
           </label>
         </Typography>
