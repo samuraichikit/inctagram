@@ -91,10 +91,6 @@ input[type='search']::-webkit-search-results-decoration {
   padding-left: 41px;
 }
 
-.eyeIcon *[fill] {
-  fill: var(--color-light-100);
-}
-
 .searchIcon *[fill] {
   fill: var(--color-light-900);
 }
@@ -105,6 +101,8 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .wrapper:has(input:disabled) {
+  color: var(--color-dark-100);
+
   & .searchIcon *[fill] {
     fill: var(--color-dark-100);
   }
@@ -116,9 +114,5 @@ input[type='search']::-webkit-search-results-decoration {
 
   & .button {
     pointer-events: none;
-
-    .eyeIcon *[fill] {
-      fill: var(--color-dark-100);
-    }
   }
 }
