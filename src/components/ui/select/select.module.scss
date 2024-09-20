@@ -1,12 +1,12 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  row-gap: 7px;
-}
+  gap: 7px;
 
-.wrapper .label {
-  align-self: flex-start;
-  color: var(--color-light-900);
+  & .label {
+    align-self: flex-start;
+    color: var(--color-light-900);
+  }
 }
 
 .trigger {
@@ -24,6 +24,10 @@
   border: 1px solid var(--color-dark-100);
   border-radius: 2px;
 
+  .dropDownArrowIcon {
+    transition: 0.2s;
+  }
+
   &[data-state='open'] {
     color: var(--color-light-100);
     background-color: var(--color-dark-500);
@@ -31,13 +35,6 @@
 
     .dropDownArrowIcon {
       rotate: 180deg;
-      transition: 0.2s;
-    }
-  }
-
-  &[data-state='closed'] {
-    .dropDownArrowIcon {
-      transition: 0.2s;
     }
   }
 
@@ -46,11 +43,11 @@
     color: var(--color-dark-100);
   }
 
-  &:not([disabled]):focus-visible {
+  &:enabled:focus-visible {
     outline: 2px solid var(--color-accent-500);
   }
 
-  &:not([disabled]):hover {
+  &:enabled:hover {
     border-color: var(--color-light-900);
   }
 }
@@ -77,8 +74,4 @@
     outline: none;
     transition: 0.2s;
   }
-}
-
-.dropDownArrowIcon *[fill] {
-  fill: var(--color-light-100);
 }
