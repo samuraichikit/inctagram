@@ -1,4 +1,4 @@
-import { ComponentProps, FC } from 'react'
+import { ComponentProps } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -8,12 +8,8 @@ type Props = {
   active: boolean
 } & ComponentProps<'button'>
 
-export const NavigateButton: FC<Props> = ({ children, active, className, ...rest }) => {
+export const NavigateButton = ({ active, className, ...rest }: Props) => {
   const classes = clsx(s.button, active && s.active, className)
 
-  return (
-    <button {...rest} className={classes}>
-      {children}
-    </button>
-  )
+  return <button type={'button'} {...rest} className={classes} />
 }
