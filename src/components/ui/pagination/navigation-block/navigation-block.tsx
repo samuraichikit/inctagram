@@ -1,13 +1,14 @@
-import { FC } from 'react'
 import s from '../pagination.module.scss'
 import { NavigateButton } from '@/components/ui/pagination/navigate-button/navigate-button'
 import { PaginationProps } from '@/components/ui/pagination'
+import { ArrowBackIcon } from '@/assets/icons/ArrowBackIcon'
+import { ArrowForwardIcon } from '@/assets/icons/ArrowForwardIcon'
 
 type Props = {
   paginationRange: (string | number)[]
 } & Pick<PaginationProps, 'currentPage' | 'onPageChange'>
 
-export const NavigationBlock: FC<Props> = ({ paginationRange, currentPage, onPageChange }) => {
+export const NavigationBlock = ({ paginationRange, currentPage, onPageChange }: Props) => {
   return (
     <div className={s.buttons}>
       <NavigateButton
@@ -15,24 +16,24 @@ export const NavigationBlock: FC<Props> = ({ paginationRange, currentPage, onPag
         disabled={currentPage === 1}
         onClick={() => onPageChange(currentPage - 1)}
       >
-        {'❮'}
+        <ArrowBackIcon />
       </NavigateButton>
-      {paginationRange.map((btn, index) => {
+      {paginationRange.map((page, index) => {
         const onPageClick = (btn: number) => () => {
           onPageChange(btn)
         }
 
-        if (typeof btn !== 'number') {
+        if (typeof page !== 'number') {
           return (
             <div key={index} className={s.dots}>
-              ...
+              &#8230;
             </div>
           )
         }
 
         return (
-          <NavigateButton key={index} active={btn === currentPage} onClick={onPageClick(btn)}>
-            {btn}
+          <NavigateButton key={index} active={page === currentPage} onClick={onPageClick(page)}>
+            {page}
           </NavigateButton>
         )
       })}
@@ -41,7 +42,7 @@ export const NavigationBlock: FC<Props> = ({ paginationRange, currentPage, onPag
         disabled={currentPage === paginationRange[paginationRange.length - 1]}
         onClick={() => onPageChange(currentPage + 1)}
       >
-        {'❯'}
+        <ArrowForwardIcon />
       </NavigateButton>
     </div>
   )
