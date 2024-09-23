@@ -4,6 +4,7 @@ import s from './pagination.module.scss'
 import { Typography } from '@/components/ui/typography'
 import { usePagination } from '@/components/ui/pagination/usePagination'
 import { NavigationBlock } from '@/components/ui/pagination/navigation-block'
+import { PageSizeSelect } from '@/components/ui/pagination/page-size-select/page-size-select'
 
 export type PaginationProps = {
   totalCount?: number
@@ -21,6 +22,7 @@ export const Pagination = memo(
     currentPage,
     onPageChange,
     pageSize,
+    onPageSizeChange,
     siblingCount,
     className,
   }: PaginationProps) => {
@@ -46,8 +48,8 @@ export const Pagination = memo(
         />
         <div className={s.selectBlock}>
           <Typography variant="regular_text_14">Show</Typography>
-          <select />
-          <Typography variant="regular_text_14">the page</Typography>
+          <PageSizeSelect pageSize={pageSize} onPageSizeChange={onPageSizeChange} />
+          <Typography variant="regular_text_14">on page</Typography>
         </div>
       </div>
     )
