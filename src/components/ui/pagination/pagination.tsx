@@ -1,9 +1,9 @@
-import { FC, memo } from 'react'
+import { memo } from 'react'
 import { clsx } from 'clsx'
 import s from './pagination.module.scss'
 import { Typography } from '@/components/ui/typography'
 import { usePagination } from '@/components/ui/pagination/usePagination'
-import { NavigationBlock } from '@/components/ui/pagination/navigation-block/navigation-block'
+import { NavigationBlock } from '@/components/ui/pagination/navigation-block'
 
 export type PaginationProps = {
   totalCount?: number
@@ -15,7 +15,7 @@ export type PaginationProps = {
   className?: string
 }
 
-export const Pagination: FC<PaginationProps> = memo(
+export const Pagination = memo(
   ({
     totalCount = 10,
     currentPage,
@@ -23,7 +23,7 @@ export const Pagination: FC<PaginationProps> = memo(
     pageSize,
     siblingCount,
     className,
-  }) => {
+  }: PaginationProps) => {
     const classes = clsx(s.root, className)
 
     const paginationRange = usePagination({
