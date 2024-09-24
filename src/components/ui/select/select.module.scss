@@ -28,10 +28,19 @@
     transition: 0.2s;
   }
 
+  &.small {
+    padding: 0 2px 0 6px;
+    font-size: var(--font-size-s);
+  }
+
   &[data-state='open'] {
     color: var(--color-light-100);
     background-color: var(--color-dark-500);
     border: 1px solid var(--color-light-100);
+
+    &.small {
+      border: 1px solid var(--color-dark-100);
+    }
 
     .dropDownArrowIcon {
       rotate: 180deg;
@@ -57,6 +66,10 @@
   background-color: var(--color-dark-500);
   border: 1px solid var(--color-light-100);
   border-top: none;
+
+  &.small {
+    border: 1px solid var(--color-dark-100);
+  }
 }
 
 .viewport {
@@ -66,6 +79,11 @@
 
 .item {
   padding: 6px 12px;
+
+  &.small {
+    padding: 0 6px;
+    font-size: var(--font-size-s);
+  }
 
   &:hover,
   &[data-highlighted] {
