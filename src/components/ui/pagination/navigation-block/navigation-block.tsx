@@ -1,14 +1,15 @@
-import s from '../pagination.module.scss'
-import { NavigateButton } from '@/components/ui/pagination/navigate-button/navigate-button'
-import { PaginationProps } from '@/components/ui/pagination'
 import { ArrowBackIcon } from '@/assets/icons/ArrowBackIcon'
 import { ArrowForwardIcon } from '@/assets/icons/ArrowForwardIcon'
+import { PaginationProps } from '@/components/ui/pagination'
+import { NavigateButton } from '@/components/ui/pagination/navigate-button/navigate-button'
+
+import s from '../pagination.module.scss'
 
 type Props = {
-  paginationRange: (string | number)[]
+  paginationRange: (number | string)[]
 } & Pick<PaginationProps, 'currentPage' | 'onPageChange'>
 
-export const NavigationBlock = ({ paginationRange, currentPage, onPageChange }: Props) => {
+export const NavigationBlock = ({ currentPage, onPageChange, paginationRange }: Props) => {
   return (
     <div className={s.buttons}>
       <NavigateButton
@@ -25,14 +26,14 @@ export const NavigationBlock = ({ paginationRange, currentPage, onPageChange }: 
 
         if (typeof page !== 'number') {
           return (
-            <div key={index} className={s.dots}>
+            <div className={s.dots} key={index}>
               &#8230;
             </div>
           )
         }
 
         return (
-          <NavigateButton key={index} active={page === currentPage} onClick={onPageClick(page)}>
+          <NavigateButton active={page === currentPage} key={index} onClick={onPageClick(page)}>
             {page}
           </NavigateButton>
         )
