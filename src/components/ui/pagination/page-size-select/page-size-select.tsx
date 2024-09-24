@@ -1,11 +1,11 @@
 import { Select } from '@/components/ui/select'
 
 type Props = {
-  pageSize: number
   onPageSizeChange: (newPageSize: number) => void
+  pageSize: number
 }
 
-export const PageSizeSelect = ({ pageSize, onPageSizeChange }: Props) => {
+export const PageSizeSelect = ({ onPageSizeChange, pageSize }: Props) => {
   const options = [
     { label: '10', value: '10' },
     { label: '20', value: '20' },
@@ -18,5 +18,5 @@ export const PageSizeSelect = ({ pageSize, onPageSizeChange }: Props) => {
     onPageSizeChange(+value)
   }
 
-  return <Select options={options} value={`${pageSize}`} onValueChange={onValueChange} />
+  return <Select onValueChange={onValueChange} options={options} small value={`${pageSize}`} />
 }
