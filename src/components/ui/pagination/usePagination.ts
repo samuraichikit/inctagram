@@ -3,17 +3,17 @@ import { useMemo } from 'react'
 const DOTS = '...'
 
 type UsePaginationArgs = {
-  totalCount: number
+  currentPage: number
   pageSize: number
   siblingCount?: number
-  currentPage: number
+  totalCount: number
 }
 
 export const usePagination = ({
-  totalCount,
+  currentPage,
   pageSize,
   siblingCount = 1,
-  currentPage,
+  totalCount,
 }: UsePaginationArgs) => {
   return useMemo(() => {
     const totalPageCount = Math.ceil(totalCount / pageSize)
@@ -34,19 +34,19 @@ export const usePagination = ({
     const lastPageIndex = totalPageCount
 
     if (!shouldShowLeftDots && shouldShowRightDots) {
-      let leftItemCount = 3 + 2 * siblingCount
-      let leftRange = range(1, leftItemCount)
+      const leftItemCount = 3 + 2 * siblingCount
+      const leftRange = range(1, leftItemCount)
 
       return [...leftRange, DOTS, totalPageCount]
     }
 
     if (shouldShowLeftDots && !shouldShowRightDots) {
-      let rightItemCount = 3 + 2 * siblingCount
-      let rightRange = range(totalPageCount - rightItemCount + 1, totalPageCount)
+      const rightItemCount = 3 + 2 * siblingCount
+      const rightRange = range(totalPageCount - rightItemCount + 1, totalPageCount)
 
       return [firstPageIndex, DOTS, ...rightRange]
     } else {
-      let middleRange = range(leftSiblingIndex, rightSiblingIndex)
+      const middleRange = range(leftSiblingIndex, rightSiblingIndex)
 
       return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex]
     }
@@ -54,7 +54,7 @@ export const usePagination = ({
 }
 
 function range(start: number, end: number) {
-  let length = end - start + 1
+  const length = end - start + 1
 
   return Array.from({ length }, (_, idx) => idx + start)
 }
