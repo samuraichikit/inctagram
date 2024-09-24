@@ -1,38 +1,40 @@
 import { memo } from 'react'
-import { clsx } from 'clsx'
-import s from './pagination.module.scss'
-import { Typography } from '@/components/ui/typography'
-import { usePagination } from '@/components/ui/pagination/usePagination'
+
 import { NavigationBlock } from '@/components/ui/pagination/navigation-block'
 import { PageSizeSelect } from '@/components/ui/pagination/page-size-select/page-size-select'
+import { usePagination } from '@/components/ui/pagination/usePagination'
+import { Typography } from '@/components/ui/typography'
+import clsx from 'clsx'
+
+import s from './pagination.module.scss'
 
 export type PaginationProps = {
-  totalCount?: number
+  className?: string
   currentPage: number
   onPageChange: (newPage: number) => void
-  pageSize: number
   onPageSizeChange: (newPageSize: number) => void
+  pageSize: number
   siblingCount?: number
-  className?: string
+  totalCount?: number
 }
 
 export const Pagination = memo(
   ({
-    totalCount = 10,
+    className,
     currentPage,
     onPageChange,
-    pageSize,
     onPageSizeChange,
+    pageSize,
     siblingCount,
-    className,
+    totalCount = 10,
   }: PaginationProps) => {
     const classes = clsx(s.root, className)
 
     const paginationRange = usePagination({
       currentPage,
-      totalCount,
-      siblingCount,
       pageSize,
+      siblingCount,
+      totalCount,
     })
 
     if (currentPage === 0 || paginationRange.length < 2) {
@@ -42,14 +44,14 @@ export const Pagination = memo(
     return (
       <div className={classes}>
         <NavigationBlock
-          paginationRange={paginationRange}
           currentPage={currentPage}
           onPageChange={onPageChange}
+          paginationRange={paginationRange}
         />
         <div className={s.selectBlock}>
-          <Typography variant="regular_text_14">Show</Typography>
-          <PageSizeSelect pageSize={pageSize} onPageSizeChange={onPageSizeChange} />
-          <Typography variant="regular_text_14">on page</Typography>
+          <Typography variant={'regular_text_14'}>Show</Typography>
+          <PageSizeSelect onPageSizeChange={onPageSizeChange} pageSize={pageSize} />
+          <Typography variant={'regular_text_14'}>on page</Typography>
         </div>
       </div>
     )
