@@ -1,11 +1,14 @@
 import { ComponentProps } from 'react'
-import s from './button.module.scss'
+
 import clsx from 'clsx'
 
-type Props = ComponentProps<'button'> & {
-  variant?: 'primary' | 'secondary' | 'outlined' | 'text'
-}
+import s from './button.module.scss'
+
+type Props = {
+  variant?: 'outlined' | 'primary' | 'secondary' | 'text'
+} & ComponentProps<'button'>
 
 export const Button = ({ className, variant = 'primary', ...props }: Props) => {
+  // eslint-disable-next-line react/button-has-type
   return <button className={clsx(s.button, s[variant], className)} {...props} />
 }

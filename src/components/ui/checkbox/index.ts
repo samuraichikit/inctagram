@@ -1,1 +1,1 @@
-export * from './checkbox.module.scss'
+export * from './Checkbox'

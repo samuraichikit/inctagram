@@ -1,5 +1,6 @@
-import { Card } from './card'
 import { Meta, StoryObj } from '@storybook/react'
+
+import { Card } from './Card'
 
 const meta = {
   component: Card,
@@ -15,9 +16,9 @@ export const Primary: Story = {
   args: {
     children: 'Card',
     style: {
-      width: '100px',
       height: '100px',
       padding: '30px',
+      width: '100px',
     },
   },
 }

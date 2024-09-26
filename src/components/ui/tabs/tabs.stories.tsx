@@ -19,7 +19,7 @@ const meta = {
   },
   component: Tabs,
   tags: ['autodocs'],
-  title: 'Components/ui/Tabs',
+  title: 'Components/Tabs',
 } satisfies Meta<typeof Tabs>
 
 export default meta

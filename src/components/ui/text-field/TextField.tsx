@@ -6,7 +6,7 @@ import { SearchIcon } from '@/assets/icons/SearchIcon'
 import { Typography } from '@/components/ui/typography'
 import clsx from 'clsx'
 
-import s from './text-field.module.scss'
+import s from './textField.module.scss'
 
 type Props = {
   errorMessage?: string

@@ -42,7 +42,7 @@ export const Search: Story = {
 
 export const TextWithError: Story = {
   args: {
-    error: 'Error text',
+    errorMessage: 'Error text',
     label: 'Search input',
     placeholder: 'Input',
     type: 'search',

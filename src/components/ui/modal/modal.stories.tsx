@@ -1,22 +1,20 @@
-import {Meta, StoryObj} from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react'
 
-import {Modal} from './modal'
+import { Modal } from './Modal'
 
 const meta = {
-    component: Modal,
+  component: Modal,
+  tags: ['autodocs'],
+  title: 'Components/Modal',
 } satisfies Meta<typeof Modal>
 
 type Story = StoryObj<typeof meta>
 export default meta
 
-
 export const Default: Story = {
-    args: {
-        children: (<div>Transaction failed. Please, write to support</div>),
-        title: 'Title',
-        open: true
-    },
+  args: {
+    children: <div>Transaction failed. Please, write to support</div>,
+    open: true,
+    title: 'Title',
+  },
 }
-
-
-

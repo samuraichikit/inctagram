@@ -6,7 +6,7 @@ const meta = {
   argTypes: {},
   component: Table,
   tags: ['autodocs'],
-  title: 'Components/ui/Table',
+  title: 'Components/Table',
 } satisfies Meta<typeof Table>
 
 export default meta
