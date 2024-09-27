@@ -19,7 +19,7 @@
 
   border-radius: 50%;
 
-  transition: 0.8s ;
+  transition: 0.3s ;
 
   &:not(:disabled) {
     cursor: pointer;
@@ -73,7 +73,7 @@
   opacity: 0;
   background-color: var(--color-dark-900);
 
-  transition: 0.8s ;
+  transition: 0.3s ;
 
   &[data-state="checked"] {
     opacity: 1;
