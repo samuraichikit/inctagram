@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, useId, useState } from 'react'
+import { ComponentPropsWithoutRef, ReactNode, useId, useState } from 'react'
 
 import { CheckIcon } from '@/assets/icons/CheckIcon'
 import { Typography } from '@/components/ui/typography'
@@ -7,14 +7,18 @@ import clsx from 'clsx'
 
 import s from './checkbox.module.scss'
 
-type Props = { className?: string; id?: string; label?: string } & ComponentPropsWithoutRef<
-  typeof CheckboxRadix.Root
->
+type Props = {
+  className?: string
+  errorMessage?: string
+  id?: string
+  label?: ReactNode
+} & ComponentPropsWithoutRef<typeof CheckboxRadix.Root>
 
 export const Checkbox = ({
   checked,
   className,
   disabled,
+  errorMessage,
   id,
   label,
   onCheckedChange,
@@ -61,6 +65,7 @@ export const Checkbox = ({
           </label>
         </Typography>
       )}
+      {errorMessage && <Typography variant={'error'}>{errorMessage}</Typography>}
     </div>
   )
 }
