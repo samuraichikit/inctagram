@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import { ComponentPropsWithoutRef, forwardRef, useId, useState } from 'react'
 
 import { EyeIcon } from '@/assets/icons/EyeIcon'
 import { EyeOffIcon } from '@/assets/icons/EyeOffIcon'
@@ -10,11 +10,12 @@ import s from './textField.module.scss'
 
 type Props = {
   errorMessage?: string
+  id?: string
   label?: string
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, Props>(
-  ({ className, errorMessage, label, type, ...props }, ref) => {
+  ({ className, errorMessage, id, label, type, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false)
 
     const isPassword = type === 'password'
@@ -27,13 +28,16 @@ export const TextField = forwardRef<HTMLInputElement, Props>(
       finalType = showPassword ? 'text' : 'password'
     }
 
+    const generatedId = useId()
+    const idToUse = id ?? generatedId
+
     const showPasswordClickHandler = () => setShowPassword(prev => !prev)
 
     return (
       <div className={s.wrapper}>
         {!!label && (
           <Typography asChild className={s.label} variant={'regular_text_14'}>
-            <label htmlFor={label}>{label}</label>
+            <label htmlFor={idToUse}>{label}</label>
           </Typography>
         )}
         <div className={s.iconWrapper}>
@@ -45,7 +49,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>(
               isSearch && s.searchInput,
               className
             )}
-            id={label}
+            id={idToUse}
             ref={ref}
             type={finalType}
             {...props}
