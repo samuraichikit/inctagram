@@ -32,6 +32,13 @@ export const DisabledWithLabel: Story = {
   },
 }
 
+export const WithLabelAndWidthErrorMessage: Story = {
+  args: {
+    errorMessage: 'Some error',
+    label: 'checkbox label',
+  },
+}
+
 export const Controlled: Story = {
   render: args => {
     const [checked, setChecked] = useState(false)
