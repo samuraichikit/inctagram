@@ -11,6 +11,7 @@ type Props = {
   variant?:
     | 'bold_text_14'
     | 'bold_text_16'
+    | 'error'
     | 'h1'
     | 'h2'
     | 'h3'
