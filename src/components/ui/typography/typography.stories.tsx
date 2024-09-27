@@ -20,6 +20,7 @@ const meta = {
         'semi-bold_small_text',
         'small_link',
         'small_text',
+        'error',
       ],
     },
   },
@@ -107,6 +108,13 @@ export const Small_text: Story = {
   args: {
     children: 'small_text',
     variant: 'small_text',
+  },
+}
+
+export const Error: Story = {
+  args: {
+    children: 'error',
+    variant: 'error',
   },
 }
 
