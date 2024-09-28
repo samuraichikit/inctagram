@@ -41,6 +41,10 @@ export const ControlledCheckboxWithErrorHandler: Story = {
       rowGap: '10px',
     }
 
+    const iAgreeWithEverything = register('iAgreeWithEverything', {
+      validate: value => value === true || 'consent required',
+    })
+
     const isButtonDisabled = Boolean(Object.keys(errors).length)
 
     return (
@@ -51,9 +55,7 @@ export const ControlledCheckboxWithErrorHandler: Story = {
         <FormCheckbox
           control={control}
           label={'I agree with everything'}
-          {...register('iAgreeWithEverything', {
-            validate: value => value === true || 'consent required',
-          })}
+          name={iAgreeWithEverything.name}
         />
         <Button disabled={isButtonDisabled} style={{ minWidth: '300px' }}>
           Send
