@@ -37,7 +37,9 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, Props>
         </CheckboxRadix.Root>
         {label && (
           <Typography asChild>
-            <label className={classNames.label}>{label}</label>
+            <label className={classNames.label} htmlFor={idToUse}>
+              {label}
+            </label>
           </Typography>
         )}
         {errorMessage && <Typography variant={'error'}>{errorMessage}</Typography>}
