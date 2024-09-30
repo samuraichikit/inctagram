@@ -36,8 +36,8 @@ export const CreateNewPassword = () => {
   return (
     <Card className={classNames.card}>
       <form className={classNames.form} onSubmit={handleSubmit(handleCreateNewPassword)}>
-        <Typography className={classNames.title} variant={'h1'}>
-          Create New Password
+        <Typography asChild className={classNames.title} variant={'h1'}>
+          <h1>Create New Password</h1>
         </Typography>
         <FormTextField
           className={classNames.newPasswordInput}
