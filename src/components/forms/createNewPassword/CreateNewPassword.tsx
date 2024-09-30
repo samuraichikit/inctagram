@@ -7,6 +7,8 @@ import { Typography } from '@/components/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
+import s from './createNewPassword.module.scss'
+
 type FormValues = z.infer<typeof newPasswordSchema>
 
 const newPasswordSchema = z.object({
@@ -15,6 +17,15 @@ const newPasswordSchema = z.object({
 })
 
 export const CreateNewPassword = () => {
+  const classNames = {
+    buttonSubmit: s.buttonSubmit,
+    card: s.card,
+    form: s.form,
+    instructions: s.instructions,
+    newPasswordInput: s.newPasswordInput,
+    title: s.title,
+  }
+
   const { control, handleSubmit } = useForm<FormValues>({
     defaultValues: { newPassword: '', passwordConfirmation: '' },
     resolver: zodResolver(newPasswordSchema),
@@ -23,9 +34,13 @@ export const CreateNewPassword = () => {
   const handleCreateNewPassword = () => {}
 
   return (
-    <Card>
-      <form onSubmit={handleSubmit(handleCreateNewPassword)}>
+    <Card className={classNames.card}>
+      <form className={classNames.form} onSubmit={handleSubmit(handleCreateNewPassword)}>
+        <Typography className={classNames.title} variant={'h1'}>
+          Create New Password
+        </Typography>
         <FormTextField
+          className={classNames.newPasswordInput}
           control={control}
           label={'New password'}
           name={'newPassword'}
@@ -37,10 +52,10 @@ export const CreateNewPassword = () => {
           name={'passwordConfirmation'}
           type={'password'}
         />
-        <Typography variant={'regular_text_14'}>
+        <Typography className={classNames.instructions} variant={'regular_text_14'}>
           Your password must be between 6 and 20 characters
         </Typography>
-        <Button>Create new password</Button>
+        <Button className={classNames.buttonSubmit}>Create new password</Button>
       </form>
     </Card>
   )
