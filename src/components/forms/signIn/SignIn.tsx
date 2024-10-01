@@ -36,7 +36,7 @@ export const SignIn = () => {
   })
 
   const onSubmitHandler: SubmitHandler<SignIn> = data => {
-    console.log(data)
+    alert(`email: ${data.email}; password: ${data.password}`)
   }
 
   return (
