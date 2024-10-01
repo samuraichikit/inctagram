@@ -1,0 +1,55 @@
+.wrapper {
+  max-width: 378px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+
+  & .forgotPassword {
+    align-self: flex-end;
+    color: var(--color-light-900);
+    text-decoration: none;
+    transition: 0.2s;
+
+    &:hover {
+      color: var(--color-light-100);
+    }
+  }
+}
+
+.fullWidth {
+  align-self: stretch;
+}
+
+.mainMargin {
+  margin-bottom: 24px;
+}
+
+.title {
+  margin-bottom: 13px;
+}
+
+.iconWrapper {
+  display: flex;
+  gap: 60px;
+}
+
+.emailTextField,
+.passwordTextField {
+  gap: 0;
+}
+
+.passwordTextField {
+  margin-bottom: 36px;
+}
+
+.signInButton {
+  margin-bottom: 18px;
+}
+
+.signUpQuestion {
+  margin-bottom: 6px;
+}

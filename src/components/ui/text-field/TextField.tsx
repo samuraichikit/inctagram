@@ -34,7 +34,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     const showPasswordClickHandler = () => setShowPassword(prev => !prev)
 
     return (
-      <div className={s.wrapper}>
+      <div className={clsx(s.wrapper, className)}>
         {!!label && (
           <Typography asChild className={s.label} variant={'regular_text_14'}>
             <label htmlFor={idToUse}>{label}</label>
@@ -46,8 +46,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               s.input,
               errorMessage && s.errorInput,
               isPassword && s.passwordInput,
-              isSearch && s.searchInput,
-              className
+              isSearch && s.searchInput
             )}
             id={idToUse}
             ref={ref}
