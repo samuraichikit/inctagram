@@ -11,10 +11,29 @@ import s from './createNewPassword.module.scss'
 
 type FormValues = z.infer<typeof newPasswordSchema>
 
-const newPasswordSchema = z.object({
-  newPassword: z.string(),
-  passwordConfirmation: z.string(),
-})
+const PASSWORD_REGEX =
+  /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z0-9!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]+$/
+
+const passwordSchema = z
+  .string()
+  .min(6, { message: 'Minimum number of characters 6' })
+  .max(20, { message: 'Maximum number of characters 20' })
+  .regex(PASSWORD_REGEX, {
+    message: `Password must contain 0-9, a-z, A-Z, ! "
+# $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^
+_\` { | } ~`,
+  })
+  .trim()
+
+const newPasswordSchema = z
+  .object({
+    newPassword: passwordSchema,
+    passwordConfirmation: passwordSchema,
+  })
+  .refine(data => data.newPassword === data.passwordConfirmation, {
+    message: 'Passwords must match',
+    path: ['passwordConfirmation'],
+  })
 
 export const CreateNewPassword = () => {
   const classNames = {
