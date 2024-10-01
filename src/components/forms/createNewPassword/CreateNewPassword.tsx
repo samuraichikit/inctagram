@@ -47,6 +47,7 @@ export const CreateNewPassword = () => {
 
   const { control, handleSubmit } = useForm<FormValues>({
     defaultValues: { newPassword: '', passwordConfirmation: '' },
+    mode: 'onBlur',
     resolver: zodResolver(newPasswordSchema),
   })
 
