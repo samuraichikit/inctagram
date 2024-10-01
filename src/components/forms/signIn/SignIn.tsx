@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
 import { GoogleIcon } from '@/assets/icons/GoogleIcon'
@@ -22,9 +22,22 @@ export const SignIn = () => {
     title: s.title,
     wrapper: s.wrapper,
   }
-  const { control, handleSubmit } = useForm()
 
-  const onSubmitHandler = () => {}
+  type SignIn = {
+    email: string
+    password: string
+  }
+
+  const { control, handleSubmit } = useForm<SignIn>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  })
+
+  const onSubmitHandler: SubmitHandler<SignIn> = data => {
+    console.log(data)
+  }
 
   return (
     <Card className={classNames.wrapper}>
