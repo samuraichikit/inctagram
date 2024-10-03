@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { Modal } from './Modal'
@@ -13,8 +14,13 @@ export default meta
 
 export const Default: Story = {
   args: {
-    children: <div>Transaction failed. Please, write to support</div>,
-    open: true,
+    children: (
+      <div>
+        Transaction failed. Please, write to support Transaction failed. Please, write to support
+        Transaction failed. Please, write to supportTransaction failed.
+      </div>
+    ),
     title: 'Title',
+    trigger: <Button variant={'primary'}>Click to open modal</Button>,
   },
 }
