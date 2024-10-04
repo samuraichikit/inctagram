@@ -54,6 +54,12 @@ button {
   border-bottom: 1px solid var(--color-dark-100);
 }
 
+.contentContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .content {
   padding: 24px 24px 36px;
 }
