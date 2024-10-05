@@ -15,7 +15,7 @@ export default meta
 export const Default: Story = {
   args: {
     children: (
-      <div>
+      <div style={{ padding: '24px' }}>
         Transaction failed. Please, write to support Transaction failed. Please, write to support
         Transaction failed. Please, write to supportTransaction failed.
       </div>
