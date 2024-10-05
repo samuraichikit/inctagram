@@ -27,7 +27,7 @@ export const Modal = ({ children, className, title, trigger, ...props }: Props) 
             </Dialog.Close>
           </div>
           <div className={s.contentContainer}>
-            <div className={s.content}>{children}</div>
+            <div>{children}</div>
           </div>
         </Dialog.Content>
       </Dialog.Portal>
