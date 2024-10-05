@@ -41,6 +41,9 @@ importers:
       '@radix-ui/react-tabs':
         specifier: ^1.1.0
         version: 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@types/react-google-recaptcha':
+        specifier: ^2.1.9
+        version: 2.1.9
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -56,6 +59,9 @@ importers:
       react-dom:
         specifier: ^18
         version: 18.3.1(react@18.3.1)
+      react-google-recaptcha:
+        specifier: ^3.1.0
+        version: 3.1.0(react@18.3.1)
       react-hook-form:
         specifier: ^7.53.0
         version: 7.53.0(react@18.3.1)
@@ -2048,6 +2054,9 @@ packages:
 
   '@types/react-dom@18.3.0':
     resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
+
+  '@types/react-google-recaptcha@2.1.9':
+    resolution: {integrity: sha512-nT31LrBDuoSZJN4QuwtQSF3O89FVHC4jLhM+NtKEmVF5R1e8OY0Jo4//x2Yapn2aNHguwgX5doAq8Zo+Ehd0ug==}
 
   '@types/react@18.3.5':
     resolution: {integrity: sha512-WeqMfGJLGuLCqHGYRGHxnKrXcTitc6L/nBUWfWPcTarG3t9PsquqUMuVeXZeca+mglY4Vo5GZjCi0A3Or2lnxA==}
@@ -4646,6 +4655,11 @@ packages:
     resolution: {integrity: sha512-8zGqypfENjCIqGhgXToC8aB2r7YrBX+AQAfIPs/Mlk+BtPTztOvTS01NRW/3Eh60J+a48lt8qsCzirQ6loCVfA==}
     engines: {node: '>= 0.8'}
 
+  react-async-script@1.2.0:
+    resolution: {integrity: sha512-bCpkbm9JiAuMGhkqoAiC0lLkb40DJ0HOEJIku+9JDjxX3Rcs+ztEOG13wbrOskt3n2DTrjshhaQ/iay+SnGg5Q==}
+    peerDependencies:
+      react: '>=16.4.1'
+
   react-colorful@5.6.1:
     resolution: {integrity: sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==}
     peerDependencies:
@@ -4677,6 +4691,11 @@ packages:
     peerDependencies:
       react: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
       react-dom: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
+
+  react-google-recaptcha@3.1.0:
+    resolution: {integrity: sha512-cYW2/DWas8nEKZGD7SCu9BSuVz8iOcOLHChHyi7upUuVhkpkhYG/6N3KDiTQ3XAiZ2UAZkfvYKMfAHOzBOcGEg==}
+    peerDependencies:
+      react: '>=16.4.1'
 
   react-hook-form@7.53.0:
     resolution: {integrity: sha512-M1n3HhqCww6S2hxLxciEXy2oISPnAzxY7gvwVPrtlczTM/1dDadXgUxDpHMrMTblDOcm/AXtXxHwZ3jpg1mqKQ==}
@@ -7885,6 +7904,10 @@ snapshots:
     dependencies:
       '@types/react': 18.3.5
 
+  '@types/react-google-recaptcha@2.1.9':
+    dependencies:
+      '@types/react': 18.3.5
+
   '@types/react@18.3.5':
     dependencies:
       '@types/prop-types': 15.7.12
@@ -10878,6 +10901,12 @@ snapshots:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
+  react-async-script@1.2.0(react@18.3.1):
+    dependencies:
+      hoist-non-react-statics: 3.3.2
+      prop-types: 15.8.1
+      react: 18.3.1
+
   react-colorful@5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
@@ -10920,6 +10949,12 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-is: 18.1.0
+
+  react-google-recaptcha@3.1.0(react@18.3.1):
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-async-script: 1.2.0(react@18.3.1)
 
   react-hook-form@7.53.0(react@18.3.1):
     dependencies:
