@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { passwordSchema } from '@/common/schemas'
+import { newPasswordSchema } from '@/common/schemas'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -11,16 +11,6 @@ import { z } from 'zod'
 import s from './createNewPassword.module.scss'
 
 type FormValues = z.infer<typeof newPasswordSchema>
-
-const newPasswordSchema = z
-  .object({
-    newPassword: passwordSchema,
-    passwordConfirmation: passwordSchema,
-  })
-  .refine(data => data.newPassword === data.passwordConfirmation, {
-    message: 'Passwords must match',
-    path: ['passwordConfirmation'],
-  })
 
 export const CreateNewPassword = () => {
   const classNames = {
