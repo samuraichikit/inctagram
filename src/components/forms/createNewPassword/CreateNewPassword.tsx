@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 
+import { passwordSchema } from '@/common/schemas'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -10,20 +11,6 @@ import { z } from 'zod'
 import s from './createNewPassword.module.scss'
 
 type FormValues = z.infer<typeof newPasswordSchema>
-
-const PASSWORD_REGEX =
-  /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z0-9!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]+$/
-
-const passwordSchema = z
-  .string()
-  .min(6, { message: 'Minimum number of characters 6' })
-  .max(20, { message: 'Maximum number of characters 20' })
-  .regex(PASSWORD_REGEX, {
-    message: `Password must contain 0-9, a-z, A-Z, ! "
-# $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^
-_\` { | } ~`,
-  })
-  .trim()
 
 const newPasswordSchema = z
   .object({
