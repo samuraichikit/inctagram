@@ -1,16 +1,10 @@
+import { Header } from '@/components/header/Header'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 
-import { en } from '../../locales/en'
-import { ru } from '../../locales/ru'
+import { useTranslation } from '../../hooks/useTranslation'
 
 export default function Home() {
-  const router = useRouter()
-  const t = router.locale === 'en' ? en : ru
-
-  console.log('router.locales: ', router.locales)
-  console.log('router.locale: ', router.locale)
-  console.log('router.defaultLocale: ', router.defaultLocale)
+  const { t } = useTranslation()
 
   return (
     <>
@@ -20,6 +14,7 @@ export default function Home() {
         <meta content={'width=device-width, initial-scale=1'} name={'viewport'} />
         <link href={'/favicon.ico'} rel={'icon'} />
       </Head>
+      <Header />
       <div>
         <h1>{t.test}</h1>
       </div>
