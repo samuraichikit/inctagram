@@ -3,33 +3,37 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
 import { GoogleIcon } from '@/assets/icons/GoogleIcon'
+import { signUpSchema } from '@/common/schemas'
 import { FormCheckbox } from '@/components/controlled/formCheckbox'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 import s from './signUp.module.scss'
 
+type FormValues = z.infer<typeof signUpSchema>
+
 export const SignUp = () => {
-  type SignUp = {
-    agreesToTOS: any
-    email: string
-    password: string
-    password_confirmation: string
-    username: string
-  }
-  const { control, handleSubmit } = useForm<SignUp>({
+  const {
+    control,
+    formState: { isValid },
+    handleSubmit,
+  } = useForm<FormValues>({
     defaultValues: {
       agreesToTOS: false,
       email: '',
       password: '',
-      password_confirmation: '',
+      passwordConfirmation: '',
       username: '',
     },
+    mode: 'onBlur',
+    resolver: zodResolver(signUpSchema),
   })
 
-  const onSubmitHandler: SubmitHandler<SignUp> = data => {}
+  const onSubmitHandler: SubmitHandler<FormValues> = data => {}
 
   return (
     <Card className={s.card}>
@@ -69,7 +73,7 @@ export const SignUp = () => {
           className={s.input}
           control={control}
           label={'Password confirmation'}
-          name={'password_confirmation'}
+          name={'passwordConfirmation'}
           placeholder={'Password confirmation'}
           type={'password'}
         />
@@ -90,7 +94,7 @@ export const SignUp = () => {
           }
           name={'agreesToTOS'}
         />
-        <Button className={s.signUpButton} variant={'primary'}>
+        <Button className={s.signUpButton} disabled={!isValid} variant={'primary'}>
           Sign up
         </Button>
         <Typography className={s.signInQuestion} variant={'regular_text_16'}>

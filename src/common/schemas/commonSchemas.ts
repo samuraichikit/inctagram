@@ -22,3 +22,5 @@ export const passwordSchema = z
 _\` { | } ~`,
   })
   .trim()
+
+export const agreesToTOSSchema = z.boolean()

@@ -1,9 +1,9 @@
 import { z } from 'zod'
 
-import { emailSchema, passwordSchema, userNameSchema } from './commonSchemas'
+import { agreesToTOSSchema, emailSchema, passwordSchema, userNameSchema } from './commonSchemas'
 
 export const signUpSchema = z.object({
-  agreesToTOS: z.literal(true),
+  agreesToTOS: agreesToTOSSchema,
   email: emailSchema,
   password: passwordSchema,
   passwordConfirmation: passwordSchema,
