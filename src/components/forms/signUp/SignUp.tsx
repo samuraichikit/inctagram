@@ -89,7 +89,7 @@ export const SignUp = () => {
               </Typography>{' '}
               and
               <Typography asChild variant={'small_link'}>
-                <a> Privacy Policy</a>
+                <Link href={'/auth/privacyPolicy'}> Privacy Policy</Link>
               </Typography>
             </Typography>
           }
