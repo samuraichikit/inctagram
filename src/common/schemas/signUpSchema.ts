@@ -8,7 +8,7 @@ export const signUpSchema = z
     email: emailSchema,
     password: passwordSchema,
     passwordConfirmation: passwordSchema,
-    username: userNameSchema,
+    userName: userNameSchema,
   })
   .refine(data => data.password === data.passwordConfirmation, {
     message: 'Passwords must match',

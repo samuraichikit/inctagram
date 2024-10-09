@@ -1,5 +1,4 @@
-import React from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
 import { GoogleIcon } from '@/assets/icons/GoogleIcon'
@@ -9,6 +8,7 @@ import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { useSignUpMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { z } from 'zod'
@@ -22,19 +22,27 @@ export const SignUp = () => {
     control,
     formState: { isValid },
     handleSubmit,
+    reset,
   } = useForm<FormValues>({
     defaultValues: {
       agreesToTOS: false,
       email: '',
       password: '',
       passwordConfirmation: '',
-      username: '',
+      userName: '',
     },
     mode: 'onBlur',
     resolver: zodResolver(signUpSchema),
   })
 
-  const onSubmitHandler: SubmitHandler<FormValues> = data => {}
+  const [signUp] = useSignUpMutation()
+
+  const onSubmitHandler = async (data: FormValues) => {
+    const { email, password, userName } = data
+
+    await signUp({ email, password, userName })
+    reset()
+  }
 
   return (
     <Card className={s.card}>
@@ -50,7 +58,7 @@ export const SignUp = () => {
           className={s.input}
           control={control}
           label={'Username'}
-          name={'username'}
+          name={'userName'}
           placeholder={'Epam11'}
           type={'text'}
         />
