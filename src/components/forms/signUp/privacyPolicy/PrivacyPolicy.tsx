@@ -2,16 +2,17 @@ import React from 'react'
 
 import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
 import { Typography } from '@/components/ui/typography'
+import Link from 'next/link'
 
 import s from './privacyPolicy.module.scss'
 
 export const PrivacyPolicy = () => {
   return (
     <div>
-      <div className={s.linkWrapper}>
+      <Link className={s.linkWrapper} href={'/auth/signUp'}>
         <ArrowLeftIcon />
         <Typography variant={'regular_text_14'}>Back to Sign Up</Typography>
-      </div>
+      </Link>
       <Typography className={s.title} variant={'h1'}>
         Privacy Policy
       </Typography>
