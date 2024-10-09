@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 import { z } from 'zod'
 
 import s from './signUp.module.scss'
@@ -84,7 +85,7 @@ export const SignUp = () => {
             <Typography slot={'span'} variant={'small_text'}>
               I agree to the{' '}
               <Typography asChild variant={'small_link'}>
-                <a>Terms of Service</a>
+                <Link href={'/auth/termsOfService'}>Terms of Service</Link>
               </Typography>{' '}
               and
               <Typography asChild variant={'small_link'}>
