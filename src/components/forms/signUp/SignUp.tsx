@@ -25,6 +25,7 @@ export const SignUp = () => {
     formState: { isValid },
     handleSubmit,
     reset,
+    watch,
   } = useForm<FormValues>({
     defaultValues: {
       agreesToTOS: false,
@@ -36,6 +37,9 @@ export const SignUp = () => {
     mode: 'onBlur',
     resolver: zodResolver(signUpSchema),
   })
+
+  const acceptTerms = watch('agreesToTOS')
+  const isDisabled = !isValid && !acceptTerms
 
   const [signUp] = useSignUpMutation()
   const [isOpen, setIsOpen] = useState(false)
@@ -112,7 +116,7 @@ export const SignUp = () => {
             }
             name={'agreesToTOS'}
           />
-          <Button className={s.signUpButton} disabled={!isValid} variant={'primary'}>
+          <Button className={s.signUpButton} disabled={isDisabled} variant={'primary'}>
             Sign up
           </Button>
           <Typography className={s.signInQuestion} variant={'regular_text_16'}>
