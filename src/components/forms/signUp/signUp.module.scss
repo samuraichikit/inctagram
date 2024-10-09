@@ -38,8 +38,13 @@
 
 .iconWrapper {
   display: flex;
-  justify-content: center;
   gap: 60px;
+  justify-content: center;
+
   margin-top: 12px;
   margin-bottom: 24px;
+}
+
+.buttonOk {
+  float: right;
 }
