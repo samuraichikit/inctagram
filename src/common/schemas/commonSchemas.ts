@@ -5,7 +5,12 @@ const PASSWORD_REGEX =
 
 const USER_NAME_REGEX = /^[a-zA-Z0-9_-]*$/
 
-export const userNameSchema = z.string().min(6).max(30).regex(USER_NAME_REGEX).trim()
+export const userNameSchema = z
+  .string()
+  .min(6, { message: 'Minimum number of characters 6' })
+  .max(30, { message: 'Maximum number of characters 30' })
+  .regex(USER_NAME_REGEX)
+  .trim()
 
 export const emailSchema = z.string().email({
   message: `The email must match the format 
@@ -23,4 +28,4 @@ _\` { | } ~`,
   })
   .trim()
 
-export const agreesToTOSSchema = z.boolean()
+export const agreesToTOSSchema = z.boolean().refine(value => value)
