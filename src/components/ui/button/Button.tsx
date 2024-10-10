@@ -7,12 +7,13 @@ import s from './button.module.scss'
 
 type Props = {
   asChild?: boolean
+  fullwidth?: boolean
   variant?: 'outlined' | 'primary' | 'secondary' | 'text'
 } & ComponentProps<'button'>
 
-export const Button = ({ asChild, className, variant = 'primary', ...props }: Props) => {
+export const Button = ({ asChild, className, fullwidth, variant = 'primary', ...props }: Props) => {
   const classNames = {
-    root: clsx(s.button, s[variant], className),
+    root: clsx(s.button, s[variant], fullwidth && s.fullwidth, className),
   }
   const Component = asChild ? Slot : 'button'
 
