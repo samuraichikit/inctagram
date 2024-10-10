@@ -50,7 +50,7 @@ export const TextButton: Story = {
 export const FullWidthButton: Story = {
   args: {
     children: 'Full Width Button',
-    fullwidth: true,
+    fullWidth: true,
   },
 }
 
