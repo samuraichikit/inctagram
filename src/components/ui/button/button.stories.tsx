@@ -46,3 +46,17 @@ export const TextButton: Story = {
     variant: 'text',
   },
 }
+
+export const FullWidthButton: Story = {
+  args: {
+    children: 'Full Width Button',
+    fullwidth: true,
+  },
+}
+
+export const Link: Story = {
+  args: {
+    asChild: true,
+    children: <a>link</a>,
+  },
+}
