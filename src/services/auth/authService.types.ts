@@ -14,3 +14,7 @@ export type ErrorMessage = {
   field: string
   message: string
 }
+
+export type RegistrationConfirmationArgs = {
+  confirmationCode: string
+}
