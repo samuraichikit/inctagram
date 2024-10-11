@@ -18,6 +18,20 @@ import { z } from 'zod'
 import s from './signUp.module.scss'
 
 type FormValues = z.infer<typeof signUpSchema>
+type FormField = keyof FormValues
+type ServerErrorMessage = {
+  field: FormField
+  message: string
+}
+type ServerErrorData = {
+  error: string
+  messages: ServerErrorMessage[]
+  statusCode: number
+}
+type ServerError = {
+  data: ServerErrorData
+  status: number
+}
 
 export const SignUp = () => {
   const {
@@ -25,6 +39,7 @@ export const SignUp = () => {
     formState: { isValid },
     handleSubmit,
     reset,
+    setError,
     watch,
   } = useForm<FormValues>({
     defaultValues: {
@@ -50,10 +65,29 @@ export const SignUp = () => {
   const onSubmitHandler = async (data: FormValues) => {
     const { email, password, userName } = data
 
-    await signUp({ email, password, userName })
-    setEmailModal(email)
-    setIsOpen(true)
-    reset()
+    try {
+      await signUp({ email, password, userName }).unwrap()
+      setEmailModal(email)
+      setIsOpen(true)
+      reset()
+    } catch (error) {
+      const err = error as ServerError
+
+      if (err.data.messages) {
+        const field = err.data.messages[0].field
+        const message = err.data.messages[0].message
+
+        const wordsMessage = message.split(' ')
+
+        wordsMessage[wordsMessage.length - 1] = 'registered'
+
+        const updatedMessage = wordsMessage.join(' ')
+
+        setError(field, {
+          message: updatedMessage,
+        })
+      }
+    }
   }
 
   return (
