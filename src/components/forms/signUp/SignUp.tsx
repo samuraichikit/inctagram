@@ -12,6 +12,7 @@ import { Modal } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'
 import { useSignUpMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
 import Link from 'next/link'
 import { z } from 'zod'
 
@@ -36,7 +37,7 @@ type ServerError = {
 export const SignUp = () => {
   const {
     control,
-    formState: { isValid },
+    formState: { errors, isValid },
     handleSubmit,
     reset,
     setError,
@@ -102,7 +103,7 @@ export const SignUp = () => {
         </div>
         <form className={s.form} onSubmit={handleSubmit(onSubmitHandler)}>
           <FormTextField
-            className={s.input}
+            className={clsx(s.input, s.inputUserName, errors.userName && s.error)}
             control={control}
             label={'Username'}
             name={'userName'}
@@ -110,7 +111,7 @@ export const SignUp = () => {
             type={'text'}
           />
           <FormTextField
-            className={s.input}
+            className={clsx(s.input, s.inputEmail, errors.email && s.error)}
             control={control}
             label={'Email'}
             name={'email'}
@@ -118,7 +119,7 @@ export const SignUp = () => {
             type={'email'}
           />
           <FormTextField
-            className={s.input}
+            className={clsx(s.input, s.inputPassword, errors.password && s.error)}
             control={control}
             label={'Password'}
             name={'password'}
@@ -150,7 +151,7 @@ export const SignUp = () => {
             }
             name={'agreesToTOS'}
           />
-          <Button className={s.signUpButton} disabled={isDisabled} variant={'primary'}>
+          <Button disabled={isDisabled} fullWidth variant={'primary'}>
             Sign up
           </Button>
           <Typography className={s.signInQuestion} variant={'regular_text_16'}>
