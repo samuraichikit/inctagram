@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react'
-
+import { useConfirmedEmail } from '@/common/hooks'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
-import { useConfirmEmailMutation } from '@/services/auth'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import s from './confirmedEmail.module.scss'
 
@@ -13,17 +10,7 @@ import confirmedBro from '../../../../../public/confirmedBro.png'
 import { VerificationLink } from '../verificationLink'
 
 export const ConfirmedEmail = () => {
-  const [confirmEmail, { error, isLoading }] = useConfirmEmailMutation()
-  const router = useRouter()
-  const { query } = router
-
-  const confirmationCode = query.code as string
-
-  useEffect(() => {
-    if (confirmationCode) {
-      confirmEmail({ confirmationCode })
-    }
-  }, [confirmationCode, confirmEmail])
+  const { error, isLoading } = useConfirmedEmail()
 
   if (isLoading) {
     return <div>Loading...</div>
