@@ -12,11 +12,17 @@ export const LangSelect = () => {
   }
 
   return (
-    <div>
+    <div style={{ padding: '20px' }}>
       <select
         defaultValue={locale}
         onChange={changeLangHandler}
-        style={{ background: 'black', position: 'absolute', right: '0', top: '20' }}
+        style={{
+          background: 'black',
+          marginRight: '20px',
+          position: 'absolute',
+          right: '0',
+          top: '20',
+        }}
       >
         {locales?.map(l => {
           return (
@@ -29,5 +35,3 @@ export const LangSelect = () => {
     </div>
   )
 }
-
-// style={{ background: 'black', position: 'absolute', right: '0', top: '20' }}

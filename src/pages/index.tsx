@@ -1,7 +1,7 @@
-import { Header } from '@/components/header/Header'
+import { LangSelect } from '@/components/langSelect/LangSelect'
 import Head from 'next/head'
 
-import { useTranslation } from '../../hooks/useTranslation'
+import { useTranslation } from '../common/hooks/useTranslation'
 
 export default function Home() {
   const { t } = useTranslation()
@@ -14,8 +14,8 @@ export default function Home() {
         <meta content={'width=device-width, initial-scale=1'} name={'viewport'} />
         <link href={'/favicon.ico'} rel={'icon'} />
       </Head>
-      <Header />
       <div>
+        <LangSelect />
         <h1>{t.test}</h1>
       </div>
     </>

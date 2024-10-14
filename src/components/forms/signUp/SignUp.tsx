@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
 import { GoogleIcon } from '@/assets/icons/GoogleIcon'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { FormCheckbox } from '@/components/controlled/formCheckbox'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
@@ -12,6 +13,8 @@ import { Typography } from '@/components/ui/typography'
 import s from './signUp.module.scss'
 
 export const SignUp = () => {
+  const { t } = useTranslation()
+
   type SignUp = {
     agreesToTOS: any
     email: string
