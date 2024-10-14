@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { newPasswordSchema } from '@/common/schemas'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
@@ -13,6 +14,7 @@ import s from './createNewPassword.module.scss'
 type FormValues = z.infer<typeof newPasswordSchema>
 
 export const CreateNewPassword = () => {
+  const { t } = useTranslation()
   const classNames = {
     buttonSubmit: s.buttonSubmit,
     card: s.card,
@@ -34,25 +36,25 @@ export const CreateNewPassword = () => {
     <Card className={classNames.card}>
       <form className={classNames.form} onSubmit={handleSubmit(handleCreateNewPassword)}>
         <Typography asChild className={classNames.title} variant={'h1'}>
-          <h1>Create New Password</h1>
+          <h1>{t.passwordForm.createNewPassword}</h1>
         </Typography>
         <FormTextField
           className={classNames.newPasswordInput}
           control={control}
-          label={'New password'}
+          label={t.passwordForm.newPassword}
           name={'newPassword'}
           type={'password'}
         />
         <FormTextField
           control={control}
-          label={'Password confirmation'}
+          label={t.passwordForm.passwordConfirmation}
           name={'passwordConfirmation'}
           type={'password'}
         />
         <Typography className={classNames.instructions} variant={'regular_text_14'}>
-          Your password must be between 6 and 20 characters
+          {t.passwordForm.passwordLengthMsg}
         </Typography>
-        <Button className={classNames.buttonSubmit}>Create new password</Button>
+        <Button className={classNames.buttonSubmit}>{t.passwordForm.createNewPassBtn}</Button>
       </form>
     </Card>
   )

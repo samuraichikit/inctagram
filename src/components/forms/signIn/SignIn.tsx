@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
 import { GoogleIcon } from '@/assets/icons/GoogleIcon'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -11,6 +12,7 @@ import clsx from 'clsx'
 import s from './signIn.module.scss'
 
 export const SignIn = () => {
+  const { t } = useTranslation()
   const classNames = {
     emailTextField: clsx(s.emailTextField, s.fullWidth, s.mainMargin),
     forgotPassword: clsx(s.forgotPassword, s.mainMargin),
@@ -43,7 +45,7 @@ export const SignIn = () => {
     <Card className={classNames.wrapper}>
       <form className={classNames.form} onSubmit={handleSubmit(onSubmitHandler)}>
         <Typography asChild className={classNames.title} variant={'h1'}>
-          <h1>Sign In</h1>
+          <h1>{t.passwordForm.signIn}</h1>
         </Typography>
         <div className={classNames.iconWrapper}>
           <GoogleIcon height={36} width={36} />
@@ -53,7 +55,7 @@ export const SignIn = () => {
         <FormTextField
           className={classNames.emailTextField}
           control={control}
-          label={'Email'}
+          label={t.passwordForm.email}
           name={'email'}
           placeholder={'Epam@epam.com'}
           type={'email'}
@@ -61,19 +63,19 @@ export const SignIn = () => {
         <FormTextField
           className={classNames.passwordTextField}
           control={control}
-          label={'Password'}
+          label={t.passwordForm.password}
           name={'password'}
-          placeholder={'Enter password'}
+          placeholder={t.passwordForm.enterPassword}
           type={'password'}
         />
         <Typography asChild className={classNames.forgotPassword} variant={'regular_text_14'}>
-          <a href={'#'}>Forgot Password</a>
+          <a href={'#'}>{t.passwordForm.forgotPassword}</a>
         </Typography>
-        <Button className={classNames.signInButton}>Sign In</Button>
+        <Button className={classNames.signInButton}>{t.passwordForm.signInBtn}</Button>
         <Typography className={s.signUpQuestion} variant={'regular_text_16'}>
-          Don’t have an account?
+          {t.passwordForm.noAccount}
         </Typography>
-        <Button variant={'text'}>Sign Up</Button>
+        <Button variant={'text'}>{t.passwordForm.signUp}</Button>
       </form>
     </Card>
   )

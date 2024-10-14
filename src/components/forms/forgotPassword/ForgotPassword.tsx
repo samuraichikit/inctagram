@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -18,15 +19,21 @@ type Props = {}
 export const ForgotPassword = (props: Props) => {
   const [isUserEmail, setUserEmail] = useState<null | string>(null)
   const [showModal, setShowModal] = useState(false)
+  const { t } = useTranslation()
 
   const forgotSchema = z.object({
-    email: z.string().min(1, 'Обязательный').email('Некорректный адресс электронной почты'),
+    email: z
+      .string()
+      .min(1, `${t.passwordForm.mandatoryField}`)
+      .email(`${t.passwordForm.incorrectEmail}`),
     reCaptcha: !isUserEmail
       ? z.string().min(1, 'Пожалуйста, подтвердите, что вы не робот')
       : z.string(),
   })
 
-  const buttonSentText = isUserEmail ? 'Send Link Again' : 'Send Link'
+  const buttonSentText = isUserEmail
+    ? `${t.passwordForm.sendLinkAgain}`
+    : `${t.passwordForm.sendLink}`
 
   const { control, formState, handleSubmit, reset, setValue } = useForm<ForgotValues>({
     defaultValues: { email: '', reCaptcha: '' },
@@ -48,29 +55,29 @@ export const ForgotPassword = (props: Props) => {
     <Card className={s.card}>
       <form className={s.form} onSubmit={handleSubmit(handleSendLink)}>
         <Typography asChild className={s.title} variant={'h1'}>
-          <h1>Forgot Password</h1>
+          <h1>{t.passwordForm.forgotPassword}</h1>
         </Typography>
         <FormTextField
           control={control}
-          label={'Email'}
+          label={t.passwordForm.email}
           name={'email'}
           placeholder={'Epam@epam.com'}
         />
         <Typography className={s.instructions} variant={'regular_text_14'}>
-          Enter your email address and we will send you further instructions
+          {t.passwordForm.forgotPasswordMsg}
         </Typography>
         {isUserEmail && (
           <Typography className={s.info}>
-            The link has been sent by email.
+            {t.passwordForm.linkSentMsg}
             <br />
-            If you don’t receive an email send link again
+            {t.passwordForm.linkSentMsg_1}
           </Typography>
         )}
         <Button className={s.button} type={'submit'}>
           {buttonSentText}
         </Button>
         <Button className={s.button} variant={'text'}>
-          Back to Sign In
+          {t.passwordForm.backToSignIn}
         </Button>
         {!isUserEmail && (
           <Recaptcha
