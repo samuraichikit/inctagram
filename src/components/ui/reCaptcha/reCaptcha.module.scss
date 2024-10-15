@@ -1,0 +1,10 @@
+.reCaptcha {
+  display: grid;
+  row-gap: 13px;
+  justify-items: center;
+}
+
+.error {
+  padding: 8px 7px;
+  border: 1px solid var(--color-danger-500);
+}
