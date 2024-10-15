@@ -1,4 +1,5 @@
 export const ru = {
+  agreementMsg: 'Я соглашаюсь с ',
   emailVerification: {
     expiredLinkMsg: 'Ссылка на подтверждение пароля истекла',
     msg: 'Вероятно, сcылка на подтверждение пароля истекла.  Не волнуйтесь - мы вышлем вам новую!',
@@ -22,11 +23,12 @@ export const ru = {
     password: 'Пароль',
     passwordConfirmation: 'Подтверждение пароля',
     passwordLengthMsg: 'Длина вашего пароля должна составлять от 6 до 20 символов',
+    recaptchaMsg: 'Пожалуйста, подтвердите, что вы не робот',
     sendLink: 'Получить ссылку',
     sendLinkAgain: 'Получить повторную ссылку',
     signIn: 'Войти',
     signInBtn: 'Войти',
-    signUp: 'Регистрация',
+    signUp: 'Зарегистрироваться',
   },
   privacyPolicy: {
     title: 'Политика конфиденциальности',
@@ -35,6 +37,9 @@ export const ru = {
     backToSignUp: 'Назад к регистрации',
     congratsMsg: 'Поздравляем!',
     emailConfirmed: 'Ваш адрес эл.почты подтвержден',
+    haveAccount: 'Уже зарегистрированы?',
+    signUpHeader: 'Регистрация пользователя',
+    username: 'Имя пользователя',
   },
   termsOfService: { title: 'Пользовательское соглашение' },
   test: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати',

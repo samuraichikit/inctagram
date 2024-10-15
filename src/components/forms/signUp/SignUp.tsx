@@ -37,7 +37,7 @@ export const SignUp = () => {
   return (
     <Card className={s.card}>
       <Typography asChild className={s.title} variant={'h1'}>
-        <h1>Sign Up</h1>
+        <h1>{t.signUp.signUpHeader}</h1>
       </Typography>
       <div className={s.iconWrapper}>
         <GoogleIcon height={36} width={36} />
@@ -47,7 +47,7 @@ export const SignUp = () => {
         <FormTextField
           className={s.input}
           control={control}
-          label={'Username'}
+          label={t.signUp.username}
           name={'username'}
           placeholder={'Epam11'}
           type={'text'}
@@ -55,7 +55,7 @@ export const SignUp = () => {
         <FormTextField
           className={s.input}
           control={control}
-          label={'Email'}
+          label={t.passwordForm.email}
           name={'email'}
           placeholder={'Epam@epam.com'}
           type={'email'}
@@ -63,17 +63,17 @@ export const SignUp = () => {
         <FormTextField
           className={s.input}
           control={control}
-          label={'Password'}
+          label={t.passwordForm.password}
           name={'password'}
-          placeholder={'Password'}
+          placeholder={t.passwordForm.password}
           type={'password'}
         />
         <FormTextField
           className={s.input}
           control={control}
-          label={'Password confirmation'}
+          label={t.passwordForm.passwordConfirmation}
           name={'password_confirmation'}
-          placeholder={'Password confirmation'}
+          placeholder={t.passwordForm.passwordConfirmation}
           type={'password'}
         />
         <FormCheckbox
@@ -81,25 +81,25 @@ export const SignUp = () => {
           control={control}
           label={
             <Typography slot={'span'} variant={'small_text'}>
-              I agree to the{' '}
+              {t.agreementMsg}{' '}
               <Typography asChild variant={'small_link'}>
-                <a>Terms of Service</a>
+                <a>{t.termsOfService.title}</a>
               </Typography>{' '}
               and
               <Typography asChild variant={'small_link'}>
-                <a> Privacy Policy</a>
+                <a> {t.privacyPolicy.title}</a>
               </Typography>
             </Typography>
           }
           name={'agreesToTOS'}
         />
         <Button className={s.signUpButton} variant={'primary'}>
-          Sign up
+          {t.passwordForm.signUp}
         </Button>
         <Typography className={s.signInQuestion} variant={'regular_text_16'}>
-          Do you have an account?
+          {t.signUp.haveAccount}
         </Typography>
-        <Button variant={'text'}>Sign in</Button>
+        <Button variant={'text'}>{t.passwordForm.signIn}</Button>
       </form>
     </Card>
   )

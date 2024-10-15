@@ -1,6 +1,7 @@
 import { LocaleType } from './ru'
 
 export const en: LocaleType = {
+  agreementMsg: 'I agree to the',
   emailVerification: {
     expiredLinkMsg: 'Email verification link expired',
     msg: 'Looks like the verification link has expired. Not to worry, we can send the link again',
@@ -8,7 +9,7 @@ export const en: LocaleType = {
   },
   passwordForm: {
     backToSignIn: 'Back to Sign In',
-    confirmationLinkMsg: 'We have sent a link to confirm your email to',
+    confirmationLinkMsg: 'We have sent a link to confirm your email to ',
     createNewPassBtn: 'Create new password',
     createNewPassword: 'Create New Password',
     email: 'Email',
@@ -24,6 +25,7 @@ export const en: LocaleType = {
     password: 'Password',
     passwordConfirmation: 'Password confirmation',
     passwordLengthMsg: 'Your password must be between 6 and 20 characters',
+    recaptchaMsg: 'Please verify that you are not a robot',
     sendLink: 'Send Link',
     sendLinkAgain: 'If you don’t receive an email send link again',
     signIn: 'Sign In',
@@ -37,6 +39,9 @@ export const en: LocaleType = {
     backToSignUp: 'Back to Sign Up',
     congratsMsg: 'Congratulations!',
     emailConfirmed: 'Your email has been confirmed',
+    haveAccount: 'Do you have an account?',
+    signUpHeader: 'Sign Up',
+    username: 'Username',
   },
   termsOfService: { title: 'Terms of Service' },
   test: 'Lorem Ipsum is simply dummy text of the printing',

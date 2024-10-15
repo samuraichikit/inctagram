@@ -26,9 +26,7 @@ export const ForgotPassword = (props: Props) => {
       .string()
       .min(1, `${t.passwordForm.mandatoryField}`)
       .email(`${t.passwordForm.incorrectEmail}`),
-    reCaptcha: !isUserEmail
-      ? z.string().min(1, 'Пожалуйста, подтвердите, что вы не робот')
-      : z.string(),
+    reCaptcha: !isUserEmail ? z.string().min(1, `${t.passwordForm.recaptchaMsg}`) : z.string(),
   })
 
   const buttonSentText = isUserEmail
@@ -90,7 +88,7 @@ export const ForgotPassword = (props: Props) => {
         <Modal onOpenChange={setShowModal} open={showModal} title={'Email sent'}>
           <div className={s.modalContent}>
             <Typography variant={'regular_text_16'}>
-              We have sent a link to confirm your email to {isUserEmail}
+              {t.passwordForm.confirmationLinkMsg} {isUserEmail}
             </Typography>
             <Button onClick={handleButtonOkClick}>Ok</Button>
           </div>
