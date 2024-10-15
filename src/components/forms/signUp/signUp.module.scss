@@ -46,5 +46,17 @@
 }
 
 .buttonOk {
-  float: right;
+  align-self: flex-end;
+}
+
+.modalContentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 30px 24px 36px;
+}
+
+.modal {
+  width: 100%;
+  max-width: 378px;
 }

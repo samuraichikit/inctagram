@@ -94,13 +94,15 @@ export const SignUp = () => {
           <Button variant={'text'}>Sign in</Button>
         </form>
       </Card>
-      <Modal onOpenChange={setIsOpen} open={isOpen} title={'Email sent'}>
-        <Typography variant={'regular_text_16'}>
-          We have sent a link to confirm your email to {emailModal}
-        </Typography>
-        <Button className={s.buttonOk} onClick={onCloseHandler}>
-          OK
-        </Button>
+      <Modal className={s.modal} onOpenChange={setIsOpen} open={isOpen} title={'Email sent'}>
+        <div className={s.modalContentContainer}>
+          <Typography variant={'regular_text_16'}>
+            We have sent a link to confirm your email to {emailModal}
+          </Typography>
+          <Button className={s.buttonOk} onClick={onCloseHandler}>
+            OK
+          </Button>
+        </div>
       </Modal>
     </>
   )
