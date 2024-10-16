@@ -7,20 +7,14 @@ import clsx from 'clsx'
 
 import s from './select.module.scss'
 
-type Option = {
-  label: number | string
-  value: string
-}
-
 export type SelectProps = {
   id?: string
   label?: string
-  options: Option[]
   placeholder?: ReactNode
   small?: boolean
 } & ComponentPropsWithoutRef<typeof SelectRadix.Root>
 
-export const Select = ({ id, label, options, placeholder, small, ...rest }: SelectProps) => {
+export const Select = ({ children, id, label, placeholder, small, ...rest }: SelectProps) => {
   const generatedId = useId()
   const idToUse = id ?? generatedId
 
@@ -37,20 +31,12 @@ export const Select = ({ id, label, options, placeholder, small, ...rest }: Sele
           <DropDownArrowIcon className={s.dropDownArrowIcon} height={24} width={24} />
         </SelectRadix.Trigger>
         <SelectRadix.Portal>
-          <SelectRadix.Content className={clsx(s.content, small && s.small)} position={'popper'}>
-            <SelectRadix.Viewport className={s.viewport}>
-              {options.map(item => {
-                return (
-                  <SelectRadix.Item
-                    className={clsx(s.item, small && s.small)}
-                    key={item.value}
-                    value={item.value}
-                  >
-                    <SelectRadix.ItemText>{item.label}</SelectRadix.ItemText>
-                  </SelectRadix.Item>
-                )
-              })}
-            </SelectRadix.Viewport>
+          <SelectRadix.Content
+            className={clsx(s.content, small && s.small)}
+            collisionPadding={0}
+            position={'popper'}
+          >
+            <SelectRadix.Viewport className={s.viewport}>{children}</SelectRadix.Viewport>
           </SelectRadix.Content>
         </SelectRadix.Portal>
       </SelectRadix.Root>
