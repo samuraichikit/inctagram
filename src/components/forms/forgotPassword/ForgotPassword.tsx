@@ -6,7 +6,7 @@ import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Modal } from '@/components/ui/modal'
-import { Recaptcha } from '@/components/ui/recaptcha'
+import { ReCaptcha } from '@/components/ui/reCaptcha'
 import { Typography } from '@/components/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -78,10 +78,10 @@ export const ForgotPassword = (props: Props) => {
           {t.passwordForm.backToSignIn}
         </Button>
         {!isUserEmail && (
-          <Recaptcha
+          <ReCaptcha
             errorMessage={formState.errors.reCaptcha?.message}
             onChange={handleChangeRecaptcha}
-            sitekey={'6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'}
+            sitekey={'6LfCfGEqAAAAADuum-zR79JJ2C5qDQpb7pFLi4LE'}
             theme={'dark'}
           />
         )}
