@@ -1,14 +1,21 @@
-import { useVerificationLink } from '@/common/hooks'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
+import { useResendVerificationLinkMutation } from '@/services/auth'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 import s from './verificationLink.module.scss'
 
 import verificationLink from '../../../../../public/verificationLink.png'
 
 export const VerificationLink = () => {
-  const { resendEmailHandler } = useVerificationLink()
+  const [resendVerificationLink] = useResendVerificationLinkMutation()
+  const router = useRouter()
+  const { query } = router
+  const email = query.email as string
+  const resendEmailHandler = () => {
+    resendVerificationLink({ email })
+  }
 
   return (
     <div className={s.wrapper}>
