@@ -62,7 +62,10 @@
 }
 
 .content {
+  z-index: 9999;
+
   width: var(--radix-select-trigger-width);
+
   background-color: var(--color-dark-500);
   border: 1px solid var(--color-light-100);
   border-top: none;
