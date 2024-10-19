@@ -27,7 +27,7 @@ export const en: LocaleType = {
     passwordLengthMsg: 'Your password must be between 6 and 20 characters',
     recaptchaMsg: 'Please verify that you are not a robot',
     sendLink: 'Send Link',
-    sendLinkAgain: 'If you don’t receive an email send link again',
+    sendLinkAgain: 'Send Link Again',
     signIn: 'Sign In',
     signInBtn: 'Войти',
     signUp: 'Sign Up',
