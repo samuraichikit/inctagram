@@ -168,7 +168,7 @@ export const SignUp = () => {
       <Modal className={s.modal} onOpenChange={setIsOpen} open={isOpen} title={'Email sent'}>
         <div className={s.modalContentContainer}>
           <Typography variant={'regular_text_16'}>
-            We have sent a link to confirm your email to {emailModal}
+            {t.passwordForm.confirmationLinkMsg} {emailModal}
           </Typography>
           <Button className={s.buttonOk} onClick={onCloseHandler}>
             OK
