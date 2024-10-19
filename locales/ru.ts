@@ -34,6 +34,7 @@ export const ru = {
     title: 'Политика конфиденциальности',
   },
   signUp: {
+    and: 'и',
     backToSignUp: 'Назад к регистрации',
     congratsMsg: 'Поздравляем!',
     emailConfirmed: 'Ваш адрес эл.почты подтвержден',
