@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
 
 import { wrapper } from '@/app/store'
+import { Layout } from '@/components/ui/layout'
 
 import './../styles/index.scss'
 import '@fontsource-variable/inter'
@@ -12,7 +13,9 @@ export default function App({ Component, ...rest }: AppProps) {
 
   return (
     <Provider store={store}>
-      <Component {...props.pageProps} />
+      <Layout>
+        <Component {...props.pageProps} />
+      </Layout>
     </Provider>
   )
 }
