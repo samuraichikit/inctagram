@@ -6,7 +6,11 @@ import s from './header.module.scss'
 import { Button } from '../button'
 import { Typography } from '../typography'
 
-export const Header = () => {
+type Props = {
+  isAuth: boolean
+}
+
+export const Header = ({ isAuth }: Props) => {
   const classNames = {
     buttonsContainer: s.buttonsContainer,
     container: s.container,
@@ -20,14 +24,16 @@ export const Header = () => {
         <Typography variant={'large'}>Inctagram</Typography>
         <div className={classNames.navContainer}>
           <LangSelect />
-          <div className={classNames.buttonsContainer}>
-            <Button asChild variant={'text'}>
-              <Link href={'auth/signIn'}>Log in</Link>
-            </Button>
-            <Button asChild>
-              <Link href={'auth/signUp'}>Sign up</Link>
-            </Button>
-          </div>
+          {!isAuth && (
+            <div className={classNames.buttonsContainer}>
+              <Button asChild variant={'text'}>
+                <Link href={'auth/signIn'}>Log in</Link>
+              </Button>
+              <Button asChild>
+                <Link href={'auth/signUp'}>Sign up</Link>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </header>
