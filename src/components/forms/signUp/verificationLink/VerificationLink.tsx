@@ -17,7 +17,7 @@ export const VerificationLink = () => {
   const resendEmailHandler = () => {
     resendVerificationLink({ email })
   }
-  
+
   const { t } = useTranslation()
 
   return (

@@ -15,6 +15,7 @@ import { VerificationLink } from '../verificationLink'
 
 export const ConfirmedEmail = () => {
   const [confirmEmail, { error, isLoading }] = useConfirmEmailMutation()
+  const { t } = useTranslation()
   const router = useRouter()
   const { query } = router
 
@@ -33,8 +34,6 @@ export const ConfirmedEmail = () => {
   if (error) {
     return <VerificationLink />
   }
-  
-  const { t } = useTranslation()
 
   return (
     <div className={s.wrapper}>

@@ -36,6 +36,7 @@ export const en: LocaleType = {
     title: 'Privacy Policy',
   },
   signUp: {
+    and: 'and',
     backToSignUp: 'Back to Sign Up',
     congratsMsg: 'Congratulations!',
     emailConfirmed: 'Your email has been confirmed',
