@@ -35,6 +35,15 @@ export const en: LocaleType = {
   privacyPolicy: {
     title: 'Privacy Policy',
   },
+  schemaErrorMsg: {
+    emailFormat: 'The email must match the format example@example.com',
+    maxName: 'Maximum number of characters 30',
+    maxPassword: 'Maximum number of characters 6',
+    minName: 'Minimum number of characters 6',
+    minPassword: 'Minimum number of characters 6',
+    passwordContain: 'Password must contain ',
+    passwordMatch: 'Passwords must match',
+  },
   signUp: {
     and: 'and',
     backToSignUp: 'Back to Sign Up',

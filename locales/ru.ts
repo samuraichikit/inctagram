@@ -33,6 +33,15 @@ export const ru = {
   privacyPolicy: {
     title: 'Политика конфиденциальности',
   },
+  schemaErrorMsg: {
+    emailFormat: 'Адрес эл.почты должен быть в формате example@example.com',
+    maxName: 'Максимальное число символов - 30',
+    maxPassword: 'Максимальное число символов - 20',
+    minName: 'Минимальное число символов - 6',
+    minPassword: 'Минимальное число символов - 6',
+    passwordContain: 'Пароль должен содержать ',
+    passwordMatch: 'Пароли должны совпадать',
+  },
   signUp: {
     and: 'и',
     backToSignUp: 'Назад к регистрации',
