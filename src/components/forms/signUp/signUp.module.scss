@@ -1,45 +1,62 @@
 .card {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
   max-width: 378px;
-  padding: 24px;
+  padding: 23px 24px 24px;
+}
+
+.title {
+  text-align: center;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 
   .input {
-    width: 330px;
-    height: 60px;
+    width: 100%;
+  }
+
+  .inputUserName,
+  .inputEmail,
+  .inputPassword {
     margin-bottom: 24px;
+  }
+
+  .error {
+    margin-bottom: 0;
   }
 
   .checkBox {
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
-  }
-
-  .signUpButton {
-    width: 330px;
+    margin: 12px 0;
   }
 
   .signInQuestion {
-    margin: 18px auto 6px;
+    margin: 18px 0 12px;
   }
-}
-
-.title {
-  margin: 0 auto;
 }
 
 .iconWrapper {
   display: flex;
-  justify-content: center;
   gap: 60px;
-  margin-top: 12px;
-  margin-bottom: 24px;
+  justify-content: center;
+  margin: 13px 0 24px;
+}
+
+.buttonOk {
+  align-self: flex-end;
+}
+
+.modalContentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 30px 24px 36px;
+}
+
+.modal {
+  width: 100%;
+  max-width: 378px;
 }
