@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import { useConfirmEmailMutation } from '@/services/auth'
@@ -32,18 +33,20 @@ export const ConfirmedEmail = () => {
   if (error) {
     return <VerificationLink />
   }
+  
+  const { t } = useTranslation()
 
   return (
     <div className={s.wrapper}>
       <Typography className={s.title} variant={'h1'}>
-        Congratulations!
+        {t.signUp.congratsMsg}
       </Typography>
       <Typography className={s.description} variant={'regular_text_16'}>
-        Your email has been confirmed
+        {t.signUp.emailConfirmed}
       </Typography>
       <div>
         <Button asChild className={s.button}>
-          <Link href={'/auth/signIn'}>Sign in</Link>
+          <Link href={'/auth/signIn'}>{t.passwordForm.signIn}</Link>
         </Button>
       </div>
       <div>

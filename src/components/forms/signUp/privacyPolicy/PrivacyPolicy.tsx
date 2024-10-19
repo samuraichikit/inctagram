@@ -1,20 +1,23 @@
 import React from 'react'
 
 import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { Typography } from '@/components/ui/typography'
 import Link from 'next/link'
 
 import s from './privacyPolicy.module.scss'
 
 export const PrivacyPolicy = () => {
+  const { t } = useTranslation()
+
   return (
     <div>
       <Link className={s.linkWrapper} href={'/auth/signUp'}>
         <ArrowLeftIcon />
-        <Typography variant={'regular_text_14'}>Back to Sign Up</Typography>
+        <Typography variant={'regular_text_14'}>{t.signUp.backToSignUp}</Typography>
       </Link>
       <Typography className={s.title} variant={'h1'}>
-        Privacy Policy
+        {t.privacyPolicy.title}
       </Typography>
       <Typography className={s.text} variant={'regular_text_14'}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut

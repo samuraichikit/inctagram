@@ -1,3 +1,4 @@
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import { useResendVerificationLinkMutation } from '@/services/auth'
@@ -16,18 +17,20 @@ export const VerificationLink = () => {
   const resendEmailHandler = () => {
     resendVerificationLink({ email })
   }
+  
+  const { t } = useTranslation()
 
   return (
     <div className={s.wrapper}>
       <Typography className={s.title} variant={'h1'}>
-        Email verification link expired
+        {t.emailVerification.expiredLinkMsg}
       </Typography>
       <Typography className={s.description} variant={'regular_text_16'}>
-        Looks like the verification link has expired. Not to worry, we can send the link again
+        {t.emailVerification.msg}
       </Typography>
       <div>
         <Button className={s.button} onClick={resendEmailHandler}>
-          Resend verification link
+          {t.emailVerification.resendMsg}
         </Button>
       </div>
       <div>
