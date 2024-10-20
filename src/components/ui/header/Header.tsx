@@ -1,3 +1,4 @@
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { LangSelect } from '@/components/langSelect/LangSelect'
 import Link from 'next/link'
 
@@ -18,6 +19,8 @@ export const Header = ({ isAuth }: Props) => {
     navContainer: s.navContainer,
   }
 
+  const { t } = useTranslation()
+
   return (
     <header className={classNames.header}>
       <div className={classNames.container}>
@@ -27,10 +30,10 @@ export const Header = ({ isAuth }: Props) => {
           {!isAuth && (
             <div className={classNames.buttonsContainer}>
               <Button asChild variant={'text'}>
-                <Link href={'auth/signIn'}>Log in</Link>
+                <Link href={'auth/signIn'}>{t.header.signIn}</Link>
               </Button>
               <Button asChild>
-                <Link href={'auth/signUp'}>Sign up</Link>
+                <Link href={'auth/signUp'}>{t.header.signUp}</Link>
               </Button>
             </div>
           )}

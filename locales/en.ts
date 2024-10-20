@@ -7,6 +7,10 @@ export const en: Locale = {
     msg: 'Looks like the verification link has expired. Not to worry, we can send the link again',
     resendMsg: 'Resend verification link',
   },
+  header: {
+    signIn: 'Log in',
+    signUp: 'Sign up',
+  },
   passwordForm: {
     backToSignIn: 'Back to Sign In',
     confirmationLinkMsg: 'We have sent a link to confirm your email to ',
