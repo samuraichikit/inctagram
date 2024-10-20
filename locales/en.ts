@@ -1,6 +1,6 @@
-import { LocaleType } from './ru'
+import { Locale } from './ru'
 
-export const en: LocaleType = {
+export const en: Locale = {
   agreementMsg: 'I agree to the',
   emailVerification: {
     expiredLinkMsg: 'Email verification link expired',
@@ -36,7 +36,7 @@ export const en: LocaleType = {
     title: 'Privacy Policy',
   },
   schemaErrorMsg: {
-    emailFormat: 'The email must match the format example@example.com',
+    emailFormat: 'The email must match the format',
     maxName: 'Maximum number of characters 30',
     maxPassword: 'Maximum number of characters 6',
     minName: 'Minimum number of characters 6',

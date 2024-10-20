@@ -34,7 +34,7 @@ export const ru = {
     title: 'Политика конфиденциальности',
   },
   schemaErrorMsg: {
-    emailFormat: 'Адрес эл.почты должен быть в формате example@example.com',
+    emailFormat: 'Адрес эл.почты должен быть в формате',
     maxName: 'Максимальное число символов - 30',
     maxPassword: 'Максимальное число символов - 20',
     minName: 'Минимальное число символов - 6',
@@ -55,4 +55,4 @@ export const ru = {
   test: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати',
 }
 
-export type LocaleType = typeof ru
+export type Locale = typeof ru

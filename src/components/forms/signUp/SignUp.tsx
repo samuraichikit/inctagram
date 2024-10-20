@@ -19,7 +19,7 @@ import { z } from 'zod'
 
 import s from './signUp.module.scss'
 
-type FormValues = z.infer<typeof signUpSchema>
+type FormValues = z.infer<ReturnType<typeof signUpSchema>>
 type FormField = keyof FormValues
 type ServerErrorMessage = {
   field: FormField
@@ -36,6 +36,7 @@ type ServerError = {
 }
 
 export const SignUp = () => {
+  const { t } = useTranslation()
   const {
     control,
     formState: { errors, isValid },
@@ -52,10 +53,8 @@ export const SignUp = () => {
       userName: '',
     },
     mode: 'onBlur',
-    resolver: zodResolver(signUpSchema),
+    resolver: zodResolver(signUpSchema(t)),
   })
-
-  const { t } = useTranslation()
 
   const acceptTerms = watch('agreesToTOS')
   const isDisabled = !isValid && !acceptTerms
