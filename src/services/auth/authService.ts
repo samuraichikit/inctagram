@@ -15,6 +15,9 @@ const authService = baseApi.injectEndpoints({
       confirmEmail: builder.mutation<ErrorResponse | void, RegistrationConfirmationArgs>({
         query: body => ({ body, method: 'POST', url: 'v1/auth/registration-confirmation' }),
       }),
+      logout: builder.mutation<void, void>({
+        query: () => ({ method: 'POST', url: 'v1/auth/logout' }),
+      }),
       me: builder.query<MeResponse, void>({
         query: () => ({
           url: 'v1/auth/me',
@@ -42,6 +45,7 @@ const authService = baseApi.injectEndpoints({
 
 export const {
   useConfirmEmailMutation,
+  useLogoutMutation,
   useMeQuery,
   useResendVerificationLinkMutation,
   useSignInMutation,
