@@ -1,14 +1,6 @@
-import { SignIn } from '@/components/forms/signIn'
-import { Button } from '@/components/ui/button'
-import { useLogoutMutation } from '@/services/baseApi'
 import Head from 'next/head'
 
 export default function Home() {
-  const [logOut] = useLogoutMutation()
-  const logOutHandler = () => {
-    logOut()
-  }
-
   return (
     <>
       <Head>
@@ -17,10 +9,7 @@ export default function Home() {
         <meta content={'width=device-width, initial-scale=1'} name={'viewport'} />
         <link href={'/favicon.ico'} rel={'icon'} />
       </Head>
-      <div>
-        <SignIn />
-        <Button onClick={logOutHandler}>Logout</Button>
-      </div>
+      <div></div>
     </>
   )
 }

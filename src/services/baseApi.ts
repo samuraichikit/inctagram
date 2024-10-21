@@ -14,26 +14,6 @@ export const baseApi = createApi({
       return headers
     },
   }),
-  endpoints: builder => ({
-    login: builder.mutation({
-      query: args => ({ body: args, method: 'POST', url: 'v1/auth/login' }),
-    }),
-    logout: builder.mutation<void, void>({
-      query: () => ({ method: 'POST', url: 'v1/auth/logout' }),
-    }),
-    registrationConfirmation: builder.mutation({
-      query: () => ({ method: 'POST', url: 'v1/auth/registration-confirmation' }),
-    }),
-    signUp: builder.mutation({
-      query: args => ({ body: args, method: 'POST', url: 'v1/auth/registration' }),
-    }),
-  }),
+  endpoints: () => ({}),
   reducerPath: 'baseApi',
 })
-
-export const {
-  useLoginMutation,
-  useLogoutMutation,
-  useRegistrationConfirmationMutation,
-  useSignUpMutation,
-} = baseApi
