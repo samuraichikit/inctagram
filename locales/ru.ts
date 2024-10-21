@@ -34,6 +34,7 @@ export const ru = {
     signInBtn: 'Войти',
     signUp: 'Зарегистрироваться',
   },
+
   privacyPolicy: {
     title: 'Политика конфиденциальности',
   },
@@ -45,6 +46,10 @@ export const ru = {
     minPassword: 'Минимальное число символов - 6',
     passwordContain: 'Пароль должен содержать ',
     passwordMatch: 'Пароли должны совпадать',
+  },
+  sideBar: {
+    logOut: 'Выйти',
+    logOutConfirmation: 'Вы действительно хотите выйти из своей учетной записи?',
   },
   signUp: {
     and: 'и',

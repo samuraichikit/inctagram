@@ -5,6 +5,7 @@ import { useMeQuery } from '@/services/auth/authService'
 import s from './lauout.module.scss'
 
 import { Header } from '../header'
+import { Sidebar } from '../sidebar'
 type Props = {
   children: ReactNode
 }
@@ -20,7 +21,10 @@ export const Layout = ({ children }: Props) => {
   return (
     <>
       <Header isAuth={isAuth} />
-      <main className={classNames.main}>{children}</main>
+      <main className={classNames.main}>
+        <Sidebar />
+        {children}
+      </main>
     </>
   )
 }

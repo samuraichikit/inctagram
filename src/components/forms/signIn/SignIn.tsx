@@ -9,8 +9,10 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { useSignInMutation } from '@/services/auth'
+import { useGetProfileQuery } from '@/services/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
+import { useRouter } from 'next/router'
 import { z } from 'zod'
 
 import s from './signIn.module.scss'
@@ -46,11 +48,17 @@ export const SignIn = () => {
 
   const [signIn] = useSignInMutation()
 
+  const router = useRouter()
+
   const onSubmitHandler: SubmitHandler<SignInSchemaType> = (data: SignInSchemaType) => {
     signIn(data)
       .unwrap()
       .then(data => {
-        localStorage.setItem('ACCESS_TOKEN', data.accessToken)
+        localStorage.setItem('accessToken', data.accessToken)
+        const payload = data.accessToken.split('.')[1]
+        const id = JSON.parse(atob(payload)).userId
+
+        router.push(`/profile/${id}`)
       })
       .catch(err => {
         if (err.status) {

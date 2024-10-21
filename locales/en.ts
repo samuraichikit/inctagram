@@ -48,6 +48,10 @@ export const en: Locale = {
     passwordContain: 'Password must contain ',
     passwordMatch: 'Passwords must match',
   },
+  sideBar: {
+    logOut: 'Log out',
+    logOutConfirmation: 'Are you really want to log out of your account',
+  },
   signUp: {
     and: 'and',
     backToSignUp: 'Back to Sign Up',
