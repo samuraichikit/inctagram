@@ -1,5 +1,5 @@
 import { SignIn } from '@/components/forms/signIn'
 
-export default function SignUpPage() {
+export default function SignIpPage() {
   return <SignIn />
 }
