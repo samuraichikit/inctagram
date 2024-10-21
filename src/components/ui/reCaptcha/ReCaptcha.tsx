@@ -1,5 +1,5 @@
 import React, { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import ReCAPTCHA from 'react-google-recaptcha'
+import { ReCAPTCHA } from 'react-google-recaptcha'
 
 import { Typography } from '@/components/ui/typography'
 import clsx from 'clsx'

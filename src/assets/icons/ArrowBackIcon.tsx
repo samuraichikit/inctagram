@@ -4,10 +4,10 @@ type Props = SVGProps<SVGSVGElement>
 export const ArrowBackIcon = (props: Props) => {
   return (
     <svg
-      width={5}
+      fill={'none'}
       height={10}
       viewBox={'0 0 5 10'}
-      fill={'none'}
+      width={5}
       xmlns={'http://www.w3.org/2000/svg'}
       {...props}
     >
