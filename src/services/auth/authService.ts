@@ -16,9 +16,15 @@ const authService = baseApi.injectEndpoints({
         query: body => ({ body, method: 'POST', url: 'v1/auth/registration-confirmation' }),
       }),
       logout: builder.mutation<void, void>({
+        invalidatesTags: ['Me'],
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          await queryFulfilled
+          dispatch(authService.util.invalidateTags(['Me']))
+        },
         query: () => ({ method: 'POST', url: 'v1/auth/logout' }),
       }),
       me: builder.query<MeResponse, void>({
+        providesTags: ['Me'],
         query: () => ({
           url: 'v1/auth/me',
         }),
@@ -34,6 +40,7 @@ const authService = baseApi.injectEndpoints({
         }),
       }),
       signIn: builder.mutation<SignInResponseArgs, SignInArgs>({
+        invalidatesTags: ['Me'],
         query: body => ({ body, method: 'POST', url: 'v1/auth/login' }),
       }),
       signUp: builder.mutation<ErrorResponse | void, SignUpArgs>({
