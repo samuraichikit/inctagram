@@ -1,11 +1,10 @@
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { LangSelect } from '@/components/langSelect/LangSelect'
+import { Button } from '@/components/ui/button'
+import { Typography } from '@/components/ui/typography'
 import Link from 'next/link'
 
 import s from './header.module.scss'
-
-import { Button } from '../button'
-import { Typography } from '../typography'
 
 type Props = {
   isAuth: boolean

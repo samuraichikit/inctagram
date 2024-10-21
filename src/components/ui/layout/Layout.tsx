@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 
 import { useMeQuery } from '@/services/auth/authService'
+import clsx from 'clsx'
 
 import s from './lauout.module.scss'
 
@@ -11,12 +12,13 @@ type Props = {
 }
 
 export const Layout = ({ children }: Props) => {
-  const classNames = {
-    main: s.main,
-  }
   const { data, isError, isLoading } = useMeQuery()
 
   const isAuth = !isError && !isLoading
+
+  const classNames = {
+    main: clsx(s.main, isAuth && s.mainIsAuth),
+  }
 
   return (
     <>

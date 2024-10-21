@@ -1,3 +1,4 @@
+import { Profile } from '@/components/ui/profile'
 import { useGetProfileQuery } from '@/services/profile'
 
 export default function UserProfile() {
@@ -5,7 +6,7 @@ export default function UserProfile() {
 
   return (
     <>
-      <h1>{data?.userName}</h1>
+      <Profile />
     </>
   )
 }
