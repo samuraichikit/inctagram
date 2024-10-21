@@ -18,5 +18,6 @@ export const PageSizeSelect = ({ onPageSizeChange, pageSize }: Props) => {
     onPageSizeChange(+value)
   }
 
-  return <Select onValueChange={onValueChange} options={options} small value={`${pageSize}`} />
+  // return <Select onValueChange={onValueChange} options={options} small value={`${pageSize}`} />
+  return <div></div>
 }
