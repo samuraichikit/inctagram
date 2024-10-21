@@ -8,10 +8,13 @@ import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { useSignUpMutation } from '@/services/baseApi'
 
 import s from './signUp.module.scss'
 
 export const SignUp = () => {
+  const [signUp, { data }] = useSignUpMutation()
+
   type SignUp = {
     agreesToTOS: any
     email: string
@@ -29,7 +32,14 @@ export const SignUp = () => {
     },
   })
 
-  const onSubmitHandler: SubmitHandler<SignUp> = data => {}
+  const onSubmitHandler: SubmitHandler<SignUp> = data => {
+    signUp({
+      baseUrl: 'http://localhost:3000',
+      email: data.email,
+      password: data.password,
+      userName: data.username,
+    })
+  }
 
   return (
     <Card className={s.card}>

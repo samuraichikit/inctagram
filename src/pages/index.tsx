@@ -1,6 +1,14 @@
+import { SignIn } from '@/components/forms/signIn'
+import { Button } from '@/components/ui/button'
+import { useLogoutMutation } from '@/services/baseApi'
 import Head from 'next/head'
 
 export default function Home() {
+  const [logOut] = useLogoutMutation()
+  const logOutHandler = () => {
+    logOut()
+  }
+
   return (
     <>
       <Head>
@@ -10,7 +18,8 @@ export default function Home() {
         <link href={'/favicon.ico'} rel={'icon'} />
       </Head>
       <div>
-        <h1>Samuraichiki team</h1>
+        <SignIn />
+        <Button onClick={logOutHandler}>Logout</Button>
       </div>
     </>
   )

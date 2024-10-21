@@ -6,11 +6,14 @@ import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { useLoginMutation } from '@/services/baseApi'
 import clsx from 'clsx'
 
 import s from './signIn.module.scss'
 
 export const SignIn = () => {
+  const [login, { data }] = useLoginMutation()
+
   const classNames = {
     emailTextField: clsx(s.emailTextField, s.fullWidth, s.mainMargin),
     forgotPassword: clsx(s.forgotPassword, s.mainMargin),
@@ -36,7 +39,7 @@ export const SignIn = () => {
   })
 
   const onSubmitHandler: SubmitHandler<SignIn> = data => {
-    alert(`email: ${data.email}; password: ${data.password}`)
+    login({ email: data.email, password: data.password })
   }
 
   return (
