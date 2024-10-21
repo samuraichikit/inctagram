@@ -11,7 +11,7 @@ import { z } from 'zod'
 
 import s from './createNewPassword.module.scss'
 
-type FormValues = z.infer<typeof newPasswordSchema>
+type FormValues = z.infer<ReturnType<typeof newPasswordSchema>>
 
 export const CreateNewPassword = () => {
   const { t } = useTranslation()
@@ -27,7 +27,7 @@ export const CreateNewPassword = () => {
   const { control, handleSubmit } = useForm<FormValues>({
     defaultValues: { newPassword: '', passwordConfirmation: '' },
     mode: 'onBlur',
-    resolver: zodResolver(newPasswordSchema),
+    resolver: zodResolver(newPasswordSchema(t)),
   })
 
   const handleCreateNewPassword = () => {}
