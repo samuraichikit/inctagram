@@ -3,13 +3,19 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
 import { GoogleIcon } from '@/assets/icons/GoogleIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { signInSchema } from '@/common/schemas/signInSchema'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { useSignInMutation } from '@/services/auth'
+import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
+import { z } from 'zod'
 
 import s from './signIn.module.scss'
+
+type SignInSchemaType = z.infer<ReturnType<typeof signInSchema>>
 
 export const SignIn = () => {
   const { t } = useTranslation()
@@ -25,20 +31,33 @@ export const SignIn = () => {
     wrapper: s.wrapper,
   }
 
-  type SignIn = {
-    email: string
-    password: string
-  }
-
-  const { control, handleSubmit } = useForm<SignIn>({
+  const {
+    control,
+    formState: { isValid },
+    handleSubmit,
+    setError,
+  } = useForm<SignInSchemaType>({
     defaultValues: {
       email: '',
       password: '',
     },
+    resolver: zodResolver(signInSchema(t)),
   })
 
-  const onSubmitHandler: SubmitHandler<SignIn> = data => {
-    alert(`email: ${data.email}; password: ${data.password}`)
+  const [signIn] = useSignInMutation()
+
+  const onSubmitHandler: SubmitHandler<SignInSchemaType> = (data: SignInSchemaType) => {
+    signIn(data)
+      .unwrap()
+      .then(data => {
+        localStorage.setItem('ACCESS_TOKEN', data.accessToken)
+      })
+      .catch(err => {
+        if (err.status) {
+          //t.passwordForm.incorrectEmail && incorrectPassword: The email or password are incorrect. Try again please
+          setError('password', { message: err.data.messages })
+        }
+      })
   }
 
   return (

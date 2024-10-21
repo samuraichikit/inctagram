@@ -4,9 +4,10 @@ import {
   MeResponse,
   RegistrationConfirmationArgs,
   RegistrationEmailResendingArgs,
+  SignInArgs,
+  SignInResponseArgs,
   SignUpArgs,
 } from './authService.types'
-
 
 const authService = baseApi.injectEndpoints({
   endpoints: builder => {
@@ -29,6 +30,9 @@ const authService = baseApi.injectEndpoints({
           url: 'v1/auth/registration-email-resending',
         }),
       }),
+      signIn: builder.mutation<SignInResponseArgs, SignInArgs>({
+        query: body => ({ body, method: 'POST', url: 'v1/auth/login' }),
+      }),
       signUp: builder.mutation<ErrorResponse | void, SignUpArgs>({
         query: body => ({ body, method: 'POST', url: 'v1/auth/registration' }),
       }),
@@ -36,6 +40,10 @@ const authService = baseApi.injectEndpoints({
   },
 })
 
-export const { useConfirmEmailMutation, useMeQuery, useResendVerificationLinkMutation, useSignUpMutation } =
-  authService
-
+export const {
+  useConfirmEmailMutation,
+  useMeQuery,
+  useResendVerificationLinkMutation,
+  useSignInMutation,
+  useSignUpMutation,
+} = authService
