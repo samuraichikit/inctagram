@@ -1,19 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
+
+import { baseQueryWithReauth } from './baseQueryWithReauth'
 
 export const baseApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://inctagram.work/api/',
-    credentials: 'include',
-    prepareHeaders: headers => {
-      const accessToken = localStorage.getItem('accessToken')
-
-      if (accessToken) {
-        headers.set('Authorization', `Bearer ${accessToken}`)
-      }
-
-      return headers
-    },
-  }),
+  baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
   reducerPath: 'baseApi',
 })
