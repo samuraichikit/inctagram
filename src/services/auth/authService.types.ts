@@ -1,4 +1,3 @@
-
 export type MeResponse = {
   email: string
   isBlocked: boolean
@@ -31,3 +30,11 @@ export type RegistrationEmailResendingArgs = {
   email: string
 }
 
+export type SignInArgs = {
+  email: string
+  password: string
+}
+
+export type SignInResponseArgs = {
+  accessToken: string
+}
