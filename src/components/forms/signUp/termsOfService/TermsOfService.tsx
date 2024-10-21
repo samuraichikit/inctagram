@@ -1,19 +1,23 @@
 import React from 'react'
 
 import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { Typography } from '@/components/ui/typography'
+import Link from 'next/link'
 
 import s from './termsOfService.module.scss'
 
 export const TermsOfService = () => {
+  const { t } = useTranslation()
+
   return (
     <div>
-      <div className={s.linkWrapper}>
+      <Link className={s.linkWrapper} href={'/auth/signUp'}>
         <ArrowLeftIcon />
-        <Typography variant={'regular_text_14'}>Back to Sign Up</Typography>
-      </div>
+        <Typography variant={'regular_text_14'}>{t.signUp.backToSignUp}</Typography>
+      </Link>
       <Typography className={s.title} variant={'h1'}>
-        Terms of Service
+        {t.termsOfService.title}
       </Typography>
       <Typography className={s.text} variant={'regular_text_14'}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut

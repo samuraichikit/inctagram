@@ -2,18 +2,23 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
 import { GoogleIcon } from '@/assets/icons/GoogleIcon'
+import { useTranslation } from '@/common/hooks/useTranslation'
+import { signInSchema } from '@/common/schemas/signInSchema'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
-import { useLoginMutation } from '@/services/baseApi'
+import { useSignInMutation } from '@/services/auth'
+import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
+import { z } from 'zod'
 
 import s from './signIn.module.scss'
 
-export const SignIn = () => {
-  const [login, { data }] = useLoginMutation()
+type SignInSchemaType = z.infer<ReturnType<typeof signInSchema>>
 
+export const SignIn = () => {
+  const { t } = useTranslation()
   const classNames = {
     emailTextField: clsx(s.emailTextField, s.fullWidth, s.mainMargin),
     forgotPassword: clsx(s.forgotPassword, s.mainMargin),
@@ -26,27 +31,40 @@ export const SignIn = () => {
     wrapper: s.wrapper,
   }
 
-  type SignIn = {
-    email: string
-    password: string
-  }
-
-  const { control, handleSubmit } = useForm<SignIn>({
+  const {
+    control,
+    formState: { isValid },
+    handleSubmit,
+    setError,
+  } = useForm<SignInSchemaType>({
     defaultValues: {
       email: '',
       password: '',
     },
+    resolver: zodResolver(signInSchema(t)),
   })
 
-  const onSubmitHandler: SubmitHandler<SignIn> = data => {
-    login({ email: data.email, password: data.password })
+  const [signIn] = useSignInMutation()
+
+  const onSubmitHandler: SubmitHandler<SignInSchemaType> = (data: SignInSchemaType) => {
+    signIn(data)
+      .unwrap()
+      .then(data => {
+        localStorage.setItem('ACCESS_TOKEN', data.accessToken)
+      })
+      .catch(err => {
+        if (err.status) {
+          //t.passwordForm.incorrectEmail && incorrectPassword: The email or password are incorrect. Try again please
+          setError('password', { message: err.data.messages })
+        }
+      })
   }
 
   return (
     <Card className={classNames.wrapper}>
       <form className={classNames.form} onSubmit={handleSubmit(onSubmitHandler)}>
         <Typography asChild className={classNames.title} variant={'h1'}>
-          <h1>Sign In</h1>
+          <h1>{t.passwordForm.signIn}</h1>
         </Typography>
         <div className={classNames.iconWrapper}>
           <GoogleIcon height={36} width={36} />
@@ -56,7 +74,7 @@ export const SignIn = () => {
         <FormTextField
           className={classNames.emailTextField}
           control={control}
-          label={'Email'}
+          label={t.passwordForm.email}
           name={'email'}
           placeholder={'Epam@epam.com'}
           type={'email'}
@@ -64,19 +82,19 @@ export const SignIn = () => {
         <FormTextField
           className={classNames.passwordTextField}
           control={control}
-          label={'Password'}
+          label={t.passwordForm.password}
           name={'password'}
-          placeholder={'Enter password'}
+          placeholder={t.passwordForm.enterPassword}
           type={'password'}
         />
         <Typography asChild className={classNames.forgotPassword} variant={'regular_text_14'}>
-          <a href={'#'}>Forgot Password</a>
+          <a href={'#'}>{t.passwordForm.forgotPassword}</a>
         </Typography>
-        <Button className={classNames.signInButton}>Sign In</Button>
+        <Button className={classNames.signInButton}>{t.passwordForm.signInBtn}</Button>
         <Typography className={s.signUpQuestion} variant={'regular_text_16'}>
-          Don’t have an account?
+          {t.passwordForm.noAccount}
         </Typography>
-        <Button variant={'text'}>Sign Up</Button>
+        <Button variant={'text'}>{t.passwordForm.signUp}</Button>
       </form>
     </Card>
   )

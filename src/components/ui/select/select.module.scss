@@ -62,7 +62,10 @@
 }
 
 .content {
+  z-index: 9999;
+
   width: var(--radix-select-trigger-width);
+
   background-color: var(--color-dark-500);
   border: 1px solid var(--color-light-100);
   border-top: none;
@@ -75,21 +78,4 @@
 .viewport {
   display: flex;
   flex-direction: column;
-}
-
-.item {
-  padding: 6px 12px;
-
-  &.small {
-    padding: 0 6px;
-    font-size: var(--font-size-s);
-  }
-
-  &:hover,
-  &[data-highlighted] {
-    color: var(--color-accent-500);
-    background-color: var(--color-dark-300);
-    outline: none;
-    transition: 0.2s;
-  }
 }
