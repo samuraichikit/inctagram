@@ -22,7 +22,7 @@ export const Sidebar = () => {
       localStorage.removeItem('accessToken')
       router.push('/auth/signIn')
     } catch (error) {
-      console.log('error')
+      alert('error')
     }
   }
 

@@ -22,7 +22,7 @@ export const Layout = ({ children }: Props) => {
     <>
       <Header isAuth={isAuth} />
       <main className={classNames.main}>
-        <Sidebar />
+        {isAuth && <Sidebar />}
         {children}
       </main>
     </>
