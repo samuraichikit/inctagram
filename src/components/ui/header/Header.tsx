@@ -32,7 +32,7 @@ export const Header = ({ isAuth }: Props) => {
                 <Link href={'auth/signIn'}>{t.header.signIn}</Link>
               </Button>
               <Button asChild>
-                <Link href={'auth/signUp'}>{t.header.signUp}</Link>
+                <Link href={'/auth/signUp'}>{t.header.signUp}</Link>
               </Button>
             </div>
           )}
