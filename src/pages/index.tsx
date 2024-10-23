@@ -16,7 +16,6 @@ export default function Home() {
       </Head>
       <div>
         <LangSelect />
-        <h1>{t.test}</h1>
       </div>
     </>
   )
