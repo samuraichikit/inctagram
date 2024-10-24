@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  .title {
+    padding: 35px 0 20px;
+  }
+
+  .description {
+    max-width: 294px;
+    margin: 0 auto;
+    padding: 5px 0 30px;
+  }
+
+  .button {
+    width: 100%;
+    max-width: 229px;
+    margin-bottom: 40px;
+  }
+}

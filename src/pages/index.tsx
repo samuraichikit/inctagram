@@ -1,6 +1,11 @@
+import { LangSelect } from '@/components/langSelect/LangSelect'
 import Head from 'next/head'
 
+import { useTranslation } from '../common/hooks/useTranslation'
+
 export default function Home() {
+  const { t } = useTranslation()
+
   return (
     <>
       <Head>
@@ -10,7 +15,7 @@ export default function Home() {
         <link href={'/favicon.ico'} rel={'icon'} />
       </Head>
       <div>
-        <h1>Samuraichiki team</h1>
+        <LangSelect />
       </div>
     </>
   )
