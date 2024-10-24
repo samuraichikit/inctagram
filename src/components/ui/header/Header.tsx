@@ -29,7 +29,7 @@ export const Header = ({ isAuth }: Props) => {
           {!isAuth && (
             <div className={classNames.buttonsContainer}>
               <Button asChild variant={'text'}>
-                <Link href={'auth/signIn'}>{t.header.signIn}</Link>
+                <Link href={'/auth/signIn'}>{t.header.signIn}</Link>
               </Button>
               <Button asChild>
                 <Link href={'/auth/signUp'}>{t.header.signUp}</Link>
