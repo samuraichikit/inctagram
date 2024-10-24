@@ -31,7 +31,6 @@ export const ru = {
     sendLink: 'Получить ссылку',
     sendLinkAgain: 'Получить повторную ссылку',
     signIn: 'Войти',
-    signInBtn: 'Войти',
     signUp: 'Зарегистрироваться',
   },
 
