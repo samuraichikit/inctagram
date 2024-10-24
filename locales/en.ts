@@ -33,7 +33,6 @@ export const en: Locale = {
     sendLink: 'Send Link',
     sendLinkAgain: 'Send  Link Again',
     signIn: 'Sign In',
-    signInBtn: 'Войти',
     signUp: 'Sign Up',
   },
   privacyPolicy: {
