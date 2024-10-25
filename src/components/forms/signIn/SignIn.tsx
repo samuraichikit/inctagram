@@ -12,6 +12,7 @@ import { useSignInMutation } from '@/services/auth'
 import { useGetProfileQuery } from '@/services/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { z } from 'zod'
 
@@ -102,7 +103,9 @@ export const SignIn = () => {
         <Typography className={s.signUpQuestion} variant={'regular_text_16'}>
           {t.passwordForm.noAccount}
         </Typography>
-        <Button variant={'text'}>{t.passwordForm.signUp}</Button>
+        <Button asChild variant={'text'}>
+          <Link href={'/auth/signUp'}>{t.passwordForm.signUp}</Link>
+        </Button>
       </form>
     </Card>
   )
