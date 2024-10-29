@@ -47,6 +47,8 @@ export const SignIn = () => {
     resolver: zodResolver(signInSchema(t)),
   })
 
+  const isDisabled = !isValid
+
   const [signIn] = useSignInMutation()
 
   const router = useRouter()
@@ -99,7 +101,9 @@ export const SignIn = () => {
         <Typography asChild className={classNames.forgotPassword} variant={'regular_text_14'}>
           <a href={'#'}>{t.passwordForm.forgotPassword}</a>
         </Typography>
-        <Button className={classNames.signInButton}>{t.passwordForm.signIn}</Button>
+        <Button className={classNames.signInButton} disabled={isDisabled}>
+          {t.passwordForm.signIn}
+        </Button>
         <Typography className={s.signUpQuestion} variant={'regular_text_16'}>
           {t.passwordForm.noAccount}
         </Typography>
