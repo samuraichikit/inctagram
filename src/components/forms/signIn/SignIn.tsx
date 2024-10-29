@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { useSignInMutation } from '@/services/auth'
-import { useGetProfileQuery } from '@/services/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import Link from 'next/link'
@@ -44,6 +43,7 @@ export const SignIn = () => {
       email: '',
       password: '',
     },
+    mode: 'onBlur',
     resolver: zodResolver(signInSchema(t)),
   })
 
