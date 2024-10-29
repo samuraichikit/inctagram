@@ -57,7 +57,7 @@ export const SignUp = () => {
   })
 
   const acceptTerms = watch('agreesToTOS')
-  const isDisabled = !isValid && !acceptTerms
+  const isDisabled = !isValid || !acceptTerms
 
   const [signUp] = useSignUpMutation()
   const [isOpen, setIsOpen] = useState(false)
