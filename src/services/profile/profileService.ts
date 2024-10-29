@@ -4,7 +4,7 @@ import { GetProfileResponse } from './profileService.types'
 const profileService = baseApi.injectEndpoints({
   endpoints: builder => ({
     getProfile: builder.query<GetProfileResponse, void>({
-      providesTags: ['Profile'],
+      providesTags: ['Me'],
       query: () => ({ url: 'v1/users/profile' }),
     }),
   }),
