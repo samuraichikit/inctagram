@@ -19,7 +19,7 @@ export const SidebarItemStory: Story = {
   args: {
     children: (
       <>
-        <HomeOutlineIcon /> <Typography variant={'medium_text_14'}>Home</Typography>
+        <HomeOutlineIcon /> Home
       </>
     ),
     href: '#',
