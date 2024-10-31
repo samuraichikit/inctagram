@@ -8,16 +8,17 @@ import s from './sidebarItem.module.scss'
 
 type Props = {
   children: ReactNode
+  disabled?: boolean
   href: string
 }
 
-export const SidebarItem = ({ children, href }: Props) => {
+export const SidebarItem = ({ children, disabled, href }: Props) => {
   const router = useRouter()
   const isActive = router.pathname === href
 
   const classNames = {
     item: s.item,
-    link: clsx(s.link, isActive && s.active),
+    link: clsx(s.link, isActive && s.active, disabled && s.disabled),
   }
 
   return (

@@ -29,3 +29,8 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-accent-500);
 }
+
+.disabled {
+  pointer-events: none;
+  color: var(--color-dark-100);
+}

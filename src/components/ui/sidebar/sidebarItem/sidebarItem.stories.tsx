@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { HomeOutlineIcon } from '@/assets/icons/HomeOutline'
 
-import { Typography } from '../../typography'
 import { SidebarItem } from './SidebarItem'
 
 const meta = {
@@ -22,6 +21,17 @@ export const SidebarItemStory: Story = {
         <HomeOutlineIcon /> Home
       </>
     ),
+    href: '#',
+  },
+}
+export const DisabledSidebarItemStory: Story = {
+  args: {
+    children: (
+      <>
+        <HomeOutlineIcon /> Home
+      </>
+    ),
+    disabled: true,
     href: '#',
   },
 }
