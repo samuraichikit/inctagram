@@ -1,11 +1,13 @@
-import s from './sidebar.module.scss'
+import { ReactNode } from 'react'
 
-import { LogoutButton } from './logoutButton'
+type Props = {
+  children: ReactNode
+}
 
-export const Sidebar = () => {
+export const Sidebar = ({ children }: Props) => {
   return (
-    <aside className={s.aside}>
-      <LogoutButton />
-    </aside>
+    <nav>
+      <ul>{children}</ul>
+    </nav>
   )
 }
