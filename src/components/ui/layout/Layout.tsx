@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import s from './lauout.module.scss'
 
 import { Header } from '../header'
-import { Sidebar } from '../sidebar'
+import { MainSidebar } from '../sidebar/mainSidebar'
 type Props = {
   children: ReactNode
 }
@@ -24,7 +24,7 @@ export const Layout = ({ children }: Props) => {
     <>
       <Header isAuth={isAuth} />
       <main className={classNames.main}>
-        {isAuth && <Sidebar />}
+        {isAuth && <MainSidebar />}
         {children}
       </main>
     </>

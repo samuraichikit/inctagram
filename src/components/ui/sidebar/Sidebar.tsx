@@ -5,9 +5,5 @@ type Props = {
 }
 
 export const Sidebar = ({ children }: Props) => {
-  return (
-    <nav>
-      <ul>{children}</ul>
-    </nav>
-  )
+  return <nav>{children}</nav>
 }
