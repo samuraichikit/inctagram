@@ -8,13 +8,13 @@ import s from './baseLayout.module.scss'
 
 import { Header } from '../header'
 
-const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
-  const { data, isError, isLoading } = useMeQuery()
+export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
+  const { isError, isLoading } = useMeQuery()
 
   const isAuth = !isError && !isLoading
 
   const classNames = {
-    main: clsx(s.main, isAuth && s.mainIsAuth),
+    main: s.main,
   }
 
   return (
