@@ -1,9 +1,11 @@
 import { LangSelect } from '@/components/langSelect/LangSelect'
+import { getBaseLayout } from '@/components/ui/layout'
 import Head from 'next/head'
 
 import { useTranslation } from '../common/hooks/useTranslation'
+import { NextPageWithLayout } from './_app'
 
-export default function Home() {
+const Home: NextPageWithLayout = () => {
   const { t } = useTranslation()
 
   return (
@@ -20,3 +22,6 @@ export default function Home() {
     </>
   )
 }
+
+Home.getLayout = getBaseLayout
+export default Home
