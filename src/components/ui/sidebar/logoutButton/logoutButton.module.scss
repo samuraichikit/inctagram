@@ -1,3 +1,17 @@
+.logoutButton {
+  gap: 12px;
+
+  padding: 1px;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-light-100);
+
+  &:focus-visible {
+    color: var(--color-light-100);
+  }
+}
+
 .text {
   margin-bottom: 15px;
 }
