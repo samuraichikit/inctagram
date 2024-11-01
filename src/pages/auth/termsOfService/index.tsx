@@ -7,4 +7,4 @@ const TermsOfServicePage: NextPageWithLayout = () => {
 }
 
 TermsOfServicePage.getLayout = getBaseLayout
-export default TermsOfService
+export default TermsOfServicePage

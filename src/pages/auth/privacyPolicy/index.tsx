@@ -7,4 +7,4 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
 }
 
 PrivacyPolicyPage.getLayout = getBaseLayout
-export default PrivacyPolicy
+export default PrivacyPolicyPage

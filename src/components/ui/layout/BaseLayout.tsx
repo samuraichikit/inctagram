@@ -4,7 +4,7 @@ import { useMeQuery } from '@/services/auth/authService'
 import clsx from 'clsx'
 import { NextPage } from 'next'
 
-import s from './lauout.module.scss'
+import s from './baseLayout.module.scss'
 
 import { Header } from '../header'
 
