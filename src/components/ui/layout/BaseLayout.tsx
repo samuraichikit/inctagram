@@ -1,17 +1,14 @@
-import { ReactNode } from 'react'
+import { PropsWithChildren, ReactElement } from 'react'
 
 import { useMeQuery } from '@/services/auth/authService'
 import clsx from 'clsx'
+import { NextPage } from 'next'
 
 import s from './lauout.module.scss'
 
 import { Header } from '../header'
-import { MainSidebar } from '../sidebar/mainSidebar'
-type Props = {
-  children: ReactNode
-}
 
-export const Layout = ({ children }: Props) => {
+const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
   const { data, isError, isLoading } = useMeQuery()
 
   const isAuth = !isError && !isLoading
@@ -23,10 +20,11 @@ export const Layout = ({ children }: Props) => {
   return (
     <>
       <Header isAuth={isAuth} />
-      <main className={classNames.main}>
-        {isAuth && <MainSidebar />}
-        {children}
-      </main>
+      <main className={classNames.main}>{children}</main>
     </>
   )
+}
+
+export const getBaseLayout = (page: ReactElement) => {
+  return <BaseLayout>{page}</BaseLayout>
 }

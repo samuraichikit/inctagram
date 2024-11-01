@@ -1,5 +1,10 @@
 import { PrivacyPolicy } from '@/components/forms/signUp/privacyPolicy'
+import { getBaseLayout } from '@/components/ui/layout'
+import { NextPageWithLayout } from '@/pages/_app'
 
-export default function PrivacyPolicyPage() {
+const PrivacyPolicyPage: NextPageWithLayout = () => {
   return <PrivacyPolicy />
 }
+
+PrivacyPolicyPage.getLayout = getBaseLayout
+export default PrivacyPolicy
