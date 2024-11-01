@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactElement } from 'react'
 
-import { useMeQuery } from '@/services/auth'
+import { useAuth } from '@/common/hooks/useAuth'
 import { NextPage } from 'next'
 
 import s from './authLayout.module.scss'
@@ -12,9 +12,7 @@ const AuthLayout: NextPage<PropsWithChildren> = ({ children }) => {
   const classNames = {
     main: s.main,
   }
-  const { isError, isLoading } = useMeQuery()
-
-  const isAuth = !isError && !isLoading
+  const { isAuth } = useAuth()
 
   return (
     <>
