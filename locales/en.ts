@@ -33,6 +33,7 @@ export const en: Locale = {
     sendLink: 'Send Link',
     sendLinkAgain: 'Send  Link Again',
     signIn: 'Sign In',
+    signInError: 'The email or password are incorrect. Try again please.',
     signUp: 'Sign Up',
   },
   privacyPolicy: {
