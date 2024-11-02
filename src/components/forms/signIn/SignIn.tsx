@@ -64,9 +64,11 @@ export const SignIn = () => {
         router.push(`/profile/${id}`)
       })
       .catch(err => {
-        if (err.status) {
-          //t.passwordForm.incorrectEmail && incorrectPassword: The email or password are incorrect. Try again please
-          setError('password', { message: err.data.messages })
+        if (err.data.messages === 'invalid password or email') {
+          setError('email', { message: ' ' })
+          setError('password', {
+            message: t.passwordForm.signInError,
+          })
         }
       })
   }
