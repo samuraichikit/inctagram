@@ -11,7 +11,7 @@ export const TermsOfService = () => {
   const { t } = useTranslation()
 
   return (
-    <div>
+    <div className={s.wrapper}>
       <Link className={s.linkWrapper} href={'/auth/signUp'}>
         <ArrowLeftIcon />
         <Typography variant={'regular_text_14'}>{t.signUp.backToSignUp}</Typography>
