@@ -1,9 +1,12 @@
+.wrapper {
+  align-self: flex-start;
+}
+
 .linkWrapper {
   display: flex;
   gap: 16px;
   align-items: center;
 
-  margin-left: 44px;
   padding: 0;
 
   text-decoration: none;
