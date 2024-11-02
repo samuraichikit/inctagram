@@ -47,8 +47,10 @@ export const ru = {
     passwordMatch: 'Пароли должны совпадать',
   },
   sideBar: {
+    confirmButton: 'Да',
     logOut: 'Выйти',
     logOutConfirmation: 'Вы действительно хотите выйти из своей учетной записи?',
+    rejectButton: 'Нет',
   },
   signUp: {
     and: 'и',
