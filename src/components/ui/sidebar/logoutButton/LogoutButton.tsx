@@ -43,8 +43,8 @@ export const LogoutButton = () => {
           {t.sideBar.logOutConfirmation}
         </Typography>
         <div className={classNames.buttonWrapper}>
-          <Button onClick={logOutHandler}>Yes</Button>
-          <Button onClick={() => setIsOpen(false)}>No</Button>
+          <Button onClick={logOutHandler}>{t.sideBar.confirmButton}</Button>
+          <Button onClick={() => setIsOpen(false)}>{t.sideBar.rejectButton}</Button>
         </div>
       </Modal>
     </div>
