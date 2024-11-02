@@ -40,6 +40,7 @@ export const en: Locale = {
   },
   schemaErrorMsg: {
     emailFormat: 'The email must match the format',
+    invalidPasswordOrEmail: 'The email or password are incorrect. Try again please',
     maxName: 'Maximum number of characters 30',
     maxPassword: 'Maximum number of characters 6',
     minName: 'Minimum number of characters 6',

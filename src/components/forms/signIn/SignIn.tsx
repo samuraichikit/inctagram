@@ -66,7 +66,12 @@ export const SignIn = () => {
       .catch(err => {
         if (err.status) {
           //t.passwordForm.incorrectEmail && incorrectPassword: The email or password are incorrect. Try again please
-          setError('password', { message: err.data.messages })
+          setError('password', {
+            message:
+              err.data.messages === 'invalid password or email'
+                ? t.schemaErrorMsg.invalidPasswordOrEmail
+                : err.data.messages,
+          })
         }
       })
   }
