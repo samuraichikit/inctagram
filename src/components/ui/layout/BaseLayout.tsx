@@ -1,7 +1,6 @@
 import { PropsWithChildren, ReactElement } from 'react'
 
 import { useAuth } from '@/common/hooks/useAuth'
-import { useMeQuery } from '@/services/auth/authService'
 import clsx from 'clsx'
 import { NextPage } from 'next'
 import { usePathname } from 'next/navigation'
