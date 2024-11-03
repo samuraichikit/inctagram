@@ -5,7 +5,6 @@ import {
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
-import Router from 'next/router'
 
 const mutex = new Mutex()
 
@@ -47,8 +46,6 @@ export const baseQueryWithReauth: BaseQueryFn<
 
           localStorage.setItem('accessToken', responseData.accessToken)
           result = await baseQuery(args, api, extraOptions)
-        } else {
-          await Router.push('/auth/signIn')
         }
       } finally {
         release()

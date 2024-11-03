@@ -1,4 +1,3 @@
-import { LangSelect } from '@/components/langSelect/LangSelect'
 import { getBaseLayout } from '@/components/ui/layout'
 import Head from 'next/head'
 
@@ -16,9 +15,7 @@ const Home: NextPageWithLayout = () => {
         <meta content={'width=device-width, initial-scale=1'} name={'viewport'} />
         <link href={'/favicon.ico'} rel={'icon'} />
       </Head>
-      <div>
-        <LangSelect />
-      </div>
+      <div>Public page</div>
     </>
   )
 }
