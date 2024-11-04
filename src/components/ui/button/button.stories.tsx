@@ -1,3 +1,4 @@
+import { GoogleIcon } from '@/assets/icons/GoogleIcon'
 import { Button } from '@/components/ui/button'
 import { Meta, StoryObj } from '@storybook/react'
 
@@ -58,5 +59,12 @@ export const Link: Story = {
   args: {
     asChild: true,
     children: <a>link</a>,
+  },
+}
+
+export const IconButton: Story = {
+  args: {
+    children: <GoogleIcon />,
+    variant: 'icon',
   },
 }
