@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
 import { GoogleIcon } from '@/assets/icons/GoogleIcon'
+import { GOOGLE_URL } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { signUpSchema } from '@/common/schemas'
 import { FormCheckbox } from '@/components/controlled/formCheckbox'
@@ -65,6 +66,10 @@ export const SignUp = () => {
 
   const onCloseHandler = () => setIsOpen(false)
 
+  const googleAuthHandler = () => {
+    window.location.assign(GOOGLE_URL)
+  }
+
   const onSubmitHandler = async (data: FormValues) => {
     const { email, password, userName } = data
 
@@ -100,7 +105,10 @@ export const SignUp = () => {
           <h1>{t.signUp.signUpHeader}</h1>
         </Typography>
         <div className={s.iconWrapper}>
-          <GoogleIcon height={36} width={36} />
+          <Button onClick={googleAuthHandler} variant={'icon'}>
+            <GoogleIcon />
+          </Button>
+
           <GitHubIcon height={36} width={36} />
         </div>
         <form className={s.form} onSubmit={handleSubmit(onSubmitHandler)}>
