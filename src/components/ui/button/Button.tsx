@@ -8,7 +8,7 @@ import s from './button.module.scss'
 type Props = {
   asChild?: boolean
   fullWidth?: boolean
-  variant?: 'outlined' | 'primary' | 'secondary' | 'text'
+  variant?: 'icon' | 'outlined' | 'primary' | 'secondary' | 'text'
 } & ComponentProps<'button'>
 
 export const Button = ({ asChild, className, fullWidth, variant = 'primary', ...props }: Props) => {

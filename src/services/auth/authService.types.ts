@@ -38,3 +38,12 @@ export type SignInArgs = {
 export type SignInResponseArgs = {
   accessToken: string
 }
+
+export type GoogleAuthResponse = {
+  accessToken: string
+  email: string
+}
+
+export type GoogleAuthArgs = {
+  code: string
+}

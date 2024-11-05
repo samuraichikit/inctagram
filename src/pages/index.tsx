@@ -1,11 +1,15 @@
+import { useGoogleAuth } from '@/common/hooks/useGoogleAuth'
 import { getBaseLayout } from '@/components/ui/layout'
 import Head from 'next/head'
 
-import { useTranslation } from '../common/hooks/useTranslation'
 import { NextPageWithLayout } from './_app'
 
 const Home: NextPageWithLayout = () => {
-  const { t } = useTranslation()
+  const { isLoading } = useGoogleAuth()
+
+  if (isLoading) {
+    return <div>LOADING ...</div>
+  }
 
   return (
     <>

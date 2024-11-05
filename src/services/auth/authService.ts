@@ -1,6 +1,8 @@
 import { baseApi } from '../baseApi'
 import {
   ErrorResponse,
+  GoogleAuthArgs,
+  GoogleAuthResponse,
   MeResponse,
   RegistrationConfirmationArgs,
   RegistrationEmailResendingArgs,
@@ -14,6 +16,13 @@ const authService = baseApi.injectEndpoints({
     return {
       confirmEmail: builder.mutation<ErrorResponse | void, RegistrationConfirmationArgs>({
         query: body => ({ body, method: 'POST', url: 'v1/auth/registration-confirmation' }),
+      }),
+      googleAuth: builder.mutation<GoogleAuthResponse, GoogleAuthArgs>({
+        query: body => ({
+          body,
+          method: 'POST',
+          url: 'v1/auth/google/login',
+        }),
       }),
       logout: builder.mutation<void, void>({
         invalidatesTags: ['Me'],
@@ -52,6 +61,7 @@ const authService = baseApi.injectEndpoints({
 
 export const {
   useConfirmEmailMutation,
+  useGoogleAuthMutation,
   useLogoutMutation,
   useMeQuery,
   useResendVerificationLinkMutation,
