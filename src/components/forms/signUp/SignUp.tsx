@@ -2,14 +2,13 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
-import { GoogleIcon } from '@/assets/icons/GoogleIcon'
-import { GOOGLE_URL } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { signUpSchema } from '@/common/schemas'
 import { FormCheckbox } from '@/components/controlled/formCheckbox'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { GoogleAuthButton } from '@/components/ui/googleAuthButton/GoogleAuthButton'
 import { Modal } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'
 import { useSignUpMutation } from '@/services/auth'
@@ -66,10 +65,6 @@ export const SignUp = () => {
 
   const onCloseHandler = () => setIsOpen(false)
 
-  const googleAuthHandler = () => {
-    window.location.assign(GOOGLE_URL)
-  }
-
   const onSubmitHandler = async (data: FormValues) => {
     const { email, password, userName } = data
 
@@ -105,10 +100,7 @@ export const SignUp = () => {
           <h1>{t.signUp.signUpHeader}</h1>
         </Typography>
         <div className={s.iconWrapper}>
-          <Button onClick={googleAuthHandler} variant={'icon'}>
-            <GoogleIcon />
-          </Button>
-
+          <GoogleAuthButton />
           <GitHubIcon height={36} width={36} />
         </div>
         <form className={s.form} onSubmit={handleSubmit(onSubmitHandler)}>
