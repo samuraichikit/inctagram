@@ -1,11 +1,43 @@
-import { getBaseLayout } from '@/components/ui/layout'
-import Head from 'next/head'
+import { useEffect } from 'react'
 
-import { useTranslation } from '../common/hooks/useTranslation'
+import { getBaseLayout } from '@/components/ui/layout'
+import { useGoogleAuthMutation } from '@/services/auth'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+
 import { NextPageWithLayout } from './_app'
 
 const Home: NextPageWithLayout = () => {
-  const { t } = useTranslation()
+  const router = useRouter()
+  const { query } = router
+  const code = query.code as string
+  const [googleAuth, { isLoading }] = useGoogleAuthMutation()
+
+  useEffect(() => {
+    const googleLoginHandler = async () => {
+      if (code) {
+        try {
+          const data = await googleAuth({ code }).unwrap()
+
+          localStorage.setItem('accessToken', data.accessToken)
+          const payload = data.accessToken.split('.')[1]
+          const id = JSON.parse(atob(payload)).userId
+
+          router.push(`/profile/${id}`)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+
+    if (code) {
+      googleLoginHandler()
+    }
+  }, [code, router, googleAuth])
+
+  if (isLoading) {
+    return <div>LOADING ...</div>
+  }
 
   return (
     <>
