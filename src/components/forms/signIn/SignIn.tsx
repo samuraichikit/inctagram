@@ -1,12 +1,12 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
-import { GoogleIcon } from '@/assets/icons/GoogleIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { signInSchema } from '@/common/schemas/signInSchema'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { GoogleAuthButton } from '@/components/ui/googleAuthButton'
 import { Typography } from '@/components/ui/typography'
 import { useSignInMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -75,15 +75,14 @@ export const SignIn = () => {
 
   return (
     <Card className={classNames.wrapper}>
+      <Typography asChild className={classNames.title} variant={'h1'}>
+        <h1>{t.passwordForm.signIn}</h1>
+      </Typography>
+      <div className={classNames.iconWrapper}>
+        <GoogleAuthButton />
+        <GitHubIcon height={36} width={36} />
+      </div>
       <form className={classNames.form} onSubmit={handleSubmit(onSubmitHandler)}>
-        <Typography asChild className={classNames.title} variant={'h1'}>
-          <h1>{t.passwordForm.signIn}</h1>
-        </Typography>
-        <div className={classNames.iconWrapper}>
-          <GoogleIcon height={36} width={36} />
-          <GitHubIcon height={36} width={36} />
-        </div>
-
         <FormTextField
           className={classNames.emailTextField}
           control={control}
