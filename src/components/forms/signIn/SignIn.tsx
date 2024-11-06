@@ -100,7 +100,7 @@ export const SignIn = () => {
           type={'password'}
         />
         <Typography asChild className={classNames.forgotPassword} variant={'regular_text_14'}>
-          <a href={'#'}>{t.passwordForm.forgotPassword}</a>
+          <a href={'/auth/forgotPassword'}>{t.passwordForm.forgotPassword}</a>
         </Typography>
         <Button className={classNames.signInButton} disabled={isDisabled}>
           {t.passwordForm.signIn}
