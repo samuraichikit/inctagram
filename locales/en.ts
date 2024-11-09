@@ -11,6 +11,15 @@ export const en: Locale = {
     signIn: 'Log in',
     signUp: 'Sign up',
   },
+  mainSidebar: {
+    create: 'Create',
+    favorites: 'Favorites',
+    home: 'Home',
+    messenger: 'Messenger',
+    myProfile: 'My Profile',
+    search: 'Search',
+    statistics: 'Statistics',
+  },
   passwordForm: {
     backToSignIn: 'Back to Sign In',
     confirmationLinkMsg: 'We have sent a link to confirm your email to ',

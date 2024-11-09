@@ -5,6 +5,7 @@ import { MyProfileIcon } from '@/assets/icons/MyProfile'
 import { PlusSquareOutlineIcon } from '@/assets/icons/PlusSquareOutline'
 import { SearchIcon } from '@/assets/icons/SearchIcon'
 import { TrendingUpOutlineIcon } from '@/assets/icons/TrendingUpOutline'
+import { useTranslation } from '@/common/hooks/useTranslation'
 
 import s from './mainSidebar.module.scss'
 
@@ -19,38 +20,41 @@ export const MainSidebar = () => {
     sidebar: s.sidebar,
   }
 
+  const { t } = useTranslation()
+
   return (
     <Sidebar className={classNames.sidebar}>
       <div>
         <ul className={classNames.mainItems}>
           <SidebarItem href={'#'}>
             <HomeOutlineIcon />
-            Home
+            {t.mainSidebar.home}
           </SidebarItem>
           <SidebarItem href={'#'}>
             <PlusSquareOutlineIcon />
-            Create
+            {t.mainSidebar.create}
           </SidebarItem>
           <SidebarItem href={'#'}>
             <MyProfileIcon />
-            MyProfile
+            {t.mainSidebar.myProfile}
           </SidebarItem>
           <SidebarItem href={'#'}>
             <MessengerIcon />
-            Messenger
+            {t.mainSidebar.messenger}
           </SidebarItem>
           <SidebarItem href={'#'}>
             <SearchIcon className={''} />
-            Seach
+            {t.mainSidebar.search}
           </SidebarItem>
         </ul>
         <ul className={classNames.secondaryItems}>
           <SidebarItem href={'#'}>
-            <TrendingUpOutlineIcon /> Statistics
+            <TrendingUpOutlineIcon />
+            {t.mainSidebar.statistics}
           </SidebarItem>
           <SidebarItem href={'#'}>
             <BookmarkOutlineIcon />
-            Favorites
+            {t.mainSidebar.favorites}
           </SidebarItem>
         </ul>
       </div>
