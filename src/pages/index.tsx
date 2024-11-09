@@ -1,10 +1,32 @@
 import { useGoogleAuth } from '@/common/hooks/useGoogleAuth'
+import { PublicPage } from '@/components/pagesComponents/publicPage/PublicPage'
 import { getBaseLayout } from '@/components/ui/layout'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
 import { NextPageWithLayout } from './_app'
 
-const Home: NextPageWithLayout = () => {
+type PublicUserResponse = {
+  totalCount: number
+}
+
+type Props = {
+  totalUsers: PublicUserResponse
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await fetch('https://inctagram.work/api/v1/public-user')
+  const totalUsers = await res.json()
+
+  return {
+    props: {
+      totalUsers,
+    },
+    revalidate: 60,
+  }
+}
+
+const Home: NextPageWithLayout<Props> = ({ totalUsers }) => {
   const { isLoading } = useGoogleAuth()
 
   if (isLoading) {
@@ -19,7 +41,9 @@ const Home: NextPageWithLayout = () => {
         <meta content={'width=device-width, initial-scale=1'} name={'viewport'} />
         <link href={'/favicon.ico'} rel={'icon'} />
       </Head>
-      <div>Public page</div>
+      <>
+        <PublicPage totalUsers={totalUsers.totalCount} />
+      </>
     </>
   )
 }
