@@ -9,6 +9,15 @@ export const ru = {
     signIn: 'Войти',
     signUp: 'Зарегистрироваться',
   },
+  mainSidebar: {
+    create: 'Создать',
+    favorites: 'Избранное',
+    home: 'Главная',
+    messenger: 'Сообщения',
+    myProfile: 'Мой профиль',
+    search: 'Поиск',
+    statistics: 'Статистика',
+  },
   passwordForm: {
     backToSignIn: 'Вернуться на страницу входа',
     confirmationLinkMsg: 'Мы отправили вам ссылку для подтверждения на ',
@@ -34,7 +43,6 @@ export const ru = {
     signInError: 'Адрес электронной почты или пароль неверны. Попробуйте еще раз, пожалуйста.',
     signUp: 'Зарегистрироваться',
   },
-
   privacyPolicy: {
     title: 'Политика конфиденциальности',
   },
