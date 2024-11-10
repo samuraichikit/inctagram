@@ -1,3 +1,4 @@
+import { BASE_URL } from '@/common/constants'
 import { useGoogleAuth } from '@/common/hooks/useGoogleAuth'
 import { PublicPage } from '@/components/pagesComponents/publicPage/PublicPage'
 import { getBaseLayout } from '@/components/ui/layout'
@@ -15,7 +16,7 @@ type Props = {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch('https://inctagram.work/api/v1/public-user')
+  const res = await fetch(`${BASE_URL}v1/public-user`)
   const totalUsers = await res.json()
 
   return {
