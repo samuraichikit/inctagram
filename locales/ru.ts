@@ -46,6 +46,11 @@ export const ru = {
   privacyPolicy: {
     title: 'Политика конфиденциальности',
   },
+  profile: {
+    followers: 'Подписчики',
+    following: 'Подписан',
+    publications: 'Публикации',
+  },
   schemaErrorMsg: {
     emailFormat: 'Адрес эл.почты должен быть в формате',
     maxName: 'Максимальное число символов - 30',

@@ -48,6 +48,11 @@ export const en: Locale = {
   privacyPolicy: {
     title: 'Privacy Policy',
   },
+  profile: {
+    followers: 'Followers',
+    following: 'Following',
+    publications: 'Publications',
+  },
   schemaErrorMsg: {
     emailFormat: 'The email must match the format',
     maxName: 'Maximum number of characters 30',
