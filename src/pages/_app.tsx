@@ -7,6 +7,7 @@ import { wrapper } from '@/app/store'
 import { NextPage } from 'next'
 
 import './../styles/index.scss'
+import './../styles/tailwind.css'
 import '@fontsource-variable/inter'
 
 export type NextPageWithLayout<P = {}, IP = P> = {
