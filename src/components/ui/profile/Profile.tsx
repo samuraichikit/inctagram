@@ -1,6 +1,7 @@
 import { Avatar } from '@/assets/icons/Avatar'
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { useGetProfileQuery } from '@/services/profile'
+import { useMeQuery } from '@/services/auth'
+import { useGetProfileWithPostsQuery } from '@/services/profile'
 
 import s from './profile.module.scss'
 
@@ -8,25 +9,30 @@ import { Button } from '../button'
 import { Typography } from '../typography'
 
 export const Profile = () => {
-  const { data } = useGetProfileQuery()
+  const { data: meInfo } = useMeQuery()
+  const { data: profileInfo } = useGetProfileWithPostsQuery(meInfo?.userName as string)
   const { t } = useTranslation()
-  const followArray = [2218, 2358, 2764]
+  const followArray = [
+    profileInfo?.followingCount,
+    profileInfo?.followersCount,
+    profileInfo?.publicationsCount,
+  ]
 
-  console.log(data)
+  console.log(profileInfo)
 
   return (
     <div className={s.wrapper}>
       <div className={s.infoWrapper}>
         <div className={s.avatarWrapper}>
-          {data?.avatars.length !== 0 ? (
-            <img alt={'Avatar'} src={data?.avatars[0].url} />
+          {profileInfo?.avatars.length !== 0 ? (
+            <img alt={'Avatar'} src={profileInfo?.avatars[0].url} />
           ) : (
             <Avatar height={204} width={204} />
           )}
         </div>
         <div className={s.profieWrapper}>
           <div className={s.userNameWrapper}>
-            <Typography variant={'h1'}>{data?.userName}</Typography>
+            <Typography variant={'h1'}>{profileInfo?.userName}</Typography>
             <Button variant={'secondary'}>Profile Settings</Button>
           </div>
           <div className={s.followInfoWrapper}>
