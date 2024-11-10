@@ -49,8 +49,14 @@ export const ru = {
   profile: {
     followers: 'Подписчики',
     following: 'Подписан',
-    profileSettings: 'Настройки профиля',
     publications: 'Публикации',
+    settings: {
+      accountManagement: 'Управление аккаунтом',
+      devices: 'Устройства',
+      generalInformation: 'Общая информация',
+      myPayments: 'Мои платежи',
+      profileSettings: 'Настройки профиля',
+    },
   },
   schemaErrorMsg: {
     emailFormat: 'Адрес эл.почты должен быть в формате',

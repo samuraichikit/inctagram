@@ -51,8 +51,14 @@ export const en: Locale = {
   profile: {
     followers: 'Followers',
     following: 'Following',
-    profileSettings: 'Profile Settings',
     publications: 'Publications',
+    settings: {
+      accountManagement: 'Account Management',
+      devices: 'Devices',
+      generalInformation: 'General information',
+      myPayments: 'My payments',
+      profileSettings: 'Profile Settings',
+    },
   },
   schemaErrorMsg: {
     emailFormat: 'The email must match the format',

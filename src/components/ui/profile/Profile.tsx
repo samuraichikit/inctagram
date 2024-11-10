@@ -37,7 +37,7 @@ export const Profile = () => {
               onClick={() => router.push(`settings/general/${profileInfo?.id}`)}
               variant={'secondary'}
             >
-              {t.profile.profileSettings}
+              {t.profile.settings.profileSettings}
             </Button>
           </div>
           <div className={s.followInfoWrapper}>
