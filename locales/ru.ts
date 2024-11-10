@@ -49,6 +49,7 @@ export const ru = {
   profile: {
     followers: 'Подписчики',
     following: 'Подписан',
+    profileSettings: 'Настройки профиля',
     publications: 'Публикации',
   },
   schemaErrorMsg: {

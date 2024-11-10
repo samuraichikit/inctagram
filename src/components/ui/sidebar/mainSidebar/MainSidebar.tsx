@@ -6,6 +6,8 @@ import { PlusSquareOutlineIcon } from '@/assets/icons/PlusSquareOutline'
 import { SearchIcon } from '@/assets/icons/SearchIcon'
 import { TrendingUpOutlineIcon } from '@/assets/icons/TrendingUpOutline'
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { useMeQuery } from '@/services/auth'
+import { useRouter } from 'next/router'
 
 import s from './mainSidebar.module.scss'
 
@@ -19,6 +21,9 @@ export const MainSidebar = () => {
     secondaryItems: s.secondaryItems,
     sidebar: s.sidebar,
   }
+
+  const { data } = useMeQuery()
+  const router = useRouter()
 
   const { t } = useTranslation()
 
@@ -34,7 +39,7 @@ export const MainSidebar = () => {
             <PlusSquareOutlineIcon />
             {t.mainSidebar.create}
           </SidebarItem>
-          <SidebarItem href={'#'}>
+          <SidebarItem href={`/profile/${data?.userId}`}>
             <MyProfileIcon />
             {t.mainSidebar.myProfile}
           </SidebarItem>

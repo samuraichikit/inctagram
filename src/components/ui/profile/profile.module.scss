@@ -1,12 +1,24 @@
 .infoWrapper {
   display: flex;
-  gap: 38px;
+  gap: 40px;
+}
+
+.avatarWrapper {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+
+  width: 204px;
+  height: 204px;
+
+  background-color: var(--color-dark-500);
+  border-radius: 50%;
 }
 
 .profieWrapper {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   gap: 20px;
 }
 

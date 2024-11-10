@@ -51,6 +51,7 @@ export const en: Locale = {
   profile: {
     followers: 'Followers',
     following: 'Following',
+    profileSettings: 'Profile Settings',
     publications: 'Publications',
   },
   schemaErrorMsg: {

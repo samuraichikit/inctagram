@@ -1,12 +1,12 @@
-import { Avatar } from '@/assets/icons/Avatar'
+import { ImageOutline } from '@/assets/icons/ImageOutline'
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { Button } from '@/components/ui/button'
+import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
 import { useGetProfileWithPostsQuery } from '@/services/profile'
+import { useRouter } from 'next/router'
 
 import s from './profile.module.scss'
-
-import { Button } from '../button'
-import { Typography } from '../typography'
 
 export const Profile = () => {
   const { data: meInfo } = useMeQuery()
@@ -18,7 +18,7 @@ export const Profile = () => {
     profileInfo?.publicationsCount,
   ]
 
-  console.log(profileInfo)
+  const router = useRouter()
 
   return (
     <div className={s.wrapper}>
@@ -27,13 +27,18 @@ export const Profile = () => {
           {profileInfo?.avatars.length !== 0 ? (
             <img alt={'Avatar'} src={profileInfo?.avatars[0].url} />
           ) : (
-            <Avatar height={204} width={204} />
+            <ImageOutline height={48} width={48} />
           )}
         </div>
         <div className={s.profieWrapper}>
           <div className={s.userNameWrapper}>
             <Typography variant={'h1'}>{profileInfo?.userName}</Typography>
-            <Button variant={'secondary'}>Profile Settings</Button>
+            <Button
+              onClick={() => router.push(`settings/general/${profileInfo?.id}`)}
+              variant={'secondary'}
+            >
+              {t.profile.profileSettings}
+            </Button>
           </div>
           <div className={s.followInfoWrapper}>
             <ul className={s.followInfoList}>
@@ -49,11 +54,13 @@ export const Profile = () => {
               ))}
             </ul>
           </div>
-          <Typography className={s.aboutMe}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </Typography>
+          <div>
+            <Typography className={s.aboutMe}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </Typography>
+          </div>
         </div>
       </div>
     </div>
