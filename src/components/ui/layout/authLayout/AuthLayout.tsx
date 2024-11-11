@@ -1,12 +1,11 @@
 import { PropsWithChildren, ReactElement } from 'react'
 
 import { useAuth } from '@/common/hooks/useAuth'
+import { Header } from '@/components/ui/header'
+import { MainSidebar } from '@/components/ui/sidebar/mainSidebar'
 import { NextPage } from 'next'
 
 import s from './authLayout.module.scss'
-
-import { Header } from '../../header'
-import { MainSidebar } from '../../sidebar/mainSidebar'
 
 const AuthLayout: NextPage<PropsWithChildren> = ({ children }) => {
   const classNames = {
