@@ -1,3 +1,37 @@
 .wrapper {
   display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.photoAndFormWrapper {
+  display: flex;
+  gap: 40px;
+}
+
+.photoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 204px;
+  height: 204px;
+
+  background-color: var(--color-dark-500);
+  border-radius: 50%;
+}
+
+.addPhotoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 24px;
+
+  margin-top: -24px;
 }

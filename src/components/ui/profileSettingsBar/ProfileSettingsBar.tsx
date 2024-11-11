@@ -7,14 +7,10 @@ import s from './profileSettingsBar.module.scss'
 
 export const ProfileSettingsBar = () => {
   const { t } = useTranslation()
-
   const path = usePathname()
   const router = useRouter()
   const { accountManagement, devices, generalInformation, myPayments } = t.profile.settings
   const userId = path?.split('/').reverse()[0]
-  const currentSetting = path?.split('/').reverse()[1]
-
-  console.log(currentSetting)
 
   return (
     <>
@@ -45,11 +41,6 @@ export const ProfileSettingsBar = () => {
             {myPayments}
           </TabsTrigger>
         </TabsList>
-
-        <TabsContent value={generalInformation}>{generalInformation}</TabsContent>
-        <TabsContent value={devices}>{devices}</TabsContent>
-        <TabsContent value={accountManagement}>{accountManagement}</TabsContent>
-        <TabsContent value={myPayments}>{myPayments}</TabsContent>
       </Tabs>
     </>
   )

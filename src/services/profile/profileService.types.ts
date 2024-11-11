@@ -37,3 +37,14 @@ export type Avatar = {
   url: string
   width: number
 }
+
+export type UpdateProfile = {
+  aboutMe: string
+  city: string
+  country: string
+  dateOfBirth: string
+  firstName: string
+  lastName: string
+  region: string
+  userName: string
+}
