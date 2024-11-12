@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { ImageOutline } from '@/assets/icons/ImageOutline'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { generalSettingsSchemas } from '@/common/schemas'
+import { FormTextArea } from '@/components/controlled/formTextArea'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { ProfileSettingsBar } from '@/components/ui/profileSettingsBar'
@@ -77,10 +78,22 @@ export const GeneralSettings = () => {
           <FormTextField control={control} label={'Username*'} name={'userName'} />
           <FormTextField control={control} label={'First Name*'} name={'firstName'} />
           <FormTextField control={control} label={'Last Name*'} name={'lastName'} />
-          <FormTextField control={control} label={'Select your country'} name={'country'} />
-          <FormTextField control={control} label={'Select your city'} name={'city'} />
           <FormTextField control={control} label={'Date of birth'} name={'dateOfBirth'} />
-          <FormTextField control={control} label={'About Me*'} name={'aboutMe'} />
+          <div className={s.locationWrapper}>
+            <FormTextField
+              className={s.locationItem}
+              control={control}
+              label={'Select your country'}
+              name={'country'}
+            />
+            <FormTextField
+              className={s.locationItem}
+              control={control}
+              label={'Select your city'}
+              name={'city'}
+            />
+          </div>
+          <FormTextArea control={control} label={'About Me'} name={'aboutMe'} rows={3} />
           <Button type={'submit'}>Save Changes</Button>
         </form>
       </div>
