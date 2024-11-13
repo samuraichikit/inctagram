@@ -1,20 +1,20 @@
 export type GetPublicPostsResponse = {
-  items: PublicPost[]
+  items: PublicPostResponse[]
   pageSize: number
   totalCount: number
   totalUsers: number
 }
 
-export type PublicPost = {
+export type PublicPostResponse = {
   avatarOwner: string
-  avatarWhoLikes: boolean
+  avatarWhoLikes: string[]
   createdAt: string
   description: string
   id: number
   images: UserImage[]
   isLiked: boolean
   likesCount: number
-  location: string
+  location: null | string
   owner: Owner
   ownerId: number
   updatedAt: string
