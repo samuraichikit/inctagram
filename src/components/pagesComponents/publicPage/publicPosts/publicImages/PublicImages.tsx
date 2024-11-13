@@ -1,3 +1,4 @@
+import { formatDate } from '@/common/utils'
 import { UserImage } from '@/services/publicPosts'
 import Image from 'next/image'
 
@@ -16,7 +17,7 @@ export const PublicImages = ({ images }: Props) => {
         <ImagesSlider images={images} />
       ) : (
         <Image
-          alt={`Image uploaded on ${new Date(images[0].createdAt).toLocaleDateString()}`}
+          alt={`Image uploaded on ${formatDate(images[0].createdAt)}`}
           height={240}
           src={images[0].url}
           width={234}

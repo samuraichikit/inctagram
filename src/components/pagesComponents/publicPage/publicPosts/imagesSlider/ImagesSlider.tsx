@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
 import { ArrowIosBackOutlineIcon } from '@/assets/icons/ArrowIosBackOutline'
 import { ArrowIosForwardIcon } from '@/assets/icons/ArrowIosForward'
+import { formatDate } from '@/common/utils'
 import { Button } from '@/components/ui/button'
 import { UserImage } from '@/services/publicPosts'
 import Image from 'next/image'
@@ -47,7 +48,7 @@ export const ImagesSlider = ({ images }: Props) => {
           return (
             <SwiperSlide key={image.uploadId}>
               <Image
-                alt={`Image uploaded on ${new Date(image.createdAt).toLocaleDateString()}`}
+                alt={`Image uploaded on ${formatDate(image.createdAt)}`}
                 height={240}
                 src={image.url}
                 width={234}
