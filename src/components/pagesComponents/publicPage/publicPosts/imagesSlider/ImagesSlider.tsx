@@ -2,6 +2,7 @@
 import { ArrowIosBackOutlineIcon } from '@/assets/icons/ArrowIosBackOutline'
 import { ArrowIosForwardIcon } from '@/assets/icons/ArrowIosForward'
 import { Button } from '@/components/ui/button'
+import { UserImage } from '@/services/publicPosts'
 import Image from 'next/image'
 import { Keyboard, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -10,17 +11,8 @@ import 'swiper/scss'
 
 import s from './imageSlider.module.scss'
 
-type UserImages = {
-  createdAt: string
-  fileSize: number
-  height: number
-  uploadId: string
-  url: string
-  width: number
-}
-
 type Props = {
-  images: UserImages[]
+  images: UserImage[]
 }
 
 export const ImagesSlider = ({ images }: Props) => {
