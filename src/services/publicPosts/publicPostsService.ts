@@ -1,8 +1,6 @@
-import { BASE_URL } from '@/common/constants'
+import { BASE_URL, PAGE_SIZE_PUBLIC_POSTS } from '@/common/constants'
 
 import { GetPublicPostsResponse } from './publicPosts.types'
-
-const PAGE_SIZE_PUBLIC_POSTS = 4
 
 export const publicPostsService = {
   async getPublicPosts(): Promise<GetPublicPostsResponse> {

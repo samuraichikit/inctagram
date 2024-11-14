@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import TimeAgo from 'react-timeago'
 
+import { MAX_COUNT_CHARACTERS, MIN_COUNT_CHARACTERS } from '@/common/constants'
 import { Typography } from '@/components/ui/typography'
 import { PublicPostResponse } from '@/services/publicPosts'
 
@@ -23,8 +24,6 @@ export const PublicPost = ({ post }: Props) => {
     showMore: s.showMore,
     timeAgo: s.timeAgo,
   }
-  const MAX_COUNT_CHARACTERS = 200
-  const MIN_COUNT_CHARACTERS = 85
 
   const shownDescription = isExpanded
     ? `${description.slice(0, MAX_COUNT_CHARACTERS)}..`
