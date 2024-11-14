@@ -1,5 +1,6 @@
 import { formatDate } from '@/common/utils'
 import { UserImage } from '@/services/publicPosts'
+import clsx from 'clsx'
 import Image from 'next/image'
 
 import s from './publicImages.module.scss'
@@ -8,12 +9,13 @@ import { ImagesSlider } from '../imagesSlider'
 
 type Props = {
   images: UserImage[]
+  isExpanded: boolean
 }
 
-export const PublicImages = ({ images }: Props) => {
+export const PublicImages = ({ images, isExpanded }: Props) => {
   const shouldDisplayImagesSlider = images.length > 1
   const classNames = {
-    container: s.container,
+    container: clsx(s.container, isExpanded && s.expanded),
   }
 
   return (

@@ -9,5 +9,10 @@
 }
 
 .description {
+  display: inline;
   word-wrap: break-word;
+}
+
+.showMore {
+  cursor: pointer;
 }

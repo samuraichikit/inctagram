@@ -10,7 +10,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/scss'
 
-import s from './imageSlider.module.scss'
+import s from './imagesSlider.module.scss'
 
 type Props = {
   images: UserImage[]
