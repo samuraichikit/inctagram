@@ -40,12 +40,16 @@ export const PublicPost = ({ post }: Props) => {
       <Typography className={classNames.timeAgo} variant={'small_text'}>
         <TimeAgo date={createdAt} />
       </Typography>
-      <Typography className={classNames.description} variant={'regular_text_14'}>
-        {shownDescription}{' '}
-      </Typography>
-      <Typography asChild onClick={toggleDescriptionDisplayHandler} variant={'regular_link'}>
-        <span> {isExpanded ? 'Hide' : 'Show more'} </span>
-      </Typography>
+      {description && (
+        <Typography className={classNames.description} variant={'regular_text_14'}>
+          {shownDescription}{' '}
+        </Typography>
+      )}
+      {description && (
+        <Typography asChild onClick={toggleDescriptionDisplayHandler} variant={'regular_link'}>
+          <span> {isExpanded ? 'Hide' : 'Show more'} </span>
+        </Typography>
+      )}
     </div>
   )
 }
