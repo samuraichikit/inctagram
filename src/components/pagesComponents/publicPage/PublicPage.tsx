@@ -13,14 +13,17 @@ type Props = {
 export const PublicPage = ({ posts, totalUsers }: Props) => {
   const classNames = {
     container: s.container,
+    posts: s.posts,
   }
 
   return (
     <div className={classNames.container}>
       <TotalUsers totalUsers={totalUsers} />
-      {posts?.map(post => {
-        return <PublicPost key={post.id} post={post} />
-      })}
+      <div className={classNames.posts}>
+        {posts?.map(post => {
+          return <PublicPost key={post.id} post={post} />
+        })}
+      </div>
     </div>
   )
 }
