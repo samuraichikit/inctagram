@@ -35,7 +35,7 @@ export const PublicPost = ({ post }: Props) => {
 
   return (
     <div className={classNames.container}>
-      <PublicImages images={images} isExpanded={isExpanded} />
+      <PublicImages height={240} images={images} isExpanded={isExpanded} width={234} />
       <UserInfo src={avatarOwner} userName={userName} />
       <Typography className={classNames.timeAgo} variant={'small_text'}>
         <TimeAgo date={createdAt} />

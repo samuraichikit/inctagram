@@ -8,11 +8,13 @@ import s from './publicImages.module.scss'
 import { ImagesSlider } from '../imagesSlider'
 
 type Props = {
+  height: number
   images: UserImage[]
-  isExpanded: boolean
+  isExpanded?: boolean
+  width: number
 }
 
-export const PublicImages = ({ images, isExpanded }: Props) => {
+export const PublicImages = ({ height, images, isExpanded, width }: Props) => {
   const shouldDisplayImagesSlider = images.length > 1
   const classNames = {
     container: clsx(s.container, isExpanded && s.expanded),
@@ -21,13 +23,13 @@ export const PublicImages = ({ images, isExpanded }: Props) => {
   return (
     <div className={classNames.container}>
       {shouldDisplayImagesSlider ? (
-        <ImagesSlider images={images} />
+        <ImagesSlider height={height} images={images} width={width} />
       ) : (
         <Image
           alt={`Image uploaded on ${formatDate(images[0].createdAt)}`}
-          height={240}
+          height={height}
           src={images[0].url}
-          width={234}
+          width={width}
         />
       )}
     </div>
