@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  gap: 12px;
+}
+
+.userName {
+  display: inline-block;
+}
+
+.comment {
+  display: inline-block;
+  word-wrap: break-word;
+}
+
+.timeAgo {
+  margin-top: 5px;
+  color: var(--color-light-900);
+}
+
+.content + .content {
+  margin-top: 15px;
+}
+
+.answers {
+  position: relative;
+  margin-top: 8px;
+  margin-left: 36px;
+  color: var(--color-light-900);
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    left: -12px;
+    transform: translateX(-100%);
+
+    width: 24px;
+    height: 1px;
+
+    background-color: var(--color-light-900);
+  }
+}
