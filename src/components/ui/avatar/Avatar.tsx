@@ -5,10 +5,12 @@ import s from './avatar.module.scss'
 import defaultAvatar from './../../../../public/defaultAvatar.png'
 
 type Props = {
+  height: number
   src: string
+  width: number
 }
 
-export const Avatar = ({ src }: Props) => {
+export const Avatar = ({ height, src, width }: Props) => {
   const classNames = {
     avatar: s.avatar,
   }
@@ -17,9 +19,9 @@ export const Avatar = ({ src }: Props) => {
     <Image
       alt={'user avatar'}
       className={classNames.avatar}
-      height={36}
+      height={height}
       src={src ?? defaultAvatar}
-      width={36}
+      width={width}
     />
   )
 }

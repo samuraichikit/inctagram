@@ -15,7 +15,7 @@ export const UserInfo = ({ src, userName }: Props) => {
 
   return (
     <div className={classNames.container}>
-      <Avatar src={src} />
+      <Avatar height={36} src={src} width={36} />
       <Typography variant={'h3'}>{userName}</Typography>
     </div>
   )
