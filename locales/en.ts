@@ -49,9 +49,16 @@ export const en: Locale = {
     title: 'Privacy Policy',
   },
   profile: {
+    aboutMe: 'About me',
+    dOB: 'Date of Birth',
+    firstName: 'First Name',
     followers: 'Followers',
     following: 'Following',
+    lastName: 'Last Name',
     publications: 'Publications',
+    saveChanges: 'Save changes',
+    selectCity: 'Select your city',
+    selectCountry: 'Select your country',
     settings: {
       accountManagement: 'Account Management',
       devices: 'Devices',
