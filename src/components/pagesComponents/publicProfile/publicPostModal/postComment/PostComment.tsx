@@ -1,6 +1,5 @@
-import TimeAgo from 'react-timeago'
-
 import { Avatar } from '@/components/ui/avatar'
+import { TimeAgoDisplay } from '@/components/ui/timeAgoDisplay'
 import { Typography } from '@/components/ui/typography'
 
 import s from './postComment.module.scss'
@@ -34,9 +33,7 @@ export const PostComment = ({ answerCount, avatarSrc, comment, createdAt, userNa
         <Typography className={classNames.comment} variant={'regular_text_14'}>
           {comment}
         </Typography>
-        <Typography className={classNames.timeAgo} variant={'small_text'}>
-          <TimeAgo date={createdAt} />
-        </Typography>
+        <TimeAgoDisplay className={classNames.timeAgo} date={createdAt} />
         {displayViewAnswer && (
           <Typography
             className={classNames.answers}

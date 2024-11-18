@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import TimeAgo from 'react-timeago'
 
 import { MAX_COUNT_CHARACTERS, MIN_COUNT_CHARACTERS } from '@/common/constants'
+import { TimeAgoDisplay } from '@/components/ui/timeAgoDisplay'
 import { Typography } from '@/components/ui/typography'
 import { PublicPostResponse } from '@/services/publicPosts'
 import Link from 'next/link'
@@ -52,9 +52,7 @@ export const PublicPost = ({ post }: Props) => {
         <PublicImages height={240} images={images} isExpanded={isExpanded} width={234} />
       </Link>
       <UserInfo src={avatarOwner} userName={userName} />
-      <Typography className={classNames.timeAgo} variant={'small_text'}>
-        <TimeAgo date={createdAt} />
-      </Typography>
+      <TimeAgoDisplay className={classNames.timeAgo} date={createdAt} />
       {description && (
         <Typography className={classNames.description} variant={'regular_text_14'}>
           {shownDescription}{' '}
