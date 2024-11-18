@@ -3,6 +3,10 @@
   gap: 12px;
 }
 
+.container + .container {
+  margin-top: 15px;
+}
+
 .userName {
   display: inline-block;
 }
@@ -15,10 +19,6 @@
 .timeAgo {
   margin-top: 5px;
   color: var(--color-light-900);
-}
-
-.content + .content {
-  margin-top: 15px;
 }
 
 .answers {

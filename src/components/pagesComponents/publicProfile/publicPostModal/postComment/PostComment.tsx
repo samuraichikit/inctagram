@@ -26,7 +26,7 @@ export const PostComment = ({ answerCount, avatarSrc, comment, createdAt, userNa
 
   return (
     <div className={classNames.container}>
-      <Avatar src={avatarSrc} />
+      <Avatar height={36} src={avatarSrc} width={36} />
       <div className={classNames.content}>
         <Typography className={classNames.userName} variant={'bold_text_14'}>
           {userName}
