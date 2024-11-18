@@ -4,6 +4,7 @@ import TimeAgo from 'react-timeago'
 import { MAX_COUNT_CHARACTERS, MIN_COUNT_CHARACTERS } from '@/common/constants'
 import { Typography } from '@/components/ui/typography'
 import { PublicPostResponse } from '@/services/publicPosts'
+import Link from 'next/link'
 
 import s from './publicPost.module.scss'
 
@@ -36,9 +37,12 @@ export const PublicPost = ({ post }: Props) => {
 
   return (
     <div className={classNames.container}>
-      <div className={classNames.publicImagesContainer}>
+      <Link
+        className={classNames.publicImagesContainer}
+        href={`/profile/${post.ownerId}/${post.id}`}
+      >
         <PublicImages height={240} images={images} isExpanded={isExpanded} width={234} />
-      </div>
+      </Link>
       <UserInfo src={avatarOwner} userName={userName} />
       <Typography className={classNames.timeAgo} variant={'small_text'}>
         <TimeAgo date={createdAt} />

@@ -1,5 +1,5 @@
 import { Modal } from '@/components/ui/modal'
-import { Comment, UserImage } from '@/services/publicPosts'
+import { Comment, PublicPostResponse, UserImage } from '@/services/publicPosts'
 
 import s from './publicPostModal.module.scss'
 
@@ -9,24 +9,13 @@ import { PostComments } from './postComments'
 import { PostLikes } from './postLikes'
 
 type Props = {
-  avatarWhoLikes: string[]
   comments: Comment[]
-  createdAt: string
-  likesCount: number
-  ownerAvatarSrc: string
-  ownerUserName: string
-  postImages: UserImage[]
+  isOpen: boolean
+  onClose: () => void
+  post: PublicPostResponse
 }
 
-export const PublicPostModal = ({
-  avatarWhoLikes,
-  comments,
-  createdAt,
-  likesCount,
-  ownerAvatarSrc,
-  ownerUserName,
-  postImages,
-}: Props) => {
+export const PublicPostModal = ({ comments, isOpen, onClose, post }: Props) => {
   const classNames = {
     container: s.container,
     postDetails: s.postDetails,
@@ -34,15 +23,19 @@ export const PublicPostModal = ({
   }
 
   return (
-    <Modal open>
+    <Modal onOpenChange={onClose} open={isOpen}>
       <div className={classNames.container}>
-        <PublicImages height={562} images={postImages} width={490} />
+        <PublicImages height={562} images={post?.images} width={490} />
         <div className={classNames.postDetails}>
           <div className={classNames.userInfoContainer}>
-            <UserInfo src={ownerAvatarSrc} userName={ownerUserName} />
+            <UserInfo src={post?.avatarOwner} userName={post?.userName} />
           </div>
           <PostComments comments={comments} />
-          <PostLikes avatarsSrc={avatarWhoLikes} createdAt={createdAt} likesCount={likesCount} />
+          <PostLikes
+            avatarsSrc={post?.avatarWhoLikes}
+            createdAt={post?.createdAt}
+            likesCount={post?.likesCount}
+          />
         </div>
       </div>
     </Modal>
