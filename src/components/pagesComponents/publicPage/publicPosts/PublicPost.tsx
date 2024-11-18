@@ -27,9 +27,17 @@ export const PublicPost = ({ post }: Props) => {
     timeAgo: s.timeAgo,
   }
 
+  const isVisibleShowMore = description.length >= MIN_COUNT_CHARACTERS && description
+
+  const showDescription = (charactersCount: number, description: string, content: string) => {
+    return description.length >= charactersCount
+      ? `${description.slice(0, charactersCount)}${content}`
+      : `${description.slice(0, charactersCount)}`
+  }
+
   const shownDescription = isExpanded
-    ? `${description.slice(0, MAX_COUNT_CHARACTERS)}..`
-    : `${description.slice(0, MIN_COUNT_CHARACTERS)}...`
+    ? showDescription(MAX_COUNT_CHARACTERS, description, '..')
+    : showDescription(MIN_COUNT_CHARACTERS, description, '...')
 
   const toggleDescriptionDisplayHandler = () => {
     setIsExpanded(!isExpanded)
@@ -52,7 +60,7 @@ export const PublicPost = ({ post }: Props) => {
           {shownDescription}{' '}
         </Typography>
       )}
-      {description && (
+      {isVisibleShowMore && (
         <Typography asChild onClick={toggleDescriptionDisplayHandler} variant={'regular_link'}>
           <span> {isExpanded ? 'Hide' : 'Show more'} </span>
         </Typography>
