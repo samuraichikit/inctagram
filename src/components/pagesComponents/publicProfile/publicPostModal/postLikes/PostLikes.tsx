@@ -1,4 +1,5 @@
 import { AVATARS_COUNT_WHO_LIKES } from '@/common/constants'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { formatDate } from '@/common/utils'
 import { Avatar } from '@/components/ui/avatar'
 import { Typography } from '@/components/ui/typography'
@@ -19,6 +20,7 @@ export const PostLikes = ({ avatarsSrc, createdAt, likesCount }: Props) => {
     container: s.container,
     date: s.date,
   }
+  const { t } = useTranslation()
   const shouldDisplayAvatars = avatarsSrc?.length > 0
   const avatars = avatarsSrc.slice(0, AVATARS_COUNT_WHO_LIKES).reverse()
 
@@ -35,7 +37,11 @@ export const PostLikes = ({ avatarsSrc, createdAt, likesCount }: Props) => {
               )
             })}
           </div>
-          {<span>{`${likesCount} "Like"`}</span>}
+          {
+            <Typography variant={'regular_text_14'}>
+              {t.publicPosts.getCount(likesCount)}
+            </Typography>
+          }
         </div>
       )}
       <Typography className={classNames.date} variant={'small_text'}>

@@ -1,3 +1,5 @@
+import { pluralizeEn } from '@/common/utils'
+
 import { Locale } from './ru'
 
 export const en: Locale = {
@@ -62,6 +64,16 @@ export const en: Locale = {
     },
   },
   publicPosts: {
+    getCount(count: number) {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'one':
+          return `${count} Like`
+        case 'other':
+          return `${count} Likes`
+      }
+    },
     hide: 'Hide',
     registeredUsers: 'Registered users',
     showMore: 'Show more',
