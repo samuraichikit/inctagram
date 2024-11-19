@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { MAX_COUNT_CHARACTERS, MIN_COUNT_CHARACTERS } from '@/common/constants'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { TimeAgoDisplay } from '@/components/ui/timeAgoDisplay'
 import { Typography } from '@/components/ui/typography'
 import { PublicPostResponse } from '@/services/publicPosts'
@@ -18,6 +19,7 @@ type Props = {
 export const PublicPost = ({ post }: Props) => {
   const { avatarOwner, createdAt, description, images, userName } = post
   const [isExpanded, setIsExpanded] = useState(false)
+  const { t } = useTranslation()
 
   const classNames = {
     container: s.container,
@@ -60,7 +62,7 @@ export const PublicPost = ({ post }: Props) => {
       )}
       {isVisibleShowMore && (
         <Typography asChild onClick={toggleDescriptionDisplayHandler} variant={'regular_link'}>
-          <span> {isExpanded ? 'Hide' : 'Show more'} </span>
+          <span> {isExpanded ? t.publicPosts.hide : t.publicPosts.showMore} </span>
         </Typography>
       )}
     </div>

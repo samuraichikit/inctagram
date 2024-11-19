@@ -61,6 +61,11 @@ export const en: Locale = {
       profileSettings: 'Profile Settings',
     },
   },
+  publicPosts: {
+    hide: 'Hide',
+    registeredUsers: 'Registered users',
+    showMore: 'Show more',
+  },
   schemaErrorMsg: {
     emailFormat: 'The email must match the format',
     maxAboutMe: 'Maximum number of characters 200',

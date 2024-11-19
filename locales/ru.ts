@@ -59,6 +59,11 @@ export const ru = {
       profileSettings: 'Настройки профиля',
     },
   },
+  publicPosts: {
+    hide: 'Скрыть',
+    registeredUsers: 'Зарегестрированные пользователи',
+    showMore: 'Показать больше',
+  },
   schemaErrorMsg: {
     emailFormat: 'Адрес эл.почты должен быть в формате',
     maxAboutMe: 'Максимальное число символов - 200',

@@ -1,3 +1,5 @@
+import { DIGITS_COUNT } from '@/common/constants'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 
@@ -14,13 +16,14 @@ export const TotalUsers = ({ totalUsers }: Props) => {
     digitContainer: s.digitContainer,
     totalUsersCard: s.totalUsersCard,
   }
-  const DIGITS_COUNT = 6
+  const { t } = useTranslation()
+
   const totalUsersFormatted = totalUsers.toString().padStart(DIGITS_COUNT, '0').split('')
 
   return (
     <Card className={classNames.container}>
       <Typography asChild variant={'h2'}>
-        <h2>Registered users:</h2>
+        <h2>{t.publicPosts.registeredUsers}:</h2>
       </Typography>
       <Card className={classNames.totalUsersCard}>
         {totalUsersFormatted.map((digit, index) => {
