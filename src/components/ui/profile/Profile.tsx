@@ -8,6 +8,7 @@ import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
 import { useGetProfileQuery, useGetProfileWithPostsQuery } from '@/services/profile'
 import { Comment, PublicPostResponse } from '@/services/publicPosts'
+import clsx from 'clsx'
 import { useRouter } from 'next/router'
 
 import s from './profile.module.scss'
@@ -47,7 +48,7 @@ export const Profile = ({ comments, post }: Props) => {
   }
 
   return (
-    <div className={s.wrapper}>
+    <div className={clsx(post && s.wrapper)}>
       <PublicPostModal comments={comments} isOpen={isOpen} onClose={closeHandler} post={post} />
       <div className={s.infoWrapper}>
         <div className={s.avatarWrapper}>
