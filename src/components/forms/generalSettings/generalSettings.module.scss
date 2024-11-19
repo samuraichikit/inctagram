@@ -1,11 +1,16 @@
-.infoWrapper {
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.photoAndFormWrapper {
   display: flex;
   gap: 40px;
 }
 
-.avatarWrapper {
+.photoWrapper {
   display: flex;
-  flex-shrink: 0;
   align-items: center;
   justify-content: center;
 
@@ -16,23 +21,17 @@
   border-radius: 50%;
 }
 
-.profieWrapper {
+.addPhotoWrapper {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
-.userNameWrapper {
+.formWrapper {
   display: flex;
-  justify-content: space-between;
-}
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 24px;
 
-.followInfoList {
-  display: flex;
-  justify-content: space-between;
-
-  margin: 0;
-  padding: 0;
-
-  list-style-type: none;
+  margin-top: -24px;
 }

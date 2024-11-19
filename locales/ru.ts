@@ -46,10 +46,26 @@ export const ru = {
   privacyPolicy: {
     title: 'Политика конфиденциальности',
   },
+  profile: {
+    followers: 'Подписчики',
+    following: 'Подписан',
+    publications: 'Публикации',
+    settings: {
+      accountManagement: 'Управление аккаунтом',
+      devices: 'Устройства',
+      generalInformation: 'Общая информация',
+      myPayments: 'Мои платежи',
+      profilePhoto: 'Добавить фото',
+      profileSettings: 'Настройки профиля',
+    },
+  },
   schemaErrorMsg: {
     emailFormat: 'Адрес эл.почты должен быть в формате',
+    maxAboutMe: 'Максимальное число символов - 200',
+    maxFirstLastName: 'Максимальное число символов - 50',
     maxName: 'Максимальное число символов - 30',
     maxPassword: 'Максимальное число символов - 20',
+    minFirstLastName: 'Минимальное число символов - 1',
     minName: 'Минимальное число символов - 6',
     minPassword: 'Минимальное число символов - 6',
     passwordContain: 'Пароль должен содержать ',
