@@ -1,3 +1,4 @@
+import { BASE_URL } from '@/common/constants'
 import {
   type BaseQueryFn,
   type FetchArgs,
@@ -9,7 +10,7 @@ import { Mutex } from 'async-mutex'
 const mutex = new Mutex()
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://inctagram.work/api/',
+  baseUrl: BASE_URL,
   credentials: 'include',
   prepareHeaders: headers => {
     const accessToken = localStorage.getItem('accessToken')

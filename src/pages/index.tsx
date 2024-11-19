@@ -1,10 +1,32 @@
 import { useGoogleAuth } from '@/common/hooks/useGoogleAuth'
+import { PublicPage } from '@/components/pagesComponents/publicPage/PublicPage'
 import { getBaseLayout } from '@/components/ui/layout'
+import { PublicPostResponse, publicPostsService } from '@/services/publicPosts'
+import { publicUserService } from '@/services/publicUser'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
 import { NextPageWithLayout } from './_app'
 
-const Home: NextPageWithLayout = () => {
+type Props = {
+  posts: PublicPostResponse[]
+  totalCount: number
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const { totalCount } = await publicUserService.getTotalUsers()
+  const { items: posts } = await publicPostsService.getPublicPosts()
+
+  return {
+    props: {
+      posts,
+      totalCount,
+    },
+    revalidate: 60,
+  }
+}
+
+const Home: NextPageWithLayout<Props> = ({ posts, totalCount }) => {
   const { isLoading } = useGoogleAuth()
 
   if (isLoading) {
@@ -19,7 +41,9 @@ const Home: NextPageWithLayout = () => {
         <meta content={'width=device-width, initial-scale=1'} name={'viewport'} />
         <link href={'/favicon.ico'} rel={'icon'} />
       </Head>
-      <div>Public page</div>
+      <>
+        <PublicPage posts={posts} totalUsers={totalCount} />
+      </>
     </>
   )
 }

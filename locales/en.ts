@@ -1,3 +1,5 @@
+import { pluralizeEn } from '@/common/utils'
+
 import { Locale } from './ru'
 
 export const en: Locale = {
@@ -67,6 +69,21 @@ export const en: Locale = {
       profilePhoto: 'Add a Profile Photo',
       profileSettings: 'Profile Settings',
     },
+  },
+  publicPosts: {
+    getCount(count: number) {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'one':
+          return `${count} Like`
+        case 'other':
+          return `${count} Likes`
+      }
+    },
+    hide: 'Hide',
+    registeredUsers: 'Registered users',
+    showMore: 'Show more',
   },
   schemaErrorMsg: {
     emailFormat: 'The email must match the format',
