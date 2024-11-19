@@ -1,3 +1,4 @@
+import { AVATARS_COUNT_WHO_LIKES } from '@/common/constants'
 import { formatDate } from '@/common/utils'
 import { Avatar } from '@/components/ui/avatar'
 import { Typography } from '@/components/ui/typography'
@@ -19,13 +20,14 @@ export const PostLikes = ({ avatarsSrc, createdAt, likesCount }: Props) => {
     date: s.date,
   }
   const shouldDisplayAvatars = avatarsSrc?.length > 0
+  const avatars = avatarsSrc.slice(0, AVATARS_COUNT_WHO_LIKES).reverse()
 
   return (
     <div className={classNames.container}>
       {shouldDisplayAvatars && (
         <div className={classNames.avatarsWithLikes}>
           <div className={classNames.avatarsContainer}>
-            {avatarsSrc.map(avatarSrc => {
+            {avatars.map(avatarSrc => {
               return (
                 <div className={classNames.avatarWrapper} key={avatarSrc}>
                   <Avatar height={24} src={avatarSrc} width={24} />
