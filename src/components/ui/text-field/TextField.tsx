@@ -5,6 +5,7 @@ import { EyeOffIcon } from '@/assets/icons/EyeOffIcon'
 import { SearchIcon } from '@/assets/icons/SearchIcon'
 import { Typography } from '@/components/ui/typography'
 import clsx from 'clsx'
+import Link from 'next/link'
 
 import s from './textField.module.scss'
 
@@ -17,6 +18,8 @@ export type TextFieldProps = {
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   ({ className, errorMessage, id, label, type, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false)
+
+    const isDateError = errorMessage === 'A user under 13 cannot create a profile.'
 
     const isPassword = type === 'password'
 
@@ -66,7 +69,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         </div>
         {errorMessage && (
           <Typography className={s.error} variant={'regular_text_14'}>
-            {errorMessage}
+            {errorMessage} {isDateError && <Link href={'/auth/privacyPolicy'}>Privacy Policy</Link>}
           </Typography>
         )}
       </div>
