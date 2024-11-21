@@ -19,7 +19,7 @@ const Home: NextPageWithLayout = () => {
         <meta content={'width=device-width, initial-scale=1'} name={'viewport'} />
         <link href={'/favicon.ico'} rel={'icon'} />
       </Head>
-      {/*<div>Public page</div>*/}
+      <div>Public page</div>
     </>
   )
 }

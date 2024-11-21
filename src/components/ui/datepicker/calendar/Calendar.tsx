@@ -1,21 +1,27 @@
 import * as React from 'react'
 import { DayPicker } from 'react-day-picker'
 
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { clsx } from 'clsx'
 import { enIN, ru } from 'date-fns/locale'
 
 import s from './calendar.module.scss'
+
+import { en } from '../../../../../locales/en'
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
 
 function Calendar({ className, classNames, ...props }: CalendarProps) {
   const modifiers = {
     weekend: (date: Date) => {
-      const day = date.getDay() // Получаем день недели
+      const day = date.getDay()
 
-      return day === 0 || day === 6 // Возвращаем true для воскресенья (0) и субботы (6)
+      return day === 0 || day === 6
     },
   }
+  const { t } = useTranslation()
+
+  const locale = t === en ? enIN : ru
 
   return (
     <div>
@@ -40,9 +46,10 @@ function Calendar({ className, classNames, ...props }: CalendarProps) {
           today: s.day_today,
           week: s.week,
           weekday: s.weekday,
+          weeks: s.weeks,
           ...classNames,
         }}
-        locale={enIN}
+        locale={locale}
         mode={'single'}
         modifiers={modifiers}
         modifiersClassNames={{
