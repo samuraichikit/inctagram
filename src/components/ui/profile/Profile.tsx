@@ -7,8 +7,10 @@ import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
 import { useGetProfileQuery, useGetProfileWithPostsQuery } from '@/services/profile'
+
 import { Comment, PublicPostResponse } from '@/services/publicPosts'
 import clsx from 'clsx'
+
 import { useRouter } from 'next/router'
 
 import s from './profile.module.scss'
@@ -23,6 +25,7 @@ type Props = {
 export const Profile = ({ comments, post }: Props) => {
   const { data: meInfo } = useMeQuery()
   const { data: profileInfo } = useGetProfileWithPostsQuery(meInfo?.userName as string)
+  const { data: profile } = useGetProfileQuery()
   const { t } = useTranslation()
   const followArray = [
     profileInfo?.followingCount,

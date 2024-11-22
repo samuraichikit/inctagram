@@ -15,7 +15,6 @@ const profileService = baseApi.injectEndpoints({
       providesTags: ['Me'],
       query: userId => ({ url: `v1/users/${userId}` }),
     }),
-
     updateProfile: builder.mutation<void, UpdateProfile>({
       invalidatesTags: ['Me'],
       query: body => ({ body, method: 'PUT', url: 'v1/users/profile' }),
