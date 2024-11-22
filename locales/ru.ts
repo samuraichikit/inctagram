@@ -1,3 +1,5 @@
+import { pluralizeRu } from '@/common/utils'
+
 export const ru = {
   agreementMsg: 'Я соглашаюсь с ',
   emailVerification: {
@@ -47,17 +49,41 @@ export const ru = {
     title: 'Политика конфиденциальности',
   },
   profile: {
+    aboutMe: 'Обо мне',
+    dOB: 'Дата рождения',
+    firstName: 'Имя',
     followers: 'Подписчики',
     following: 'Подписан',
+    lastName: 'Фамилия',
     publications: 'Публикации',
+    saveChanges: 'Сохранить изменения',
+    selectCity: 'Выберите ваш город',
+    selectCountry: 'Выберите вашу страну',
     settings: {
       accountManagement: 'Управление аккаунтом',
       devices: 'Устройства',
       generalInformation: 'Общая информация',
       myPayments: 'Мои платежи',
-      profilePhoto: 'Добавить фото',
+      profilePhoto: 'Добавить фото профиля',
       profileSettings: 'Настройки профиля',
     },
+  },
+  publicPosts: {
+    getCount(count: number) {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'one':
+          return `${count} лайк`
+        case 'few':
+          return `${count} лайка`
+        case 'many':
+          return `${count} лайков`
+      }
+    },
+    hide: 'Скрыть',
+    registeredUsers: 'Зарегестрированные пользователи',
+    showMore: 'Показать больше',
   },
   schemaErrorMsg: {
     emailFormat: 'Адрес эл.почты должен быть в формате',

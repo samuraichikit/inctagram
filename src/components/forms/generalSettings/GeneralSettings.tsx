@@ -123,33 +123,14 @@ export const GeneralSettings = () => {
           <Button variant={'outlined'}>{t.profile.settings.profilePhoto}</Button>
         </div>
         <form className={s.formWrapper} onSubmit={handleSubmit(onSubmitHandler)}>
-          <FormTextField control={control} label={'Username*'} name={'userName'} required />
-          <FormTextField control={control} label={'First Name*'} name={'firstName'} required />
-          <FormTextField control={control} label={'Last Name*'} name={'lastName'} required />
-          <FormTextField
-            control={control}
-            label={'Date of birth'}
-            name={'dateOfBirth'}
-            type={'date'}
-          />
-          <div className={s.locationWrapper}>
-            <FormTextField
-              className={s.locationItem}
-              control={control}
-              label={'Select your country'}
-              name={'country'}
-            />
-            <FormTextField
-              className={s.locationItem}
-              control={control}
-              label={'Select your city'}
-              name={'city'}
-            />
-          </div>
-          <FormTextArea control={control} label={'About Me'} name={'aboutMe'} rows={3} />
-          <Button disabled={!isValid} type={'submit'}>
-            Save Changes
-          </Button>
+          <FormTextField control={control} label={t.signUp.username} name={'userName'} />
+          <FormTextField control={control} label={`${t.profile.firstName}*`} name={'firstName'} />
+          <FormTextField control={control} label={`${t.profile.lastName}*`} name={'lastName'} />
+          <FormTextField control={control} label={t.profile.selectCountry} name={'country'} />
+          <FormTextField control={control} label={t.profile.selectCity} name={'city'} />
+          <FormTextField control={control} label={t.profile.dOB} name={'dateOfBirth'} />
+          <FormTextField control={control} label={`${t.profile.aboutMe}*`} name={'aboutMe'} />
+          <Button type={'submit'}>{t.profile.saveChanges}</Button>
         </form>
       </div>
     </div>

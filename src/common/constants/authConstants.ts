@@ -1,5 +1,5 @@
-const LOCAL_URL = 'http://localhost:3000'
-const PRODUCTION_URL = 'https://samuraichiki.org'
+import { LOCAL_URL, PRODUCTION_URL } from './urlConstants'
+
 const SCOPE = 'email profile'
 const REDIRECT_URL = process.env.NODE_ENV === 'production' ? PRODUCTION_URL : LOCAL_URL
 
