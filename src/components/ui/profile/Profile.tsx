@@ -3,7 +3,7 @@ import { useTranslation } from '@/common/hooks/useTranslation'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
-import { useGetProfileWithPostsQuery } from '@/services/profile'
+import { useGetProfileQuery, useGetProfileWithPostsQuery } from '@/services/profile'
 import { useRouter } from 'next/router'
 
 import s from './profile.module.scss'
@@ -11,6 +11,7 @@ import s from './profile.module.scss'
 export const Profile = () => {
   const { data: meInfo } = useMeQuery()
   const { data: profileInfo } = useGetProfileWithPostsQuery(meInfo?.userName as string)
+  const { data: profile } = useGetProfileQuery()
   const { t } = useTranslation()
   const followArray = [
     profileInfo?.followingCount,

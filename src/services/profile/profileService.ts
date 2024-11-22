@@ -8,7 +8,7 @@ import {
 const profileService = baseApi.injectEndpoints({
   endpoints: builder => ({
     getProfile: builder.query<GetProfileResponse, void>({
-      providesTags: ['Profile'],
+      providesTags: ['Me'],
       query: () => ({ url: 'v1/users/profile' }),
     }),
     getProfileWithPosts: builder.query<GetProfileWithPostsResponse, string>({
@@ -16,7 +16,7 @@ const profileService = baseApi.injectEndpoints({
       query: userId => ({ url: `v1/users/${userId}` }),
     }),
     updateProfile: builder.mutation<void, UpdateProfile>({
-      invalidatesTags: ['Profile'],
+      invalidatesTags: ['Me'],
       query: body => ({ body, method: 'PUT', url: 'v1/users/profile' }),
     }),
   }),

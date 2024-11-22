@@ -1,5 +1,5 @@
+import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import useFormPersist from 'react-hook-form-persist'
 
 import { ImageOutline } from '@/assets/icons/ImageOutline'
 import { useTranslation } from '@/common/hooks/useTranslation'
@@ -15,6 +15,7 @@ import {
   useUpdateProfileMutation,
 } from '@/services/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
+import router from 'next/router'
 import { z } from 'zod'
 
 import s from './generalSettings.module.scss'
@@ -26,12 +27,6 @@ export const GeneralSettings = () => {
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string)
   const { data: profile } = useGetProfileQuery()
   const [updateProfile] = useUpdateProfileMutation()
-
-  const profileValuesLS = localStorage.getItem('generalSettingsForm')
-  const profileValuesPersist: GeneralSettingsSchemasType =
-    profileValuesLS && JSON.parse(profileValuesLS)
-
-  console.log(profileValuesPersist)
 
   const profileValues: GeneralSettingsSchemasType = {
     aboutMe: profile?.aboutMe ?? '',
@@ -46,18 +41,34 @@ export const GeneralSettings = () => {
 
   const { t } = useTranslation()
 
-  const { control, handleSubmit, setValue, watch } = useForm<GeneralSettingsSchemasType>({
+  const {
+    control,
+    formState: { isDirty, isValid },
+    handleSubmit,
+    reset,
+    setValue,
+    watch,
+  } = useForm<GeneralSettingsSchemasType>({
     defaultValues: profileValues,
     mode: 'onBlur',
     resolver: zodResolver(generalSettingsSchemas(t)),
   })
 
-  useFormPersist('generalSettingsForm', { setValue, storage: window.localStorage, watch })
-
   const onSubmitHandler: SubmitHandler<GeneralSettingsSchemasType> = (
     data: GeneralSettingsSchemasType
   ) => {
-    updateProfile(data)
+    const profileData = {
+      aboutMe: data.aboutMe || '',
+      city: data.city || '',
+      country: data.country || '',
+      dateOfBirth: data.dateOfBirth || '',
+      firstName: data.firstName,
+      lastName: data.lastName,
+      region: data.region || '',
+      userName: data.userName,
+    }
+
+    updateProfile(profileData)
       .unwrap()
       .then(_ => {
         alert('Your settings are saved!')
@@ -66,6 +77,36 @@ export const GeneralSettings = () => {
         alert('Error! Server is not available!')
       })
   }
+
+  useEffect(() => {
+    const subscription = watch(value => {
+      localStorage.setItem('generalSettingsForm', JSON.stringify(value))
+    })
+
+    return () => subscription.unsubscribe()
+  }, [watch])
+
+  useEffect(() => {
+    const savedData = localStorage.getItem('generalSettingsForm')
+
+    if (savedData) {
+      reset(JSON.parse(savedData))
+    }
+  }, [])
+
+  useEffect(() => {
+    const unSubscription = (url: string) => {
+      if (url !== '/auth/privacyPolicy') {
+        localStorage.removeItem('generalSettingsForm')
+      }
+    }
+
+    router.events.on('routeChangeStart', unSubscription)
+
+    return () => {
+      router.events.off('routeChangeStart', unSubscription)
+    }
+  }, [])
 
   return (
     <div className={s.wrapper}>
@@ -82,9 +123,9 @@ export const GeneralSettings = () => {
           <Button variant={'outlined'}>{t.profile.settings.profilePhoto}</Button>
         </div>
         <form className={s.formWrapper} onSubmit={handleSubmit(onSubmitHandler)}>
-          <FormTextField control={control} label={'Username*'} name={'userName'} />
-          <FormTextField control={control} label={'First Name*'} name={'firstName'} />
-          <FormTextField control={control} label={'Last Name*'} name={'lastName'} />
+          <FormTextField control={control} label={'Username*'} name={'userName'} required />
+          <FormTextField control={control} label={'First Name*'} name={'firstName'} required />
+          <FormTextField control={control} label={'Last Name*'} name={'lastName'} required />
           <FormTextField
             control={control}
             label={'Date of birth'}
@@ -106,7 +147,9 @@ export const GeneralSettings = () => {
             />
           </div>
           <FormTextArea control={control} label={'About Me'} name={'aboutMe'} rows={3} />
-          <Button type={'submit'}>Save Changes</Button>
+          <Button disabled={!isValid} type={'submit'}>
+            Save Changes
+          </Button>
         </form>
       </div>
     </div>

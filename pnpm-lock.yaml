@@ -74,9 +74,6 @@ importers:
       react-hook-form:
         specifier: ^7.53.0
         version: 7.53.0(react@18.3.1)
-      react-hook-form-persist:
-        specifier: ^3.0.0
-        version: 3.0.0(react-hook-form@7.53.0(react@18.3.1))(react@18.3.1)
       react-redux:
         specifier: ^9.1.2
         version: 9.1.2(@types/react@18.3.5)(react@18.3.1)(redux@5.0.1)
@@ -4738,12 +4735,6 @@ packages:
     resolution: {integrity: sha512-cYW2/DWas8nEKZGD7SCu9BSuVz8iOcOLHChHyi7upUuVhkpkhYG/6N3KDiTQ3XAiZ2UAZkfvYKMfAHOzBOcGEg==}
     peerDependencies:
       react: '>=16.4.1'
-
-  react-hook-form-persist@3.0.0:
-    resolution: {integrity: sha512-6nwW65JyFpBem9RjLYAWvIFxOLoCk0E13iB9e5yeF5jeHlwx1ua0M77FvwhPpD8eaCz7hG4ziCdOxRcnJVUSxQ==}
-    peerDependencies:
-      react: '>= 16.3'
-      react-hook-form: '>= 6'
 
   react-hook-form@7.53.0:
     resolution: {integrity: sha512-M1n3HhqCww6S2hxLxciEXy2oISPnAzxY7gvwVPrtlczTM/1dDadXgUxDpHMrMTblDOcm/AXtXxHwZ3jpg1mqKQ==}
@@ -11055,11 +11046,6 @@ snapshots:
       prop-types: 15.8.1
       react: 18.3.1
       react-async-script: 1.2.0(react@18.3.1)
-
-  react-hook-form-persist@3.0.0(react-hook-form@7.53.0(react@18.3.1))(react@18.3.1):
-    dependencies:
-      react: 18.3.1
-      react-hook-form: 7.53.0(react@18.3.1)
 
   react-hook-form@7.53.0(react@18.3.1):
     dependencies:
