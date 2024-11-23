@@ -128,7 +128,12 @@ export const GeneralSettings = () => {
           <FormTextField control={control} label={`${t.profile.lastName}*`} name={'lastName'} />
           <FormTextField control={control} label={t.profile.selectCountry} name={'country'} />
           <FormTextField control={control} label={t.profile.selectCity} name={'city'} />
-          <FormTextField control={control} label={t.profile.dOB} name={'dateOfBirth'} />
+          <FormTextField
+            control={control}
+            label={t.profile.dOB}
+            name={'dateOfBirth'}
+            type={'date'}
+          />
           <FormTextArea control={control} label={`${t.profile.aboutMe}*`} name={'aboutMe'} />
           <Button type={'submit'}>{t.profile.saveChanges}</Button>
         </form>
