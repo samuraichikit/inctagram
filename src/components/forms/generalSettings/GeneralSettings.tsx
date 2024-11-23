@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 import { ImageOutline } from '@/assets/icons/ImageOutline'
 import { useTranslation } from '@/common/hooks/useTranslation'
@@ -7,6 +7,7 @@ import { generalSettingsSchemas } from '@/common/schemas'
 import { FormTextArea } from '@/components/controlled/formTextArea'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
+import { Datepicker } from '@/components/ui/datepicker'
 import { ProfileSettingsBar } from '@/components/ui/profileSettingsBar'
 import { useMeQuery } from '@/services/auth'
 import {
@@ -41,18 +42,20 @@ export const GeneralSettings = () => {
 
   const { t } = useTranslation()
 
-  const {
-    control,
-    formState: { isDirty, isValid },
-    handleSubmit,
-    reset,
-    setValue,
-    watch,
-  } = useForm<GeneralSettingsSchemasType>({
+  const form = useForm<GeneralSettingsSchemasType>({
     defaultValues: profileValues,
     mode: 'onBlur',
     resolver: zodResolver(generalSettingsSchemas(t)),
   })
+
+  const {
+    control,
+    formState: { errors, isDirty, isValid },
+    handleSubmit,
+    reset,
+    setValue,
+    watch,
+  } = form
 
   const onSubmitHandler: SubmitHandler<GeneralSettingsSchemasType> = (
     data: GeneralSettingsSchemasType
@@ -122,18 +125,35 @@ export const GeneralSettings = () => {
           </div>
           <Button variant={'outlined'}>{t.profile.settings.profilePhoto}</Button>
         </div>
+
         <form className={s.formWrapper} onSubmit={handleSubmit(onSubmitHandler)}>
           <FormTextField control={control} label={t.signUp.username} name={'userName'} />
           <FormTextField control={control} label={`${t.profile.firstName}*`} name={'firstName'} />
           <FormTextField control={control} label={`${t.profile.lastName}*`} name={'lastName'} />
           <FormTextField control={control} label={t.profile.selectCountry} name={'country'} />
           <FormTextField control={control} label={t.profile.selectCity} name={'city'} />
-          <FormTextField
+          {/* <FormTextField
             control={control}
             label={t.profile.dOB}
             name={'dateOfBirth'}
             type={'date'}
+          /> */}
+
+          <Controller
+            control={control}
+            name={'dateOfBirth'}
+            render={({ field }) => {
+              const dateValue = field.value !== undefined ? new Date(field.value) : undefined
+
+              return (
+                <>
+                  <Datepicker onChange={field.onChange} value={dateValue} />
+                  {errors.dateOfBirth?.message}
+                </>
+              )
+            }}
           />
+
           <FormTextArea control={control} label={`${t.profile.aboutMe}*`} name={'aboutMe'} />
           <Button type={'submit'}>{t.profile.saveChanges}</Button>
         </form>

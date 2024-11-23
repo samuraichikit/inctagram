@@ -7,7 +7,12 @@ import s from './datepicker.module.scss'
 
 import { Popover, PopoverContent, PopoverTrigger } from '../popover/Popover'
 
-export function Datepicker() {
+type Props = {
+  onChange: () => void
+  value: Date | undefined
+}
+
+export function Datepicker({ onChange, value }: Props) {
   return (
     <Popover>
       <PopoverTrigger asChild className={s.datepicker_container}>
@@ -17,7 +22,7 @@ export function Datepicker() {
         </button>
       </PopoverTrigger>
       <PopoverContent className={s.content}>
-        <Calendar />
+        <Calendar mode={'single'} onSelect={onChange} selected={value} />
       </PopoverContent>
     </Popover>
   )
