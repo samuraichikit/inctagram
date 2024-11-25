@@ -1,6 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { ImageOutline } from '@/assets/icons/ImageOutline'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { generalSettingsSchemas } from '@/common/schemas'
 import { FormTextField } from '@/components/controlled/formTextField'
@@ -14,7 +13,6 @@ import { z } from 'zod'
 
 import s from './generalSettings.module.scss'
 import {ProfilePhotoEdit} from "@/components/ui/profile/profilePhoto/profilePhotoEdit/ProfilePhotoEdit";
-import {BlankCover} from "@/components/ui/profile/profilePhoto/blankCover/BlankCover";
 
 type GeneralSettingsSchemasType = z.infer<ReturnType<typeof generalSettingsSchemas>>
 
