@@ -7,6 +7,7 @@ import { useGetProfileWithPostsQuery } from '@/services/profile'
 import { useRouter } from 'next/router'
 
 import s from './profile.module.scss'
+import {ProfilePhotoEdit} from "@/components/ui/profile/profilePhoto/profilePhotoEdit/ProfilePhotoEdit";
 
 export const Profile = () => {
   const { data: meInfo } = useMeQuery()
@@ -25,9 +26,9 @@ export const Profile = () => {
       <div className={s.infoWrapper}>
         <div className={s.avatarWrapper}>
           {profileInfo?.avatars.length !== 0 ? (
-            <img alt={'Avatar'} src={profileInfo?.avatars[0].url} />
+              <ProfilePhotoEdit avatar={profileInfo?.avatars[0].url} />
           ) : (
-            <ImageOutline height={48} width={48} />
+              <ProfilePhotoEdit />
           )}
         </div>
         <div className={s.profieWrapper}>
