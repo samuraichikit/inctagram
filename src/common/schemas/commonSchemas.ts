@@ -3,7 +3,6 @@ import { z } from 'zod'
 import { Locale } from '../../../locales/ru'
 import {
   ABOUT_ME_REGEX,
-  DATE_REGEX,
   EMAIL_EXAMPLE,
   FIRST_LAST_NAME_REGEX,
   PASSWORD_ALLOWED_CHARACTERS,
@@ -29,22 +28,30 @@ export const emailSchema = (t: Locale) => {
 export const dateOfBirthSchema = (t: Locale) => {
   return z
     .string()
-    .regex(DATE_REGEX, {
-      message: `Date format xx.yy.zzzz`,
-    })
     .trim()
+    .refine(
+      val => {
+        const today = new Date()
+        const birthdate = new Date(val)
+        const age = today.getFullYear() - birthdate.getFullYear()
+
+        return age >= 13
+      },
+      { message: `A user under 13 cannot create a profile.` }
+    )
+    .optional()
 }
 
 export const countrySchema = (t: Locale) => {
-  return z.string().trim()
+  return z.string().trim().optional()
 }
 
 export const citySchema = (t: Locale) => {
-  return z.string().trim()
+  return z.string().trim().optional()
 }
 
 export const regionSchema = (t: Locale) => {
-  return z.string().trim()
+  return z.string().trim().optional()
 }
 
 export const passwordSchema = (t: Locale) => {
@@ -74,6 +81,7 @@ export const aboutMeSchema = (t: Locale) => {
     .max(200, { message: t.schemaErrorMsg.maxPassword })
     .regex(ABOUT_ME_REGEX)
     .trim()
+    .optional()
 }
 
 export const agreesToTOSSchema = z.boolean().refine(value => value)

@@ -1,3 +1,5 @@
+import { pluralizeRu } from '@/common/utils'
+
 export const ru = {
   agreementMsg: 'Я соглашаюсь с ',
   emailVerification: {
@@ -72,6 +74,23 @@ export const ru = {
       profilePhotoErrorFormat: 'Ошибка! Формат загруженного фото должен быть\n' +
           'PNG и JPEG',
     },
+  },
+  publicPosts: {
+    getCount(count: number) {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'one':
+          return `${count} лайк`
+        case 'few':
+          return `${count} лайка`
+        case 'many':
+          return `${count} лайков`
+      }
+    },
+    hide: 'Скрыть',
+    registeredUsers: 'Зарегестрированные пользователи',
+    showMore: 'Показать больше',
   },
   schemaErrorMsg: {
     emailFormat: 'Адрес эл.почты должен быть в формате',

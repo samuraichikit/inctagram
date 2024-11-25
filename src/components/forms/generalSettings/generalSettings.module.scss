@@ -35,3 +35,12 @@
 
   margin-top: -24px;
 }
+
+.locationWrapper {
+  display: flex;
+  gap: 24px;
+}
+
+.locationItem {
+  flex-grow: 1;
+}

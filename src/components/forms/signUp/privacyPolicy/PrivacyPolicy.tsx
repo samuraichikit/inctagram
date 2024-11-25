@@ -3,19 +3,20 @@ import React from 'react'
 import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { Typography } from '@/components/ui/typography'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import s from './privacyPolicy.module.scss'
 
 export const PrivacyPolicy = () => {
   const { t } = useTranslation()
+  const router = useRouter()
 
   return (
     <div className={s.wrapper}>
-      <Link className={s.linkWrapper} href={'/auth/signUp'}>
+      <div className={s.linkWrapper} onClick={() => router.back()}>
         <ArrowLeftIcon />
         <Typography variant={'regular_text_14'}>{t.signUp.backToSignUp}</Typography>
-      </Link>
+      </div>
       <Typography className={s.title} variant={'h1'}>
         {t.privacyPolicy.title}
       </Typography>
