@@ -12,6 +12,7 @@ import clsx from 'clsx'
 import { useRouter } from 'next/router'
 
 import s from './profile.module.scss'
+import {ProfilePhotoEdit} from "@/components/ui/profile/profilePhoto/profilePhotoEdit/ProfilePhotoEdit";
 
 import { Avatar } from '../avatar'
 
@@ -54,9 +55,9 @@ export const Profile = ({ comments, post }: Props) => {
       <div className={s.infoWrapper}>
         <div className={s.avatarWrapper}>
           {profileInfo?.avatars.length !== 0 ? (
-            <Avatar height={204} src={avatarSrc} width={204} />
+              <ProfilePhotoEdit avatar={profileInfo?.avatars[0].url} />
           ) : (
-            <ImageOutline height={48} width={48} />
+              <ProfilePhotoEdit />
           )}
         </div>
         <div className={s.profileWrapper}>

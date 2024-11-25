@@ -66,6 +66,13 @@ export const ru = {
       myPayments: 'Мои платежи',
       profilePhoto: 'Добавить фото профиля',
       profileSettings: 'Настройки профиля',
+      profileSavePhoto: 'Сохранить',
+      profileDeletePhoto: 'Удалить Фото',
+      profileDeletePhotoModal: 'Вы уверены, что хотите удалить фотографию?',
+      profilePhotoSelect: 'Выбрать с Компьютера',
+      profilePhotoErrorSize: 'Ошибка! Размер фото должен быть меньше 10 МБ!',
+      profilePhotoErrorFormat: 'Ошибка! Формат загруженного фото должен быть\n' +
+          'PNG и JPEG',
     },
   },
   publicPosts: {

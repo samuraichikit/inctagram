@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { ImageOutline } from '@/assets/icons/ImageOutline'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { generalSettingsSchemas } from '@/common/schemas'
 import { FormTextArea } from '@/components/controlled/formTextArea'
@@ -19,6 +18,7 @@ import router from 'next/router'
 import { z } from 'zod'
 
 import s from './generalSettings.module.scss'
+import {ProfilePhotoEdit} from "@/components/ui/profile/profilePhoto/profilePhotoEdit/ProfilePhotoEdit";
 
 type GeneralSettingsSchemasType = z.infer<ReturnType<typeof generalSettingsSchemas>>
 
