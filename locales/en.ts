@@ -66,6 +66,13 @@ export const en: Locale = {
       myPayments: 'My payments',
       profilePhoto: 'Add a Profile Photo',
       profileSettings: 'Profile Settings',
+      profileSavePhoto: 'Save',
+      profileDeletePhoto: 'Delete Photo',
+      profileDeletePhotoModal: 'Are you sure you want to delete the photo?',
+      profilePhotoSelect: 'Select from Computer',
+      profilePhotoErrorSize: 'Error! Photo size must be less than 10 MB!',
+      profilePhotoErrorFormat: 'Error! The format of the uploaded photo must be\n' +
+          'PNG and JPEG',
     },
   },
   schemaErrorMsg: {
