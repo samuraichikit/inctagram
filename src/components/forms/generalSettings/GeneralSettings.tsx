@@ -18,7 +18,7 @@ import router from 'next/router'
 import { z } from 'zod'
 
 import s from './generalSettings.module.scss'
-import {ProfilePhotoEdit} from "@/components/ui/profile/profilePhoto/profilePhotoEdit/ProfilePhotoEdit";
+import {ImageOutline} from "@/assets/icons/ImageOutline";
 
 type GeneralSettingsSchemasType = z.infer<ReturnType<typeof generalSettingsSchemas>>
 
