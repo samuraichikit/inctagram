@@ -21,7 +21,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Def: Story = {}
+export const Def: Story = {
+  args: { onChange: () => {}, value: new Date() },
+}
 
 const CalendarSingle = () => {
   const [date, setDate] = React.useState<Date>()
@@ -85,9 +87,11 @@ const CalendarRange = () => {
 }
 
 export const Single: Story = {
+  args: { onChange: () => {}, value: new Date() },
   render: () => <CalendarSingle />,
 }
 
 export const Range: Story = {
+  args: { onChange: () => {}, value: new Date() },
   render: () => <CalendarRange />,
 }

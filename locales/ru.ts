@@ -64,15 +64,14 @@ export const ru = {
       devices: 'Устройства',
       generalInformation: 'Общая информация',
       myPayments: 'Мои платежи',
-      profilePhoto: 'Добавить фото профиля',
-      profileSettings: 'Настройки профиля',
-      profileSavePhoto: 'Сохранить',
       profileDeletePhoto: 'Удалить Фото',
       profileDeletePhotoModal: 'Вы уверены, что хотите удалить фотографию?',
-      profilePhotoSelect: 'Выбрать с Компьютера',
+      profilePhoto: 'Добавить фото профиля',
+      profilePhotoErrorFormat: 'Ошибка! Формат загруженного фото должен быть\n' + 'PNG и JPEG',
       profilePhotoErrorSize: 'Ошибка! Размер фото должен быть меньше 10 МБ!',
-      profilePhotoErrorFormat: 'Ошибка! Формат загруженного фото должен быть\n' +
-          'PNG и JPEG',
+      profilePhotoSelect: 'Выбрать с Компьютера',
+      profileSavePhoto: 'Сохранить',
+      profileSettings: 'Настройки профиля',
     },
   },
   publicPosts: {
@@ -89,7 +88,7 @@ export const ru = {
       }
     },
     hide: 'Скрыть',
-    registeredUsers: 'Зарегестрированные пользователи',
+    registeredUsers: 'Зарегистрированные пользователи',
     showMore: 'Показать больше',
   },
   schemaErrorMsg: {
