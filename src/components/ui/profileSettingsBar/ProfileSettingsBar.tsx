@@ -1,5 +1,5 @@
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/router'
 
@@ -14,27 +14,31 @@ export const ProfileSettingsBar = () => {
 
   return (
     <>
-      <Tabs className={s.settingsList} defaultValue={generalInformation}>
-        <TabsList>
+      <Tabs defaultValue={generalInformation}>
+        <TabsList className={s.settingsList}>
           <TabsTrigger
+            className={s.settingsItem}
             onClick={() => router.push(`/profile/settings/general/${userId}`)}
             value={generalInformation}
           >
             {generalInformation}
           </TabsTrigger>
           <TabsTrigger
+            className={s.settingsItem}
             onClick={() => router.push(`/profile/settings/devices/${userId}`)}
             value={devices}
           >
             {devices}
           </TabsTrigger>
           <TabsTrigger
+            className={s.settingsItem}
             onClick={() => router.push(`/profile/settings/management/${userId}`)}
             value={accountManagement}
           >
             {accountManagement}
           </TabsTrigger>
           <TabsTrigger
+            className={s.settingsItem}
             onClick={() => router.push(`/profile/settings/payments/${userId}`)}
             value={myPayments}
           >

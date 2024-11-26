@@ -12,10 +12,11 @@ export type TextFieldProps = {
   errorMessage?: string
   id?: string
   label?: string
+  mandatory?: boolean
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ className, errorMessage, id, label, type, ...props }, ref) => {
+  ({ className, errorMessage, id, label, mandatory, type, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false)
 
     const isPassword = type === 'password'
@@ -37,7 +38,14 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       <div className={clsx(s.wrapper, className)}>
         {!!label && (
           <Typography asChild className={s.label} variant={'regular_text_14'}>
-            <label htmlFor={idToUse}>{label}</label>
+            <label htmlFor={idToUse}>
+              {label}
+              {mandatory && (
+                <Typography asChild variant={'error'}>
+                  <span>*</span>
+                </Typography>
+              )}
+            </label>
           </Typography>
         )}
         <div className={s.iconWrapper}>

@@ -1,3 +1,9 @@
+.formButtonWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -7,6 +13,7 @@
 .photoAndFormWrapper {
   display: flex;
   gap: 40px;
+  border-bottom: 1px solid var(--color-dark-300);
 }
 
 .photoWrapper {
@@ -34,6 +41,7 @@
   gap: 24px;
 
   margin-top: -24px;
+  padding-bottom: 24px;
 }
 
 .locationWrapper {
@@ -43,4 +51,16 @@
 
 .locationItem {
   flex-grow: 1;
+}
+
+.dateOfBirthLabel {
+  color: var(--color-light-900);
+}
+
+.aboutMe textarea {
+  min-height: 84px;
+}
+
+.formSubmitButton {
+  align-self: flex-end;
 }

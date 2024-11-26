@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 import { ImageOutline } from '@/assets/icons/ImageOutline'
@@ -30,6 +30,7 @@ export const GeneralSettings = () => {
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string)
   const { data: profile } = useGetProfileQuery()
   const [updateProfile] = useUpdateProfileMutation()
+  const formId = 'formId' + useId()
 
   const profileValues: GeneralSettingsSchemasType = {
     aboutMe: profile?.aboutMe ?? '',
@@ -54,8 +55,7 @@ export const GeneralSettings = () => {
 
   const {
     control,
-    formState: { errors, isValid },
-    getValues,
+    formState: { errors },
     handleSubmit,
     reset,
     watch,
@@ -122,58 +122,102 @@ export const GeneralSettings = () => {
   }, [])
 
   return (
-    <div className={s.wrapper}>
-      <ProfileSettingsBar />
-      <div className={s.photoAndFormWrapper}>
-        <div className={s.addPhotoWrapper}>
-          <div className={s.photoWrapper}>
-            {profileWithPosts?.avatars.length !== 0 ? (
-              <img alt={'Avatar'} src={profileWithPosts?.avatars[0].url} />
-            ) : (
-              <ImageOutline height={48} width={48} />
-            )}
+    <div className={s.formButtonWrapper}>
+      <div className={s.wrapper}>
+        <ProfileSettingsBar />
+        <div className={s.photoAndFormWrapper}>
+          <div className={s.addPhotoWrapper}>
+            <div className={s.photoWrapper}>
+              {profileWithPosts?.avatars.length !== 0 ? (
+                <img alt={'Avatar'} src={profileWithPosts?.avatars[0].url} />
+              ) : (
+                <ImageOutline height={48} width={48} />
+              )}
+            </div>
+            <Button variant={'outlined'}>{t.profile.settings.profilePhoto}</Button>
           </div>
-          <Button variant={'outlined'}>{t.profile.settings.profilePhoto}</Button>
+          <form className={s.formWrapper} id={formId} onSubmit={handleSubmit(onSubmitHandler)}>
+            <FormTextField
+              control={control}
+              label={t.signUp.username}
+              mandatory
+              name={'userName'}
+            />
+            <FormTextField
+              control={control}
+              label={t.profile.firstName}
+              mandatory
+              name={'firstName'}
+            />
+            <FormTextField
+              control={control}
+              label={t.profile.lastName}
+              mandatory
+              name={'lastName'}
+            />
+            <div>
+              <Typography asChild className={s.dateOfBirthLabel} variant={'regular_text_14'}>
+                <label>{t.profile.dOB}</label>
+              </Typography>
+
+              <Controller
+                control={control}
+                name={'dateOfBirth'}
+                render={({ field }) => {
+                  let dateValue: Date | undefined
+
+                  if (field.value !== undefined && field.value !== '') {
+                    dateValue = new Date(field.value)
+                  }
+
+                  return (
+                    <div>
+                      <Datepicker onChange={field.onChange} value={dateValue} />
+                      {errors.dateOfBirth?.message ===
+                      'A user under 13 cannot create a profile.' ? (
+                        <Typography variant={'error'}>
+                          A user under 13 cannot create a profile.{' '}
+                          <Link href={'/auth/privacyPolicy'}>Privacy Policy</Link>
+                        </Typography>
+                      ) : (
+                        errors.dateOfBirth?.message
+                      )}
+                    </div>
+                  )
+                }}
+              />
+            </div>
+            <div className={s.locationWrapper}>
+              <FormTextField
+                className={s.locationItem}
+                control={control}
+                label={t.profile.selectCountry}
+                name={'country'}
+              />
+              <FormTextField
+                className={s.locationItem}
+                control={control}
+                label={t.profile.selectCity}
+                name={'city'}
+              />
+            </div>
+            <FormTextArea
+              className={s.aboutMe}
+              control={control}
+              label={t.profile.aboutMe}
+              name={'aboutMe'}
+            />
+          </form>
         </div>
-
-        <form className={s.formWrapper} onSubmit={handleSubmit(onSubmitHandler)}>
-          <FormTextField control={control} label={t.signUp.username} name={'userName'} />
-          <FormTextField control={control} label={`${t.profile.firstName}*`} name={'firstName'} />
-          <FormTextField control={control} label={`${t.profile.lastName}*`} name={'lastName'} />
-          <FormTextField control={control} label={t.profile.selectCountry} name={'country'} />
-          <FormTextField control={control} label={t.profile.selectCity} name={'city'} />
-          <Controller
-            control={control}
-            name={'dateOfBirth'}
-            render={({ field }) => {
-              let dateValue: Date | undefined
-
-              if (field.value !== undefined && field.value !== '') {
-                dateValue = new Date(field.value)
-              }
-
-              return (
-                <div>
-                  <Datepicker onChange={field.onChange} value={dateValue} />
-                  {errors.dateOfBirth?.message === 'A user under 13 cannot create a profile.' ? (
-                    <Typography variant={'error'}>
-                      A user under 13 cannot create a profile.{' '}
-                      <Link href={'/auth/privacyPolicy'}>Privacy Policy</Link>
-                    </Typography>
-                  ) : (
-                    errors.dateOfBirth?.message
-                  )}
-                </div>
-              )
-            }}
-          />
-
-          <FormTextArea control={control} label={`${t.profile.aboutMe}*`} name={'aboutMe'} />
-          <Button disabled={!mandatoryFieldsFilled} type={'submit'}>
-            {t.profile.saveChanges}
-          </Button>
-        </form>
       </div>
+      <Button
+        className={s.formSubmitButton}
+        disabled={!mandatoryFieldsFilled}
+        form={formId}
+        type={'submit'}
+      >
+        {t.profile.saveChanges}
+      </Button>
     </div>
   )
 }
