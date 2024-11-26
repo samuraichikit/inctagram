@@ -1,13 +1,13 @@
 import { useEffect, useId, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
-import { ImageOutline } from '@/assets/icons/ImageOutline'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { generalSettingsSchemas } from '@/common/schemas'
 import { FormTextArea } from '@/components/controlled/formTextArea'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Datepicker } from '@/components/ui/datepicker'
+import { ProfilePhotoEdit } from '@/components/ui/profile/profilePhoto/profilePhotoEdit/ProfilePhotoEdit'
 import { ProfileSettingsBar } from '@/components/ui/profileSettingsBar'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
@@ -126,16 +126,11 @@ export const GeneralSettings = () => {
       <div className={s.wrapper}>
         <ProfileSettingsBar />
         <div className={s.photoAndFormWrapper}>
-          <div className={s.addPhotoWrapper}>
-            <div className={s.photoWrapper}>
-              {profileWithPosts?.avatars.length !== 0 ? (
-                <img alt={'Avatar'} src={profileWithPosts?.avatars[0].url} />
-              ) : (
-                <ImageOutline height={48} width={48} />
-              )}
-            </div>
-            <Button variant={'outlined'}>{t.profile.settings.profilePhoto}</Button>
-          </div>
+          {profile?.avatars.length !== 0 ? (
+            <ProfilePhotoEdit avatar={profileWithPosts?.avatars[0]?.url ?? null} />
+          ) : (
+            <ProfilePhotoEdit />
+          )}
           <form className={s.formWrapper} id={formId} onSubmit={handleSubmit(onSubmitHandler)}>
             <FormTextField
               control={control}
