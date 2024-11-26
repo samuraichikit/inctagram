@@ -31,11 +31,15 @@ export const dateOfBirthSchema = (t: Locale) => {
     .trim()
     .refine(
       val => {
-        const today = new Date()
-        const birthdate = new Date(val)
-        const age = today.getFullYear() - birthdate.getFullYear()
+        if (val === '') {
+          return true
+        } else {
+          const today = new Date()
+          const birthdate = new Date(val)
+          const age = today.getFullYear() - birthdate.getFullYear()
 
-        return age >= 13
+          return age >= 13
+        }
       },
       { message: `A user under 13 cannot create a profile.` }
     )

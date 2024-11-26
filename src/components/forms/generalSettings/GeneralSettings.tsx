@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 import { ImageOutline } from '@/assets/icons/ImageOutline'
@@ -9,6 +9,7 @@ import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Datepicker } from '@/components/ui/datepicker'
 import { ProfileSettingsBar } from '@/components/ui/profileSettingsBar'
+import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
 import {
   useGetProfileQuery,
@@ -16,6 +17,7 @@ import {
   useUpdateProfileMutation,
 } from '@/services/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 import router from 'next/router'
 import { z } from 'zod'
 
@@ -40,6 +42,8 @@ export const GeneralSettings = () => {
     userName: profile?.userName ?? '',
   }
 
+  const [mandatoryFieldsFilled, setMandatoryFieldsFilled] = useState(false)
+
   const { t } = useTranslation()
 
   const form = useForm<GeneralSettingsSchemasType>({
@@ -50,10 +54,10 @@ export const GeneralSettings = () => {
 
   const {
     control,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isValid },
+    getValues,
     handleSubmit,
     reset,
-    setValue,
     watch,
   } = form
 
@@ -84,6 +88,12 @@ export const GeneralSettings = () => {
   useEffect(() => {
     const subscription = watch(value => {
       localStorage.setItem('generalSettingsForm', JSON.stringify(value))
+
+      if (value.userName !== '' && value.firstName !== '' && value.lastName !== '') {
+        setMandatoryFieldsFilled(true)
+      } else {
+        setMandatoryFieldsFilled(false)
+      }
     })
 
     return () => subscription.unsubscribe()
@@ -132,30 +142,36 @@ export const GeneralSettings = () => {
           <FormTextField control={control} label={`${t.profile.lastName}*`} name={'lastName'} />
           <FormTextField control={control} label={t.profile.selectCountry} name={'country'} />
           <FormTextField control={control} label={t.profile.selectCity} name={'city'} />
-          {/* <FormTextField
-            control={control}
-            label={t.profile.dOB}
-            name={'dateOfBirth'}
-            type={'date'}
-          /> */}
-
           <Controller
             control={control}
             name={'dateOfBirth'}
             render={({ field }) => {
-              const dateValue = field.value !== undefined ? new Date(field.value) : undefined
+              let dateValue: Date | undefined
+
+              if (field.value !== undefined && field.value !== '') {
+                dateValue = new Date(field.value)
+              }
 
               return (
-                <>
+                <div>
                   <Datepicker onChange={field.onChange} value={dateValue} />
-                  {errors.dateOfBirth?.message}
-                </>
+                  {errors.dateOfBirth?.message === 'A user under 13 cannot create a profile.' ? (
+                    <Typography variant={'error'}>
+                      A user under 13 cannot create a profile.{' '}
+                      <Link href={'/auth/privacyPolicy'}>Privacy Policy</Link>
+                    </Typography>
+                  ) : (
+                    errors.dateOfBirth?.message
+                  )}
+                </div>
               )
             }}
           />
 
           <FormTextArea control={control} label={`${t.profile.aboutMe}*`} name={'aboutMe'} />
-          <Button type={'submit'}>{t.profile.saveChanges}</Button>
+          <Button disabled={!mandatoryFieldsFilled} type={'submit'}>
+            {t.profile.saveChanges}
+          </Button>
         </form>
       </div>
     </div>
