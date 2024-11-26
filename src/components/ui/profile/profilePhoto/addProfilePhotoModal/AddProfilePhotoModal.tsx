@@ -1,16 +1,15 @@
 import React, { ChangeEvent, useRef } from 'react'
-
-import { useTranslation } from '@/common/hooks/useTranslation'
-
-import { clsx } from 'clsx'
 import AvatarEditor from 'react-avatar-editor'
 
-import s from './AddProfilePhotoModal.module.scss'
-import { useUploadAvatarMutation } from '@/services/profile'
-import { Modal } from '@/components/ui/modal'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { Button } from '@/components/ui/button'
+import { Modal } from '@/components/ui/modal'
 import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
 import { Typography } from '@/components/ui/typography'
+import { useUploadAvatarMutation } from '@/services/profile'
+import { clsx } from 'clsx'
+
+import s from './AddProfilePhotoModal.module.scss'
 
 type Props = {
   currentPhoto: File | null
@@ -86,8 +85,8 @@ export const AddProfilePhotoModal = ({
   return (
     <Modal
       className={s.addModalRoot}
-      open={isOpenAddPhotoModal}
       onOpenChange={setIsOpenAddPhotoModal}
+      open={isOpenAddPhotoModal}
       title={t.profile.settings.profilePhoto}
     >
       <div className={s.modalContent}>
@@ -116,11 +115,11 @@ export const AddProfilePhotoModal = ({
           </>
         ) : (
           <div className={s.withoutPhoto}>
-            {error &&
+            {error && (
               <div className={s.errorText}>
                 <Typography variant={'bold_text_14'}>{error}</Typography>
               </div>
-            }
+            )}
             <BlankCover className={clsx(s.blank, error && s.blankError)} type={'square'} />
             <Button fullWidth={false} onClick={selectPhoto} variant={'primary'}>
               {t.profile.settings.profilePhotoSelect}
