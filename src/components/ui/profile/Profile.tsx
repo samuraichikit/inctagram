@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 
-import { ImageOutline } from '@/assets/icons/ImageOutline'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { PublicPostModal } from '@/components/pagesComponents/publicProfile/publicPostModal'
 import { Button } from '@/components/ui/button'
@@ -17,8 +16,7 @@ import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 import s from './profile.module.scss'
-
-import { Avatar } from '../avatar'
+import {ProfilePhotoEdit} from "@/components/ui/profile/profilePhoto/profilePhotoEdit/ProfilePhotoEdit";
 
 type Props = {
   comments: Comment[]
@@ -63,13 +61,11 @@ export const Profile = ({ comments, post }: Props) => {
     <div className={clsx(post && s.wrapper)}>
       <PublicPostModal comments={comments} isOpen={isOpen} onClose={closeHandler} post={post} />
       <div className={s.infoWrapper}>
-        <div className={s.avatarWrapper}>
           {profileInfo?.avatars.length !== 0 ? (
-            <Avatar height={204} src={avatarSrc} width={204} />
+              <ProfilePhotoEdit avatar={profileInfo?.avatars[0].url} />
           ) : (
-            <ImageOutline height={48} width={48} />
+              <ProfilePhotoEdit />
           )}
-        </div>
         <div className={s.profileWrapper}>
           <div className={s.userNameWrapper}>
             <Typography variant={'h1'}>{profileInfo?.userName}</Typography>

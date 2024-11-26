@@ -1,0 +1,25 @@
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0, $wrap: nowrap) {
+  display: flex;
+  flex-flow: $direction $wrap;
+  flex-wrap: $wrap;
+  gap: $gap;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+.root {
+  @include flex($justify: center, $align: center);
+
+  overflow: hidden;
+  background-color: var(--color-accent-500);
+  border-radius: 50%;
+
+
+  .userName {
+    font-weight: 700;
+  }
+
+  .image {
+    object-fit: cover;
+  }
+}
