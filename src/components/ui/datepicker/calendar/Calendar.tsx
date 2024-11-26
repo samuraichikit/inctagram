@@ -26,16 +26,19 @@ function Calendar({ className, classNames, ...props }: CalendarProps) {
   return (
     <div>
       <DayPicker
+        captionLayout={'dropdown-years'}
         className={clsx(s.datepicker, className)}
         classNames={{
           button_next: s.button_next,
           button_previous: s.button_prev,
           caption: s.caption,
           caption_label: s.caption_label,
+          chevron: s.chevron,
           day: s.day,
           day_disabled: s.day_disabled,
           day_hidden: s.day_hidden,
           day_outside: s.day_outside,
+          month_caption: s.month_caption,
           month_grid: s.month_grid,
           nav_button: s.nav_button,
           range_end: s.day_range_end,
@@ -47,13 +50,14 @@ function Calendar({ className, classNames, ...props }: CalendarProps) {
           week: s.week,
           weekday: s.weekday,
           weeks: s.weeks,
+          years_dropdown: s.years_dropdown,
           ...classNames,
         }}
         locale={locale}
         mode={'single'}
         modifiers={modifiers}
         modifiersClassNames={{
-          weekend: s.weekend, // Класс, который будет применяться к выходным дням
+          weekend: s.weekend,
         }}
         showOutsideDays
         {...props}
