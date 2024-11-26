@@ -48,3 +48,17 @@ export type UpdateProfile = {
   region: string
   userName: string
 }
+
+export type GetPublicProfileResponse = {
+  aboutMe: null | string
+  avatars: Avatar[]
+  id: number
+  userMetadata: UserMetadata
+  userName: string
+}
+
+export type UserMetadata = {
+  followers: number
+  following: number
+  publications: number
+}

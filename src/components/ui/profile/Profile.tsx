@@ -5,9 +5,14 @@ import { PublicPostModal } from '@/components/pagesComponents/publicProfile/publ
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
-import { useGetProfileQuery, useGetProfileWithPostsQuery } from '@/services/profile'
+import {
+  useGetProfileQuery,
+  useGetProfileWithPostsQuery,
+  useGetPublicProfileQuery,
+} from '@/services/profile'
 import { Comment, PublicPostResponse } from '@/services/publicPosts'
 import clsx from 'clsx'
+import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 import s from './profile.module.scss'
@@ -18,18 +23,24 @@ type Props = {
   post: PublicPostResponse
 }
 
+type Params = {
+  id: string[]
+} | null
+
 export const Profile = ({ comments, post }: Props) => {
+  const params: Params = useParams()
+
   const { data: meInfo } = useMeQuery()
-  const { data: profileInfo } = useGetProfileWithPostsQuery(meInfo?.userName as string)
-  const { data: profile } = useGetProfileQuery()
+  const { data } = useGetProfileQuery()
+  const { data: profileInfo } = useGetPublicProfileQuery(params?.id[0] as string)
+
   const { t } = useTranslation()
   const followArray = [
-    profileInfo?.followingCount,
-    profileInfo?.followersCount,
-    profileInfo?.publicationsCount,
+    profileInfo?.userMetadata.following,
+    profileInfo?.userMetadata.followers,
+    profileInfo?.userMetadata.publications,
   ]
 
-  const { data } = useGetProfileQuery()
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
   const { push } = router
@@ -59,6 +70,7 @@ export const Profile = ({ comments, post }: Props) => {
           <div className={s.userNameWrapper}>
             <Typography variant={'h1'}>{profileInfo?.userName}</Typography>
             <Button
+              disabled={String(meInfo?.userId) !== params?.id[0]}
               onClick={() => router.push(`settings/general/${profileInfo?.id}`)}
               variant={'secondary'}
             >
