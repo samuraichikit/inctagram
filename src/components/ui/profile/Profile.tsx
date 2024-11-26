@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { PublicPostModal } from '@/components/pagesComponents/publicProfile/publicPostModal'
 import { Button } from '@/components/ui/button'
-import { ProfilePhotoEdit } from '@/components/ui/profile/profilePhoto/profilePhotoEdit/ProfilePhotoEdit'
+import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
+import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
 import {
@@ -63,9 +64,14 @@ export const Profile = ({ comments, post }: Props) => {
       <PublicPostModal comments={comments} isOpen={isOpen} onClose={closeHandler} post={post} />
       <div className={s.infoWrapper}>
         {profileInfo?.avatars.length !== 0 ? (
-          <ProfilePhotoEdit avatar={profileWithPosts?.avatars[0]?.url ?? null} />
+          <div>
+            {' '}
+            <Avatar size={192} src={profileWithPosts?.avatars[0]?.url ?? null} />
+          </div>
         ) : (
-          <ProfilePhotoEdit />
+          <div>
+            <BlankCover />
+          </div>
         )}
         <div className={s.profileWrapper}>
           <div className={s.userNameWrapper}>
