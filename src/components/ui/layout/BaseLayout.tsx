@@ -1,6 +1,5 @@
 import { PropsWithChildren, ReactElement } from 'react'
 
-import { useAuth } from '@/common/hooks/useAuth'
 import clsx from 'clsx'
 import { NextPage } from 'next'
 import { usePathname } from 'next/navigation'
@@ -10,7 +9,6 @@ import s from './baseLayout.module.scss'
 import { Header } from '../header'
 
 export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
-  const { isAuth } = useAuth()
   const path = usePathname()
 
   const classNames = {
@@ -22,7 +20,7 @@ export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
 
   return (
     <>
-      <Header isAuth={isAuth} />
+      <Header />
       <main className={classNames.main}>{children}</main>
     </>
   )
