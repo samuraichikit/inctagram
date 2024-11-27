@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import { useAuth } from '@/common/hooks/useAuth'
 import { useGoogleAuth } from '@/common/hooks/useGoogleAuth'
 import { PublicPage } from '@/components/pagesComponents/publicPage/PublicPage'
@@ -32,10 +34,14 @@ export const getStaticProps: GetStaticProps = async () => {
 const Home: NextPageWithLayout<Props> = ({ posts, totalCount }) => {
   const router = useRouter()
   const { data: meInfo } = useMeQuery()
-  const { isAuth } = useAuth()
   const { isLoading } = useGoogleAuth()
+  const [accessToken, setAccessToken] = useState<boolean | null | string>(false)
 
-  if (isAuth) {
+  useEffect(() => {
+    setAccessToken(localStorage.getItem('accessToken'))
+  }, [])
+
+  if (accessToken) {
     router.push(`/profile/${meInfo?.userId}`)
   }
 
