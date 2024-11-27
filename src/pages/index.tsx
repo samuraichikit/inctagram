@@ -1,10 +1,13 @@
+import { useAuth } from '@/common/hooks/useAuth'
 import { useGoogleAuth } from '@/common/hooks/useGoogleAuth'
 import { PublicPage } from '@/components/pagesComponents/publicPage/PublicPage'
 import { getBaseLayout } from '@/components/ui/layout'
+import { useMeQuery } from '@/services/auth'
 import { PublicPostResponse, publicPostsService } from '@/services/publicPosts'
 import { publicUserService } from '@/services/publicUser'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import { NextPageWithLayout } from './_app'
 
@@ -27,7 +30,14 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const Home: NextPageWithLayout<Props> = ({ posts, totalCount }) => {
+  const router = useRouter()
+  const { data: meInfo } = useMeQuery()
+  const { isAuth } = useAuth()
   const { isLoading } = useGoogleAuth()
+
+  if (isAuth) {
+    router.push(`/profile/${meInfo?.userId}`)
+  }
 
   if (isLoading) {
     return <div>LOADING ...</div>

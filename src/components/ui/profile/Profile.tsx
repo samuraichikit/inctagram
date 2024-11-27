@@ -45,7 +45,6 @@ export const Profile = ({ comments, post }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
   const { push } = router
-  const avatarSrc = (post ? post.avatarOwner : profileInfo?.avatars[0]?.url) ?? ''
 
   useEffect(() => {
     if (post) {
