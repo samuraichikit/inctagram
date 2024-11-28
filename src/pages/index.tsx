@@ -34,7 +34,8 @@ export const getStaticProps: GetStaticProps = async () => {
 const Home: NextPageWithLayout<Props> = ({ posts, totalCount }) => {
   const router = useRouter()
   const { data: meInfo } = useMeQuery()
-  const { isLoading } = useGoogleAuth()
+
+  useGoogleAuth()
   const [accessToken, setAccessToken] = useState<boolean | null | string>(false)
 
   useEffect(() => {
@@ -43,10 +44,6 @@ const Home: NextPageWithLayout<Props> = ({ posts, totalCount }) => {
 
   if (accessToken) {
     router.push(`/profile/${meInfo?.userId}`)
-  }
-
-  if (isLoading) {
-    return <div>LOADING ...</div>
   }
 
   return (
