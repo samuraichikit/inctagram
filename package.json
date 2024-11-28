@@ -10,8 +10,7 @@
     "format": "prettier --write src",
     "lint": "eslint src --ext .jsx,.js,.tsx,.ts  --no-error-on-unmatched-pattern --fix && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "prepare": "node .husky/install.mjs"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.0.20",
@@ -69,7 +68,6 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.8",
     "eslint-plugin-storybook": "^0.8.0",
-    "husky": "^9.1.7",
     "sass": "^1.78.0",
     "storybook": "^8.2.9",
     "stylelint": "^16.9.0",
