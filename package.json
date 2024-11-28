@@ -68,6 +68,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.8",
     "eslint-plugin-storybook": "^0.8.0",
+    "husky": "^9.1.7",
     "sass": "^1.78.0",
     "storybook": "^8.2.9",
     "stylelint": "^16.9.0",
