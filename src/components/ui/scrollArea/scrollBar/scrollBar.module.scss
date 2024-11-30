@@ -1,0 +1,45 @@
+.scrollbar {
+  touch-action: none;
+  user-select: none;
+  display: flex;
+}
+
+.scrollbar[data-orientation='vertical'] {
+  width: 14px;
+}
+
+.scrollbar[data-orientation='horizontal'] {
+  flex-direction: column;
+  height: 14px;
+}
+
+.thumb {
+  cursor: pointer;
+  position: relative;
+  flex: 1;
+  padding: 5px;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 4px;
+    height: 46px;
+
+    background-color: var(--color-dark-300);
+    border-radius: 3px;
+
+    [data-orientation='horizontal'] & {
+      width: 46px;
+      height: 4px;
+    }
+  }
+
+  &:hover::before {
+    background-color: var(--color-light-900);
+  }
+}
