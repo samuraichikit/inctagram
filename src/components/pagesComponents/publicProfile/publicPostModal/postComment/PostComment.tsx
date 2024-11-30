@@ -21,24 +21,27 @@ export const PostComment = ({
 }: Props) => {
   const classNames = {
     answers: s.answers,
+    avatar: s.avatar,
     comment: s.comment,
     container: s.container,
-    content: s.content,
     timeAgo: s.timeAgo,
+    userAndComment: s.userAndComment,
     userName: s.userName,
   }
   const displayViewAnswer = answerCount > 0
 
   return (
     <div className={classNames.container}>
-      <Avatar height={36} src={avatarSrc} width={36} />
-      <div className={classNames.content}>
-        <Typography className={classNames.userName} variant={'bold_text_14'}>
-          {userName}
-        </Typography>{' '}
-        <Typography className={classNames.comment} variant={'regular_text_14'}>
-          {comment}
-        </Typography>
+      <Avatar className={classNames.avatar} height={36} src={avatarSrc} width={36} />
+      <div>
+        <div className={classNames.userAndComment}>
+          <Typography className={classNames.userName} variant={'bold_text_14'}>
+            {userName}
+          </Typography>{' '}
+          <Typography className={classNames.comment} variant={'regular_text_14'}>
+            {comment}
+          </Typography>
+        </div>
         <TimeAgoDisplay className={classNames.timeAgo} date={createdAt} />
         {displayViewAnswer && (
           <Typography
