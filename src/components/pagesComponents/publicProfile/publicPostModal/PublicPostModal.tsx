@@ -18,6 +18,7 @@ type Props = {
 export const PublicPostModal = ({ comments, isOpen, onClose, post }: Props) => {
   const classNames = {
     container: s.container,
+    images: s.images,
     postDetails: s.postDetails,
     userInfoContainer: s.userInfoContainer,
   }
@@ -27,7 +28,7 @@ export const PublicPostModal = ({ comments, isOpen, onClose, post }: Props) => {
   return (
     <Modal onOpenChange={onClose} open={isOpen}>
       <div className={classNames.container}>
-        <PublicImages height={562} images={images} width={490} />
+        <PublicImages className={classNames.images} height={562} images={images} width={490} />
         <div className={classNames.postDetails}>
           <div className={classNames.userInfoContainer}>
             <UserInfo src={avatarOwner} userName={userName} />
