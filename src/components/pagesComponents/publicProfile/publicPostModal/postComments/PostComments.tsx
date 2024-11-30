@@ -5,16 +5,28 @@ import s from './postComments.module.scss'
 import { PostComment } from '../postComment'
 
 type Props = {
+  avatarSrc: string
   comments: Comment[]
+  createdAt: string
+  description: string
+  userName: string
 }
 
-export const PostComments = ({ comments }: Props) => {
+export const PostComments = ({ avatarSrc, comments, createdAt, description, userName }: Props) => {
   const classNames = {
     container: s.container,
   }
 
   return (
     <div className={classNames.container}>
+      {description && (
+        <PostComment
+          avatarSrc={avatarSrc}
+          comment={description}
+          createdAt={createdAt}
+          userName={userName}
+        />
+      )}
       {comments.map(({ answerCount, content, createdAt, from, id }) => (
         <PostComment
           answerCount={answerCount}

@@ -25,16 +25,22 @@ export const PublicPostModal = ({ comments, isOpen, onClose, post }: Props) => {
   return (
     <Modal onOpenChange={onClose} open={isOpen}>
       <div className={classNames.container}>
-        <PublicImages height={562} images={post?.images} width={490} />
+        <PublicImages height={562} images={post.images} width={490} />
         <div className={classNames.postDetails}>
           <div className={classNames.userInfoContainer}>
-            <UserInfo src={post?.avatarOwner} userName={post?.userName} />
+            <UserInfo src={post.avatarOwner} userName={post.userName} />
           </div>
-          <PostComments comments={comments} />
+          <PostComments
+            avatarSrc={post.avatarOwner}
+            comments={comments}
+            createdAt={post.createdAt}
+            description={post.description}
+            userName={post.userName}
+          />
           <PostLikes
-            avatarsSrc={post?.avatarWhoLikes}
-            createdAt={post?.createdAt}
-            likesCount={post?.likesCount}
+            avatarsSrc={post.avatarWhoLikes}
+            createdAt={post.createdAt}
+            likesCount={post.likesCount}
           />
         </div>
       </div>
