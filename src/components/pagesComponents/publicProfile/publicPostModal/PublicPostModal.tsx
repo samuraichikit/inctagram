@@ -1,5 +1,5 @@
 import { Modal } from '@/components/ui/modal'
-import { Comment, PublicPostResponse, UserImage } from '@/services/publicPosts'
+import { Comment, PublicPostResponse } from '@/services/publicPosts'
 
 import s from './publicPostModal.module.scss'
 
@@ -22,26 +22,24 @@ export const PublicPostModal = ({ comments, isOpen, onClose, post }: Props) => {
     userInfoContainer: s.userInfoContainer,
   }
 
+  const { avatarOwner, avatarWhoLikes, createdAt, description, images, likesCount, userName } = post
+
   return (
     <Modal onOpenChange={onClose} open={isOpen}>
       <div className={classNames.container}>
-        <PublicImages height={562} images={post.images} width={490} />
+        <PublicImages height={562} images={images} width={490} />
         <div className={classNames.postDetails}>
           <div className={classNames.userInfoContainer}>
-            <UserInfo src={post.avatarOwner} userName={post.userName} />
+            <UserInfo src={avatarOwner} userName={userName} />
           </div>
           <PostComments
-            avatarSrc={post.avatarOwner}
+            avatarSrc={avatarOwner}
             comments={comments}
-            createdAt={post.createdAt}
-            description={post.description}
-            userName={post.userName}
+            createdAt={createdAt}
+            description={description}
+            userName={userName}
           />
-          <PostLikes
-            avatarsSrc={post.avatarWhoLikes}
-            createdAt={post.createdAt}
-            likesCount={post.likesCount}
-          />
+          <PostLikes avatarsSrc={avatarWhoLikes} createdAt={createdAt} likesCount={likesCount} />
         </div>
       </div>
     </Modal>
