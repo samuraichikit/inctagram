@@ -1,3 +1,4 @@
+import { ScrollArea } from '@/components/ui/scrollArea'
 import { Comment } from '@/services/publicPosts'
 
 import s from './postComments.module.scss'
@@ -18,25 +19,27 @@ export const PostComments = ({ avatarSrc, comments, createdAt, description, user
   }
 
   return (
-    <div className={classNames.container}>
-      {description && (
-        <PostComment
-          avatarSrc={avatarSrc}
-          comment={description}
-          createdAt={createdAt}
-          userName={userName}
-        />
-      )}
-      {comments.map(({ answerCount, content, createdAt, from, id }) => (
-        <PostComment
-          answerCount={answerCount}
-          avatarSrc={from.avatars[0].url}
-          comment={content}
-          createdAt={createdAt}
-          key={id}
-          userName={from.username}
-        />
-      ))}
-    </div>
+    <ScrollArea>
+      <div className={classNames.container}>
+        {description && (
+          <PostComment
+            avatarSrc={avatarSrc}
+            comment={description}
+            createdAt={createdAt}
+            userName={userName}
+          />
+        )}
+        {comments.map(({ answerCount, content, createdAt, from, id }) => (
+          <PostComment
+            answerCount={answerCount}
+            avatarSrc={from.avatars[0].url}
+            comment={content}
+            createdAt={createdAt}
+            key={id}
+            userName={from.username}
+          />
+        ))}
+      </div>
+    </ScrollArea>
   )
 }

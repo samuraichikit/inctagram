@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import Image from 'next/image'
 
 import s from './avatar.module.scss'
@@ -5,14 +6,15 @@ import s from './avatar.module.scss'
 import defaultAvatar from './../../../../public/defaultAvatar.png'
 
 type Props = {
+  className?: string
   height: number
   src: string
   width: number
 }
 
-export const Avatar = ({ height, src, width }: Props) => {
+export const Avatar = ({ className, height, src, width }: Props) => {
   const classNames = {
-    avatar: s.avatar,
+    avatar: clsx(s.avatar, className),
   }
 
   return (
