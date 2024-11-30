@@ -5,9 +5,13 @@ import clsx from 'clsx'
 
 import s from './scrollBar.module.scss'
 
+type ScrollBarProps = {
+  orientation?: 'horizontal' | 'vertical'
+} & ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>
+
 const ScrollBar = forwardRef<
   ElementRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,
-  ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>
+  ScrollBarProps
 >(({ className, orientation = 'vertical', ...rest }, ref) => {
   const classNames = {
     scrollbar: clsx(s.scrollBar, className),
