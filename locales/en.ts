@@ -9,6 +9,10 @@ export const en: Locale = {
     msg: 'Looks like the verification link has expired. Not to worry, we can send the link again',
     resendMsg: 'Resend verification link',
   },
+  generalSettings: {
+    notAvailable: 'Error! Server is not available!',
+    savedSettings: 'Your settings are saved!',
+  },
   header: {
     signIn: 'Log in',
     signUp: 'Sign up',
@@ -66,15 +70,14 @@ export const en: Locale = {
       devices: 'Devices',
       generalInformation: 'General information',
       myPayments: 'My payments',
-      profilePhoto: 'Add a Profile Photo',
-      profileSettings: 'Profile Settings',
-      profileSavePhoto: 'Save',
       profileDeletePhoto: 'Delete Photo',
       profileDeletePhotoModal: 'Are you sure you want to delete the photo?',
-      profilePhotoSelect: 'Select from Computer',
+      profilePhoto: 'Add a Profile Photo',
+      profilePhotoErrorFormat: 'Error! The format of the uploaded photo must be\n' + 'PNG and JPEG',
       profilePhotoErrorSize: 'Error! Photo size must be less than 10 MB!',
-      profilePhotoErrorFormat: 'Error! The format of the uploaded photo must be\n' +
-          'PNG and JPEG',
+      profilePhotoSelect: 'Select from Computer',
+      profileSavePhoto: 'Save',
+      profileSettings: 'Profile Settings',
     },
   },
   publicPosts: {
