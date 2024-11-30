@@ -23,6 +23,10 @@ export const PublicPostModal = ({ comments, isOpen, onClose, post }: Props) => {
     userInfoContainer: s.userInfoContainer,
   }
 
+  if (!post) {
+    return
+  }
+
   const { avatarOwner, avatarWhoLikes, createdAt, description, images, likesCount, userName } = post
 
   return (
