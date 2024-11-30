@@ -32,10 +32,10 @@ export const Header = () => {
           {!accessToken && (
             <div className={classNames.buttonsContainer}>
               <Button asChild variant={'text'}>
-                <Link href={'/auth/signIn'}>{t.header.signIn}</Link>
+                <Link href={'/auth/signIn'} data-cy="logIn">{t.header.signIn}</Link>
               </Button>
-              <Button asChild>
-                <Link href={'/auth/signUp'}>{t.header.signUp}</Link>
+              <Button asChild data-cy="signUp">
+                <Link href={'/auth/signUp'}  data-cy="signUp">{t.header.signUp}</Link>
               </Button>
             </div>
           )}
