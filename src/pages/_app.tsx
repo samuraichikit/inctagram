@@ -4,6 +4,7 @@ import { ReactElement, ReactNode } from 'react'
 import { Provider } from 'react-redux'
 
 import { wrapper } from '@/app/store'
+import { NotificationContainer } from '@/components/ui/notificationContainer'
 import { NextPage } from 'next'
 
 import './../styles/index.scss'
@@ -22,5 +23,10 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
 
   const getLayout = Component.getLayout ?? (page => page)
 
-  return <Provider store={store}>{getLayout(<Component {...props.pageProps} />)}</Provider>
+  return (
+    <Provider store={store}>
+      {getLayout(<Component {...props.pageProps} />)}
+      <NotificationContainer />
+    </Provider>
+  )
 }

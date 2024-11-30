@@ -1,5 +1,6 @@
 import { useEffect, useId, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { generalSettingsSchemas } from '@/common/schemas'
@@ -78,10 +79,10 @@ export const GeneralSettings = () => {
     updateProfile(profileData)
       .unwrap()
       .then(_ => {
-        alert('Your settings are saved!')
+        toast.success(t.generalSettings.savedSettings)
       })
       .catch(_ => {
-        alert('Error! Server is not available!')
+        toast.error(t.generalSettings.notAvailable)
       })
   }
 
