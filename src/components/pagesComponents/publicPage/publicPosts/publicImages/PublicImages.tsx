@@ -8,16 +8,17 @@ import s from './publicImages.module.scss'
 import { ImagesSlider } from '../imagesSlider'
 
 type Props = {
+  className?: string
   height: number
   images: UserImage[]
   isExpanded?: boolean
   width: number
 }
 
-export const PublicImages = ({ height, images, isExpanded, width }: Props) => {
+export const PublicImages = ({ className, height, images, isExpanded, width }: Props) => {
   const shouldDisplayImagesSlider = images.length > 1
   const classNames = {
-    container: clsx(s.container, isExpanded && s.expanded),
+    container: clsx(s.container, isExpanded && s.expanded, className),
   }
 
   return (

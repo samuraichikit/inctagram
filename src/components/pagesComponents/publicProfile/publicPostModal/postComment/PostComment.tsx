@@ -5,14 +5,20 @@ import { Typography } from '@/components/ui/typography'
 import s from './postComment.module.scss'
 
 type Props = {
-  answerCount: number
+  answerCount?: number
   avatarSrc: string
   comment: string
   createdAt: string
   userName: string
 }
 
-export const PostComment = ({ answerCount, avatarSrc, comment, createdAt, userName }: Props) => {
+export const PostComment = ({
+  answerCount = 0,
+  avatarSrc,
+  comment,
+  createdAt,
+  userName,
+}: Props) => {
   const classNames = {
     answers: s.answers,
     comment: s.comment,
