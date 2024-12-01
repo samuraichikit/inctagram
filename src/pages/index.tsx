@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 
-import { useAuth } from '@/common/hooks/useAuth'
 import { useGoogleAuth } from '@/common/hooks/useGoogleAuth'
 import { PublicPage } from '@/components/pagesComponents/publicPage/PublicPage'
 import { getBaseLayout } from '@/components/ui/layout'
