@@ -3,7 +3,7 @@ import { UserImage } from '@/services/publicPosts'
 import clsx from 'clsx'
 import Image from 'next/image'
 
-import s from './publicImages.module.scss'
+import s from './postImages.module.scss'
 
 import { ImagesSlider } from '../imagesSlider'
 
@@ -15,7 +15,7 @@ type Props = {
   width: number
 }
 
-export const PublicImages = ({ className, height, images, isExpanded, width }: Props) => {
+export const PostImages = ({ className, height, images, isExpanded, width }: Props) => {
   const shouldDisplayImagesSlider = images.length > 1
   const classNames = {
     container: clsx(s.container, isExpanded && s.expanded, className),
@@ -27,9 +27,9 @@ export const PublicImages = ({ className, height, images, isExpanded, width }: P
         <ImagesSlider height={height} images={images} width={width} />
       ) : (
         <Image
-          alt={`Image uploaded on ${formatDate(images[0].createdAt)}`}
+          alt={`Image uploaded on ${formatDate(images[0]?.createdAt)}`}
           height={height}
-          src={images[0].url}
+          src={images[0]?.url}
           width={width}
         />
       )}
