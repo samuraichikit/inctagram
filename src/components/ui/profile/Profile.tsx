@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { UserPosts } from '@/components/pagesComponents/profile/userPosts'
 import { PublicPostModal } from '@/components/pagesComponents/publicProfile/publicPostModal'
 import { Button } from '@/components/ui/button'
 import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
@@ -59,7 +60,7 @@ export const Profile = ({ comments, post }: Props) => {
   }
 
   return (
-    <div className={clsx(post && s.wrapper)}>
+    <div className={s.wrapper}>
       <PublicPostModal comments={comments} isOpen={isOpen} onClose={closeHandler} post={post} />
       <div className={s.infoWrapper}>
         {profileInfo?.avatars.length !== 0 ? (
@@ -105,6 +106,9 @@ export const Profile = ({ comments, post }: Props) => {
             </Typography>
           </div>
         </div>
+      </div>
+      <div className={s.userPostsContainer}>
+        {meInfo?.userName && <UserPosts userName={meInfo?.userName} />}
       </div>
     </div>
   )

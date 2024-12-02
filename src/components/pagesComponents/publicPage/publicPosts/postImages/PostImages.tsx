@@ -18,7 +18,7 @@ type Props = {
 export const PostImages = ({ className, height, images, isExpanded, width }: Props) => {
   const shouldDisplayImagesSlider = images.length > 1
   const classNames = {
-    container: clsx(s.container, isExpanded && s.expanded, className),
+    container: clsx(isExpanded && s.expanded, className),
   }
 
   return (

@@ -1,6 +1,5 @@
 .wrapper {
   width: 100%;
-  max-width: 972px;
   margin-top: 36px;
 }
 
@@ -41,4 +40,15 @@
   padding: 0;
 
   list-style-type: none;
+}
+
+.userPostsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  width: 100%;
+  max-width: 972px;
+  margin: 0 auto;
+  margin-top: 48px;
 }
