@@ -12,7 +12,7 @@ export const UserPosts = ({ userName }: Props) => {
   return (
     <>
       {postsByUserName?.items.map(post => (
-        <PostImages height={228} images={post.images} key={post.id} width={234} />
+        <PostImages height={380} images={post.images} key={post.id} width={390} />
       ))}
     </>
   )

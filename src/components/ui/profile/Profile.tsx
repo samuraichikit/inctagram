@@ -14,7 +14,6 @@ import {
   useGetPublicProfileQuery,
 } from '@/services/profile'
 import { Comment, PublicPostResponse } from '@/services/publicPosts'
-import clsx from 'clsx'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
