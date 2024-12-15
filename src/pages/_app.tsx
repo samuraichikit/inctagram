@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { wrapper } from '@/app/store'
 import { useLoader } from '@/common/hooks/useLoader'
 import { NotificationContainer } from '@/components/ui/notificationContainer'
+import { ScrollArea } from '@/components/ui/scrollArea'
 import { NextPage } from 'next'
 
 import '@/styles/index.scss'
@@ -29,8 +30,10 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
 
   return (
     <Provider store={store}>
-      {getLayout(<Component {...props.pageProps} />)}
-      <NotificationContainer />
+      <ScrollArea style={{ marginTop: '60px' }}>
+        {getLayout(<Component {...props.pageProps} />)}
+        <NotificationContainer />
+      </ScrollArea>
     </Provider>
   )
 }
