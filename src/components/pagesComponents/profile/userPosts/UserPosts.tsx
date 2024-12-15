@@ -58,7 +58,7 @@ export const UserPosts = ({ userName }: Props) => {
     <>
       {posts.map((post, index) => (
         <div key={post.id} ref={index === posts.length - 1 ? targetRef : null}>
-          <PostImages height={380} images={post.images} width={390} />
+          <PostImages height={380} images={post.images} width={394} />
         </div>
       ))}
     </>
