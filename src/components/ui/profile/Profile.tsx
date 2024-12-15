@@ -32,7 +32,6 @@ export const Profile = ({ comments, post }: Props) => {
   const params: Params = useParams()
 
   const { data: meInfo } = useMeQuery()
-  const { data } = useGetProfileQuery()
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string)
   const { data: profileInfo } = useGetPublicProfileQuery(params?.id[0] as string)
 
@@ -42,6 +41,8 @@ export const Profile = ({ comments, post }: Props) => {
     profileInfo?.userMetadata.followers,
     profileInfo?.userMetadata.publications,
   ]
+
+  const isMyProfile = meInfo?.userId === Number(params?.id[0])
 
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
@@ -75,13 +76,14 @@ export const Profile = ({ comments, post }: Props) => {
         <div className={s.profileWrapper}>
           <div className={s.userNameWrapper}>
             <Typography variant={'h1'}>{profileInfo?.userName}</Typography>
-            <Button
-              disabled={String(meInfo?.userId) !== params?.id[0]}
-              onClick={() => router.push(`settings/general/${profileInfo?.id}`)}
-              variant={'secondary'}
-            >
-              {t.profile.settings.profileSettings}
-            </Button>
+            {isMyProfile && (
+              <Button
+                onClick={() => router.push(`settings/general/${profileInfo?.id}`)}
+                variant={'secondary'}
+              >
+                {t.profile.settings.profileSettings}
+              </Button>
+            )}
           </div>
           <div className={s.followInfoWrapper}>
             <ul className={s.followInfoList}>
