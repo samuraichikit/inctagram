@@ -24,6 +24,7 @@
 .profileWrapper {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   gap: 20px;
 }
 
@@ -43,11 +44,8 @@
 }
 
 .userPostsContainer {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(390px, 1fr));
   gap: 12px;
-
-  width: 100%;
-  margin: 0 auto;
   margin-top: 48px;
 }
