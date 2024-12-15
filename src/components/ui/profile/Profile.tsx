@@ -8,11 +8,7 @@ import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
 import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
-import {
-  useGetProfileQuery,
-  useGetProfileWithPostsQuery,
-  useGetPublicProfileQuery,
-} from '@/services/profile'
+import { useGetProfileWithPostsQuery, useGetPublicProfileQuery } from '@/services/profile'
 import { Comment, PublicPostResponse } from '@/services/publicPosts'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'

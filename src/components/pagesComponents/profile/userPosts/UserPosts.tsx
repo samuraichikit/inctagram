@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 
+import { useElementInView } from '@/common/hooks/useElementInView'
+import { PostImages } from '@/components/pagesComponents/publicPage/publicPosts/postImages'
 import { PostResponse, useGetUserPostsQuery, useLazyGetUserPostsQuery } from '@/services/posts'
-
-import { useElementInView } from '../../../../common/hooks/useElementInView'
-import { PostImages } from '../../publicPage/publicPosts/postImages'
 
 type Props = {
   userName: string
