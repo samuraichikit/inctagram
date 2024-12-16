@@ -4,11 +4,16 @@ import { useElementInView } from '@/common/hooks/useElementInView'
 import { PostImages } from '@/components/pagesComponents/publicPage/publicPosts/postImages'
 import { PostResponse, useGetUserPostsQuery, useLazyGetUserPostsQuery } from '@/services/posts'
 
+import s from './userPosts.module.scss'
+
 type Props = {
   userName: string
 }
 
 export const UserPosts = ({ userName }: Props) => {
+  const classNames = {
+    container: s.container,
+  }
   const [pageNumber, setPageNumber] = useState(1)
   const { data: postsByUserName } = useGetUserPostsQuery(
     {
@@ -56,13 +61,13 @@ export const UserPosts = ({ userName }: Props) => {
   return (
     <>
       {posts.map((post, index) => (
-        <PostImages
-          height={380}
-          images={post.images}
+        <div
+          className={classNames.container}
           key={post.id}
           ref={index === posts.length - 1 ? targetRef : null}
-          width={394}
-        />
+        >
+          <PostImages fill images={post.images} />
+        </div>
       ))}
     </>
   )
