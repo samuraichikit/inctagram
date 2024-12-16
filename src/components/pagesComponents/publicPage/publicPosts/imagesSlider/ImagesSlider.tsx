@@ -13,12 +13,13 @@ import 'swiper/scss'
 import s from './imagesSlider.module.scss'
 
 type Props = {
-  height: number
+  fill?: boolean
+  height?: number
   images: UserImage[]
-  width: number
+  width?: number
 }
 
-export const ImagesSlider = ({ height, images, width }: Props) => {
+export const ImagesSlider = ({ fill, height, images, width }: Props) => {
   const classNames = {
     activeCustomBullet: s.activeCustomBullet,
     buttonArrowBack: s.buttonArrowBack,
@@ -49,12 +50,16 @@ export const ImagesSlider = ({ height, images, width }: Props) => {
         {images.map(image => {
           return (
             <SwiperSlide key={image.uploadId}>
-              <Image
-                alt={`Image uploaded on ${formatDate(image.createdAt)}`}
-                height={height}
-                src={image.url}
-                width={width}
-              />
+              <div style={{ height: '100%', position: 'relative', width: '100%' }}>
+                <Image
+                  alt={`Image uploaded on ${formatDate(image.createdAt)}`}
+                  fill={fill}
+                  height={height}
+                  objectFit={'cover'}
+                  src={image.url}
+                  width={width}
+                />
+              </div>
             </SwiperSlide>
           )
         })}

@@ -3,7 +3,7 @@ import { Comment, PublicPostResponse } from '@/services/publicPosts'
 
 import s from './publicPostModal.module.scss'
 
-import { PublicImages } from '../../publicPage/publicPosts/publicImages'
+import { PostImages } from '../../publicPage/publicPosts/postImages'
 import { UserInfo } from '../../publicPage/publicPosts/userInfo'
 import { PostComments } from './postComments'
 import { PostLikes } from './postLikes'
@@ -32,7 +32,7 @@ export const PublicPostModal = ({ comments, isOpen, onClose, post }: Props) => {
   return (
     <Modal onOpenChange={onClose} open={isOpen}>
       <div className={classNames.container}>
-        <PublicImages className={classNames.images} height={562} images={images} width={490} />
+        <PostImages className={classNames.images} height={562} images={images} width={490} />
         <div className={classNames.postDetails}>
           <div className={classNames.userInfoContainer}>
             <UserInfo src={avatarOwner} userName={userName} />
