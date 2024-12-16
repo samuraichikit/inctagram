@@ -100,7 +100,7 @@ export const en: Locale = {
     maxAboutMe: 'Maximum number of characters 200',
     maxFirstLastName: 'Maximum number of characters 50',
     maxName: 'Maximum number of characters 30',
-    maxPassword: 'Maximum number of characters 6',
+    maxPassword: 'Maximum number of characters 20',
     minFirstLastName: 'Minimum number of characters 1',
     minName: 'Minimum number of characters 6',
     minPassword: 'Minimum number of characters 6',
