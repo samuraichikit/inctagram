@@ -8,7 +8,11 @@ import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
 import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
-import { useGetProfileWithPostsQuery, useGetPublicProfileQuery } from '@/services/profile'
+import {
+  GetPublicProfileResponse,
+  useGetProfileWithPostsQuery,
+  useGetPublicProfileQuery,
+} from '@/services/profile'
 import { Comment, PublicPostResponse } from '@/services/publicPosts'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
@@ -18,25 +22,35 @@ import s from './profile.module.scss'
 type Props = {
   comments: Comment[]
   post: PublicPostResponse
+  publicProfile: GetPublicProfileResponse
 }
 
 type Params = {
   id: string[]
 } | null
 
-export const Profile = ({ comments, post }: Props) => {
+export const Profile = ({ comments, post, publicProfile }: Props) => {
   const params: Params = useParams()
 
   const { data: meInfo } = useMeQuery()
-  const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string)
-  const { data: profileInfo } = useGetPublicProfileQuery(params?.id[0] as string)
+  const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string, {
+    skip: !!publicProfile,
+  })
+  const { data: profileInfo } = useGetPublicProfileQuery(params?.id[0] as string, {
+    skip: !!publicProfile,
+  })
 
   const { t } = useTranslation()
   const followArray = [
-    profileInfo?.userMetadata.following,
-    profileInfo?.userMetadata.followers,
-    profileInfo?.userMetadata.publications,
+    publicProfile?.userMetadata.following ?? profileInfo?.userMetadata.following,
+    publicProfile?.userMetadata.followers ?? profileInfo?.userMetadata.followers,
+    publicProfile?.userMetadata.publications ?? profileInfo?.userMetadata.publications,
   ]
+
+  const userName = publicProfile?.userName ?? meInfo?.userName
+  const aboutMe = publicProfile?.aboutMe ?? profileInfo?.aboutMe
+  const avatarSrc = publicProfile?.avatars[0].url ?? profileWithPosts?.avatars[0]?.url
+  const profileId = publicProfile?.id ?? profileInfo?.id
 
   const isMyProfile = meInfo?.userId === Number(params?.id[0])
 
@@ -59,10 +73,9 @@ export const Profile = ({ comments, post }: Props) => {
     <div className={s.wrapper}>
       <PublicPostModal comments={comments} isOpen={isOpen} onClose={closeHandler} post={post} />
       <div className={s.infoWrapper}>
-        {profileInfo?.avatars.length !== 0 ? (
+        {avatarSrc ? (
           <div>
-            {' '}
-            <Avatar size={192} src={profileWithPosts?.avatars[0]?.url ?? null} />
+            <Avatar size={192} src={avatarSrc ?? null} />
           </div>
         ) : (
           <div>
@@ -71,10 +84,10 @@ export const Profile = ({ comments, post }: Props) => {
         )}
         <div className={s.profileWrapper}>
           <div className={s.userNameWrapper}>
-            <Typography variant={'h1'}>{profileInfo?.userName}</Typography>
+            <Typography variant={'h1'}>{userName}</Typography>
             {isMyProfile && (
               <Button
-                onClick={() => router.push(`settings/general/${profileInfo?.id}`)}
+                onClick={() => router.push(`settings/general/${profileId}`)}
                 variant={'secondary'}
               >
                 {t.profile.settings.profileSettings}
@@ -96,13 +109,11 @@ export const Profile = ({ comments, post }: Props) => {
             </ul>
           </div>
           <div>
-            <Typography className={s.aboutMe}>{profileInfo?.aboutMe}</Typography>
+            <Typography className={s.aboutMe}>{aboutMe}</Typography>
           </div>
         </div>
       </div>
-      <div className={s.userPostsContainer}>
-        {meInfo?.userName && <UserPosts userName={meInfo?.userName} />}
-      </div>
+      <div className={s.userPostsContainer}>{userName && <UserPosts userName={userName} />}</div>
     </div>
   )
 }

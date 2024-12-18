@@ -17,7 +17,7 @@ type Props = {
 }
 
 export const PublicPost = ({ post }: Props) => {
-  const { avatarOwner, createdAt, description, images, userName } = post
+  const { avatarOwner, createdAt, description, id, images, ownerId, userName } = post
   const [isExpanded, setIsExpanded] = useState(false)
   const { t } = useTranslation()
 
@@ -47,10 +47,12 @@ export const PublicPost = ({ post }: Props) => {
 
   return (
     <div className={classNames.container}>
-      <Link className={classNames.postImagesContainer} href={`/profile/${post.ownerId}/${post.id}`}>
+      <Link className={classNames.postImagesContainer} href={`/profile/${ownerId}/${id}`}>
         <PostImages height={240} images={images} isExpanded={isExpanded} width={234} />
       </Link>
-      <UserInfo src={avatarOwner} userName={userName} />
+      <Link href={`/profile/${ownerId}`}>
+        <UserInfo src={avatarOwner} userName={userName} />
+      </Link>
       <TimeAgoDisplay className={classNames.timeAgo} date={createdAt} />
       {description && (
         <Typography className={classNames.description} variant={'regular_text_14'}>
