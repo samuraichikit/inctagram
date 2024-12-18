@@ -49,7 +49,7 @@ export const Profile = ({ comments, post, publicProfile }: Props) => {
 
   const userName = publicProfile?.userName ?? meInfo?.userName
   const aboutMe = publicProfile?.aboutMe ?? profileInfo?.aboutMe
-  const avatarSrc = publicProfile?.avatars[0].url ?? profileWithPosts?.avatars[0]?.url
+  const avatarSrc = publicProfile?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
   const profileId = publicProfile?.id ?? profileInfo?.id
 
   const isMyProfile = meInfo?.userId === Number(params?.id[0])
