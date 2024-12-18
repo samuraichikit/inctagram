@@ -1,11 +1,9 @@
 .container {
   max-width: 234px;
-  max-height: 391px;
 }
 
 .postImagesContainer {
-  height: 100%;
-  max-height: 240px;
+  display: block;
   margin-bottom: 12px;
 }
 
