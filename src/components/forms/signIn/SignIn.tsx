@@ -11,6 +11,7 @@ import { Typography } from '@/components/ui/typography'
 import { useSignInMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
+import { setCookie } from 'cookies-next/client'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { z } from 'zod'
@@ -57,7 +58,7 @@ export const SignIn = () => {
     signIn(data)
       .unwrap()
       .then(data => {
-        localStorage.setItem('accessToken', data.accessToken)
+        setCookie('accessToken', data.accessToken)
         const payload = data.accessToken.split('.')[1]
         const id = JSON.parse(atob(payload)).userId
 
