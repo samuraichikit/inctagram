@@ -10,8 +10,11 @@ const postsService = baseApi.injectEndpoints({
     }),
     updatePost: builder.mutation<void, PostUpdate>({
       query: ({ description, postId }) => ({
-        description,
-        method: 'POST',
+        body: { description },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'PUT',
         url: `/v1/posts/${postId}`,
       }),
     }),

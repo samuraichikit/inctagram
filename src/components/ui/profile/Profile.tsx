@@ -13,7 +13,6 @@ import {
   useGetPublicProfileQuery,
 } from '@/services/profile'
 import { Comment, PublicPostResponse } from '@/services/publicPosts'
-import { useGetPostByIdQuery } from '@/services/userPosts/postsService'
 import clsx from 'clsx'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
@@ -36,15 +35,12 @@ export const Profile = ({ comments, post }: Props) => {
   const { data } = useGetProfileQuery()
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string)
   const { data: profileInfo } = useGetPublicProfileQuery(params?.id[0] as string)
-  const { data: postById } = useGetPostByIdQuery('3754')
   const { t } = useTranslation()
   const followArray = [
     profileInfo?.userMetadata.following,
     profileInfo?.userMetadata.followers,
     profileInfo?.userMetadata.publications,
   ]
-
-  console.log(postById)
 
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
@@ -107,8 +103,6 @@ export const Profile = ({ comments, post }: Props) => {
               exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </Typography>
           </div>
-          <div>hello456789123</div>
-          <div>{postById?.description}</div>
         </div>
       </div>
     </div>

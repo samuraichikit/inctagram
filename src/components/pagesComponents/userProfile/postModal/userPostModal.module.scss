@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  max-height: 562px;
+}
+
+.images {
+  max-width: 490px;
+}
+
+.postDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.userInfoContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 11px 24px 12px;
+  border-bottom: 1px solid var(--color-dark-100);
+}
+
+.editModal {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  width: 137px;
+  height: 85px;
+  padding: 14px 12px;
+
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
+}
+
+.toggle {
+  position: relative;
+  font-size: var(--font-size-xxl);
+  color: var(--color-accent-900);
+}
+
+.btn {
+  margin-left: 0;
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
+}

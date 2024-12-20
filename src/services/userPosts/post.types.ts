@@ -1,6 +1,6 @@
 export type PostUpdate = {
   description: string
-  postId: string
+  postId: number
 }
 
 export type GetpostByIdResponse = {
