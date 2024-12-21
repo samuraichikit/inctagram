@@ -3,7 +3,7 @@ export type PostUpdate = {
   postId: number
 }
 
-export type GetpostByIdResponse = {
+interface PostItem {
   avatarOwner: string
   avatarWhoLikes: boolean
   createdAt: string
@@ -18,6 +18,8 @@ export type GetpostByIdResponse = {
   updatedAt: string
   userName: string
 }
+
+export type GetPostByIdResponse = PostItem
 
 export interface Image {
   createdAt: string
