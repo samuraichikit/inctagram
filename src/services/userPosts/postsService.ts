@@ -1,9 +1,9 @@
 import { baseApi } from '@/services/baseApi'
-import { GetpostByIdResponse, PostUpdate } from '@/services/userPosts/post.types'
+import { GetPostByIdResponse, PostUpdate } from '@/services/userPosts/post.types'
 
 const postsService = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getPostById: builder.query<GetpostByIdResponse, string>({
+    getPostById: builder.query<GetPostByIdResponse, string>({
       query: postId => ({
         url: `/v1/posts/id/${postId}`,
       }),
