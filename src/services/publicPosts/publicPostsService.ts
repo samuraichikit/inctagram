@@ -9,6 +9,12 @@ export const publicPostsService = {
 
     return comments
   },
+  async getPostsByUserId(userId: string): Promise<GetPublicPostsResponse> {
+    const res = await fetch(`${BASE_URL}v1/public-posts/user/${userId}`, {})
+    const userPosts = await res.json()
+
+    return userPosts
+  },
   async getPublicPost(postId: string): Promise<PublicPostResponse> {
     const res = await fetch(`${BASE_URL}v1/public-posts/${postId}`)
     const post = await res.json()

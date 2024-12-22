@@ -30,7 +30,6 @@ export const Profile = ({ comments, post }: Props) => {
   const { data: meInfo } = useMeQuery()
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string)
   const { data: profileInfo } = useGetPublicProfileQuery(params?.id[0] as string)
-
   const { t } = useTranslation()
   const followArray = [
     profileInfo?.userMetadata.following,
@@ -54,6 +53,8 @@ export const Profile = ({ comments, post }: Props) => {
     setIsOpen(false)
     push('/')
   }
+
+  console.log(params)
 
   return (
     <div className={s.wrapper}>
