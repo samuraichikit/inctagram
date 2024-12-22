@@ -57,6 +57,8 @@ export const Profile = ({ comments, post }: Props) => {
     push('/')
   }
 
+  console.log(params)
+
   return (
     <div className={clsx(post && s.wrapper)}>
       <PublicPostModal comments={comments} isOpen={isOpen} onClose={closeHandler} post={post} />

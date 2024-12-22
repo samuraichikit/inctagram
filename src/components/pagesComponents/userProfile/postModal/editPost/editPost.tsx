@@ -11,11 +11,12 @@ import { useGetPostByIdQuery, useUpdatePostMutation } from '@/services/userPosts
 import s from './editPost.module.scss'
 
 type Props = {
-  returnPost: (v: boolean) => void
+  closeEditModal: (isShow: boolean) => void
+  postId: string
 }
 
-export const EditPost = ({ returnPost }: Props) => {
-  const { data } = useGetPostByIdQuery('3754')
+export const EditPost = ({ closeEditModal, postId }: Props) => {
+  const { data } = useGetPostByIdQuery(postId)
   const [updatePost] = useUpdatePostMutation()
   const [desc, setDesc] = useState<string>('')
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -34,13 +35,13 @@ export const EditPost = ({ returnPost }: Props) => {
     if (id) {
       updatePost({ description: desc, postId: +id ?? 0 })
     }
-    returnPost(false)
+    closeEditModal(false)
   }
 
   const handleSubmitAndCloseModal = () => {
     setIsOpen(false)
     handleSubmit()
-    returnPost(false)
+    closeEditModal(false)
   }
 
   const toggleModal = () => {
