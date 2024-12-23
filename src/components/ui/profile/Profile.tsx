@@ -23,13 +23,14 @@ type Props = {
   comments?: Comment[]
   post?: PublicPostResponse
   publicProfile?: GetPublicProfileResponse
+  userPosts?: PublicPostResponse[]
 }
 
 type Params = {
   id: string[]
 } | null
 
-export const Profile = ({ comments, post, publicProfile }: Props) => {
+export const Profile = ({ comments, post, publicProfile, userPosts }: Props) => {
   const params: Params = useParams()
 
   const { data: meInfo } = useMeQuery()
@@ -115,7 +116,9 @@ export const Profile = ({ comments, post, publicProfile }: Props) => {
           </div>
         </div>
       </div>
-      <div className={s.userPostsContainer}>{userName && <UserPosts userName={userName} />}</div>
+      <div className={s.userPostsContainer}>
+        {userName && <UserPosts userName={userName} userPosts={userPosts ?? []} />}
+      </div>
     </div>
   )
 }

@@ -3,14 +3,16 @@ import { useEffect, useState } from 'react'
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { PostImages } from '@/components/pagesComponents/publicPage/publicPosts/postImages'
 import { PostResponse, useGetUserPostsQuery, useLazyGetUserPostsQuery } from '@/services/posts'
+import { PublicPostResponse } from '@/services/publicPosts'
 
 import s from './userPosts.module.scss'
 
 type Props = {
   userName: string
+  userPosts: PublicPostResponse[]
 }
 
-export const UserPosts = ({ userName }: Props) => {
+export const UserPosts = ({ userName, userPosts }: Props) => {
   const classNames = {
     container: s.container,
   }
@@ -21,7 +23,7 @@ export const UserPosts = ({ userName }: Props) => {
       pageSize: 8,
       userName,
     },
-    { skip: pageNumber > 1 }
+    { skip: !!userPosts }
   )
   const [posts, setPosts] = useState<PostResponse[]>([])
   const [getNextPosts] = useLazyGetUserPostsQuery()
@@ -31,12 +33,13 @@ export const UserPosts = ({ userName }: Props) => {
   const totalCount = postsByUserName?.totalCount ?? 0
   const totalPages = Math.ceil(totalCount / 8)
   const isSetNextPage = isInView && pageNumber < totalPages
+  const initialPosts = userPosts ?? postsByUserName?.items
 
   useEffect(() => {
-    if (pageNumber === 1 && postsByUserName?.items) {
-      setPosts([...postsByUserName.items])
+    if (pageNumber === 1 && initialPosts) {
+      setPosts([...initialPosts])
     }
-  }, [pageNumber, postsByUserName, posts.length])
+  }, [pageNumber, initialPosts, posts.length])
 
   useEffect(() => {
     const fetchPosts = async () => {

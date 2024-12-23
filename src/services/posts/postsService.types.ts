@@ -15,14 +15,14 @@ export type PostsByUserNameResponse = {
 
 export type PostResponse = {
   avatarOwner: string
-  avatarWhoLikes: boolean
+  avatarWhoLikes: string[]
   createdAt: string
   description: string
   id: number
   images: Image[]
   isLiked: boolean
   likesCount: number
-  location: string
+  location: null | string
   owner: Owner
   ownerId: number
   updatedAt: string

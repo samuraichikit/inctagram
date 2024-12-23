@@ -21,4 +21,10 @@ export const publicPostsService = {
 
     return posts
   },
+  async getPublicPostsByUserId(userId: string): Promise<GetPublicPostsResponse> {
+    const res = await fetch(`${BASE_URL}v1/public-posts/user/${userId}?pageSize=8`)
+    const userPosts = await res.json()
+
+    return userPosts
+  },
 }
