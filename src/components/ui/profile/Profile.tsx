@@ -20,9 +20,9 @@ import { useRouter } from 'next/router'
 import s from './profile.module.scss'
 
 type Props = {
-  comments: Comment[]
-  post: PublicPostResponse
-  publicProfile: GetPublicProfileResponse
+  comments?: Comment[]
+  post?: PublicPostResponse
+  publicProfile?: GetPublicProfileResponse
 }
 
 type Params = {
@@ -71,7 +71,9 @@ export const Profile = ({ comments, post, publicProfile }: Props) => {
 
   return (
     <div className={s.wrapper}>
-      <PublicPostModal comments={comments} isOpen={isOpen} onClose={closeHandler} post={post} />
+      {post && comments && (
+        <PublicPostModal comments={comments} isOpen={isOpen} onClose={closeHandler} post={post} />
+      )}
       <div className={s.infoWrapper}>
         {avatarSrc ? (
           <div>
