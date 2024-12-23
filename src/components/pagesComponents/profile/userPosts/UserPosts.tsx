@@ -23,7 +23,7 @@ export const UserPosts = ({ userName, userPosts }: Props) => {
       pageSize: 8,
       userName,
     },
-    { skip: !!userPosts }
+    { skip: userPosts?.length > 0 }
   )
   const [posts, setPosts] = useState<PostResponse[]>([])
   const [getNextPosts] = useLazyGetUserPostsQuery()
