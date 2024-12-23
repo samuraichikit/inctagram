@@ -1,13 +1,10 @@
 import { getBaseLayout } from '@/components/ui/layout'
-import { getAuthLayout } from '@/components/ui/layout/authLayout'
 import { Profile } from '@/components/ui/profile'
 import { NextPageWithLayout } from '@/pages/_app'
 import { GetPublicProfileResponse } from '@/services/profile'
 import { Comment, PublicPostResponse, publicPostsService } from '@/services/publicPosts'
 import { publicUserService } from '@/services/publicUser'
 import { GetServerSideProps } from 'next'
-
-
 
 type Params = {
   id: string[]
@@ -46,9 +43,6 @@ const UserProfile: NextPageWithLayout<Props> = ({ comments, post, publicProfile 
   )
 }
 
-UserProfile.getLayout = page => {
-  const { post } = page.props
+UserProfile.getLayout = getBaseLayout
 
-  return post ? getBaseLayout(page) : getAuthLayout(page)
-}
 export default UserProfile
