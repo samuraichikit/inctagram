@@ -65,7 +65,6 @@ export const SignIn = () => {
   }, [email, password])
 
   const [signIn] = useSignInMutation()
-
   const router = useRouter()
 
   const onSubmitHandler: SubmitHandler<SignInSchemaType> = (data: SignInSchemaType) => {
