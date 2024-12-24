@@ -8,11 +8,12 @@ import s from './postLikes.module.scss'
 
 type Props = {
   avatarsSrc: string[]
+  className?: string
   createdAt: string
   likesCount: number
 }
 
-export const PostLikes = ({ avatarsSrc, createdAt, likesCount }: Props) => {
+export const PostLikes = ({ avatarsSrc, className, createdAt, likesCount }: Props) => {
   const classNames = {
     avatarWrapper: s.avatarWrapper,
     avatarsContainer: s.avatarsContainer,
@@ -22,11 +23,11 @@ export const PostLikes = ({ avatarsSrc, createdAt, likesCount }: Props) => {
   }
   const { t } = useTranslation()
   const shouldDisplayAvatars = avatarsSrc?.length > 0
-  const avatars = avatarsSrc.slice(0, AVATARS_COUNT_WHO_LIKES).reverse()
+  const avatars = avatarsSrc?.slice(0, AVATARS_COUNT_WHO_LIKES).reverse()
 
   return (
-    <div className={classNames.container}>
-      {shouldDisplayAvatars && (
+    <div className={classNames.container && className}>
+      {shouldDisplayAvatars ? (
         <div className={classNames.avatarsWithLikes}>
           <div className={classNames.avatarsContainer}>
             {avatars.map(avatarSrc => {
@@ -43,6 +44,8 @@ export const PostLikes = ({ avatarsSrc, createdAt, likesCount }: Props) => {
             </Typography>
           }
         </div>
+      ) : (
+        <Typography variant={'regular_text_14'}> {t.publicPosts.getCount(0)}</Typography>
       )}
       <Typography className={classNames.date} variant={'small_text'}>
         {formatDate(createdAt)}

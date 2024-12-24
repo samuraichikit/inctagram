@@ -20,6 +20,10 @@
 .toggle {
   position: relative;
   font-size: var(--font-size-xxl);
+  color: var(--color-light-100);
+}
+
+.toggle:active {
   color: var(--color-accent-900);
 }
 

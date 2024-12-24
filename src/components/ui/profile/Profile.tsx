@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { PostModal } from '@/components/pagesComponents/profile/postModal/PostModal'
 import { UserPosts } from '@/components/pagesComponents/profile/userPosts'
 import { PublicPostModal } from '@/components/pagesComponents/publicProfile/publicPostModal'
 import { Button } from '@/components/ui/button'
@@ -10,6 +11,8 @@ import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
 import { useGetProfileWithPostsQuery, useGetPublicProfileQuery } from '@/services/profile'
 import { Comment, PublicPostResponse } from '@/services/publicPosts'
+import { useGetPostByIdQuery } from '@/services/userPosts'
+import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
@@ -20,7 +23,7 @@ type Props = {
   post: PublicPostResponse
 }
 
-type Params = {
+export type Params = {
   id: string[]
 } | null
 
@@ -54,11 +57,13 @@ export const Profile = ({ comments, post }: Props) => {
     push('/')
   }
 
-  console.log(params)
-
   return (
     <div className={s.wrapper}>
-      <PublicPostModal comments={comments} isOpen={isOpen} onClose={closeHandler} post={post} />
+      {isMyProfile ? (
+        <PostModal isOpen={isOpen} onClose={closeHandler} />
+      ) : (
+        <PublicPostModal comments={comments} isOpen={isOpen} onClose={closeHandler} post={post} />
+      )}
       <div className={s.infoWrapper}>
         {profileInfo?.avatars.length !== 0 ? (
           <div>
