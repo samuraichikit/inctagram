@@ -1,0 +1,28 @@
+.deleteModalRoot {
+  max-width: 438px;
+  max-height: 240px;
+  width: 100%;
+  height: 100%;
+
+  .deleteRoot {
+    display: flex;
+    flex-direction: column;
+    gap: 54px;
+    justify-content: flex-start;
+
+    margin-top: 6px;
+  }
+
+  .buttonsBlock {
+    display: flex;
+    gap: 24px;
+
+    margin-right: 0;
+    margin-bottom: 12px;
+    margin-left: auto;
+
+    button {
+      width: 96px;
+    }
+  }
+}

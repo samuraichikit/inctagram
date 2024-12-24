@@ -1,0 +1,32 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+
+  width: 100%;
+  max-width: 196px;
+  margin-top: 24px;
+
+  .avatar {
+    position: relative;
+    width: 192px;
+    height: 192px;
+    border-radius: 50%;
+
+    .avatarPhoto {
+      border-radius: 50%;
+    }
+
+    .deleteIcon {
+      position: absolute;
+      top: 8px;
+      right: 16px;
+
+      padding: 0;
+
+      background: transparent;
+    }
+  }
+
+}
