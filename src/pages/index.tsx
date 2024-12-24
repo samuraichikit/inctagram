@@ -1,50 +1,6 @@
-import { useEffect, useState } from 'react'
-
-import { useGoogleAuth } from '@/common/hooks/useGoogleAuth'
-import { PublicPage } from '@/components/pagesComponents/publicPage/PublicPage'
-import { getBaseLayout } from '@/components/ui/layout'
-import { useMeQuery } from '@/services/auth'
-import { PublicPostResponse, publicPostsService } from '@/services/publicPosts'
-import { publicUserService } from '@/services/publicUser'
-import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 
-import { NextPageWithLayout } from './_app'
-
-type Props = {
-  posts: PublicPostResponse[]
-  totalCount: number
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  const { totalCount } = await publicUserService.getTotalUsers()
-  const { items: posts } = await publicPostsService.getPublicPosts()
-
-  return {
-    props: {
-      posts,
-      totalCount,
-    },
-    revalidate: 60,
-  }
-}
-
-const Home: NextPageWithLayout<Props> = ({ posts, totalCount }) => {
-  const router = useRouter()
-  const { data: meInfo } = useMeQuery()
-
-  useGoogleAuth()
-  const [accessToken, setAccessToken] = useState<boolean | null | string>(false)
-
-  useEffect(() => {
-    setAccessToken(localStorage.getItem('accessToken'))
-  }, [])
-
-  if (accessToken) {
-    router.push(`/profile/${meInfo?.userId}`)
-  }
-
+export default function Home() {
   return (
     <>
       <Head>
@@ -53,12 +9,9 @@ const Home: NextPageWithLayout<Props> = ({ posts, totalCount }) => {
         <meta content={'width=device-width, initial-scale=1'} name={'viewport'} />
         <link href={'/favicon.ico'} rel={'icon'} />
       </Head>
-      <>
-        <PublicPage posts={posts} totalUsers={totalCount} />
-      </>
+      <div>
+        <h1>Samuraichiki team</h1>
+      </div>
     </>
   )
 }
-
-Home.getLayout = getBaseLayout
-export default Home

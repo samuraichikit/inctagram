@@ -3,8 +3,9 @@ import { themes } from '@storybook/theming'
 import '../src/styles/index.scss'
 
 const preview: Preview = {
+  
   parameters: {
-    actions: {},
+    actions: { argTypesRegex: '^on[A-Z].*' },
     docs: {
       theme: themes.dark,
     },

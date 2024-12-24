@@ -29,7 +29,6 @@ a:visited {
 }
 
 body {
-  height: calc(100vh - 60px);
   margin: 0;
   padding: 0;
 
@@ -38,8 +37,4 @@ body {
   color: var(--color-light-100);
 
   background-color: var(--color-dark-900);
-}
-
-#__next {
-  height: 100%;
 }
