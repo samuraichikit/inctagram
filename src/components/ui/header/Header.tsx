@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { LangSelect } from '@/components/langSelect/LangSelect'
 import { Button } from '@/components/ui/button'

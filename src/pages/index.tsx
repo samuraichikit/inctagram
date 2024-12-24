@@ -31,19 +31,7 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const Home: NextPageWithLayout<Props> = ({ posts, totalCount }) => {
-  const router = useRouter()
-  const { data: meInfo } = useMeQuery()
-
   useGoogleAuth()
-  const [accessToken, setAccessToken] = useState<boolean | null | string>(false)
-
-  useEffect(() => {
-    setAccessToken(localStorage.getItem('accessToken'))
-  }, [])
-
-  if (accessToken) {
-    router.push(`/profile/${meInfo?.userId}`)
-  }
 
   return (
     <>
