@@ -4,12 +4,12 @@ import { useTranslation } from '@/common/hooks/useTranslation'
 import { LangSelect } from '@/components/langSelect/LangSelect'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
+import { useMeQuery } from '@/services/auth'
 import Link from 'next/link'
 
 import s from './header.module.scss'
 
 export const Header = () => {
-  const [accessToken, setAccessToken] = useState<boolean | null | string>(true)
   const classNames = {
     buttonsContainer: s.buttonsContainer,
     container: s.container,
@@ -17,9 +17,8 @@ export const Header = () => {
     navContainer: s.navContainer,
   }
 
-  useEffect(() => {
-    setAccessToken(localStorage.getItem('accessToken'))
-  }, [])
+  const { isError, isLoading } = useMeQuery()
+  const isMyProfile = !isError && !isLoading
 
   const { t } = useTranslation()
 
@@ -29,7 +28,7 @@ export const Header = () => {
         <Typography variant={'large'}>Inctagram</Typography>
         <div className={classNames.navContainer}>
           <LangSelect />
-          {!accessToken && (
+          {!isMyProfile && (
             <div className={classNames.buttonsContainer}>
               <Button asChild variant={'text'}>
                 <Link data-cy={'logIn'} href={'/auth/signIn'}>
