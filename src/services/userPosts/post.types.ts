@@ -5,7 +5,7 @@ export type PostUpdate = {
 
 interface PostItem {
   avatarOwner: string
-  avatarWhoLikes: boolean
+  avatarWhoLikes: string[]
   createdAt: string
   description: string
   id: number

@@ -1,8 +1,8 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 import { CloseIcon } from '@/assets/icons/Close'
+import { QuestionModal } from '@/components/pagesComponents/profile/postModal/questionModal/questionModal'
 import { UserInfo } from '@/components/pagesComponents/publicPage/publicPosts/userInfo'
-import { QuestionModal } from '@/components/pagesComponents/userProfile/postModal/questionModal/questionModal'
 import { Button } from '@/components/ui/button'
 import { TextArea } from '@/components/ui/text-area'
 import { Typography } from '@/components/ui/typography'
@@ -21,7 +21,7 @@ export const EditPost = ({ closeEditModal, postId }: Props) => {
   const [desc, setDesc] = useState<string>('')
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const { avatarOwner = '', description, id, images = [], userName = '' } = data || {}
+  const { avatarOwner = '', description, id, userName = '' } = data || {}
 
   useEffect(() => {
     setDesc(description ?? '')
@@ -79,7 +79,9 @@ export const EditPost = ({ closeEditModal, postId }: Props) => {
           <TextArea
             defaultValue={desc}
             label={'Add publication descriptions'}
+            maxLength={500}
             name={'comments'}
+            onBlur={toggleModal}
             onChange={handleDescriptionChange}
             textAreaClassName={s.textArea}
           />

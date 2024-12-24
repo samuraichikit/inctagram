@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { PostImages } from '@/components/pagesComponents/publicPage/publicPosts/postImages'
 import { PostResponse, useGetUserPostsQuery, useLazyGetUserPostsQuery } from '@/services/posts'
+import Link from 'next/link'
 
 import s from './userPosts.module.scss'
 
@@ -66,7 +67,11 @@ export const UserPosts = ({ userName }: Props) => {
           key={post.id}
           ref={index === posts.length - 1 ? targetRef : null}
         >
-          <PostImages fill images={post.images} />
+          <Link
+            href={`/profile/${postsByUserName?.items[0].ownerId}/${postsByUserName?.items[0].id}`}
+          >
+            <PostImages fill images={post.images} />
+          </Link>
         </div>
       ))}
     </>
