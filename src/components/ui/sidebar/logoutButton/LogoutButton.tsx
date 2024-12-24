@@ -27,7 +27,7 @@ export const LogoutButton = () => {
     try {
       await logOut().unwrap()
       deleteCookie('accessToken')
-      router.push('/auth/signIn')
+      router.push('/')
     } catch (error) {
       alert('error')
     }
