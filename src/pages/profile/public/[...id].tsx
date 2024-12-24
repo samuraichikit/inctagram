@@ -13,6 +13,7 @@ type Params = {
 type Props = {
   comments: Comment[]
   post: PublicPostResponse
+  publicPostsTotalCount: number
   publicProfile: GetPublicProfileResponse
   userPosts: PublicPostResponse[]
 }
@@ -26,22 +27,28 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     ? await publicPostsService.getComments(postId).then(data => data.items)
     : []
   const publicProfile = await publicUserService.getPublicProfile(userId)
-  const userPosts = await publicPostsService.getPublicPostsByUserId(userId).then(data => data.items)
+  const {items: userPosts, totalCount: publicPostsTotalCount} = await publicPostsService.getPublicPostsByUserId(userId)
 
   return {
     props: {
       comments,
       post,
+      publicPostsTotalCount,
       publicProfile,
       userPosts
     },
   }
 }
 
-const UserProfile: NextPageWithLayout<Props> = ({ comments, post, publicProfile, userPosts }) => {
+const UserProfile: NextPageWithLayout<Props> = ({ comments, post, publicPostsTotalCount, publicProfile, userPosts }) => {
   return (
     <>
-      <Profile comments={comments} post={post} publicProfile={publicProfile} userPosts={userPosts} />
+      <Profile 
+      comments={comments} 
+      post={post} 
+      publicPostsTotalCount={publicPostsTotalCount} 
+      publicProfile={publicProfile} 
+      userPosts={userPosts} />
     </>
   )
 }

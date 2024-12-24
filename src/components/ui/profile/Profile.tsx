@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { UserPosts } from '@/components/pagesComponents/profile/userPosts'
@@ -22,6 +22,7 @@ import s from './profile.module.scss'
 type Props = {
   comments?: Comment[]
   post?: PublicPostResponse
+  publicPostsTotalCount?: number
   publicProfile?: GetPublicProfileResponse
   userPosts?: PublicPostResponse[]
 }
@@ -30,7 +31,13 @@ type Params = {
   id: string[]
 } | null
 
-export const Profile = ({ comments, post, publicProfile, userPosts }: Props) => {
+export const Profile = ({
+  comments,
+  post,
+  publicPostsTotalCount,
+  publicProfile,
+  userPosts,
+}: Props) => {
   const params: Params = useParams()
 
   const { data: meInfo } = useMeQuery()
@@ -117,7 +124,13 @@ export const Profile = ({ comments, post, publicProfile, userPosts }: Props) => 
         </div>
       </div>
       <div className={s.userPostsContainer}>
-        {userName && <UserPosts userName={userName} userPosts={userPosts ?? []} />}
+        {userName && (
+          <UserPosts
+            publicPostsTotalCount={publicPostsTotalCount ?? null}
+            userName={userName}
+            userPosts={userPosts ?? []}
+          />
+        )}
       </div>
     </div>
   )

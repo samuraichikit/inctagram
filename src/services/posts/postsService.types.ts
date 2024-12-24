@@ -1,4 +1,4 @@
-export type GetUserPosts = {
+export type GetUserPostsArgs = {
   pageNumber?: number
   pageSize?: number
   sortBy?: string
@@ -6,12 +6,19 @@ export type GetUserPosts = {
   userName: string
 }
 
+export type GetUserPostsByUserIdArgs = { userId: string } & Omit<GetUserPostsArgs, 'userName'>
+
 export type PostsByUserNameResponse = {
   items: PostResponse[]
   notReadCount: number
   pageSize: number
   totalCount: number
 }
+
+export type PostsByUserIdResponse = { totalUsers: number } & Omit<
+  PostsByUserNameResponse,
+  'notReadCount'
+>
 
 export type PostResponse = {
   avatarOwner: string
@@ -29,12 +36,12 @@ export type PostResponse = {
   userName: string
 }
 
-interface Owner {
+type Owner = {
   firstName: string
   lastName: string
 }
 
-interface Image {
+type Image = {
   createdAt: string
   fileSize: number
   height: number

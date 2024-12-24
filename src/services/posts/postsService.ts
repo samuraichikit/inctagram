@@ -1,9 +1,17 @@
 import { baseApi } from '../baseApi'
-import { GetUserPosts, PostsByUserNameResponse } from './postsService.types'
+import {
+  GetUserPostsArgs,
+  GetUserPostsByUserIdArgs,
+  PostsByUserIdResponse,
+  PostsByUserNameResponse,
+} from './postsService.types'
 
 const postService = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getUserPosts: builder.query<PostsByUserNameResponse, GetUserPosts>({
+    getPublicPostsByUserId: builder.query<PostsByUserIdResponse, GetUserPostsByUserIdArgs>({
+      query: ({ userId, ...params }) => ({ params, url: `v1/public-posts/user/${userId}` }),
+    }),
+    getUserPosts: builder.query<PostsByUserNameResponse, GetUserPostsArgs>({
       query: ({ userName, ...params }) => ({
         params,
         url: `v1/posts/${userName}`,
@@ -12,4 +20,8 @@ const postService = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetUserPostsQuery, useLazyGetUserPostsQuery } = postService
+export const {
+  useGetUserPostsQuery,
+  useLazyGetPublicPostsByUserIdQuery,
+  useLazyGetUserPostsQuery,
+} = postService

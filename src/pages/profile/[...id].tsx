@@ -1,4 +1,3 @@
-import { getBaseLayout } from '@/components/ui/layout'
 import { getAuthLayout } from '@/components/ui/layout/authLayout'
 import { Profile } from '@/components/ui/profile'
 
