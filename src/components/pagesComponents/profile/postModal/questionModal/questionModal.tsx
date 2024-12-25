@@ -1,3 +1,4 @@
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 
@@ -12,15 +13,17 @@ type Props = {
 }
 
 export const QuestionModal = ({ btnNo, btnYes, isOpen, question, title }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <Modal onOpenChange={btnNo} open={isOpen} title={title}>
       {question}
       <div className={s.yesNo}>
         <Button className={s.buttons} onClick={btnYes} variant={'outlined'}>
-          {'Yes'}
+          {t.sideBar.confirmButton}
         </Button>
         <Button className={s.buttons} onClick={btnNo}>
-          {'No'}
+          {t.sideBar.rejectButton}
         </Button>
       </div>
     </Modal>

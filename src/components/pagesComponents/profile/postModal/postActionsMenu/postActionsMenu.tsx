@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { EditIcon } from '@/assets/icons/EditIcon'
 import { TrashIcon } from '@/assets/icons/TrashIcon'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { Button } from '@/components/ui/button'
 
 import s from './postActionsMenu.module.scss'
@@ -12,6 +13,7 @@ type Props = {
 
 export const PostActionsMenu = ({ showEditModal }: Props) => {
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false)
+  const { t } = useTranslation()
   const toggleEditModal = () => {
     setEditModalOpen(!editModalOpen)
   }
@@ -29,10 +31,10 @@ export const PostActionsMenu = ({ showEditModal }: Props) => {
       {editModalOpen && (
         <div className={s.editModal}>
           <Button className={s.btn} onClick={handleEditPost} variant={'icon'}>
-            <EditIcon /> {'Edit Post'}
+            <EditIcon /> {t.postModal.editPost}
           </Button>
           <Button className={s.btn} onClick={toggleEditModal} variant={'icon'}>
-            <TrashIcon /> {'Delete Post'}
+            <TrashIcon /> {t.postModal.deletePost}
           </Button>
         </div>
       )}
