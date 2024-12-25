@@ -1,9 +1,12 @@
 import { baseApi } from '../baseApi'
 import {
+  CheckRecoveryCodeArgs,
+  CreateNewPasswordArgs,
   ErrorResponse,
   GoogleAuthArgs,
   GoogleAuthResponse,
   MeResponse,
+  PasswordRecoveryArgs,
   RegistrationConfirmationArgs,
   RegistrationEmailResendingArgs,
   SignInArgs,
@@ -14,8 +17,22 @@ import {
 const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
+      checkRecoveryCode: builder.mutation<void, CheckRecoveryCodeArgs>({
+        query: body => ({
+          body,
+          method: 'POST',
+          url: 'v1/auth/check-recovery-code',
+        }),
+      }),
       confirmEmail: builder.mutation<ErrorResponse | void, RegistrationConfirmationArgs>({
         query: body => ({ body, method: 'POST', url: 'v1/auth/registration-confirmation' }),
+      }),
+      createNewPassword: builder.mutation<void, CreateNewPasswordArgs>({
+        query: body => ({
+          body,
+          method: 'POST',
+          url: 'v1/auth/new-password',
+        }),
       }),
       googleAuth: builder.mutation<GoogleAuthResponse, GoogleAuthArgs>({
         query: body => ({
@@ -36,6 +53,13 @@ const authService = baseApi.injectEndpoints({
         providesTags: ['Me'],
         query: () => ({
           url: 'v1/auth/me',
+        }),
+      }),
+      passwordRecovery: builder.mutation<void, PasswordRecoveryArgs>({
+        query: body => ({
+          body,
+          method: 'POST',
+          url: 'v1/auth/password-recovery',
         }),
       }),
       resendVerificationLink: builder.mutation<
@@ -60,10 +84,13 @@ const authService = baseApi.injectEndpoints({
 })
 
 export const {
+  useCheckRecoveryCodeMutation,
   useConfirmEmailMutation,
+  useCreateNewPasswordMutation,
   useGoogleAuthMutation,
   useLogoutMutation,
   useMeQuery,
+  usePasswordRecoveryMutation,
   useResendVerificationLinkMutation,
   useSignInMutation,
   useSignUpMutation,
