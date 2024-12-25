@@ -7,26 +7,10 @@ export type GetUserPosts = {
 }
 
 export type PostsByUserNameResponse = {
-  items: PostResponse[]
+  items: PostItemResponse[]
   notReadCount: number
   pageSize: number
   totalCount: number
-}
-
-export type PostResponse = {
-  avatarOwner: string
-  avatarWhoLikes: boolean
-  createdAt: string
-  description: string
-  id: number
-  images: Image[]
-  isLiked: boolean
-  likesCount: number
-  location: string
-  owner: Owner
-  ownerId: number
-  updatedAt: string
-  userName: string
 }
 
 interface Owner {
@@ -41,4 +25,25 @@ interface Image {
   uploadId: string
   url: string
   width: number
+}
+
+export type PostUpdate = {
+  description: string
+  postId: number
+}
+
+export interface PostItemResponse {
+  avatarOwner: string
+  avatarWhoLikes: string[]
+  createdAt: string
+  description: string
+  id: number
+  images: Image[]
+  isLiked: boolean
+  likesCount: number
+  location: string
+  owner: Owner
+  ownerId: number
+  updatedAt: string
+  userName: string
 }

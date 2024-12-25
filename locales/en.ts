@@ -51,6 +51,16 @@ export const en: Locale = {
     signInError: 'The email or password are incorrect. Try again please.',
     signUp: 'Sign Up',
   },
+  postModal: {
+    addComment: 'Add a comment',
+    addPublicationDesc: 'Add Publication Description',
+    confirmationMsg:
+      'Do you really want to finish editing? If you close the changes you have made will not be saved.',
+    deletePost: 'Delete Post',
+    editPost: 'Edit Post',
+    publishMsg: 'Publish',
+    saveChangesBtn: 'Save Changes',
+  },
   privacyPolicy: {
     title: 'Privacy Policy',
   },

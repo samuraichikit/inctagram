@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { BookmarkIcon } from '@/assets/icons/BookmarkIcon'
 import { HeartIcon } from '@/assets/icons/HeartIcon'
 import { PaperPlaneIcon } from '@/assets/icons/PaperPlaneIcon'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { EditPost } from '@/components/pagesComponents/profile/postModal/editPost'
 import { PostComments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComments'
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
@@ -10,8 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 import { Params } from '@/components/ui/profile'
 import { Typography } from '@/components/ui/typography'
-import { Comment } from '@/services/publicPosts'
-import { useGetPostByIdQuery } from '@/services/userPosts'
+import { useGetPostByIdQuery, useGetPostMessageByIdQuery } from '@/services/posts'
 import { useParams } from 'next/navigation'
 
 import s from './postModal.module.scss'
@@ -28,20 +28,29 @@ type Props = {
 export const PostModal = ({ isOpen, onClose }: Props) => {
   const params: Params = useParams()
 
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const { data: postById } = useGetPostByIdQuery(params?.id[1] as string)
+  const { data: comments } = useGetPostMessageByIdQuery(params?.id[0] as string)
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [description, setDescription] = useState<string>('')
+  const { t } = useTranslation()
 
-  const comments: Comment[] = []
+  useEffect(() => {
+    if (postById) {
+      setDescription(postById.description)
+    }
+  }, [postById])
 
   const handleSetEditPost = (isShow: boolean) => {
     setIsEditModalOpen(isShow)
+  }
+  const handleUpdateDescription = (newDescription: string) => {
+    setDescription(newDescription)
   }
 
   if (!postById) {
     return
   }
-  const { avatarOwner, avatarWhoLikes, createdAt, description, id, images, likesCount, userName } =
-    postById
+  const { avatarOwner, avatarWhoLikes, createdAt, id, images, likesCount, userName } = postById
 
   return (
     <Modal onOpenChange={onClose} open={isOpen}>
@@ -55,12 +64,16 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
             </div>
           )}
           {isEditModalOpen ? (
-            <EditPost closeEditModal={isShow => handleSetEditPost(isShow)} postId={id.toString()} />
+            <EditPost
+              closeEditModal={isShow => handleSetEditPost(isShow)}
+              onUpdateDescription={handleUpdateDescription}
+              postId={id.toString()}
+            />
           ) : (
             <div className={s.aboutPost}>
               <PostComments
                 avatarSrc={avatarOwner}
-                comments={comments}
+                comments={comments?.items ?? []}
                 createdAt={createdAt}
                 description={description}
                 userName={userName}
@@ -80,9 +93,9 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
               />
               <div className={s.addComment}>
                 <Typography className={s.addText} variant={'regular_text_14'}>
-                  Add a Comment
+                  {t.postModal.addComment}
                 </Typography>
-                <Button variant={'text'}>{'Publish'}</Button>
+                <Button variant={'text'}>{t.postModal.publishMsg}</Button>
               </div>
             </div>
           )}

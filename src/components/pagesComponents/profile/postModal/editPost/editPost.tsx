@@ -1,25 +1,28 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 
 import { CloseIcon } from '@/assets/icons/Close'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { QuestionModal } from '@/components/pagesComponents/profile/postModal/questionModal/questionModal'
 import { UserInfo } from '@/components/pagesComponents/publicPage/publicPosts/userInfo'
 import { Button } from '@/components/ui/button'
 import { TextArea } from '@/components/ui/text-area'
 import { Typography } from '@/components/ui/typography'
-import { useGetPostByIdQuery, useUpdatePostMutation } from '@/services/userPosts/postsService'
+import { useGetPostByIdQuery, useUpdatePostMutation } from '@/services/posts'
 
 import s from './editPost.module.scss'
 
 type Props = {
   closeEditModal: (isShow: boolean) => void
+  onUpdateDescription: (description: string) => void
   postId: string
 }
 
-export const EditPost = ({ closeEditModal, postId }: Props) => {
+export const EditPost = ({ closeEditModal, onUpdateDescription, postId }: Props) => {
   const { data } = useGetPostByIdQuery(postId)
   const [updatePost] = useUpdatePostMutation()
   const [desc, setDesc] = useState<string>('')
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const { t } = useTranslation()
 
   const { avatarOwner = '', description, id, userName = '' } = data || {}
 
@@ -36,6 +39,7 @@ export const EditPost = ({ closeEditModal, postId }: Props) => {
       updatePost({ description: desc, postId: +id ?? 0 })
     }
     closeEditModal(false)
+    onUpdateDescription(desc)
   }
 
   const handleSubmitAndCloseModal = () => {
@@ -52,7 +56,7 @@ export const EditPost = ({ closeEditModal, postId }: Props) => {
     <div className={s.container}>
       <div className={s.titleWithClose}>
         <Typography color={'textSecondary'} variant={'h1'}>
-          Edit Post
+          {t.postModal.editPost}
         </Typography>
         <button className={s.closeButton} onClick={toggleModal} type={'button'}>
           <CloseIcon />
@@ -62,12 +66,8 @@ export const EditPost = ({ closeEditModal, postId }: Props) => {
             btnNo={toggleModal}
             btnYes={handleSubmitAndCloseModal}
             isOpen={isOpen}
-            question={
-              'Do you really want to finish editing?\n' +
-              'If you close the changes you have\n' +
-              'made will not be saved.'
-            }
-            title={'Edit Post'}
+            question={t.postModal.confirmationMsg}
+            title={t.postModal.editPost}
           />
         )}
       </div>
@@ -77,8 +77,8 @@ export const EditPost = ({ closeEditModal, postId }: Props) => {
         </div>
         <div>
           <TextArea
-            defaultValue={desc}
-            label={'Add publication descriptions'}
+            defaultValue={description}
+            label={t.postModal.addPublicationDesc}
             maxLength={500}
             name={'comments'}
             onBlur={toggleModal}
@@ -89,7 +89,7 @@ export const EditPost = ({ closeEditModal, postId }: Props) => {
         </div>
         <div className={s.buttonWrapper}>
           <Button onClick={handleSubmit} variant={'primary'}>
-            {'Save Changes'}
+            {t.postModal.saveChangesBtn}
           </Button>
         </div>
       </div>

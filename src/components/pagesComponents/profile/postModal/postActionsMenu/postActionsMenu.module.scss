@@ -1,5 +1,6 @@
 .editModal {
   position: absolute;
+  z-index: 1;
   top: 50px;
   right: 20px;
 
@@ -8,7 +9,7 @@
   align-items: flex-start;
   justify-content: space-between;
 
-  width: 137px;
+  width: auto;
   height: 85px;
   padding: 14px 12px;
 
