@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import { FormTextField } from '@/components/controlled/formTextField'
 import { useForgotPassword } from '@/components/forms/forgotPassword/useForgotPassword'
 import { Button } from '@/components/ui/button'
