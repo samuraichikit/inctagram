@@ -56,6 +56,7 @@ export const en: Locale = {
     addPublicationDesc: 'Add Publication Description',
     confirmationMsg:
       'Do you really want to finish editing? If you close the changes you have made will not be saved.',
+    deleteConfirmMsg: 'Are you sure you want to delete this post?',
     deletePost: 'Delete Post',
     editPost: 'Edit Post',
     publishMsg: 'Publish',

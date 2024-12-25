@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { PostImages } from '@/components/pagesComponents/publicPage/publicPosts/postImages'
-import { PostResponse, useGetUserPostsQuery, useLazyGetUserPostsQuery } from '@/services/posts'
+import { PostItemResponse, useGetUserPostsQuery, useLazyGetUserPostsQuery } from '@/services/posts'
 import Link from 'next/link'
 
 import s from './userPosts.module.scss'
@@ -24,7 +24,7 @@ export const UserPosts = ({ userName }: Props) => {
     },
     { skip: pageNumber > 1 }
   )
-  const [posts, setPosts] = useState<PostResponse[]>([])
+  const [posts, setPosts] = useState<PostItemResponse[]>([])
   const [getNextPosts] = useLazyGetUserPostsQuery()
 
   const { isInView, targetRef } = useElementInView({ threshold: 0.6 })

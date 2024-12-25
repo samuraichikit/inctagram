@@ -7,16 +7,17 @@ import s from './questionModal.module.scss'
 type Props = {
   btnNo: () => void
   btnYes: () => void
+  className?: string
   isOpen: boolean
   question: string
   title: string
 }
 
-export const QuestionModal = ({ btnNo, btnYes, isOpen, question, title }: Props) => {
+export const QuestionModal = ({ btnNo, btnYes, className, isOpen, question, title }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <Modal onOpenChange={btnNo} open={isOpen} title={title}>
+    <Modal className={className} onOpenChange={btnNo} open={isOpen} title={title}>
       {question}
       <div className={s.yesNo}>
         <Button className={s.buttons} onClick={btnYes} variant={'outlined'}>

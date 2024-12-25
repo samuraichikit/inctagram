@@ -4,6 +4,7 @@ import { BookmarkIcon } from '@/assets/icons/BookmarkIcon'
 import { HeartIcon } from '@/assets/icons/HeartIcon'
 import { PaperPlaneIcon } from '@/assets/icons/PaperPlaneIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { DeletePost } from '@/components/pagesComponents/profile/postModal/deletePost/DeletePost'
 import { EditPost } from '@/components/pagesComponents/profile/postModal/editPost'
 import { PostComments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComments'
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
@@ -31,6 +32,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
   const { data: postById } = useGetPostByIdQuery(params?.id[1] as string)
   const { data: comments } = useGetPostMessageByIdQuery(params?.id[0] as string)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [description, setDescription] = useState<string>('')
   const { t } = useTranslation()
 
@@ -60,8 +62,18 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
           {!isEditModalOpen && (
             <div className={s.userInfoContainer}>
               <UserInfo src={avatarOwner} userName={userName} />
-              <PostActionsMenu showEditModal={isShow => handleSetEditPost(isShow)} />
+              <PostActionsMenu
+                showDeleteModal={isShow => setIsDeleteModalOpen(isShow)}
+                showEditModal={isShow => handleSetEditPost(isShow)}
+              />
             </div>
+          )}
+          {isDeleteModalOpen && (
+            <DeletePost
+              closeDeleteModal={isShow => setIsDeleteModalOpen(isShow)}
+              isOpen={isDeleteModalOpen}
+              onCloseModalPost={onClose}
+            />
           )}
           {isEditModalOpen ? (
             <EditPost
