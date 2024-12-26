@@ -28,12 +28,15 @@ export const useCreateNewPassword = () => {
       .unwrap()
       .then(() => {
         setLoading(false)
+        localStorage.removeItem('accessToken')
       })
       .catch(error => {
-        if (error.data.messages[0].message === 'Code is not valid') {
-          router.push('/auth/expiredLink').then(() => {
-            setLoading(false)
-          })
+        if (error.data) {
+          if (error.data.messages[0].message === 'Code is not valid') {
+            router.push('/auth/expiredLink').then(() => {
+              setLoading(false)
+            })
+          }
         }
       })
   }, [code])
