@@ -1,5 +1,6 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
+import { createPostSlice } from '@/components/pagesComponents/createPost/service/createPost.slice'
 import { baseApi } from '@/services/baseApi'
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
@@ -9,6 +10,7 @@ const makeStore = () =>
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
     reducer: {
       [baseApi.reducerPath]: baseApi.reducer,
+      [createPostSlice.name]: createPostSlice.reducer,
     },
   })
 
