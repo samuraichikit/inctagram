@@ -17,6 +17,8 @@ export default class HomePage {
         cy.visit('/')
     }
 
+    //incorrect
+
     verifyMemoizedPosts() {
         this.mainElements.publicPostsArr().children().then(($posts) => {
             const memoizedProps: HTMLElement[] = $posts.toArray() as HTMLElement[];
@@ -27,6 +29,12 @@ export default class HomePage {
             // Iterate over the posts using forEach
             memoizedProps.forEach((post) => {
                 console.log(post); // Log each individual post element
+
+                // Check for the presence of posts
+                this.mainElements.publicPostsArr()
+                    .children() // replace with the actual selector for posts
+                    .should('exist')
+                    .and('have.length.greaterThan', 0); // Ensure there is at least one post
 
             });
         })
