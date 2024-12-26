@@ -10,7 +10,7 @@ import Link from 'next/link'
 import s from './forgotPassword.module.scss'
 
 type Props = {}
-export const ForgotPassword = (props: Props) => {
+export const ForgotPassword = ({}: Props) => {
   const {
     buttonSentText,
     control,
