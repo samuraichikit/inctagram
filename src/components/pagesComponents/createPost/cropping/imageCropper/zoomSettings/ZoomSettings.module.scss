@@ -1,0 +1,28 @@
+.zoomBlock {
+  position: absolute;
+  bottom: 50px;
+  left: 71px;
+
+  padding: 12px;
+
+  background-color: rgb(35 35 35 / 90%);
+  border-radius: 2px;
+
+  &.hide {
+    display: none;
+  }
+}
+
+.sizeBtn {
+  bottom: 11px;
+  left: 71px;
+
+  &.active {
+    color: var(--color-accent-500);
+  }
+}
+
+.range {
+  height: 10px;
+  margin: 0;
+}
