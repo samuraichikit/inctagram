@@ -35,7 +35,6 @@ export default class HomePage {
                     .children() // replace with the actual selector for posts
                     .should('exist')
                     .and('have.length.greaterThan', 0); // Ensure there is at least one post
-
             });
         })
     }
