@@ -11,8 +11,6 @@ import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
 import { useGetProfileWithPostsQuery, useGetPublicProfileQuery } from '@/services/profile'
 import { Comment, PublicPostResponse } from '@/services/publicPosts'
-import { useGetPostByIdQuery } from '@/services/userPosts'
-import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
