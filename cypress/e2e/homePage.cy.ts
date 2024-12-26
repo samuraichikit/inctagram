@@ -1,14 +1,17 @@
 /// <reference types="cypress" />
 
-describe('Verify Log In and Sign Up buttons exist', () => {
+import {homePage} from "../pages/index";
+
+describe('Verify Elements on Home Page', () => {
     beforeEach(() => {
-        cy.visit('/')
+        homePage.open()
         // Mock localStorage to ensure accessToken is null
         cy.window().then((win) => {
             win.localStorage.setItem('accessToken', '');
             win.localStorage.setItem('language', 'en');//???????
         });
     });
+
     it(' Verify Log in button', () => {
         cy.get('[data-cy="logIn"]').should('exist').click()
         cy.url().should('include', 'auth/signIn')
@@ -21,5 +24,8 @@ describe('Verify Log In and Sign Up buttons exist', () => {
         cy.get('a').contains('Зарегистрироваться').click()
         cy.url().should('include', 'auth/signUp')
         cy.get('h1').should('contain', 'Регистрация пользователя')
+    })
+    it('Verify that posts exist', () => {
+        homePage.verifyMemoizedPosts()
     })
 })

@@ -19,7 +19,7 @@ export const PublicPage = ({ posts, totalUsers }: Props) => {
   return (
     <div className={classNames.container}>
       <TotalUsers totalUsers={totalUsers} />
-      <div className={classNames.posts}>
+      <div data-cy={'publicPosts'} className={classNames.posts}>
         {posts?.map(post => {
           return <PublicPost key={post.id} post={post} />
         })}

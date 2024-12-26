@@ -20,7 +20,7 @@ export const Select = forwardRef<ElementRef<typeof SelectRadix.Root>, SelectProp
     const idToUse = id ?? generatedId
 
     return (
-      <div className={s.wrapper}>
+      <div data-cy={'langSelect'} className={s.wrapper}>
         {!!label && (
           <Typography asChild className={s.label} variant={'regular_text_14'}>
             <label htmlFor={idToUse}>{label}</label>
