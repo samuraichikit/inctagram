@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { MAX_COUNT_CHARACTERS, MIN_COUNT_CHARACTERS } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
@@ -37,9 +37,15 @@ export const PublicPost = ({ post }: Props) => {
       : `${description.slice(0, charactersCount)}`
   }
 
-  const shownDescription = isExpanded
-    ? showDescription(MAX_COUNT_CHARACTERS, description, '..')
-    : showDescription(MIN_COUNT_CHARACTERS, description, '...')
+  const [shownDescription, setShownDescription] = useState('')
+
+  useEffect(() => {
+    setShownDescription(
+      isExpanded
+        ? showDescription(MAX_COUNT_CHARACTERS, description, '..')
+        : showDescription(MIN_COUNT_CHARACTERS, description, '...')
+    )
+  }, [isExpanded, description])
 
   const toggleDescriptionDisplayHandler = () => {
     setIsExpanded(!isExpanded)
