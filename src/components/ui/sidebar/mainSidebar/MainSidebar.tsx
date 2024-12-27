@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { BookmarkOutlineIcon } from '@/assets/icons/BookmarkOutline'
 import { HomeOutlineIcon } from '@/assets/icons/HomeOutline'
 import { MessengerIcon } from '@/assets/icons/Messenger'
@@ -6,6 +8,7 @@ import { PlusSquareOutlineIcon } from '@/assets/icons/PlusSquareOutline'
 import { SearchIcon } from '@/assets/icons/SearchIcon'
 import { TrendingUpOutlineIcon } from '@/assets/icons/TrendingUpOutline'
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { CreatePost } from '@/components/pagesComponents/createPost/CreatePost'
 import { useMeQuery } from '@/services/auth'
 import { useRouter } from 'next/router'
 
@@ -24,7 +27,7 @@ export const MainSidebar = () => {
 
   const { data } = useMeQuery()
   const router = useRouter()
-
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const { t } = useTranslation()
 
   return (
@@ -36,8 +39,14 @@ export const MainSidebar = () => {
             {t.mainSidebar.home}
           </SidebarItem>
           <SidebarItem href={'#'}>
-            <PlusSquareOutlineIcon />
-            {t.mainSidebar.create}
+            <PlusSquareOutlineIcon
+              onClick={() => {
+                setIsOpen(true)
+              }}
+            />
+            <div onClick={() => {
+              setIsOpen(true)
+            }}>{t.mainSidebar.create}</div>
           </SidebarItem>
           <SidebarItem href={`/profile/${data?.userId}`}>
             <MyProfileIcon />
@@ -62,6 +71,7 @@ export const MainSidebar = () => {
             {t.mainSidebar.favorites}
           </SidebarItem>
         </ul>
+        <CreatePost isOpen={isOpen} isOpenChange={setIsOpen} />
       </div>
       <LogoutButton />
     </Sidebar>
