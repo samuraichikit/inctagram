@@ -1,10 +1,14 @@
+import { useEffect, useState } from 'react'
+
 import { useGoogleAuth } from '@/common/hooks/useGoogleAuth'
 import { PublicPage } from '@/components/pagesComponents/publicPage/PublicPage'
 import { getBaseLayout } from '@/components/ui/layout'
+import { useMeQuery } from '@/services/auth'
 import { PublicPostResponse, publicPostsService } from '@/services/publicPosts'
 import { publicUserService } from '@/services/publicUser'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import { NextPageWithLayout } from './_app'
 
@@ -27,10 +31,18 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const Home: NextPageWithLayout<Props> = ({ posts, totalCount }) => {
-  const { isLoading } = useGoogleAuth()
+  const router = useRouter()
+  const { data: meInfo } = useMeQuery()
 
-  if (isLoading) {
-    return <div>LOADING ...</div>
+  useGoogleAuth()
+  const [accessToken, setAccessToken] = useState<boolean | null | string>(false)
+
+  useEffect(() => {
+    setAccessToken(localStorage.getItem('accessToken'))
+  }, [])
+
+  if (accessToken) {
+    router.push(`/profile/${meInfo?.userId}`)
   }
 
   return (

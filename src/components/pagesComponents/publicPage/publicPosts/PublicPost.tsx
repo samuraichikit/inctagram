@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 import s from './publicPost.module.scss'
 
-import { PublicImages } from './publicImages'
+import { PostImages } from './postImages'
 import { UserInfo } from './userInfo'
 
 type Props = {
@@ -24,7 +24,7 @@ export const PublicPost = ({ post }: Props) => {
   const classNames = {
     container: s.container,
     description: s.description,
-    publicImagesContainer: s.publicImagesContainer,
+    postImagesContainer: s.postImagesContainer,
     showMore: s.showMore,
     timeAgo: s.timeAgo,
   }
@@ -47,11 +47,8 @@ export const PublicPost = ({ post }: Props) => {
 
   return (
     <div className={classNames.container}>
-      <Link
-        className={classNames.publicImagesContainer}
-        href={`/profile/${post.ownerId}/${post.id}`}
-      >
-        <PublicImages height={240} images={images} isExpanded={isExpanded} width={234} />
+      <Link className={classNames.postImagesContainer} href={`/profile/${post.ownerId}/${post.id}`}>
+        <PostImages height={240} images={images} isExpanded={isExpanded} width={234} />
       </Link>
       <UserInfo src={avatarOwner} userName={userName} />
       <TimeAgoDisplay className={classNames.timeAgo} date={createdAt} />

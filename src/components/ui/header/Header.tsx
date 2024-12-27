@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { LangSelect } from '@/components/langSelect/LangSelect'
 import { Button } from '@/components/ui/button'
@@ -6,17 +8,18 @@ import Link from 'next/link'
 
 import s from './header.module.scss'
 
-type Props = {
-  isAuth: boolean
-}
-
-export const Header = ({ isAuth }: Props) => {
+export const Header = () => {
+  const [accessToken, setAccessToken] = useState<boolean | null | string>(true)
   const classNames = {
     buttonsContainer: s.buttonsContainer,
     container: s.container,
     header: s.header,
     navContainer: s.navContainer,
   }
+
+  useEffect(() => {
+    setAccessToken(localStorage.getItem('accessToken'))
+  }, [])
 
   const { t } = useTranslation()
 
@@ -26,13 +29,13 @@ export const Header = ({ isAuth }: Props) => {
         <Typography variant={'large'}>Inctagram</Typography>
         <div className={classNames.navContainer}>
           <LangSelect />
-          {!isAuth && (
+          {!accessToken && (
             <div className={classNames.buttonsContainer}>
               <Button asChild variant={'text'}>
-                <Link href={'/auth/signIn'}>{t.header.signIn}</Link>
+                <Link href={'/auth/signIn'} data-cy="logIn">{t.header.signIn}</Link>
               </Button>
-              <Button asChild>
-                <Link href={'/auth/signUp'}>{t.header.signUp}</Link>
+              <Button asChild data-cy="signUp">
+                <Link href={'/auth/signUp'}  data-cy="signUp">{t.header.signUp}</Link>
               </Button>
             </div>
           )}

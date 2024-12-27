@@ -1,0 +1,70 @@
+.container {
+  position: absolute;
+
+  width: 482px;
+  height: 564px;
+
+  background-color: var(--color-dark-300);
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
+}
+
+.titleWithClose {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 972px;
+  height: 61px;
+  margin-top: -3px;
+  margin-left: -491px;
+  padding: 0 25px;
+
+  background-color: var(--color-dark-300);
+  border: 1px solid var(--color-dark-100);
+}
+
+.aboutPost {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 25px;
+}
+
+.avatarWithName {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.textArea {
+  width: 433px;
+  height: 120px;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.length {
+  width: fit-content;
+  margin-left: auto;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-s);
+  color: var(--color-light-900);
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 190px;
+}
+
+.closeButton {
+  padding: 0;
+  background-color: var(--color-dark-300);
+  border: none;
+}

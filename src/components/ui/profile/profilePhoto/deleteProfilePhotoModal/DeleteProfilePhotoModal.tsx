@@ -1,11 +1,12 @@
 import React from 'react'
 
-import s from './DeleteProfilePhotoModal.module.scss'
-import { useDeleteAvatarMutation } from '@/services/profile'
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'
-import { Button } from '@/components/ui/button'
+import { useDeleteAvatarMutation } from '@/services/profile'
+
+import s from './DeleteProfilePhotoModal.module.scss'
 
 type Props = {
   isOpenDeletePhotoModal: boolean
@@ -30,8 +31,8 @@ export const DeletePhotoModal = ({ isOpenDeletePhotoModal, setIsOpenDeletePhotoM
   return (
     <Modal
       className={s.deleteModalRoot}
-      open={isOpenDeletePhotoModal}
       onOpenChange={setIsOpenDeletePhotoModal}
+      open={isOpenDeletePhotoModal}
       title={t.profile.settings.profileDeletePhoto}
     >
       <div className={s.deleteRoot}>

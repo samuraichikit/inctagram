@@ -7,12 +7,23 @@
   margin-top: 15px;
 }
 
+.avatar {
+  margin-top: 5px;
+}
+
 .userName {
+  float: left;
+  margin-right: 5px;
+}
+
+.userAndComment {
   display: inline-block;
+  width: 100%;
+  max-width: 385px;
 }
 
 .comment {
-  display: inline-block;
+  display: inline;
   word-wrap: break-word;
 }
 
