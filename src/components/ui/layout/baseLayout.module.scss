@@ -1,4 +1,4 @@
-.main {
+.mainBase {
   display: flex;
   align-items: start;
   justify-content: center;
@@ -6,6 +6,11 @@
   max-width: 1280px;
   height: 100%;
   margin: 0 auto;
+}
+
+.mainAuth {
+  margin: 0 0 0 220px;
+  padding: 36px 60px 36px 24px;
 }
 
 .privacyPolicy {

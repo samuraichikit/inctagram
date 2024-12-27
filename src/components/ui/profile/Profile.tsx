@@ -86,7 +86,7 @@ export const Profile = ({ isPublic }: Props) => {
             <Typography variant={'h1'}>{userName}</Typography>
             {isMyProfile && (
               <Button
-                onClick={() => router.push(`settings/general/${profileId}`)}
+                onClick={() => router.push(`/profile/settings/general/${profileId}`)}
                 variant={'secondary'}
               >
                 {t.profile.settings.profileSettings}

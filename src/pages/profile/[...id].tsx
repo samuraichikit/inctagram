@@ -1,4 +1,4 @@
-import { getAuthLayout } from '@/components/ui/layout/authLayout'
+import { getBaseLayout } from '@/components/ui/layout'
 import { Profile } from '@/components/ui/profile'
 
 import { NextPageWithLayout } from '../_app'
@@ -11,6 +11,6 @@ const UserProfile: NextPageWithLayout = () => {
   )
 }
 
-UserProfile.getLayout = getAuthLayout
+UserProfile.getLayout = getBaseLayout
 
 export default UserProfile
