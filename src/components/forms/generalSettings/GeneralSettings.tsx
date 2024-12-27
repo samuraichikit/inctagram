@@ -29,7 +29,7 @@ type GeneralSettingsSchemasType = z.infer<ReturnType<typeof generalSettingsSchem
 export const GeneralSettings = () => {
   const { data: meInfo } = useMeQuery()
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string)
-  const { data: profile } = useGetProfileQuery()
+  const { data: profile, isLoading } = useGetProfileQuery()
   const [updateProfile] = useUpdateProfileMutation()
   const formId = 'formId' + useId()
 
@@ -43,6 +43,10 @@ export const GeneralSettings = () => {
     region: profile?.region ?? '',
     userName: profile?.userName ?? '',
   }
+
+  useEffect(() => {
+    form.reset({ ...profile })
+  }, [profile])
 
   const [mandatoryFieldsFilled, setMandatoryFieldsFilled] = useState(false)
 
