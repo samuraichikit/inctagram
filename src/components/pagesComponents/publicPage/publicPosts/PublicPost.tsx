@@ -27,6 +27,7 @@ export const PublicPost = ({ post }: Props) => {
     postImagesContainer: s.postImagesContainer,
     showMore: s.showMore,
     timeAgo: s.timeAgo,
+    userInfoContainer: s.userInfoContainer,
   }
 
   const isVisibleShowMore = description.length >= MIN_COUNT_CHARACTERS && description
@@ -56,7 +57,7 @@ export const PublicPost = ({ post }: Props) => {
       <Link className={classNames.postImagesContainer} href={`/profile/public/${ownerId}/${id}`}>
         <PostImages height={240} images={images} isExpanded={isExpanded} width={234} />
       </Link>
-      <Link href={`/profile/public/${ownerId}`}>
+      <Link className={classNames.userInfoContainer} href={`/profile/public/${ownerId}`}>
         <UserInfo src={avatarOwner} userName={userName} />
       </Link>
       <TimeAgoDisplay className={classNames.timeAgo} date={createdAt} />
