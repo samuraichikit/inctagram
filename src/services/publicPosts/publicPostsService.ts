@@ -24,7 +24,10 @@ export const publicPostsService = baseApi.injectEndpoints({
       }),
     }),
     getPublicPostsByUserId: builder.query<GetPublicPostsResponse, GetPublicPostsByUserIdArgs>({
-      query: ({ userId, ...params }) => ({ params, url: `v1/public-posts/user/${userId}` }),
+      query: ({ endCursorPostId, userId, ...params }) => ({
+        params,
+        url: `v1/public-posts/user/${userId}/${endCursorPostId}`,
+      }),
     }),
   }),
 })

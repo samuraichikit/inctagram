@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   const [userId, postId] = id
 
   store.dispatch(publicUserService.endpoints.getPublicProfile.initiate({ profileId: userId }))
-  store.dispatch(publicPostsService.endpoints.getPublicPostsByUserId.initiate({ userId }))
+  store.dispatch(publicPostsService.endpoints.getPublicPostsByUserId.initiate({ pageSize: 8, userId }))
   if(postId) {
     store.dispatch(publicPostsService.endpoints.getPublicPost.initiate({ postId }))
     store.dispatch(publicPostsService.endpoints.getComments.initiate({ postId }))
