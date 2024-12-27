@@ -7,7 +7,6 @@ import { SearchIcon } from '@/assets/icons/SearchIcon'
 import { TrendingUpOutlineIcon } from '@/assets/icons/TrendingUpOutline'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { useMeQuery } from '@/services/auth'
-import { useRouter } from 'next/router'
 
 import s from './mainSidebar.module.scss'
 
@@ -23,7 +22,6 @@ export const MainSidebar = () => {
   }
 
   const { data } = useMeQuery()
-  const router = useRouter()
 
   const { t } = useTranslation()
 
@@ -31,7 +29,7 @@ export const MainSidebar = () => {
     <Sidebar className={classNames.sidebar}>
       <div>
         <ul className={classNames.mainItems}>
-          <SidebarItem href={'#'}>
+          <SidebarItem href={'/'}>
             <HomeOutlineIcon />
             {t.mainSidebar.home}
           </SidebarItem>
