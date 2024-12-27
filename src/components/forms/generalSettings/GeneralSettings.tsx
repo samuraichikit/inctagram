@@ -44,10 +44,6 @@ export const GeneralSettings = () => {
     userName: profile?.userName ?? '',
   }
 
-  useEffect(() => {
-    form.reset({ ...profile })
-  }, [profile])
-
   const [mandatoryFieldsFilled, setMandatoryFieldsFilled] = useState(false)
 
   const { t } = useTranslation()
@@ -89,6 +85,19 @@ export const GeneralSettings = () => {
         toast.error(t.generalSettings.notAvailable)
       })
   }
+
+  useEffect(() => {
+    form.reset({
+      aboutMe: profile?.aboutMe || '',
+      city: profile?.city || '',
+      country: profile?.country || '',
+      dateOfBirth: profile?.dateOfBirth || '',
+      firstName: profile?.firstName,
+      lastName: profile?.lastName,
+      region: profile?.region || '',
+      userName: profile?.userName,
+    })
+  }, [profile])
 
   useEffect(() => {
     const subscription = watch(value => {
