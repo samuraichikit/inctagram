@@ -11,11 +11,6 @@ type Params = {
   id: string[]
 }
 
-type Props = {
-  postId: string
-  userId: string
-}
-
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store: AppStore) => async ({ params }) => {
   const { id } = params as Params
   const [userId, postId] = id
@@ -36,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   }
 })
 
-const UserProfile: NextPageWithLayout<Props> = ({ postId, userId }) => {
+const UserProfile: NextPageWithLayout = () => {
   return (
     <>
       <Profile isPublic />

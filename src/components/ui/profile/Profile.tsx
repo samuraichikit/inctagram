@@ -32,7 +32,7 @@ export const Profile = ({ isPublic }: Props) => {
   const userId = id?.[0] ?? ''
   const postId = id?.[1] ?? ''
 
-  const { data: meInfo } = useMeQuery()
+  const { data: meInfo, isError: isMeError, isLoading: isMeLoading } = useMeQuery()
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string, {
     skip: isPublic,
   })
@@ -53,7 +53,7 @@ export const Profile = ({ isPublic }: Props) => {
   const avatarSrc = profileInfo?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
   const profileId = profileInfo?.id
 
-  const isMyProfile = meInfo?.userId === Number(params?.id[0])
+  const isMyProfile = !isMeLoading && !isMeError
 
   const [isOpen, setIsOpen] = useState(false)
 
