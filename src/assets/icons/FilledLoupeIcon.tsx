@@ -1,6 +1,9 @@
-import { Ref, SVGProps } from 'react'
+import {ComponentPropsWithoutRef, forwardRef} from 'react'
 
-export const FilledLoupeIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+type Props = ComponentPropsWithoutRef<'svg'>
+
+export const FilledLoupeIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
+  return (
   <svg
     fill={'currentColor'}
     height={'24'}
@@ -23,4 +26,4 @@ export const FilledLoupeIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGE
       </clipPath>
     </defs>
   </svg>
-)
+)})

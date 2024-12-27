@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { Ref, SVGProps } from 'react'
+import {ComponentPropsWithoutRef, forwardRef} from 'react'
 
-export const FilledPhotoIcon = (
-  props: { iconSize?: number } & SVGProps<SVGSVGElement>,
-  ref: Ref<SVGSVGElement>
-) => (
+type Props = ComponentPropsWithoutRef<'svg'>
+
+export const FilledPhotoIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
+ return (
   <svg
     fill={'currentColor'}
     height={'24'}
@@ -32,4 +32,4 @@ export const FilledPhotoIcon = (
       </clipPath>
     </defs>
   </svg>
-)
+)})

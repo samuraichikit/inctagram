@@ -1,6 +1,9 @@
-import { Ref, SVGProps } from 'react'
+import {ComponentPropsWithoutRef, forwardRef} from 'react'
 
-export const CrossIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+type Props = ComponentPropsWithoutRef<'svg'>
+
+export const CrossIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
+  return (
   <svg
     fill={'currentColor'}
     height={'14'}
@@ -16,4 +19,4 @@ export const CrossIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement
       }
     />
   </svg>
-)
+)})

@@ -1,6 +1,9 @@
-import { Ref, SVGProps } from 'react'
+import {ComponentPropsWithoutRef, forwardRef} from 'react'
 
-export const ExpandIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+type Props = ComponentPropsWithoutRef<'svg'>
+
+export const ExpandIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
+ return (
   <svg
     fill={'currentColor'}
     height={'24'}
@@ -28,4 +31,4 @@ export const ExpandIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElemen
       </clipPath>
     </defs>
   </svg>
-)
+)})
