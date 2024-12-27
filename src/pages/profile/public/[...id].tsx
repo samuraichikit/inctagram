@@ -1,8 +1,9 @@
+import { AppStore, wrapper } from '@/app/store'
 import { getBaseLayout } from '@/components/ui/layout'
 import { Profile } from '@/components/ui/profile'
 import { NextPageWithLayout } from '@/pages/_app'
-import { GetPublicProfileResponse } from '@/services/profile'
-import { Comment, PublicPostResponse, publicPostsService } from '@/services/publicPosts'
+import { baseApi } from '@/services/baseApi'
+import { publicPostsService } from '@/services/publicPosts'
 import { publicUserService } from '@/services/publicUser'
 import { GetServerSideProps } from 'next'
 
@@ -11,44 +12,34 @@ type Params = {
 }
 
 type Props = {
-  comments: Comment[]
-  post: PublicPostResponse
-  publicPostsTotalCount: number
-  publicProfile: GetPublicProfileResponse
-  userPosts: PublicPostResponse[]
+  postId: string
+  userId: string
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store: AppStore) => async ({ params }) => {
   const { id } = params as Params
   const [userId, postId] = id
 
-  const post = postId ? await publicPostsService.getPublicPost(postId) : null
-  const comments = postId
-    ? await publicPostsService.getComments(postId).then(data => data.items)
-    : []
-  const publicProfile = await publicUserService.getPublicProfile(userId)
-  const {items: userPosts, totalCount: publicPostsTotalCount} = await publicPostsService.getPublicPostsByUserId(userId)
+  store.dispatch(publicUserService.endpoints.getPublicProfile.initiate({ profileId: userId }))
+  store.dispatch(publicPostsService.endpoints.getPublicPostsByUserId.initiate({ userId }))
+  if(postId) {
+    store.dispatch(publicPostsService.endpoints.getPublicPost.initiate({ postId }))
+    store.dispatch(publicPostsService.endpoints.getComments.initiate({ postId }))
+  }
+
+  await Promise.all(store.dispatch(baseApi.util.getRunningQueriesThunk()))
 
   return {
     props: {
-      comments,
-      post,
-      publicPostsTotalCount,
-      publicProfile,
-      userPosts
+
     },
   }
-}
+})
 
-const UserProfile: NextPageWithLayout<Props> = ({ comments, post, publicPostsTotalCount, publicProfile, userPosts }) => {
+const UserProfile: NextPageWithLayout<Props> = ({ postId, userId }) => {
   return (
     <>
-      <Profile 
-      comments={comments} 
-      post={post} 
-      publicPostsTotalCount={publicPostsTotalCount} 
-      publicProfile={publicProfile} 
-      userPosts={userPosts} />
+      <Profile isPublic />
     </>
   )
 }

@@ -1,19 +1,16 @@
-import { BASE_URL } from '@/common/constants'
-
+import { baseApi } from '../baseApi'
 import { GetPublicProfileResponse } from '../profile'
-import { PublicUserResponse } from './publicUser.types'
+import { GetPublicProfileArgs, PublicUserResponse } from './publicUser.types'
 
-export const publicUserService = {
-  async getPublicProfile(id: string): Promise<GetPublicProfileResponse> {
-    const res = await fetch(`${BASE_URL}v1/public-user/profile/${id}`)
-    const publicProfile = await res.json()
+export const publicUserService = baseApi.injectEndpoints({
+  endpoints: builder => ({
+    getPublicProfile: builder.query<GetPublicProfileResponse, GetPublicProfileArgs>({
+      query: ({ profileId }) => ({ url: `v1/public-user/profile/${profileId}` }),
+    }),
+    getTotalUsers: builder.query<PublicUserResponse, void>({
+      query: () => ({ url: `v1/public-user` }),
+    }),
+  }),
+})
 
-    return publicProfile
-  },
-  async getTotalUsers(): Promise<PublicUserResponse> {
-    const res = await fetch(`${BASE_URL}v1/public-user`)
-    const totalUsers = await res.json()
-
-    return totalUsers
-  },
-}
+export const { useGetPublicProfileQuery, useGetTotalUsersQuery } = publicUserService

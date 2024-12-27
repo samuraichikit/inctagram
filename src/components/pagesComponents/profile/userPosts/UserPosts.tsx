@@ -2,52 +2,50 @@ import { useEffect, useState } from 'react'
 
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { PostImages } from '@/components/pagesComponents/publicPage/publicPosts/postImages'
-import {
-  PostResponse,
-  useGetUserPostsQuery,
-  useLazyGetPublicPostsByUserIdQuery,
-  useLazyGetUserPostsQuery,
-} from '@/services/posts'
-import { PublicPostResponse } from '@/services/publicPosts'
+import { PostResponse, useGetUserPostsQuery, useLazyGetUserPostsQuery } from '@/services/posts'
+import { useGetPublicPostsByUserIdQuery } from '@/services/publicPosts'
 import { useRouter } from 'next/router'
 
 import s from './userPosts.module.scss'
 
 type Props = {
-  publicPostsTotalCount: null | number
+  isPublic?: boolean
   userName: string
-  userPosts: PublicPostResponse[]
 }
 
-export const UserPosts = ({ publicPostsTotalCount, userName, userPosts }: Props) => {
+export const UserPosts = ({ isPublic, userName }: Props) => {
   const classNames = {
     container: s.container,
   }
 
-  const { query } = useRouter()
-  const { id } = query
+  const router = useRouter()
+  const { id } = router.query
   const userId = id?.[0] ?? ''
 
   const [pageNumber, setPageNumber] = useState(1)
+  const [posts, setPosts] = useState<PostResponse[]>([])
   const { data: postsByUserName } = useGetUserPostsQuery(
     {
       pageNumber,
       pageSize: 8,
       userName,
     },
-    { skip: !!publicPostsTotalCount }
+    { skip: isPublic }
   )
 
-  const [posts, setPosts] = useState<PostResponse[]>([])
+  const { data: publicPostsByUserId } = useGetPublicPostsByUserIdQuery(
+    { userId },
+    { skip: router.isFallback || pageNumber > 1 }
+  )
+
   const [getNextPosts] = useLazyGetUserPostsQuery()
-  const [getPublicPostsByUserId] = useLazyGetPublicPostsByUserIdQuery()
 
   const { isInView, targetRef } = useElementInView({ threshold: 0.6 })
 
-  const totalCount = publicPostsTotalCount ?? postsByUserName?.totalCount ?? 0
+  const totalCount = postsByUserName?.totalCount ?? 0
   const totalPages = Math.ceil(totalCount / 8)
   const isSetNextPage = isInView && pageNumber < totalPages
-  const initialPosts = publicPostsTotalCount ? userPosts : postsByUserName?.items
+  const initialPosts = isPublic ? publicPostsByUserId?.items : postsByUserName?.items
 
   useEffect(() => {
     if (pageNumber === 1 && initialPosts) {
@@ -64,30 +62,10 @@ export const UserPosts = ({ publicPostsTotalCount, userName, userPosts }: Props)
       }
     }
 
-    const fetchPublicPosts = async () => {
-      const { data } = await getPublicPostsByUserId({ pageNumber, pageSize: 8, userId })
-
-      if (data) {
-        setPosts(prev => [...prev, ...data.items])
-      }
+    if (pageNumber > 1 && pageNumber <= totalPages && !isPublic) {
+      fetchPosts()
     }
-
-    if (pageNumber > 1 && pageNumber <= totalPages) {
-      if (publicPostsTotalCount) {
-        fetchPublicPosts()
-      } else {
-        fetchPosts()
-      }
-    }
-  }, [
-    pageNumber,
-    getNextPosts,
-    totalPages,
-    userName,
-    getPublicPostsByUserId,
-    userId,
-    publicPostsTotalCount,
-  ])
+  }, [pageNumber, getNextPosts, totalPages, userName, userId, isPublic])
 
   useEffect(() => {
     if (isSetNextPage) {

@@ -6,19 +6,12 @@ export type GetUserPostsArgs = {
   userName: string
 }
 
-export type GetUserPostsByUserIdArgs = { userId: string } & Omit<GetUserPostsArgs, 'userName'>
-
 export type PostsByUserNameResponse = {
   items: PostResponse[]
   notReadCount: number
   pageSize: number
   totalCount: number
 }
-
-export type PostsByUserIdResponse = { totalUsers: number } & Omit<
-  PostsByUserNameResponse,
-  'notReadCount'
->
 
 export type PostResponse = {
   avatarOwner: string

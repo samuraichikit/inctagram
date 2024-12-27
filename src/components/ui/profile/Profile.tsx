@@ -8,69 +8,60 @@ import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
 import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
-import {
-  GetPublicProfileResponse,
-  useGetProfileWithPostsQuery,
-  useGetPublicProfileQuery,
-} from '@/services/profile'
-import { Comment, PublicPostResponse } from '@/services/publicPosts'
+import { useGetProfileWithPostsQuery } from '@/services/profile'
+import { useGetPublicProfileQuery } from '@/services/publicUser'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 import s from './profile.module.scss'
 
-type Props = {
-  comments?: Comment[]
-  post?: PublicPostResponse
-  publicPostsTotalCount?: number
-  publicProfile?: GetPublicProfileResponse
-  userPosts?: PublicPostResponse[]
-}
-
 type Params = {
   id: string[]
 } | null
 
-export const Profile = ({
-  comments,
-  post,
-  publicPostsTotalCount,
-  publicProfile,
-  userPosts,
-}: Props) => {
+type Props = {
+  isPublic?: boolean
+}
+
+export const Profile = ({ isPublic }: Props) => {
   const params: Params = useParams()
+  const router = useRouter()
+  const { push } = router
+
+  const { id } = router.query
+  const userId = id?.[0] ?? ''
+  const postId = id?.[1] ?? ''
 
   const { data: meInfo } = useMeQuery()
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string, {
-    skip: !!publicProfile,
+    skip: isPublic,
   })
-  const { data: profileInfo } = useGetPublicProfileQuery(params?.id[0] as string, {
-    skip: !!publicProfile,
-  })
+  const { data: profileInfo } = useGetPublicProfileQuery(
+    { profileId: userId },
+    { skip: router.isFallback }
+  )
 
   const { t } = useTranslation()
   const followArray = [
-    publicProfile?.userMetadata.following ?? profileInfo?.userMetadata.following,
-    publicProfile?.userMetadata.followers ?? profileInfo?.userMetadata.followers,
-    publicProfile?.userMetadata.publications ?? profileInfo?.userMetadata.publications,
+    profileInfo?.userMetadata.following,
+    profileInfo?.userMetadata.followers,
+    profileInfo?.userMetadata.publications,
   ]
 
-  const userName = publicProfile?.userName ?? meInfo?.userName
-  const aboutMe = publicProfile?.aboutMe ?? profileInfo?.aboutMe
-  const avatarSrc = publicProfile?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
-  const profileId = publicProfile?.id ?? profileInfo?.id
+  const userName = meInfo?.userName ?? profileInfo?.userName
+  const aboutMe = profileInfo?.aboutMe
+  const avatarSrc = profileInfo?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
+  const profileId = profileInfo?.id
 
   const isMyProfile = meInfo?.userId === Number(params?.id[0])
 
   const [isOpen, setIsOpen] = useState(false)
-  const router = useRouter()
-  const { push } = router
 
   useEffect(() => {
-    if (post) {
+    if (postId) {
       setIsOpen(true)
     }
-  }, [post])
+  }, [postId])
 
   const closeHandler = () => {
     setIsOpen(false)
@@ -79,9 +70,7 @@ export const Profile = ({
 
   return (
     <div className={s.wrapper}>
-      {post && comments && (
-        <PublicPostModal comments={comments} isOpen={isOpen} onClose={closeHandler} post={post} />
-      )}
+      {postId && <PublicPostModal isOpen={isOpen} onClose={closeHandler} postId={postId} />}
       <div className={s.infoWrapper}>
         {avatarSrc ? (
           <div>
@@ -124,13 +113,7 @@ export const Profile = ({
         </div>
       </div>
       <div className={s.userPostsContainer}>
-        {userName && (
-          <UserPosts
-            publicPostsTotalCount={publicPostsTotalCount ?? null}
-            userName={userName}
-            userPosts={userPosts ?? []}
-          />
-        )}
+        {userName && <UserPosts isPublic={isPublic} userName={userName} />}
       </div>
     </div>
   )
