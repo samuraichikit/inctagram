@@ -54,10 +54,10 @@ export const PublicPost = ({ post }: Props) => {
 
   return (
     <div className={classNames.container}>
-      <Link className={classNames.postImagesContainer} href={`/profile/public/${ownerId}/${id}`}>
+      <Link className={classNames.postImagesContainer} href={`/profile/${ownerId}/${id}`}>
         <PostImages height={240} images={images} isExpanded={isExpanded} width={234} />
       </Link>
-      <Link className={classNames.userInfoContainer} href={`/profile/public/${ownerId}`}>
+      <Link className={classNames.userInfoContainer} href={`/profile/${ownerId}`}>
         <UserInfo src={avatarOwner} userName={userName} />
       </Link>
       <TimeAgoDisplay className={classNames.timeAgo} date={createdAt} />

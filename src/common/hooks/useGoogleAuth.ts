@@ -20,7 +20,13 @@ export const useGoogleAuth = () => {
           const payload = data.accessToken.split('.')[1]
           const id = JSON.parse(atob(payload)).userId
 
-          router.push(`/profile/${id}`)
+          router.replace(
+            {
+              pathname: `/profile/${id}`,
+              query: { skipSSR: true },
+            },
+            `/profile/${id}`
+          )
         } catch (error) {
           console.log(error)
         }

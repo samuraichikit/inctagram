@@ -10,27 +10,19 @@ import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
 import { useGetProfileWithPostsQuery } from '@/services/profile'
 import { useGetPublicProfileQuery } from '@/services/publicUser'
-import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 import s from './profile.module.scss'
 
-type Params = {
-  id: string[]
-} | null
-
-type Props = {
-  isPublic?: boolean
-}
-
-export const Profile = ({ isPublic }: Props) => {
-  const params: Params = useParams()
+export const Profile = () => {
   const router = useRouter()
   const { push } = router
 
-  const { id } = router.query
+  const { id, skipSSR } = router.query
   const userId = id?.[0] ?? ''
   const postId = id?.[1] ?? ''
+
+  const isPublic = !skipSSR
 
   const { data: meInfo, isError: isMeError, isLoading: isMeLoading } = useMeQuery()
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string, {

@@ -37,7 +37,10 @@ export const MainSidebar = () => {
             <PlusSquareOutlineIcon />
             {t.mainSidebar.create}
           </SidebarItem>
-          <SidebarItem href={`/profile/${data?.userId}`}>
+          <SidebarItem
+            as={`/profile/${data?.userId}`}
+            href={{ pathname: `/profile/${data?.userId}`, query: { skipSSR: 'true' } }}
+          >
             <MyProfileIcon />
             {t.mainSidebar.myProfile}
           </SidebarItem>
