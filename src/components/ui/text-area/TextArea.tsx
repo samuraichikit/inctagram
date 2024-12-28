@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, forwardRef, useId, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useId } from 'react'
 
 import { Typography } from '@/components/ui/typography'
 import clsx from 'clsx'
@@ -9,12 +9,19 @@ export type TextAreaProps = {
   errorMessage?: string
   id?: string
   label?: string
+  onValueChange?: (value: string) => void
 } & ComponentPropsWithoutRef<'textarea'>
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ className, errorMessage, id, label, ...props }, ref) => {
+  ({ className, errorMessage, id, label, onChange, onValueChange, ...props }, ref) => {
     const generatedId = useId()
     const idToUse = id ?? generatedId
+
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+      onValueChange?.(e.target.value)
+
+      onChange?.(e)
+    }
 
     return (
       <div className={clsx(s.wrapper, className)}>
@@ -27,6 +34,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           <textarea
             className={clsx(s.textarea, errorMessage && s.errorTextArea)}
             id={idToUse}
+            onChange={onChangeHandler}
             ref={ref}
             {...props}
           ></textarea>
