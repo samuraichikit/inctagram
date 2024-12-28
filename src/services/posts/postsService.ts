@@ -2,7 +2,7 @@ import { CommentsResponse } from '@/services/publicPosts'
 
 import { baseApi } from '../baseApi'
 import {
-  GetUserPosts,
+  GetUserPostsArgs,
   PostItemResponse,
   PostUpdate,
   PostsByUserNameResponse,

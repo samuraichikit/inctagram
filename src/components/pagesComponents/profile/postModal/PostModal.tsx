@@ -10,7 +10,6 @@ import { PostComments } from '@/components/pagesComponents/publicProfile/publicP
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
-import { Params } from '@/components/ui/profile'
 import { Typography } from '@/components/ui/typography'
 import { useGetPostByIdQuery, useGetPostMessageByIdQuery } from '@/services/posts'
 import { useParams } from 'next/navigation'
@@ -27,7 +26,7 @@ type Props = {
 }
 
 export const PostModal = ({ isOpen, onClose }: Props) => {
-  const params: Params = useParams()
+  const params = useParams()
 
   const { data: postById } = useGetPostByIdQuery(params?.id[1] as string)
   const { data: comments } = useGetPostMessageByIdQuery(params?.id[0] as string)

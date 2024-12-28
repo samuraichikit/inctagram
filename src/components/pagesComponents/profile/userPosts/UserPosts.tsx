@@ -9,6 +9,7 @@ import {
   useGetPublicPostsByUserIdQuery,
   useLazyGetPublicPostsByUserIdQuery,
 } from '@/services/publicPosts'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import s from './userPosts.module.scss'

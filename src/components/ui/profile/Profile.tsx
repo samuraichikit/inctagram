@@ -65,7 +65,7 @@ export const Profile = () => {
       {isMyProfile ? (
         <PostModal isOpen={isOpen} onClose={closeHandler} />
       ) : (
-       postId && <PublicPostModal isOpen={isOpen} onClose={closeHandler} postId={postId} />
+        postId && <PublicPostModal isOpen={isOpen} onClose={closeHandler} postId={postId} />
       )}
       <div className={s.infoWrapper}>
         {avatarSrc ? (
@@ -78,12 +78,7 @@ export const Profile = () => {
           </div>
         )}
         <div className={s.profileWrapper}>
-          <div className={s.userNameWrapper
-                          
-                          
-                          
-                          
-                          
+          <div className={s.userNameWrapper}>
             <Typography variant={'h1'}>{userName}</Typography>
             {isMyProfile && (
               <Button
