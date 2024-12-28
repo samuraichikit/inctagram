@@ -25,13 +25,11 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   await Promise.all(store.dispatch(baseApi.util.getRunningQueriesThunk()))
 
   return {
-    props: {
-
-    },
+    props: {},
   }
 })
 
-const UserProfile: NextPageWithLayout = () => {
+const PublicUserProfile: NextPageWithLayout = () => {
   return (
     <>
       <Profile isPublic />
@@ -39,6 +37,6 @@ const UserProfile: NextPageWithLayout = () => {
   )
 }
 
-UserProfile.getLayout = getBaseLayout
+PublicUserProfile.getLayout = getBaseLayout
 
-export default UserProfile
+export default PublicUserProfile
