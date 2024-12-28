@@ -1,0 +1,14 @@
+.notificationModal {
+  width: 378px;
+
+  .body {
+    padding: 30px 21px 36px 24px;
+
+    .btnGroup {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 18px;
+    }
+  }
+}

@@ -1,13 +1,14 @@
 import { useEffect, useId, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
-import { ImageOutline } from '@/assets/icons/ImageOutline'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { generalSettingsSchemas } from '@/common/schemas'
 import { FormTextArea } from '@/components/controlled/formTextArea'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { Button } from '@/components/ui/button'
 import { Datepicker } from '@/components/ui/datepicker'
+import { ProfilePhotoEdit } from '@/components/ui/profile/profilePhoto/profilePhotoEdit/ProfilePhotoEdit'
 import { ProfileSettingsBar } from '@/components/ui/profileSettingsBar'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
@@ -28,7 +29,7 @@ type GeneralSettingsSchemasType = z.infer<ReturnType<typeof generalSettingsSchem
 export const GeneralSettings = () => {
   const { data: meInfo } = useMeQuery()
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string)
-  const { data: profile } = useGetProfileQuery()
+  const { data: profile, isLoading } = useGetProfileQuery()
   const [updateProfile] = useUpdateProfileMutation()
   const formId = 'formId' + useId()
 
@@ -78,12 +79,25 @@ export const GeneralSettings = () => {
     updateProfile(profileData)
       .unwrap()
       .then(_ => {
-        alert('Your settings are saved!')
+        toast.success(t.generalSettings.savedSettings)
       })
       .catch(_ => {
-        alert('Error! Server is not available!')
+        toast.error(t.generalSettings.notAvailable)
       })
   }
+
+  useEffect(() => {
+    form.reset({
+      aboutMe: profile?.aboutMe || '',
+      city: profile?.city || '',
+      country: profile?.country || '',
+      dateOfBirth: profile?.dateOfBirth || '',
+      firstName: profile?.firstName,
+      lastName: profile?.lastName,
+      region: profile?.region || '',
+      userName: profile?.userName,
+    })
+  }, [profile])
 
   useEffect(() => {
     const subscription = watch(value => {
@@ -126,16 +140,11 @@ export const GeneralSettings = () => {
       <div className={s.wrapper}>
         <ProfileSettingsBar />
         <div className={s.photoAndFormWrapper}>
-          <div className={s.addPhotoWrapper}>
-            <div className={s.photoWrapper}>
-              {profileWithPosts?.avatars.length !== 0 ? (
-                <img alt={'Avatar'} src={profileWithPosts?.avatars[0].url} />
-              ) : (
-                <ImageOutline height={48} width={48} />
-              )}
-            </div>
-            <Button variant={'outlined'}>{t.profile.settings.profilePhoto}</Button>
-          </div>
+          {profile?.avatars.length !== 0 ? (
+            <ProfilePhotoEdit avatar={profileWithPosts?.avatars[0]?.url ?? null} />
+          ) : (
+            <ProfilePhotoEdit />
+          )}
           <form className={s.formWrapper} id={formId} onSubmit={handleSubmit(onSubmitHandler)}>
             <FormTextField
               control={control}

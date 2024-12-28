@@ -9,11 +9,12 @@ export type TextAreaProps = {
   errorMessage?: string
   id?: string
   label?: string
+  textAreaClassName?: string
   onValueChange?: (value: string) => void
 } & ComponentPropsWithoutRef<'textarea'>
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ className, errorMessage, id, label, onChange, onValueChange, ...props }, ref) => {
+  ({ className, errorMessage, id, label, onChange, onValueChange, textAreaClassName, ...props }, ref) => {
     const generatedId = useId()
     const idToUse = id ?? generatedId
 
@@ -32,12 +33,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         )}
         <div className={s.iconWrapper}>
           <textarea
-            className={clsx(s.textarea, errorMessage && s.errorTextArea)}
+            className={clsx(s.textarea, textAreaClassName, errorMessage && s.errorTextArea)}
             id={idToUse}
             onChange={onChangeHandler}
             ref={ref}
             {...props}
-          ></textarea>
+          />
         </div>
         {errorMessage && (
           <Typography className={s.error} variant={'regular_text_14'}>

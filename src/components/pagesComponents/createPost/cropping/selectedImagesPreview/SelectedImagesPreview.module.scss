@@ -1,0 +1,50 @@
+.previewBlock {
+  position: absolute;
+  right: 11px;
+  bottom: 50px;
+
+  display: flex;
+  gap: 12px;
+
+  padding: 12px;
+
+  background-color: rgb(35 35 35 / 90%);
+  border-radius: 2px;
+
+  &.hide {
+    display: none;
+  }
+
+  .pickImagesBtn {
+    position: relative;
+    background-color: transparent;
+    border-radius: unset;
+  }
+}
+
+.imageBlock {
+  position: relative;
+
+  .image {
+    display: block;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+  }
+
+  .closeBtn {
+    top: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.addImageBtn {
+  right: 11px;
+  bottom: 11px;
+
+  &.active {
+    color: var(--color-accent-500);
+  }
+}

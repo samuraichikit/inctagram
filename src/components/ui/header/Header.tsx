@@ -2,21 +2,21 @@ import { useTranslation } from '@/common/hooks/useTranslation'
 import { LangSelect } from '@/components/langSelect/LangSelect'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
+import { useMeQuery } from '@/services/auth'
 import Link from 'next/link'
 
 import s from './header.module.scss'
 
-type Props = {
-  isAuth: boolean
-}
-
-export const Header = ({ isAuth }: Props) => {
+export const Header = () => {
   const classNames = {
     buttonsContainer: s.buttonsContainer,
     container: s.container,
     header: s.header,
     navContainer: s.navContainer,
   }
+
+  const { isError, isLoading } = useMeQuery()
+  const isMyProfile = !isError && !isLoading
 
   const { t } = useTranslation()
 
@@ -26,13 +26,17 @@ export const Header = ({ isAuth }: Props) => {
         <Typography variant={'large'}>Inctagram</Typography>
         <div className={classNames.navContainer}>
           <LangSelect />
-          {!isAuth && (
+          {!isMyProfile && (
             <div className={classNames.buttonsContainer}>
               <Button asChild variant={'text'}>
-                <Link href={'/auth/signIn'}>{t.header.signIn}</Link>
+                <Link data-cy={'logIn'} href={'/auth/signIn'}>
+                  {t.header.signIn}
+                </Link>
               </Button>
-              <Button asChild>
-                <Link href={'/auth/signUp'}>{t.header.signUp}</Link>
+              <Button asChild data-cy={'signUp'}>
+                <Link data-cy={'signUp'} href={'/auth/signUp'}>
+                  {t.header.signUp}
+                </Link>
               </Button>
             </div>
           )}

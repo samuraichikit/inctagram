@@ -1,37 +1,34 @@
+import { AppStore, wrapper } from '@/app/store'
+import { PAGE_SIZE_PUBLIC_POSTS } from '@/common/constants'
 import { useGoogleAuth } from '@/common/hooks/useGoogleAuth'
 import { PublicPage } from '@/components/pagesComponents/publicPage/PublicPage'
 import { getBaseLayout } from '@/components/ui/layout'
-import { PublicPostResponse, publicPostsService } from '@/services/publicPosts'
+import { baseApi } from '@/services/baseApi'
+import { publicPostsService } from '@/services/publicPosts'
 import { publicUserService } from '@/services/publicUser'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
 import { NextPageWithLayout } from './_app'
 
-type Props = {
-  posts: PublicPostResponse[]
-  totalCount: number
-}
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+  (store: AppStore) => async () => {
+    store.dispatch(publicUserService.endpoints.getTotalUsers.initiate())
+    store.dispatch(
+      publicPostsService.endpoints.getPublicPosts.initiate({ pageSize: PAGE_SIZE_PUBLIC_POSTS })
+    )
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { totalCount } = await publicUserService.getTotalUsers()
-  const { items: posts } = await publicPostsService.getPublicPosts()
+    await Promise.all(store.dispatch(baseApi.util.getRunningQueriesThunk()))
 
-  return {
-    props: {
-      posts,
-      totalCount,
-    },
-    revalidate: 60,
+    return {
+      props: {},
+      revalidate: 60,
+    }
   }
-}
+)
 
-const Home: NextPageWithLayout<Props> = ({ posts, totalCount }) => {
-  const { isLoading } = useGoogleAuth()
-
-  if (isLoading) {
-    return <div>LOADING ...</div>
-  }
+const Home: NextPageWithLayout = () => {
+  useGoogleAuth()
 
   return (
     <>
@@ -42,7 +39,7 @@ const Home: NextPageWithLayout<Props> = ({ posts, totalCount }) => {
         <link href={'/favicon.ico'} rel={'icon'} />
       </Head>
       <>
-        <PublicPage posts={posts} totalUsers={totalCount} />
+        <PublicPage />
       </>
     </>
   )

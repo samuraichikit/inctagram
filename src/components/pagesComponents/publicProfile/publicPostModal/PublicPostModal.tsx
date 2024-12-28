@@ -1,41 +1,54 @@
 import { Modal } from '@/components/ui/modal'
-import { Comment, PublicPostResponse, UserImage } from '@/services/publicPosts'
+import { useGetCommentsQuery, useGetPublicPostQuery } from '@/services/publicPosts'
 
 import s from './publicPostModal.module.scss'
 
-import { PublicImages } from '../../publicPage/publicPosts/publicImages'
+import { PostImages } from '../../publicPage/publicPosts/postImages'
 import { UserInfo } from '../../publicPage/publicPosts/userInfo'
 import { PostComments } from './postComments'
 import { PostLikes } from './postLikes'
 
 type Props = {
-  comments: Comment[]
   isOpen: boolean
   onClose: () => void
-  post: PublicPostResponse
+  postId: string
 }
 
-export const PublicPostModal = ({ comments, isOpen, onClose, post }: Props) => {
+export const PublicPostModal = ({ isOpen, onClose, postId }: Props) => {
   const classNames = {
     container: s.container,
+    images: s.images,
     postDetails: s.postDetails,
     userInfoContainer: s.userInfoContainer,
   }
 
+  const { data: commentsData } = useGetCommentsQuery({ postId })
+  const { data: post } = useGetPublicPostQuery({ postId })
+
+  const comments = commentsData?.items ?? []
+
+  if (!post) {
+    return null
+  }
+
+  const { avatarOwner, avatarWhoLikes, createdAt, description, images, likesCount, userName } = post
+
   return (
     <Modal onOpenChange={onClose} open={isOpen}>
       <div className={classNames.container}>
-        <PublicImages height={562} images={post?.images} width={490} />
+        <PostImages className={classNames.images} height={562} images={images} width={490} />
         <div className={classNames.postDetails}>
           <div className={classNames.userInfoContainer}>
-            <UserInfo src={post?.avatarOwner} userName={post?.userName} />
+            <UserInfo src={avatarOwner} userName={userName} />
           </div>
-          <PostComments comments={comments} />
-          <PostLikes
-            avatarsSrc={post?.avatarWhoLikes}
-            createdAt={post?.createdAt}
-            likesCount={post?.likesCount}
+          <PostComments
+            avatarSrc={avatarOwner}
+            comments={comments}
+            createdAt={createdAt}
+            description={description}
+            userName={userName}
           />
+          <PostLikes avatarsSrc={avatarWhoLikes} createdAt={createdAt} likesCount={likesCount} />
         </div>
       </div>
     </Modal>

@@ -1,39 +1,37 @@
 import { useEffect, useState } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { PostModal } from '@/components/pagesComponents/profile/postModal/PostModal'
+import { UserPosts } from '@/components/pagesComponents/profile/userPosts'
 import { PublicPostModal } from '@/components/pagesComponents/publicProfile/publicPostModal'
 import { Button } from '@/components/ui/button'
-import { ProfilePhotoEdit } from '@/components/ui/profile/profilePhoto/profilePhotoEdit/ProfilePhotoEdit'
+import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
+import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
-import {
-  useGetProfileQuery,
-  useGetProfileWithPostsQuery,
-  useGetPublicProfileQuery,
-} from '@/services/profile'
-import { Comment, PublicPostResponse } from '@/services/publicPosts'
-import clsx from 'clsx'
-import { useParams } from 'next/navigation'
+import { useGetProfileWithPostsQuery } from '@/services/profile'
+import { useGetPublicProfileQuery } from '@/services/publicUser'
 import { useRouter } from 'next/router'
 
 import s from './profile.module.scss'
 
-type Props = {
-  comments: Comment[]
-  post: PublicPostResponse
-}
+export const Profile = () => {
+  const router = useRouter()
+  const { push } = router
 
-type Params = {
-  id: string[]
-} | null
+  const { id, skipSSR } = router.query
+  const userId = id?.[0] ?? ''
+  const postId = id?.[1] ?? ''
+  const isPublic = !skipSSR
 
-export const Profile = ({ comments, post }: Props) => {
-  const params: Params = useParams()
-
-  const { data: meInfo } = useMeQuery()
-  const { data } = useGetProfileQuery()
-  const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string)
-  const { data: profileInfo } = useGetPublicProfileQuery(params?.id[0] as string)
+  const { data: meInfo, isError: isMeError, isLoading: isMeLoading } = useMeQuery()
+  const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string, {
+    skip: isPublic,
+  })
+  const { data: profileInfo } = useGetPublicProfileQuery(
+    { profileId: userId },
+    { skip: router.isFallback }
+  )
 
   const { t } = useTranslation()
   const followArray = [
@@ -42,16 +40,20 @@ export const Profile = ({ comments, post }: Props) => {
     profileInfo?.userMetadata.publications,
   ]
 
+  const userName = meInfo?.userName ?? profileInfo?.userName
+  const aboutMe = profileInfo?.aboutMe
+  const avatarSrc = profileInfo?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
+  const profileId = profileInfo?.id
+
+  const isMyProfile = !isMeLoading && !isMeError
+
   const [isOpen, setIsOpen] = useState(false)
-  const router = useRouter()
-  const { push } = router
-  const avatarSrc = (post ? post.avatarOwner : profileInfo?.avatars[0]?.url) ?? ''
 
   useEffect(() => {
-    if (post) {
+    if (postId) {
       setIsOpen(true)
     }
-  }, [post])
+  }, [postId])
 
   const closeHandler = () => {
     setIsOpen(false)
@@ -59,24 +61,38 @@ export const Profile = ({ comments, post }: Props) => {
   }
 
   return (
-    <div className={clsx(post && s.wrapper)}>
-      <PublicPostModal comments={comments} isOpen={isOpen} onClose={closeHandler} post={post} />
+    <div className={s.wrapper}>
+      {isMyProfile ? (
+        <PostModal isOpen={isOpen} onClose={closeHandler} />
+      ) : (
+       postId && <PublicPostModal isOpen={isOpen} onClose={closeHandler} postId={postId} />
+      )}
       <div className={s.infoWrapper}>
-        {profileInfo?.avatars.length !== 0 ? (
-          <ProfilePhotoEdit avatar={profileWithPosts?.avatars[0]?.url ?? null} />
+        {avatarSrc ? (
+          <div>
+            <Avatar size={192} src={avatarSrc ?? null} />
+          </div>
         ) : (
-          <ProfilePhotoEdit />
+          <div>
+            <BlankCover />
+          </div>
         )}
         <div className={s.profileWrapper}>
-          <div className={s.userNameWrapper}>
-            <Typography variant={'h1'}>{profileInfo?.userName}</Typography>
-            <Button
-              disabled={String(meInfo?.userId) !== params?.id[0]}
-              onClick={() => router.push(`settings/general/${profileInfo?.id}`)}
-              variant={'secondary'}
-            >
-              {t.profile.settings.profileSettings}
-            </Button>
+          <div className={s.userNameWrapper
+                          
+                          
+                          
+                          
+                          
+            <Typography variant={'h1'}>{userName}</Typography>
+            {isMyProfile && (
+              <Button
+                onClick={() => router.push(`/profile/settings/general/${profileId}`)}
+                variant={'secondary'}
+              >
+                {t.profile.settings.profileSettings}
+              </Button>
+            )}
           </div>
           <div className={s.followInfoWrapper}>
             <ul className={s.followInfoList}>
@@ -93,13 +109,12 @@ export const Profile = ({ comments, post }: Props) => {
             </ul>
           </div>
           <div>
-            <Typography className={s.aboutMe}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </Typography>
+            <Typography className={s.aboutMe}>{aboutMe}</Typography>
           </div>
         </div>
+      </div>
+      <div className={s.userPostsContainer}>
+        {userName && <UserPosts isPublic={isPublic} userName={userName} />}
       </div>
     </div>
   )

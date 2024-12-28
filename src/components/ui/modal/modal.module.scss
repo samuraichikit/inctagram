@@ -41,8 +41,10 @@
 
 .DialogTitle {
   margin: 0;
-  font-size: 17px;
-  font-weight: 500;
+
+  font-size: 20px;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-l);
   color: var(--color-light-100);
 }
 
