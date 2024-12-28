@@ -26,7 +26,7 @@ const postService = baseApi.injectEndpoints({
         url: `/v1/posts/${postId}/comments`,
       }),
     }),
-    getUserPosts: builder.query<PostsByUserNameResponse, GetUserPosts>({
+    getUserPosts: builder.query<PostsByUserNameResponse, GetUserPostsArgs>({
       query: ({ userName, ...params }) => ({
         params,
         url: `v1/posts/${userName}`,

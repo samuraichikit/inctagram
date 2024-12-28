@@ -1,5 +1,5 @@
 import { Modal } from '@/components/ui/modal'
-import { Comment, PublicPostResponse } from '@/services/publicPosts'
+import { useGetCommentsQuery, useGetPublicPostQuery } from '@/services/publicPosts'
 
 import s from './publicPostModal.module.scss'
 
@@ -9,13 +9,12 @@ import { PostComments } from './postComments'
 import { PostLikes } from './postLikes'
 
 type Props = {
-  comments: Comment[]
   isOpen: boolean
   onClose: () => void
-  post: PublicPostResponse
+  postId: string
 }
 
-export const PublicPostModal = ({ comments, isOpen, onClose, post }: Props) => {
+export const PublicPostModal = ({ isOpen, onClose, postId }: Props) => {
   const classNames = {
     container: s.container,
     images: s.images,
@@ -23,12 +22,16 @@ export const PublicPostModal = ({ comments, isOpen, onClose, post }: Props) => {
     userInfoContainer: s.userInfoContainer,
   }
 
+  const { data: commentsData } = useGetCommentsQuery({ postId })
+  const { data: post } = useGetPublicPostQuery({ postId })
+
+  const comments = commentsData?.items ?? []
+
   if (!post) {
-    return
+    return null
   }
 
-  const { avatarOwner, avatarWhoLikes, createdAt, description, id, images, likesCount, userName } =
-    post
+  const { avatarOwner, avatarWhoLikes, createdAt, description, images, likesCount, userName } = post
 
   return (
     <Modal onOpenChange={onClose} open={isOpen}>
