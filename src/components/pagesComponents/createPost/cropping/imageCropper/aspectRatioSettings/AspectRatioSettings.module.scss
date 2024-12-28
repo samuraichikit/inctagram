@@ -1,0 +1,42 @@
+.arBlock {
+  position: absolute;
+  bottom: 50px;
+  left: 11px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  padding: 10px 12px;
+
+  background-color: rgb(35 35 35 / 85%);
+  border-radius: 2px;
+
+  .item {
+    cursor: pointer;
+    user-select: none;
+    color: var(--color-light-900);
+    transition: color 0.1s ease;
+
+    &:hover {
+      color: var(--color-light-700);
+    }
+
+    &.active {
+      color: var(--color-light-100);
+    }
+  }
+
+  &.hide {
+    display: none;
+  }
+}
+
+.aspectRatioBtn {
+  bottom: 11px;
+  left: 11px;
+
+  &.active {
+    color: var(--color-accent-500);
+  }
+}

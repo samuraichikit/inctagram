@@ -7,7 +7,7 @@ export type GetUserPostsArgs = {
 }
 
 export type PostsByUserNameResponse = {
-  items: PostResponse[]
+  items: PostItemResponse[]
   notReadCount: number
   pageSize: number
   totalCount: number
@@ -41,4 +41,25 @@ type Image = {
   uploadId: string
   url: string
   width: number
+}
+
+export type PostUpdate = {
+  description: string
+  postId: number
+}
+
+export interface PostItemResponse {
+  avatarOwner: string
+  avatarWhoLikes: string[]
+  createdAt: string
+  description: string
+  id: number
+  images: Image[]
+  isLiked: boolean
+  likesCount: number
+  location: string
+  owner: Owner
+  ownerId: number
+  updatedAt: string
+  userName: string
 }

@@ -30,6 +30,7 @@ export const PublicPostModal = ({ isOpen, onClose, postId }: Props) => {
   if (!post) {
     return null
   }
+
   const { avatarOwner, avatarWhoLikes, createdAt, description, images, likesCount, userName } = post
 
   return (

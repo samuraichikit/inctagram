@@ -47,3 +47,15 @@ export type GoogleAuthResponse = {
 export type GoogleAuthArgs = {
   code: string
 }
+export type PasswordRecoveryArgs = {
+  baseUrl: string
+  email: string
+  recaptcha: string
+}
+export type CreateNewPasswordArgs = {
+  newPassword: string
+  recoveryCode: string
+}
+export type CheckRecoveryCodeArgs = {
+  recoveryCode: string
+}

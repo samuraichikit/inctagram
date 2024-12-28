@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { PostModal } from '@/components/pagesComponents/profile/postModal/PostModal'
 import { UserPosts } from '@/components/pagesComponents/profile/userPosts'
 import { PublicPostModal } from '@/components/pagesComponents/publicProfile/publicPostModal'
 import { Button } from '@/components/ui/button'
@@ -21,7 +22,6 @@ export const Profile = () => {
   const { id, skipSSR } = router.query
   const userId = id?.[0] ?? ''
   const postId = id?.[1] ?? ''
-
   const isPublic = !skipSSR
 
   const { data: meInfo, isError: isMeError, isLoading: isMeLoading } = useMeQuery()
@@ -62,7 +62,11 @@ export const Profile = () => {
 
   return (
     <div className={s.wrapper}>
-      {postId && <PublicPostModal isOpen={isOpen} onClose={closeHandler} postId={postId} />}
+      {isMyProfile ? (
+        <PostModal isOpen={isOpen} onClose={closeHandler} />
+      ) : (
+       postId && <PublicPostModal isOpen={isOpen} onClose={closeHandler} postId={postId} />
+      )}
       <div className={s.infoWrapper}>
         {avatarSrc ? (
           <div>
@@ -74,7 +78,12 @@ export const Profile = () => {
           </div>
         )}
         <div className={s.profileWrapper}>
-          <div className={s.userNameWrapper}>
+          <div className={s.userNameWrapper
+                          
+                          
+                          
+                          
+                          
             <Typography variant={'h1'}>{userName}</Typography>
             {isMyProfile && (
               <Button

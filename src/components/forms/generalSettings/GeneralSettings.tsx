@@ -29,7 +29,7 @@ type GeneralSettingsSchemasType = z.infer<ReturnType<typeof generalSettingsSchem
 export const GeneralSettings = () => {
   const { data: meInfo } = useMeQuery()
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string)
-  const { data: profile } = useGetProfileQuery()
+  const { data: profile, isLoading } = useGetProfileQuery()
   const [updateProfile] = useUpdateProfileMutation()
   const formId = 'formId' + useId()
 
@@ -85,6 +85,19 @@ export const GeneralSettings = () => {
         toast.error(t.generalSettings.notAvailable)
       })
   }
+
+  useEffect(() => {
+    form.reset({
+      aboutMe: profile?.aboutMe || '',
+      city: profile?.city || '',
+      country: profile?.country || '',
+      dateOfBirth: profile?.dateOfBirth || '',
+      firstName: profile?.firstName,
+      lastName: profile?.lastName,
+      region: profile?.region || '',
+      userName: profile?.userName,
+    })
+  }, [profile])
 
   useEffect(() => {
     const subscription = watch(value => {
