@@ -9,12 +9,15 @@ export type TextAreaProps = {
   errorMessage?: string
   id?: string
   label?: string
-  textAreaClassName?: string
   onValueChange?: (value: string) => void
+  textAreaClassName?: string
 } & ComponentPropsWithoutRef<'textarea'>
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ className, errorMessage, id, label, onChange, onValueChange, textAreaClassName, ...props }, ref) => {
+  (
+    { className, errorMessage, id, label, onChange, onValueChange, textAreaClassName, ...props },
+    ref
+  ) => {
     const generatedId = useId()
     const idToUse = id ?? generatedId
 

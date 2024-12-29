@@ -25,6 +25,7 @@ export const SliderButton = ({
       disabled={disabled}
       onClick={onClick}
       style={{ height: `${size}px`, width: `${size}px` }}
+      type={'button'}
     >
       {children}
     </button>

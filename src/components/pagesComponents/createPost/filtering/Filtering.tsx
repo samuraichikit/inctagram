@@ -51,7 +51,7 @@ export const Filtering = () => {
   return (
     <div>
       <div className={s.title}>
-        <button className={s.backBtn} onClick={setPerv}>
+        <button className={s.backBtn} onClick={setPerv} type={'button'}>
           <ArrowLeftIcon />
         </button>
         <Typography variant={'h1'}>Filtering</Typography>

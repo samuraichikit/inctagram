@@ -1,4 +1,4 @@
-import {ComponentPropsWithoutRef, forwardRef} from 'react'
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
 
 type Props = ComponentPropsWithoutRef<'svg'>
 
@@ -21,5 +21,4 @@ export const ArrowLeftIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
       />
     </svg>
   )
-}
-)
+})

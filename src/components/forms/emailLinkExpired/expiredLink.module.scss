@@ -1,29 +1,33 @@
 .formContainer {
-  width: 473px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 473px;
 }
 
 .form {
   display: flex;
-  width: 300px;
   flex-direction: column;
   flex-grow: 1;
   gap: 24px;
-  text-align: center;
+
+  width: 300px;
   margin-top: -24px;
   padding-bottom: 24px;
+
+  text-align: center;
 }
 
 .buttonTextFieldContainer {
-  text-align: left;
-  padding-left: 33px;
   padding-right: 33px;
+  padding-left: 33px;
+  text-align: left;
 }
+
 .submitButton {
   margin-top: 24px;
 }
+
 .modalContent {
   display: grid;
   row-gap: 18px;

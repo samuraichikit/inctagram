@@ -50,7 +50,7 @@ export const ImageSelection = ({ onCloseBtn }: ImageSelectionProps) => {
     <div>
       <div className={s.title}>
         <Typography variant={'h1'}>Add Photo</Typography>
-        <button className={s.closeBtn} onClick={onCloseBtn}>
+        <button className={s.closeBtn} onClick={onCloseBtn} type={'button'}>
           <CrossIcon />
         </button>
       </div>

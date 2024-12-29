@@ -11,7 +11,7 @@ type SliderDotProps = {
 
 export const SliderDot = ({ isActive, onClick }: SliderDotProps) => {
   return (
-    <button className={clsx(s.sliderDot, isActive && s.active)} onClick={onClick}>
+    <button className={clsx(s.sliderDot, isActive && s.active)} onClick={onClick} type={'button'}>
       •
     </button>
   )

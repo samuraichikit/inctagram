@@ -43,9 +43,13 @@ export const MainSidebar = () => {
                 setIsOpen(true)
               }}
             />
-            <div onClick={() => {
-              setIsOpen(true)
-            }}>{t.mainSidebar.create}</div>
+            <div
+              onClick={() => {
+                setIsOpen(true)
+              }}
+            >
+              {t.mainSidebar.create}
+            </div>
           </SidebarItem>
           <SidebarItem
             as={`/profile/${data?.userId}`}
