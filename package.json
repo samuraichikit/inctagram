@@ -65,7 +65,7 @@
     "@storybook/addon-onboarding": "^8.2.9",
     "@storybook/blocks": "^8.2.9",
     "@storybook/manager-api": "^8.2.9",
-    "@storybook/nextjs": "^8.2.9",
+    "@storybook/nextjs": "^8.4.7",
     "@storybook/react": "^8.2.9",
     "@storybook/test": "^8.2.9",
     "@storybook/theming": "^8.2.9",
