@@ -9,7 +9,7 @@ export const countryAndCityApi = {
         headers: {
           Accept: 'application/json',
           Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfZW1haWwiOiJuZXZhemhub2FsaWtoYW5AZ21haWwuY29tIiwiYXBpX3Rva2VuIjoiQ2dqRDlObVZCbmh3M2VuNXNaSmFVRkJEdmdHOVdsNzh4T1VjXzcyazY5aFgxYk9zb21mVFppYWRtRkVLTVdraFp5MCJ9LCJleHAiOjE3MzU1NDQyODZ9.F-qf2wxJUkFIcXa9ToIpb58XdO07Q-47afed5zWIc1Q',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfZW1haWwiOiJuZXZhemhub2FsaWtoYW4xQGdtYWlsLmNvbSIsImFwaV90b2tlbiI6Ill6VEw4N2VES2x4LV9ibUE0R1JJUW9BSXUzcmtqZDh6c0JoTnQ3WDBEaXpKYUZfbnJOUDgwUE9oRWZ1TEpIbFJTVGsifSwiZXhwIjoxNzM1NjM3MTM4fQ.1YjVGNvvjnlwemowturBD1g9x4IW3xet_HEPY1gCdOc',
         },
       })
       .then(res => {
@@ -25,7 +25,7 @@ export const countryAndCityApi = {
         headers: {
           Accept: 'application/json',
           Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfZW1haWwiOiJuZXZhemhub2FsaWtoYW5AZ21haWwuY29tIiwiYXBpX3Rva2VuIjoiQ2dqRDlObVZCbmh3M2VuNXNaSmFVRkJEdmdHOVdsNzh4T1VjXzcyazY5aFgxYk9zb21mVFppYWRtRkVLTVdraFp5MCJ9LCJleHAiOjE3MzU1NDQyODZ9.F-qf2wxJUkFIcXa9ToIpb58XdO07Q-47afed5zWIc1Q',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfZW1haWwiOiJuZXZhemhub2FsaWtoYW4xQGdtYWlsLmNvbSIsImFwaV90b2tlbiI6Ill6VEw4N2VES2x4LV9ibUE0R1JJUW9BSXUzcmtqZDh6c0JoTnQ3WDBEaXpKYUZfbnJOUDgwUE9oRWZ1TEpIbFJTVGsifSwiZXhwIjoxNzM1NjM3MTM4fQ.1YjVGNvvjnlwemowturBD1g9x4IW3xet_HEPY1gCdOc',
         },
       })
       .then(res => {

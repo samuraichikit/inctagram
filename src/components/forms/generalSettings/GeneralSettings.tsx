@@ -92,16 +92,7 @@ export const GeneralSettings = () => {
   }
 
   useEffect(() => {
-    form.reset({
-      aboutMe: profile?.aboutMe || '',
-      city: profile?.city || '',
-      country: profile?.country || '',
-      dateOfBirth: profile?.dateOfBirth || '',
-      firstName: profile?.firstName,
-      lastName: profile?.lastName,
-      region: profile?.region || '',
-      userName: profile?.userName,
-    })
+    form.reset(profileValues)
   }, [profile])
 
   useEffect(() => {
