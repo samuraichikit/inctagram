@@ -54,10 +54,11 @@ export const SignIn = () => {
   const password = useWatch({ control, name: 'password' })
 
   useEffect(() => {
-    const emailField = document.querySelector('input[name="email"]') as HTMLInputElement
-    const passwordField = document.querySelector('input[name="password"]') as HTMLInputElement
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const passwordRegex =
+      /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~\\/])(?!.*[а-яА-ЯёЁ])[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~\\/]{8,}$/
 
-    if (emailField.value.includes('@') && passwordField.value.length > 5) {
+    if (emailRegex.test(email) && passwordRegex.test(password)) {
       setIsDisabled(false)
     } else {
       setIsDisabled(true)
