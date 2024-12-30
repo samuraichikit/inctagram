@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { SubmitHandler, useForm, useWatch } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
@@ -12,6 +11,7 @@ import { Typography } from '@/components/ui/typography'
 import { useSignInMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
+import { setCookie } from 'cookies-next/client'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { z } from 'zod'
@@ -48,8 +48,6 @@ export const SignIn = () => {
     resolver: zodResolver(signInSchema(t)),
   })
 
-  const [isDisabled, setIsDisabled] = useState(!isValid)
-
   const email = useWatch({ control, name: 'email' })
   const password = useWatch({ control, name: 'password' })
 
@@ -65,6 +63,8 @@ export const SignIn = () => {
     }
   }, [email, password])
 
+  const isDisabled = !isValid
+
   const [signIn] = useSignInMutation()
   const router = useRouter()
 
@@ -72,11 +72,17 @@ export const SignIn = () => {
     signIn(data)
       .unwrap()
       .then(data => {
-        localStorage.setItem('accessToken', data.accessToken)
+        setCookie('accessToken', data.accessToken)
         const payload = data.accessToken.split('.')[1]
         const id = JSON.parse(atob(payload)).userId
 
-        router.push(`/profile/${id}`)
+        router.push(
+          {
+            pathname: `/profile/${id}`,
+            query: { skipSSR: true },
+          },
+          `/profile/${id}`
+        )
       })
       .catch(err => {
         if (err.data.messages === 'invalid password or email') {

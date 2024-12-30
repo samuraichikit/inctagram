@@ -1,49 +1,34 @@
-import { useEffect, useState } from 'react'
-
+import { AppStore, wrapper } from '@/app/store'
+import { PAGE_SIZE_PUBLIC_POSTS } from '@/common/constants'
 import { useGoogleAuth } from '@/common/hooks/useGoogleAuth'
 import { PublicPage } from '@/components/pagesComponents/publicPage/PublicPage'
 import { getBaseLayout } from '@/components/ui/layout'
-import { useMeQuery } from '@/services/auth'
-import { PublicPostResponse, publicPostsService } from '@/services/publicPosts'
+import { baseApi } from '@/services/baseApi'
+import { publicPostsService } from '@/services/publicPosts'
 import { publicUserService } from '@/services/publicUser'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 
 import { NextPageWithLayout } from './_app'
 
-type Props = {
-  posts: PublicPostResponse[]
-  totalCount: number
-}
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+  (store: AppStore) => async () => {
+    store.dispatch(publicUserService.endpoints.getTotalUsers.initiate())
+    store.dispatch(
+      publicPostsService.endpoints.getPublicPosts.initiate({ pageSize: PAGE_SIZE_PUBLIC_POSTS })
+    )
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { totalCount } = await publicUserService.getTotalUsers()
-  const { items: posts } = await publicPostsService.getPublicPosts()
+    await Promise.all(store.dispatch(baseApi.util.getRunningQueriesThunk()))
 
-  return {
-    props: {
-      posts,
-      totalCount,
-    },
-    revalidate: 60,
+    return {
+      props: {},
+      revalidate: 60,
+    }
   }
-}
+)
 
-const Home: NextPageWithLayout<Props> = ({ posts, totalCount }) => {
-  const router = useRouter()
-  const { data: meInfo } = useMeQuery()
-
+const Home: NextPageWithLayout = () => {
   useGoogleAuth()
-  const [accessToken, setAccessToken] = useState<boolean | null | string>(false)
-
-  useEffect(() => {
-    setAccessToken(localStorage.getItem('accessToken'))
-  }, [])
-
-  if (accessToken) {
-    router.push(`/profile/${meInfo?.userId}`)
-  }
 
   return (
     <>
@@ -54,7 +39,7 @@ const Home: NextPageWithLayout<Props> = ({ posts, totalCount }) => {
         <link href={'/favicon.ico'} rel={'icon'} />
       </Head>
       <>
-        <PublicPage posts={posts} totalUsers={totalCount} />
+        <PublicPage />
       </>
     </>
   )

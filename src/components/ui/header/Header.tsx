@@ -1,15 +1,13 @@
-import { useEffect, useState } from 'react'
-
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { LangSelect } from '@/components/langSelect/LangSelect'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
+import { useMeQuery } from '@/services/auth'
 import Link from 'next/link'
 
 import s from './header.module.scss'
 
 export const Header = () => {
-  const [accessToken, setAccessToken] = useState<boolean | null | string>(true)
   const classNames = {
     buttonsContainer: s.buttonsContainer,
     container: s.container,
@@ -17,9 +15,8 @@ export const Header = () => {
     navContainer: s.navContainer,
   }
 
-  useEffect(() => {
-    setAccessToken(localStorage.getItem('accessToken'))
-  }, [])
+  const { isError, isLoading } = useMeQuery()
+  const isMyProfile = !isError && !isLoading
 
   const { t } = useTranslation()
 
@@ -29,13 +26,17 @@ export const Header = () => {
         <Typography variant={'large'}>Inctagram</Typography>
         <div className={classNames.navContainer}>
           <LangSelect />
-          {!accessToken && (
+          {!isMyProfile && (
             <div className={classNames.buttonsContainer}>
               <Button asChild variant={'text'}>
-                <Link href={'/auth/signIn'} data-cy="logIn">{t.header.signIn}</Link>
+                <Link data-cy={'logIn'} href={'/auth/signIn'}>
+                  {t.header.signIn}
+                </Link>
               </Button>
-              <Button asChild data-cy="signUp">
-                <Link href={'/auth/signUp'}  data-cy="signUp">{t.header.signUp}</Link>
+              <Button asChild data-cy={'signUp'}>
+                <Link data-cy={'signUp'} href={'/auth/signUp'}>
+                  {t.header.signUp}
+                </Link>
               </Button>
             </div>
           )}

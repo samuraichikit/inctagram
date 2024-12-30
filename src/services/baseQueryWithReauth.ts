@@ -6,6 +6,7 @@ import {
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
+import { getCookie, setCookie } from 'cookies-next/client'
 
 const mutex = new Mutex()
 
@@ -13,7 +14,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
   credentials: 'include',
   prepareHeaders: headers => {
-    const accessToken = localStorage.getItem('accessToken')
+    const accessToken = getCookie('accessToken')
 
     if (accessToken) {
       headers.set('Authorization', `Bearer ${accessToken}`)
@@ -45,7 +46,7 @@ export const baseQueryWithReauth: BaseQueryFn<
         if (refreshResult.data) {
           const responseData = refreshResult.data as { accessToken: string }
 
-          localStorage.setItem('accessToken', responseData.accessToken)
+          setCookie('accessToken', responseData.accessToken)
           result = await baseQuery(args, api, extraOptions)
         }
       } finally {

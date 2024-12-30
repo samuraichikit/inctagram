@@ -25,7 +25,7 @@
 
   border-radius: 50%;
 
-  transition: 0.3s ;
+  transition: 0.3s;
 
   &:not(:disabled) {
     cursor: pointer;
@@ -41,8 +41,6 @@
     &:focus-visible {
       background-color: var(--color-dark-500);
     }
-
-
   }
 
   & .checkIndicatorWrapper {
@@ -56,8 +54,6 @@
 
     border: 2px solid;
     border-radius: 2px;
-
-
   }
 
   &:disabled {
@@ -65,12 +61,11 @@
       border-color: var(--color-light-900);
     }
 
-    &[data-state="checked"] .checkIndicatorWrapper {
+    &[data-state='checked'] .checkIndicatorWrapper {
       border-color: var(--color-dark-100);
     }
   }
 }
-
 
 .checkIndicator {
   width: 18px;
@@ -79,17 +74,16 @@
   opacity: 0;
   background-color: var(--color-dark-900);
 
-  transition: 0.3s ;
+  transition: 0.3s;
 
-  &[data-state="checked"] {
+  &[data-state='checked'] {
     opacity: 1;
-
   }
 
   &.disabled {
     color: var(--color-dark-100);
 
-    &[data-state="checked"] {
+    &[data-state='checked'] {
       background-color: var(--color-light-700);
     }
   }

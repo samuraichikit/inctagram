@@ -1,20 +1,23 @@
-import { PublicPostResponse } from '@/services/publicPosts'
+import { PAGE_SIZE_PUBLIC_POSTS } from '@/common/constants'
+import { useGetPublicPostsQuery } from '@/services/publicPosts'
+import { useGetTotalUsersQuery } from '@/services/publicUser'
 
 import s from './publicPage.module.scss'
 
 import { PublicPost } from './publicPosts/PublicPost'
 import { TotalUsers } from './totalUsers'
 
-type Props = {
-  posts: PublicPostResponse[]
-  totalUsers: number
-}
-
-export const PublicPage = ({ posts, totalUsers }: Props) => {
+export const PublicPage = () => {
   const classNames = {
     container: s.container,
     posts: s.posts,
   }
+
+  const { data: totalUsersData } = useGetTotalUsersQuery()
+  const { data: postsData } = useGetPublicPostsQuery({ pageSize: PAGE_SIZE_PUBLIC_POSTS })
+
+  const totalUsers = totalUsersData?.totalCount ?? 0
+  const posts = postsData?.items
 
   return (
     <div className={classNames.container}>
