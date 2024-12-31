@@ -129,12 +129,13 @@ export const GeneralSettings = () => {
     }
   }, [])
 
+  const [findRes, setFindRes] = useState(false)
   const [countries, setCountries] = useState<countryType[]>([])
   const [cities, setCities] = useState<cityType[]>([])
   const [initCountryAndCity, setInitCountryAndCity] = useState(false)
 
   useEffect(() => {
-    if (profile) {
+    if (profile?.country) {
       countryAndCityApi
         .getCountries(profile)
         .then(data => {
@@ -148,7 +149,22 @@ export const GeneralSettings = () => {
           })
         })
         .finally(() => {
-          setInitCountryAndCity(true)
+          if (countries && cities) {
+            setInitCountryAndCity(true)
+          }
+        })
+    } else {
+      if (countries.length > 0) {
+        setInitCountryAndCity(true)
+      }
+
+      countryAndCityApi
+        .getCountries(profile)
+        .then(data => {
+          setCountries(data)
+        })
+        .then(() => {
+          setFindRes(true)
         })
     }
   }, [profile])
@@ -228,6 +244,7 @@ export const GeneralSettings = () => {
                     setCountries={setCountries}
                     setFocusCity={setFocusCity}
                     setFocusCountry={setFocusCountry}
+                    findRes={findRes}
                   />
                 </div>
                 <FormTextArea

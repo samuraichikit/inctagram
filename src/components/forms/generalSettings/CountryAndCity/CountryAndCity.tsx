@@ -11,6 +11,7 @@ type PropsType = {
   setCountries: (countries: countryType[]) => void
   setFocusCity: (isFocus: boolean) => void
   setFocusCountry: (isFocus: boolean) => void
+  findRes: boolean
 }
 
 export const CountryAndCity = ({
@@ -21,11 +22,14 @@ export const CountryAndCity = ({
   setCountries,
   setFocusCity,
   setFocusCountry,
+  findRes,
 }: PropsType) => {
   const [disableCity, setDisableCity] = useState(false)
   const [valueCity, setValueCity] = useState('city')
+  const [valueCountry, setValueCountry] = useState('country')
 
   const changeSelectCountry = (countryName: string) => {
+    setValueCountry(countryName)
     setValueCity('city')
     setFocusCountry(true)
     setFocusCity(false)
@@ -61,7 +65,13 @@ export const CountryAndCity = ({
   }
 
   const changeCity = (cityName: string) => {
-    setFocusCity(true)
+    if (findRes) {
+      debugger
+      setFocusCountry(false)
+      setFocusCity(true)
+    } else {
+      setFocusCity(true)
+    }
     setValueCity(cityName)
   }
 
@@ -71,6 +81,7 @@ export const CountryAndCity = ({
         {...form.register('country')}
         defaultValue={'country'}
         onChange={e => changeSelectCountry(e.target.value)}
+        value={valueCountry}
       >
         {countries?.map((c, i) => {
           return (
