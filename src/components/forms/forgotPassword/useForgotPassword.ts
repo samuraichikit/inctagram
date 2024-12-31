@@ -11,7 +11,7 @@ export const useForgotPassword = () => {
   const [isUserEmail, setUserEmail] = useState<null | string>(null)
   const [showModal, setShowModal] = useState(false)
   const { t } = useTranslation()
-  const [passwordRecovery, result] = usePasswordRecoveryMutation()
+  const [passwordRecovery] = usePasswordRecoveryMutation()
   const forgotSchema = z.object({
     email: z
       .string()
@@ -23,9 +23,10 @@ export const useForgotPassword = () => {
     defaultValues: { email: '', reCaptcha: '' },
     resolver: zodResolver(forgotSchema),
   })
+  const currentBaseUrl = typeof window !== 'undefined' ? window.location.origin : ''
   const handleSendLink = async (data: ForgotValues) => {
     passwordRecovery({
-      baseUrl: 'http://localhost:3000',
+      baseUrl: currentBaseUrl,
       email: data.email,
       recaptcha: data.reCaptcha ?? '',
     })

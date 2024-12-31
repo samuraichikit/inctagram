@@ -2,12 +2,7 @@ import { useState } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { QuestionModal } from '@/components/pagesComponents/profile/postModal/questionModal'
-import { Params } from '@/components/ui/profile'
-import {
-  useDeletePostMutation,
-  useGetUserPostsQuery,
-  useLazyGetUserPostsQuery,
-} from '@/services/posts'
+import { useDeletePostMutation } from '@/services/posts'
 import { useParams } from 'next/navigation'
 
 import s from './deletePost.module.scss'
@@ -19,7 +14,7 @@ type Props = {
 }
 
 export const DeletePost = ({ closeDeleteModal, isOpen, onCloseModalPost }: Props) => {
-  const params: Params = useParams()
+  const params = useParams()
   const [deletePost] = useDeletePostMutation()
   const [isOpened, setIsOpened] = useState(isOpen)
   const { t } = useTranslation()

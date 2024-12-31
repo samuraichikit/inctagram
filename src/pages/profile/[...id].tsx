@@ -1,48 +1,53 @@
+import { AppStore, wrapper } from '@/app/store'
 import { getBaseLayout } from '@/components/ui/layout'
-import { getAuthLayout } from '@/components/ui/layout/authLayout'
 import { Profile } from '@/components/ui/profile'
-import { Comment, PublicPostResponse, publicPostsService } from '@/services/publicPosts'
+import { NextPageWithLayout } from '@/pages/_app'
+import { baseApi } from '@/services/baseApi'
+import { publicPostsService } from '@/services/publicPosts'
+import { publicUserService } from '@/services/publicUser'
 import { GetServerSideProps } from 'next'
-
-import { NextPageWithLayout } from '../_app'
 
 type Params = {
   id: string[]
 }
 
-type Props = {
-  comments: Comment[]
-  post: PublicPostResponse
-}
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
+  (store: AppStore) =>
+    async ({ params, query }) => {
+      const { id } = params as Params
+      const [userId, postId] = id
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { id } = params as Params
-  const [, postId] = id
+      if (query.skipSSR) {
+        return {
+          props: {},
+        }
+      }
 
-  const post = postId ? await publicPostsService.getPublicPost(postId) : null
-  const comments = postId
-    ? await publicPostsService.getComments(postId).then(data => data.items)
-    : []
+      store.dispatch(publicUserService.endpoints.getPublicProfile.initiate({ profileId: userId }))
+      store.dispatch(
+        publicPostsService.endpoints.getPublicPostsByUserId.initiate({ pageSize: 8, userId })
+      )
+      if (postId) {
+        store.dispatch(publicPostsService.endpoints.getPublicPost.initiate({ postId }))
+        store.dispatch(publicPostsService.endpoints.getComments.initiate({ postId }))
+      }
 
-  return {
-    props: {
-      comments,
-      post,
-    },
-  }
-}
+      await Promise.all(store.dispatch(baseApi.util.getRunningQueriesThunk()))
 
-const UserProfile: NextPageWithLayout<Props> = ({ comments, post }) => {
+      return {
+        props: {},
+      }
+    }
+)
+
+const UserProfile: NextPageWithLayout = () => {
   return (
     <>
-      <Profile comments={comments} post={post} />
+      <Profile />
     </>
   )
 }
 
-UserProfile.getLayout = page => {
-  const { post } = page.props
+UserProfile.getLayout = getBaseLayout
 
-  return post ? getBaseLayout(page) : getAuthLayout(page)
-}
 export default UserProfile
