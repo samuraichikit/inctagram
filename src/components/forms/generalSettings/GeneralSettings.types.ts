@@ -12,6 +12,6 @@ export type countryType = {
 
 export type cityType = {
   id: number
-  iso2: string
+  iso2?: string
   name: string
 }

@@ -14,13 +14,16 @@ export const countryAndCityApi = {
         },
       })
       .then(res => {
-        const data: cityType[] = [{ id: 1, iso2: '', name: profile?.city || 'city' }, ...res.data]
+        const data: cityType[] = [
+          { id: 1, iso2: 'country', name: profile?.city || 'city' },
+          ...res.data,
+        ]
 
         return data
       })
   },
 
-  getCountries(profile: { country: string }) {
+  getCountries(profile?: { country: string }) {
     return axios
       .get('https://api.countrystatecity.in/v1/countries', {
         headers: {
@@ -32,7 +35,7 @@ export const countryAndCityApi = {
         const data: countryType[] = [
           {
             id: 1,
-            iso2: initCity.iso2,
+            iso2: initCity?.iso2 || '',
             name: profile?.country || 'country',
           },
           ...res.data,
