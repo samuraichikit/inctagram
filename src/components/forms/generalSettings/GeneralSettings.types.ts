@@ -1,8 +1,17 @@
 export type countryType = {
-  country_name: string
-  country_phone_code: number
-  country_short_name: string
+  capital?: string
+  currency?: string
+  emoji?: string
+  id: number
+  iso2?: string
+  iso3?: string
+  name?: string
+  native?: string
+  phonecode?: string
 }
+
 export type cityType = {
-  state_name: string
+  id: number
+  iso2: string
+  name: string
 }

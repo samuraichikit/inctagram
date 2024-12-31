@@ -7,7 +7,6 @@ import { generalSettingsSchemas } from '@/common/schemas'
 import { FormTextArea } from '@/components/controlled/formTextArea'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { CountryAndCity } from '@/components/forms/generalSettings/CountryAndCity/CountryAndCity'
-// eslint-disable-next-line import/namespace
 import { countryAndCityApi } from '@/components/forms/generalSettings/CountryAndCity/CountryAndCity-API/countryAndCityApi'
 import { cityType, countryType } from '@/components/forms/generalSettings/GeneralSettings.types'
 import { Button } from '@/components/ui/button'
@@ -22,7 +21,6 @@ import {
   useUpdateProfileMutation,
 } from '@/services/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
-import axios from 'axios'
 import Link from 'next/link'
 import router from 'next/router'
 import { z } from 'zod'
@@ -131,20 +129,9 @@ export const GeneralSettings = () => {
     }
   }, [])
 
-  const [countries, setCountries] = useState<countryType[]>([
-    {
-      country_name: profile?.country || 'country',
-      country_phone_code: 1,
-      country_short_name: profile?.country || 'country',
-    },
-  ])
-  const [cities, setCities] = useState<cityType[]>([{ state_name: profile?.city || 'city' }])
-  const [selectedValue, setSelectedValue] = useState<null | string>(null)
-  const [selectedCityValue, setSelectedCityValue] = useState<null | string>(null)
-  const [selectCountry, setSelectCountry] = useState(false)
-  const [firstClick, setFirstClick] = useState(false)
-  const [startClick, setStartClick] = useState(false)
-  const [init, setInit] = useState(false)
+  const [countries, setCountries] = useState<countryType[]>([])
+  const [cities, setCities] = useState<cityType[]>([])
+  const [initCountryAndCity, setInitCountryAndCity] = useState(false)
 
   useEffect(() => {
     if (profile) {
@@ -152,71 +139,26 @@ export const GeneralSettings = () => {
         .getCountries(profile)
         .then(data => {
           setCountries(data)
+
+          return data
         })
-        .catch(error => {
-          console.log(error)
+        .then(data => {
+          countryAndCityApi.getCities(data[0].iso2, profile).then(data => {
+            setCities(data)
+          })
         })
         .finally(() => {
-          if (!profile?.country && !profile?.city) {
-            setSelectedValue('country')
-            setSelectedCityValue('city')
-          }
-          setInit(true)
+          setInitCountryAndCity(true)
         })
     }
   }, [profile])
 
-  useEffect(() => {
-    if (selectedValue || countries.length > 1) {
-      countryAndCityApi
-        .getCities(selectedValue, profile)
-        .then(data => {
-          setCities(data)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    }
-  }, [selectedValue, countries])
-
-  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    if (selectedValue) {
-      setSelectedValue(null)
-      setCities([{ state_name: 'city' }])
-      setSelectedCityValue(null)
-    } else {
-      setSelectedCityValue(null)
-      setSelectCountry(true)
-    }
-    if (!firstClick) {
-      setFirstClick(true)
-    }
-    setStartClick(false)
-    setSelectedValue(event.target.value)
-  }
-  const handleChangeCity = (event: ChangeEvent<HTMLSelectElement>) => {
-    if (selectedCityValue) {
-      setSelectedCityValue(null)
-    } else {
-      setStartClick(true)
-    }
-    if (!firstClick) {
-      setFirstClick(true)
-    } else {
-      setFirstClick(false)
-    }
-    setSelectedCityValue(event.target.value)
-  }
-
-  useEffect(() => {
-    if (!selectCountry) {
-      profile?.country && setSelectCountry(true)
-    }
-  }, [profile])
+  const [focusCountry, setFocusCountry] = useState(false)
+  const [focusCity, setFocusCity] = useState(false)
 
   return (
     <>
-      {init && (
+      {profile && initCountryAndCity ? (
         <div className={s.formButtonWrapper}>
           <div className={s.wrapper}>
             <ProfileSettingsBar />
@@ -282,11 +224,10 @@ export const GeneralSettings = () => {
                     cities={cities}
                     countries={countries}
                     form={form}
-                    handleChange={handleChange}
-                    handleChangeCity={handleChangeCity}
-                    profile={profile}
-                    selectedCityValue={selectedCityValue}
-                    selectedValue={selectedValue}
+                    setCities={setCities}
+                    setCountries={setCountries}
+                    setFocusCity={setFocusCity}
+                    setFocusCountry={setFocusCountry}
                   />
                 </div>
                 <FormTextArea
@@ -300,20 +241,14 @@ export const GeneralSettings = () => {
           </div>
           <Button
             className={s.formSubmitButton}
-            disabled={
-              !mandatoryFieldsFilled ||
-              (selectCountry && !selectedCityValue && firstClick) ||
-              (selectedValue === 'country' && selectedCityValue === 'city') ||
-              startClick === false ||
-              (selectedValue === 'country' && selectedCityValue === profile?.city)
-            }
+            disabled={!mandatoryFieldsFilled || (focusCountry && !focusCity)}
             form={formId}
             type={'submit'}
           >
             {t.profile.saveChanges}
           </Button>
         </div>
-      )}
+      ) : null}
     </>
   )
 }
