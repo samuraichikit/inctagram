@@ -239,12 +239,12 @@ export const GeneralSettings = () => {
                   <CountryAndCity
                     cities={cities}
                     countries={countries}
+                    findRes={findRes}
                     form={form}
                     setCities={setCities}
                     setCountries={setCountries}
                     setFocusCity={setFocusCity}
                     setFocusCountry={setFocusCountry}
-                    findRes={findRes}
                   />
                 </div>
                 <FormTextArea

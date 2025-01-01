@@ -71,3 +71,15 @@
 .formSubmitButton {
   align-self: flex-end;
 }
+
+.selectWrapper {
+  width: 100%;
+
+  & > span {
+    font-size: var(--font-size-s);
+    color: var(--color-light-900);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-m);
+  }
+
+}

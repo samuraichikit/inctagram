@@ -1,29 +1,34 @@
 import { useState } from 'react'
 
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { countryAndCityApi } from '@/components/forms/generalSettings/CountryAndCity/CountryAndCity-API/countryAndCityApi'
 import { cityType, countryType } from '@/components/forms/generalSettings/GeneralSettings.types'
+
+import s from '../generalSettings.module.scss'
 
 type PropsType = {
   cities: cityType[]
   countries: countryType[]
+  findRes: boolean
   form: any
   setCities: (cityType: cityType[]) => void
   setCountries: (countries: countryType[]) => void
   setFocusCity: (isFocus: boolean) => void
   setFocusCountry: (isFocus: boolean) => void
-  findRes: boolean
 }
 
 export const CountryAndCity = ({
   cities,
   countries,
+  findRes,
   form,
   setCities,
   setCountries,
   setFocusCity,
   setFocusCountry,
-  findRes,
 }: PropsType) => {
+  const { t } = useTranslation()
+
   const [disableCity, setDisableCity] = useState(false)
   const [valueCity, setValueCity] = useState('city')
   const [valueCountry, setValueCountry] = useState('country')
@@ -66,7 +71,6 @@ export const CountryAndCity = ({
 
   const changeCity = (cityName: string) => {
     if (findRes) {
-      debugger
       setFocusCountry(false)
       setFocusCity(true)
     } else {
@@ -77,37 +81,45 @@ export const CountryAndCity = ({
 
   return (
     <>
-      <select
-        {...form.register('country')}
-        defaultValue={'country'}
-        onChange={e => changeSelectCountry(e.target.value)}
-        value={valueCountry}
-      >
-        {countries?.map((c, i) => {
-          return (
-            <option key={i} value={c.name}>
-              {c.name}
-            </option>
-          )
-        })}
-      </select>
+      <div className={s.selectWrapper}>
+        <span>{t.profile.selectCountry}</span>
+        <select
+          {...form.register('country')}
+          aria-label={t.profile.selectCountry}
+          defaultValue={'country'}
+          onChange={e => changeSelectCountry(e.target.value)}
+          value={valueCountry}
+        >
+          {countries?.map((c, i) => {
+            return (
+              <option key={i} value={c.name}>
+                {c.name}
+              </option>
+            )
+          })}
+        </select>
+      </div>
 
-      <select
-        {...form.register('city')}
-        disabled={!!disableCity}
-        onChange={e => changeCity(e.target.value)}
-        value={valueCity}
-      >
-        {cities.length > 1 ? (
-          cities?.map((c, i) => (
-            <option key={i} value={c.name}>
-              {c.name}
-            </option>
-          ))
-        ) : (
-          <option value={'city'}>city</option>
-        )}
-      </select>
+      <div className={s.selectWrapper}>
+        <span>{t.profile.selectCity}</span>
+        <select
+          {...form.register('city')}
+          aria-label={t.profile.selectCountry}
+          disabled={!!disableCity}
+          onChange={e => changeCity(e.target.value)}
+          value={valueCity}
+        >
+          {cities.length > 1 ? (
+            cities?.map((c, i) => (
+              <option key={i} value={c.name}>
+                {c.name}
+              </option>
+            ))
+          ) : (
+            <option value={'city'}>city</option>
+          )}
+        </select>
+      </div>
     </>
   )
 }
