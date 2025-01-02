@@ -1,10 +1,10 @@
 import { GeneralSettings } from '@/components/forms/generalSettings'
-import { getBaseLayout } from '@/components/ui/layout'
+import { getProfileSettingsLayout } from '@/components/ui/layout/profileSettingsLayout/ProfileSettingsLayout'
 import { NextPageWithLayout } from '@/pages/_app'
 
 const GeneralSettingsPage: NextPageWithLayout = () => {
   return <GeneralSettings />
 }
 
-GeneralSettingsPage.getLayout = getBaseLayout
+GeneralSettingsPage.getLayout = getProfileSettingsLayout
 export default GeneralSettingsPage

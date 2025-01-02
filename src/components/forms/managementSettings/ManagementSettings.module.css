@@ -1,0 +1,29 @@
+.accountTypeBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-top: 5px;
+    padding: 10px 20px;
+
+    background-color: dimgrey;
+
+}
+
+.radioAndText {
+    display: flex;
+    gap: 10px;
+}
+
+.term {
+    text-transform: lowercase;
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
+}
+
+.wrapperPayments {
+    display: flex;
+    justify-content: flex-end;
+}

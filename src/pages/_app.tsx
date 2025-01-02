@@ -7,6 +7,7 @@ import { wrapper } from '@/app/store'
 import { useLoader } from '@/common/hooks/useLoader'
 import { NotificationContainer } from '@/components/ui/notificationContainer'
 import { ScrollArea } from '@/components/ui/scrollArea'
+import { PayPalScriptProvider, ReactPayPalScriptOptions } from '@paypal/react-paypal-js'
 import { NextPage } from 'next'
 
 import '@/styles/index.scss'
@@ -28,12 +29,21 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
 
   const getLayout = Component.getLayout ?? (page => page)
 
+  // @ts-ignore
   return (
-    <Provider store={store}>
-      <ScrollArea style={{ marginTop: '60px' }}>
-        {getLayout(<Component {...props.pageProps} />)}
-        <NotificationContainer />
-      </ScrollArea>
-    </Provider>
+    <PayPalScriptProvider
+      options={
+        {
+          ['client-id']: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+        } as unknown as ReactPayPalScriptOptions
+      }
+    >
+      <Provider store={store}>
+        <ScrollArea style={{ marginTop: '60px' }}>
+          {getLayout(<Component {...props.pageProps} />)}
+          <NotificationContainer />
+        </ScrollArea>
+      </Provider>
+    </PayPalScriptProvider>
   )
 }
