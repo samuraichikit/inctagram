@@ -1,4 +1,5 @@
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useEffect, useState } from 'react'
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
@@ -48,6 +49,8 @@ export const SignIn = () => {
     resolver: zodResolver(signInSchema(t)),
   })
 
+  const [isDisabled, setIsDisabled] = useState(!isValid)
+
   const email = useWatch({ control, name: 'email' })
   const password = useWatch({ control, name: 'password' })
 
@@ -62,8 +65,6 @@ export const SignIn = () => {
       setIsDisabled(true)
     }
   }, [email, password])
-
-  const isDisabled = !isValid
 
   const [signIn] = useSignInMutation()
   const router = useRouter()
