@@ -27,5 +27,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install missing dependency
+        run: npm install @typescript-eslint/types
+
       - name: Run Prettier, ESLint, Stylelint
         run: npm run check
