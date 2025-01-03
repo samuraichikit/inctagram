@@ -1,15 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Prices } from '@/components/forms/managementSettings/prices/Prices'
+import { useMeQuery } from '@/services/auth'
 
 import s from './ManagementSettings.module.css'
 
-type statusAccType = 'business' | 'personal'
-
 export const ManagementSettings = () => {
-  const [statusAcc, setStatusAcc] = useState<statusAccType>('personal')
+  const { data: meInfo } = useMeQuery()
+  const [statusAcc, setStatusAcc] = useState('personal')
 
-  const checkedRadio = (type: statusAccType) => {
+  useEffect(() => {
+    localStorage.setItem('userId', String(meInfo?.userId))
+    setStatusAcc(localStorage.getItem('statusAcc') || 'personal')
+  }, [meInfo])
+
+  const checkedRadio = (type: string) => {
+    localStorage.setItem('statusAcc', type)
     setStatusAcc(type)
   }
 

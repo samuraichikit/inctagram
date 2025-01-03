@@ -1,4 +1,7 @@
-import { ResponseGetPricesPay } from '@/services/accountSubscriptions/accountSubsService.types'
+import {
+  RequestPostSubscriptions,
+  ResponseGetPricesPay,
+} from '@/services/accountSubscriptions/accountSubsService.types'
 import { baseApi } from '@/services/baseApi'
 
 export const accountService = baseApi.injectEndpoints({
@@ -6,10 +9,10 @@ export const accountService = baseApi.injectEndpoints({
     getPricesPayment: builder.query<ResponseGetPricesPay, void>({
       query: () => ({ url: `/v1/subscriptions/cost-of-payment-subscriptions` }),
     }),
-    // updateProfile: builder.mutation<void, UpdateProfile>({
-    //     query: body => ({ body, method: 'PUT', url: 'v1/users/profile' }),
-    // }),
+    postSubscriptions: builder.mutation<{ url: string }, RequestPostSubscriptions>({
+      query: body => ({ body, method: 'POST', url: '/v1/subscriptions' }),
+    }),
   }),
 })
 
-export const { useGetPricesPaymentQuery } = accountService
+export const { useGetPricesPaymentQuery, usePostSubscriptionsMutation } = accountService

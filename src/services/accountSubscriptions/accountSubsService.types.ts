@@ -6,3 +6,12 @@ export type pricesPayType = {
 export type ResponseGetPricesPay = {
   data: pricesPayType[]
 }
+
+export type PaymentType = 'PAYPAL' | 'STRIPE'
+
+export type RequestPostSubscriptions = {
+  amount: number
+  baseUrl: string
+  paymentType: PaymentType
+  typeSubscription: string
+}

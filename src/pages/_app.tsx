@@ -10,6 +10,7 @@ import { ScrollArea } from '@/components/ui/scrollArea'
 import { PayPalScriptProvider, ReactPayPalScriptOptions } from '@paypal/react-paypal-js'
 import { NextPage } from 'next'
 
+import '@stripe/stripe-js'
 import '@/styles/index.scss'
 import '@/styles/nprogress.scss'
 import '@fontsource-variable/inter'

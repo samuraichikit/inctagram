@@ -1,96 +1,133 @@
 import { useState } from 'react'
 
+import { Button } from '@/components/ui/button'
+import { Modal } from '@/components/ui/modal'
+import { usePostSubscriptionsMutation } from '@/services/accountSubscriptions/accountSubsService'
+import {
+  RequestPostSubscriptions,
+  ResponseGetPricesPay,
+} from '@/services/accountSubscriptions/accountSubsService.types'
+import { useMeQuery } from '@/services/auth'
 import { PayPalButtons } from '@paypal/react-paypal-js'
 import { useRouter } from 'next/router'
 
+import s from './Paypal.module.css'
+
 type PropsType = {
-  product: {
-    description: string
-    price: string
-  }
+  data: ResponseGetPricesPay
 }
 
 const PaypalCheckoutButton = (props: PropsType) => {
-  const { product } = props
-
   const router = useRouter()
+  const [postSubscriptions, { data }] = usePostSubscriptionsMutation()
+  const { data: meInfo } = useMeQuery()
+
+  console.log(data)
 
   const [paidFor, setPaidFor] = useState(false)
-  const [error, setError] = useState<any>(null)
+  const [title, setTitle] = useState('')
+  const [message, setMessage] = useState('')
+  const [btnText, setBtnText] = useState('')
 
-  const handleApprove = (orderId: string) => {
+  const handleApprove = (data: any) => {
     // Call backend function to fulfill order
     //
     // if response is success
-    setPaidFor(true)
-    window.close()
-    // refresh user's account or subscription status
-    //
-    // if the response is error
-    // setError('Your payment was processed successfully. However, we are unable to fulfill your purchase. Please contact us at support@designcode.io for assistance.')
+    if (data.orderID) {
+      const payload: RequestPostSubscriptions = {
+        amount: props.data.data[Number(localStorage.getItem('price'))].amount || 10,
+        baseUrl: process.env.NEXT_PUBLIC_BASE_URL as string,
+        paymentType: 'STRIPE',
+        typeSubscription:
+          String(props.data.data[Number(localStorage.getItem('price'))].typeDescription) || '',
+      }
+
+      postSubscriptions(payload).then(() => {
+        localStorage.setItem('price', '0')
+        setTitle('Success')
+        setMessage('Payment was successful!')
+        setBtnText('OK')
+        setPaidFor(true)
+      })
+      // refresh user's account or subscription status
+    } else {
+      // if the response is error
+      setTitle('Error')
+      setMessage('Transaction failed. Please, write to support')
+      setBtnText('Back to payment')
+      setPaidFor(true)
+    }
   }
 
-  if (paidFor) {
-    // Display success message, modal or redirect user to success page
-    alert('Thank you four your purchase!')
-  }
-
-  if (error) {
-    // Display error message, modal or redirect user to error page
-    alert(error)
+  const clickButtonHandler = () => {
+    router.push(`/profile/settings/management/${meInfo?.userId}`)
+    setPaidFor(false)
   }
 
   return (
-    <PayPalButtons
-      createOrder={(data, actions) => {
-        // @ts-ignore
-        return actions.order.create({
-          purchase_units: [
-            {
-              amount: {
-                currency_code: '',
-                value: product.price,
+    <>
+      <PayPalButtons
+        createOrder={(data, actions) => {
+          // @ts-ignore
+          return actions.order.create({
+            purchase_units: [
+              {
+                amount: {
+                  currency_code: '',
+                  value:
+                    String(props.data.data[Number(localStorage.getItem('price'))].amount) || '10',
+                },
+                description:
+                  String(props.data.data[Number(localStorage.getItem('price'))].typeDescription) ||
+                  '',
               },
-              description: product.description,
-            },
-          ],
-        })
-      }}
-      onApprove={async (data: any, actions: any) => {
-        const order = await actions?.order.capture()
+            ],
+          })
+        }}
+        onApprove={async (data: any, actions: any) => {
+          const order = await actions?.order.capture()
 
-        console.log('order', order)
+          console.log('order', data.orderID)
 
-        handleApprove(data.orderId)
-      }}
-      onCancel={() => {
-        //Display cancel message, modal or redirect user to cancel page or back to cart
-      }}
-      onClick={(data, actions) => {
-        // Validate on button click, client or server side
+          handleApprove(data)
+        }}
+        onCancel={() => {
+          //Display cancel message, modal or redirect user to cancel page or back to cart
+          setTitle('Error')
+          setMessage('Payment canceled!')
+          setPaidFor(true)
+        }}
+        onClick={(data, actions) => {
+          // Validate on button click, client or server side
+          const hasAlreadyBoughtCourse = false
 
-        const hasAlreadyBoughtCourse = false
+          if (hasAlreadyBoughtCourse) {
+            setMessage('Вы уже купили подписку!')
 
-        if (hasAlreadyBoughtCourse) {
-          setError('Вы уже купили подписку!')
-
-          return actions.reject()
-        } else {
-          return actions.resolve()
-        }
-      }}
-      onError={err => {
-        setError(err)
-        console.error('Paypal Checkout onError', err)
-      }}
-      style={{
-        color: 'black',
-        height: 55,
-        layout: 'horizontal',
-        shape: 'pill',
-        tagline: false,
-      }}
-    />
+            return actions.reject()
+          } else {
+            return actions.resolve()
+          }
+        }}
+        style={{
+          color: 'black',
+          height: 55,
+          layout: 'horizontal',
+          shape: 'pill',
+          tagline: false,
+        }}
+      />
+      <Modal className={s.modal} onOpenChange={clickButtonHandler} open={paidFor} title={title}>
+        <div>{message}</div>
+        {btnText.length > 0 && (
+          <div className={s.textBtn}>
+            <Button onClick={clickButtonHandler} style={{ width: '100%' }}>
+              {btnText}
+            </Button>
+          </div>
+        )}
+      </Modal>
+    </>
   )
 }
 
