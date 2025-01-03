@@ -1,0 +1,83 @@
+.formButtonWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.photoAndFormWrapper {
+  display: flex;
+  gap: 40px;
+  border-bottom: 1px solid var(--color-dark-300);
+}
+
+.photoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 204px;
+  height: 204px;
+
+  background-color: var(--color-dark-500);
+  border-radius: 50%;
+}
+
+.addPhotoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 24px;
+
+  margin-top: -24px;
+  padding-bottom: 24px;
+}
+
+.locationWrapper {
+  display: flex;
+  gap: 24px;
+
+  select {
+    width: 100%;
+    padding: 6px 12px;
+    background-color: var(--color-dark-500);
+  }
+}
+
+.locationItem {
+  flex-grow: 1;
+}
+
+.dateOfBirthLabel {
+  color: var(--color-light-900);
+}
+
+.aboutMe textarea {
+  min-height: 84px;
+}
+
+.formSubmitButton {
+  align-self: flex-end;
+}
+
+.selectWrapper {
+  width: 100%;
+
+  & > span {
+    font-size: var(--font-size-s);
+    color: var(--color-light-900);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-m);
+  }
+}

@@ -1,0 +1,26 @@
+.container {
+  max-width: 234px;
+}
+
+.postImagesContainer {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.userInfoContainer {
+  text-decoration: none;
+}
+
+.timeAgo {
+  margin: 12px 0 3px;
+  color: var(--color-light-900);
+}
+
+.description {
+  display: inline;
+  word-wrap: break-word;
+}
+
+.showMore {
+  cursor: pointer;
+}

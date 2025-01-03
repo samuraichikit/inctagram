@@ -1,0 +1,104 @@
+%content {
+  position: fixed;
+  left: 50%;
+
+  background-color: var(--color-dark-300);
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
+}
+
+.header button {
+  all: unset;
+}
+
+.DialogOverlay {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+
+  opacity: 0.5;
+  background-color: var(--color-dark-900);
+}
+
+.DialogContent {
+  @extend %content;
+
+  z-index: 9999;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  max-width: 492px;
+
+  background-color: var(--color-dark-300);
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
+}
+
+.DialogContent:focus {
+  outline: none;
+}
+
+.DialogTitle {
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-l);
+  color: var(--color-light-100);
+}
+
+.IconButton {
+  width: 18px;
+  height: 18px;
+
+  font-family: inherit;
+  color: var(--color-light-100);
+
+  border-radius: 100%;
+}
+
+.IconButton:hover {
+  background-color: var(--color-dark-500);
+  transition: 10ms ease-in-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 25px;
+  border-bottom: 1px solid var(--color-dark-100);
+}
+
+.contentContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 25px;
+}
+
+.closeButton {
+  all: unset;
+
+  cursor: pointer;
+
+  position: absolute;
+  top: -13px;
+  right: -19px;
+  transform: translate(100%, -100%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.postContent {
+  @extend %content;
+
+  z-index: 9999;
+  top: 84px;
+  transform: translateX(-50%);
+
+  width: 972px;
+  height: 564px;
+}

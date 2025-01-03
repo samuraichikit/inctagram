@@ -1,0 +1,19 @@
+@mixin root($width: 192px, $height: 192px, $radius: 50%) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: $width;
+  height: $height;
+
+  background-color: var(--color-dark-500);
+  border-radius: $radius;
+}
+
+.circle {
+  @include root;
+}
+
+.square {
+  @include root(222px, 228px, 2px);
+}

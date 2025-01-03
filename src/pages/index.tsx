@@ -1,6 +1,35 @@
+import { AppStore, wrapper } from '@/app/store'
+import { PAGE_SIZE_PUBLIC_POSTS } from '@/common/constants'
+import { useGoogleAuth } from '@/common/hooks/useGoogleAuth'
+import { PublicPage } from '@/components/pagesComponents/publicPage/PublicPage'
+import { getBaseLayout } from '@/components/ui/layout'
+import { baseApi } from '@/services/baseApi'
+import { publicPostsService } from '@/services/publicPosts'
+import { publicUserService } from '@/services/publicUser'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
-export default function Home() {
+import { NextPageWithLayout } from './_app'
+
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+  (store: AppStore) => async () => {
+    store.dispatch(publicUserService.endpoints.getTotalUsers.initiate())
+    store.dispatch(
+      publicPostsService.endpoints.getPublicPosts.initiate({ pageSize: PAGE_SIZE_PUBLIC_POSTS })
+    )
+
+    await Promise.all(store.dispatch(baseApi.util.getRunningQueriesThunk()))
+
+    return {
+      props: {},
+      revalidate: 60,
+    }
+  }
+)
+
+const Home: NextPageWithLayout = () => {
+  useGoogleAuth()
+
   return (
     <>
       <Head>
@@ -9,9 +38,12 @@ export default function Home() {
         <meta content={'width=device-width, initial-scale=1'} name={'viewport'} />
         <link href={'/favicon.ico'} rel={'icon'} />
       </Head>
-      <div>
-        <h1>Samuraichiki team</h1>
-      </div>
+      <>
+        <PublicPage />
+      </>
     </>
   )
 }
+
+Home.getLayout = getBaseLayout
+export default Home

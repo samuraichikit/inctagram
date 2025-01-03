@@ -1,0 +1,66 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.buttonArrowBack,
+.buttonArrowForward {
+  z-index: 5;
+
+  width: 24px;
+  height: 24px;
+
+  color: var(--color-light-100);
+
+  background-color: rgba(51 51 51 / 50%);
+}
+
+.buttonArrowBack {
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  transform: translateY(-50%);
+}
+
+.buttonArrowForward {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+}
+
+.customPagination {
+  position: absolute;
+  z-index: 5;
+  bottom: 8px;
+  left: 50%;
+  transform: translate(-50%, -100%);
+
+  display: flex;
+  gap: 8px;
+
+  padding: 3px 8px;
+
+  background-color: rgba(51 51 51 / 50%);
+  border-radius: 2px;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.customBullet {
+  cursor: pointer;
+
+  display: inline-block;
+
+  width: 6px;
+  height: 6px;
+
+  background-color: var(--color-light-100);
+  border-radius: 100%;
+}
+
+.activeCustomBullet {
+  background-color: var(--color-accent-500);
+}

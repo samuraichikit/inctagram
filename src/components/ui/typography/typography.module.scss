@@ -1,0 +1,76 @@
+@mixin typography($fontSize, $lineHeight, $fontWeight) {
+  margin: 0;
+
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+  color: var(--color-light-100);
+}
+
+.large {
+  @include typography(var(--font-size-xxl), var(--line-height-l), var(--font-weight-semi-bold));
+}
+
+.h1 {
+  @include typography(var(--font-size-xl), var(--line-height-l), var(--font-weight-bold));
+}
+
+.h2 {
+  @include typography(var(--font-size-l), var(--line-height-m), var(--font-weight-bold));
+}
+
+.h3 {
+  @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-semi-bold));
+}
+
+.regular_text_16 {
+  @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-regular));
+}
+
+.bold_text_16 {
+  @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
+}
+
+.regular_text_14 {
+  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
+}
+
+.medium_text_14 {
+  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-medium));
+}
+
+.bold_text_14 {
+  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-bold));
+}
+
+.small_text {
+  @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
+}
+
+.semi-bold_small_text {
+  @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-semi-bold));
+}
+
+.regular_link,
+.regular_link:visited {
+  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
+
+  cursor: pointer;
+  color: var(--color-accent-500);
+  text-decoration: underline;
+}
+
+.small_link,
+.small_link:visited {
+  @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
+
+  cursor: pointer;
+  color: var(--color-accent-500);
+  text-decoration: underline;
+}
+
+.error {
+  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
+
+  color: var(--color-danger-500);
+}

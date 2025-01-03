@@ -1,0 +1,51 @@
+.wrapper {
+  width: 100%;
+  margin-top: 36px;
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 40px;
+}
+
+.avatarWrapper {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+
+  width: 204px;
+  height: 204px;
+
+  background-color: var(--color-dark-500);
+  border-radius: 50%;
+}
+
+.profileWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 20px;
+}
+
+.userNameWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.followInfoList {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+}
+
+.userPostsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 48px;
+}
