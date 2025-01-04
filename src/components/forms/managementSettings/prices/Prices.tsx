@@ -52,8 +52,6 @@ export const Prices = () => {
   const [textMessage, setTextMessage] = useState('')
   const [btnText, setBtnText] = useState('')
 
-  console.log(router.query.id && router.query.id[1])
-
   useEffect(() => {
     if (
       router.query.id &&
@@ -74,16 +72,17 @@ export const Prices = () => {
         setBtnText('OK')
         setIsModal(true)
       })
-    }
-    if (
-      router.query.id &&
-      router.query.id[1] === 'cancel' &&
-      localStorage.getItem('stripeWindow') === 'true'
-    ) {
-      setTitle('Error')
-      setTextMessage('Transaction failed. Please, write to support')
-      setBtnText('Back to payment')
-      setIsModal(true)
+    } else {
+      if (
+        router.query.id &&
+        router.query.id[1] === 'cancel' &&
+        localStorage.getItem('stripeWindow') === 'true'
+      ) {
+        setTitle('Error')
+        setTextMessage('Transaction failed. Please, write to support')
+        setBtnText('Back to payment')
+        setIsModal(true)
+      }
     }
   }, [router.query.id, data])
 
@@ -106,7 +105,6 @@ export const Prices = () => {
   }
 
   const redirectToCheckout = async () => {
-    console.log('redirectToCheckout')
     localStorage.setItem('stripeWindow', 'true')
 
     const stripe = await getStripe()
@@ -114,7 +112,6 @@ export const Prices = () => {
 
     if (error) {
       setStripeError(error.message)
-      console.log('Stripe checkout error', error)
     }
     setSuccessStripe('Успешно оплачен!')
   }
@@ -162,11 +159,12 @@ export const Prices = () => {
                         ${p.amount} {t.accountManagement.per}
                       </span>
                       <span className={s.date}>
+                        {/* eslint-disable-next-line no-nested-ternary */}
                         {p.typeDescription === 'DAY'
                           ? t.accountManagement.day
                           : p.typeDescription === 'WEEKLY'
-                            ? t.accountManagement.weekly
-                            : t.accountManagement.monthly}
+                          ? t.accountManagement.weekly
+                          : t.accountManagement.monthly}
                       </span>
                     </span>
                   </label>
