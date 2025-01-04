@@ -23,8 +23,6 @@ const PaypalCheckoutButton = (props: PropsType) => {
   const [postSubscriptions, { data }] = usePostSubscriptionsMutation()
   const { data: meInfo } = useMeQuery()
 
-  console.log(data)
-
   const [paidFor, setPaidFor] = useState(false)
   const [title, setTitle] = useState('')
   const [message, setMessage] = useState('')
@@ -91,8 +89,6 @@ const PaypalCheckoutButton = (props: PropsType) => {
         }}
         onApprove={async (data: any, actions: any) => {
           const order = await actions?.order.capture()
-
-          console.log('order', data.orderID)
 
           handleApprove(data)
         }}

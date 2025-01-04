@@ -1,25 +1,24 @@
-
-
 .textBtn {
     margin-top: 55px;
 }
 
 .PaypalIcon {
-    display: inline-block;
     position: absolute;
-    right: 200px
+    right: 200px;
+    display: inline-block
 }
 
 .PaypalOriginal {
     position: absolute;
-    right: 200px;
     top: 3px;
-    border: 1px solid;
-    width: 100px;
-    overflow: hidden;
+    right: 200px;
 
+    overflow: hidden;
     display: flex;
     justify-content: center;
 
+    width: 100px;
+
     opacity: 0.001;
+    border: 1px solid;
 }

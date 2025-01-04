@@ -163,8 +163,8 @@ export const Prices = () => {
                         {p.typeDescription === 'DAY'
                           ? t.accountManagement.day
                           : p.typeDescription === 'WEEKLY'
-                          ? t.accountManagement.weekly
-                          : t.accountManagement.monthly}
+                            ? t.accountManagement.weekly
+                            : t.accountManagement.monthly}
                       </span>
                     </span>
                   </label>
