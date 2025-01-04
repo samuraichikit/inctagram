@@ -9,7 +9,9 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+
   padding: 15px 20px;
+
   background-color: var(--color-dark-500);
   border: 1px solid var(--color-dark-300);
 }
@@ -23,15 +25,15 @@
   text-transform: lowercase;
 
   &::first-letter {
-     text-transform: uppercase;
+    text-transform: uppercase;
   }
 }
 
 .wrapperPayments {
+  position: relative;
   display: flex;
   justify-content: flex-end;
   margin-top: 25px;
-  position: relative;
 }
 
 .date {
@@ -45,9 +47,11 @@
 
 .or {
   display: inline-block;
+
   width: 80px;
   height: 60px;
+  margin-right: 12px;
+
   line-height: 60px;
   text-align: center;
-  margin-right: 12px;
 }
