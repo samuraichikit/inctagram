@@ -18,3 +18,15 @@
   height: auto;
   padding: 24px 60px;
 }
+
+.formButtonWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
