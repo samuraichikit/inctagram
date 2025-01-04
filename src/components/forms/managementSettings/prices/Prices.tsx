@@ -15,8 +15,8 @@ import * as RadioGroup from '@radix-ui/react-radio-group'
 import { loadStripe } from '@stripe/stripe-js'
 import { useRouter } from 'next/router'
 
-import s from '../ManagementSettings.module.css'
-import styles from '@/components/forms/managementSettings/styles.module.css'
+import s from '../ManagementSettings.module.scss'
+import styles from '@/components/forms/managementSettings/styles.module.scss'
 
 let stripePromise: any
 
@@ -165,8 +165,8 @@ export const Prices = () => {
                         {p.typeDescription === 'DAY'
                           ? t.accountManagement.day
                           : p.typeDescription === 'WEEKLY'
-                          ? t.accountManagement.weekly
-                          : t.accountManagement.monthly}
+                            ? t.accountManagement.weekly
+                            : t.accountManagement.monthly}
                       </span>
                     </span>
                   </label>

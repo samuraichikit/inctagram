@@ -5,8 +5,8 @@ import { Prices } from '@/components/forms/managementSettings/prices/Prices'
 import { useMeQuery } from '@/services/auth'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 
-import s from './ManagementSettings.module.css'
-import styles from './styles.module.css'
+import s from './ManagementSettings.module.scss'
+import styles from './styles.module.scss'
 
 export const ManagementSettings = () => {
   const { data: meInfo } = useMeQuery()

@@ -12,7 +12,7 @@ import { useMeQuery } from '@/services/auth'
 import { PayPalButtons } from '@paypal/react-paypal-js'
 import { useRouter } from 'next/router'
 
-import s from './Paypal.module.css'
+import s from './Paypal.module.scss'
 
 type PropsType = {
   data: ResponseGetPricesPay

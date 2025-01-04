@@ -210,9 +210,6 @@ importers:
       storybook:
         specifier: ^8.2.9
         version: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
-      stylelint:
-        specifier: ^16.9.0
-        version: 16.9.0(typescript@5.5.4)
       typescript:
         specifier: ^5
         version: 5.5.4
