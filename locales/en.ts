@@ -3,6 +3,17 @@ import { pluralizeEn } from '@/common/utils'
 import { Locale } from './ru'
 
 export const en: Locale = {
+  accountManagement: {
+    accountType: 'Account type:',
+    business: 'Business',
+    day: 'day',
+    monthly: 'monthly',
+    or: 'or',
+    per: 'per',
+    personal: 'Personal',
+    priceSubscription: 'Your subscription costs:',
+    weekly: 'weekly',
+  },
   agreementMsg: 'I agree to the',
   emailVerification: {
     expiredLinkMsg: 'Email verification link expired',

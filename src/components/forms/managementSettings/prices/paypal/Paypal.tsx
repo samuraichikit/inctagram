@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { PaypalPayment } from '@/assets/icons/PaypalPayment'
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 import { usePostSubscriptionsMutation } from '@/services/accountSubscriptions/accountSubsService'
@@ -37,9 +38,9 @@ const PaypalCheckoutButton = (props: PropsType) => {
       const payload: RequestPostSubscriptions = {
         amount: props.data.data[Number(localStorage.getItem('price'))].amount || 10,
         baseUrl: process.env.NEXT_PUBLIC_BASE_URL as string,
-        paymentType: 'STRIPE',
+        paymentType: 'PAYPAL',
         typeSubscription:
-          String(props.data.data[Number(localStorage.getItem('price'))].typeDescription) || '',
+          props.data.data[Number(localStorage.getItem('price'))].typeDescription || '',
       }
 
       postSubscriptions(payload).then(() => {
@@ -66,7 +67,11 @@ const PaypalCheckoutButton = (props: PropsType) => {
 
   return (
     <>
+      <span className={s.PaypalIcon}>
+        <PaypalPayment />
+      </span>
       <PayPalButtons
+        className={s.PaypalOriginal}
         createOrder={(data, actions) => {
           // @ts-ignore
           return actions.order.create({

@@ -1,14 +1,22 @@
 import { useEffect, useState } from 'react'
 
+import { StripePayment } from '@/assets/icons/StripePayment'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import PaypalCheckoutButton from '@/components/forms/managementSettings/prices/paypal/Paypal'
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
-import { useGetPricesPaymentQuery } from '@/services/accountSubscriptions/accountSubsService'
+import {
+  useGetPricesPaymentQuery,
+  usePostSubscriptionsMutation,
+} from '@/services/accountSubscriptions/accountSubsService'
+import { RequestPostSubscriptions } from '@/services/accountSubscriptions/accountSubsService.types'
 import { useMeQuery } from '@/services/auth'
+import * as RadioGroup from '@radix-ui/react-radio-group'
 import { loadStripe } from '@stripe/stripe-js'
 import { useRouter } from 'next/router'
 
 import s from '../ManagementSettings.module.css'
+import styles from '@/components/forms/managementSettings/styles.module.css'
 
 let stripePromise: any
 
@@ -23,7 +31,9 @@ const getStripe = () => {
 export const Prices = () => {
   const { data: meInfo } = useMeQuery()
   const { data, isLoading } = useGetPricesPaymentQuery()
+  const [postSubscriptions] = usePostSubscriptionsMutation()
   const router = useRouter()
+  const { t } = useTranslation()
 
   const [choiceSelect, setChoiceSelect] = useState<number>(
     Number(localStorage.getItem('price')) + 1 || 1
@@ -48,12 +58,22 @@ export const Prices = () => {
     if (
       router.query.id &&
       router.query.id[1] === `success` &&
-      localStorage.getItem('stripeWindow') === 'true'
+      localStorage.getItem('stripeWindow') === 'true' &&
+      data
     ) {
-      setTitle('Success')
-      setTextMessage('Payment was successful!')
-      setBtnText('OK')
-      setIsModal(true)
+      const payload: RequestPostSubscriptions = {
+        amount: data.data[Number(localStorage.getItem('price'))].amount || 10,
+        baseUrl: process.env.NEXT_PUBLIC_BASE_URL as string,
+        paymentType: 'STRIPE',
+        typeSubscription: data.data[Number(localStorage.getItem('price'))].typeDescription,
+      }
+
+      postSubscriptions(payload).then(() => {
+        setTitle('Success')
+        setTextMessage('Payment was successful!')
+        setBtnText('OK')
+        setIsModal(true)
+      })
     }
     if (
       router.query.id &&
@@ -65,7 +85,7 @@ export const Prices = () => {
       setBtnText('Back to payment')
       setIsModal(true)
     }
-  }, [router.query.id])
+  }, [router.query.id, data])
 
   const prices = [
     'price_1Qd90zQue32akx1ngur6u5os', // $10
@@ -117,25 +137,50 @@ export const Prices = () => {
   }
 
   return (
-    <div>
-      <h3>Your subscription costs:</h3>
+    <div className={s.blockPrices}>
+      <h3 className={s.Title}>{t.accountManagement.priceSubscription}</h3>
       <div className={s.accountTypeBlock}>
-        {data?.data &&
-          data?.data.map((p, i) => (
-            <div className={s.radioAndText} key={i}>
-              <input
-                checked={choiceSelect === i + 1}
-                onChange={() => checkedRadio(i + 1)}
-                type={'radio'}
-              />
-              <span>${p.amount} per</span>
-              <span className={s.term}>{p.typeDescription}</span>
-            </div>
-          ))}
+        <RadioGroup.Root
+          aria-label={'Account type'}
+          className={styles.Root}
+          defaultValue={String(choiceSelect)}
+        >
+          {data?.data &&
+            data.data.map((p, i) => (
+              <div key={i}>
+                <div style={{ alignItems: 'center', display: 'flex' }}>
+                  <RadioGroup.Item
+                    className={styles.Item}
+                    onClick={() => checkedRadio(i + 1)}
+                    value={`${i + 1}`}
+                  >
+                    <RadioGroup.Indicator className={styles.Indicator} />
+                  </RadioGroup.Item>
+                  <label className={styles.Label} htmlFor={'r2'}>
+                    <span>
+                      <span>
+                        ${p.amount} {t.accountManagement.per}
+                      </span>
+                      <span className={s.date}>
+                        {p.typeDescription === 'DAY'
+                          ? t.accountManagement.day
+                          : p.typeDescription === 'WEEKLY'
+                          ? t.accountManagement.weekly
+                          : t.accountManagement.monthly}
+                      </span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+            ))}
+        </RadioGroup.Root>
       </div>
       <div className={s.wrapperPayments}>
         <PaypalCheckoutButton data={data} />
-        <Button onClick={redirectToCheckout}>Stripe</Button>
+        <span className={s.or}>{t.accountManagement.or}</span>
+        <Button onClick={redirectToCheckout} variant={'icon'}>
+          <StripePayment />
+        </Button>
       </div>
       <Modal className={s.modal} onOpenChange={clickButtonHandler} open={isModal} title={title}>
         <div>{textMessage}</div>

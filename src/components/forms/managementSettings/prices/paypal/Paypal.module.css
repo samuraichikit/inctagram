@@ -4,3 +4,22 @@
     margin-top: 55px;
 }
 
+.PaypalIcon {
+    display: inline-block;
+    position: absolute;
+    right: 200px
+}
+
+.PaypalOriginal {
+    position: absolute;
+    right: 200px;
+    top: 3px;
+    border: 1px solid;
+    width: 100px;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+
+    opacity: 0.001;
+}

@@ -1,12 +1,19 @@
+.Title {
+    margin: 0 0 7px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+}
+
 .accountTypeBlock {
     display: flex;
     flex-direction: column;
     gap: 10px;
 
-    margin-top: 5px;
-    padding: 10px 20px;
+    padding: 15px 20px;
 
-    background-color: dimgrey;
+    background-color: var(--color-dark-500);
+    border: 1px solid var(--color-dark-300);
 
 }
 
@@ -26,4 +33,25 @@
 .wrapperPayments {
     display: flex;
     justify-content: flex-end;
+    margin-top: 25px;
+    position: relative;
+}
+
+.date {
+    margin-left: 3px;
+    text-transform: lowercase;
+}
+
+.blockPrices {
+    margin-top: 45px;
+}
+
+.or {
+    display: inline-block;
+    width: 80px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    margin-right: 12px;
+
 }
