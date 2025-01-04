@@ -1,0 +1,34 @@
+name: Lint and Prettier Check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  lint:
+    name: Run Lint, Prettier, Stylelint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.11
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install missing dependency
+        run: npm install @typescript-eslint/types
+
+      - name: Run Prettier, ESLint, Stylelint
+        run: npm run check
