@@ -17,7 +17,7 @@
   .selectBlock {
     display: flex;
     flex-direction: row;
-    gap: 0 12px;
+    gap: 0 7px;
     justify-content: center;
   }
 }
@@ -27,4 +27,14 @@
   flex-direction: row;
   gap: 0 12px;
   justify-content: center;
+}
+
+.Select {
+  background-color: var(--color-dark-500);
+}
+
+.wrapperShowPage {
+  display: flex;
+  gap: 7px;
+  margin-top: 30px;
 }

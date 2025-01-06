@@ -16,9 +16,10 @@ export const ManagementSettings = () => {
   const [statusAcc, setStatusAcc] = useState('personal')
   const { t } = useTranslation()
 
+  useEffect(() => {}, [])
+
   useEffect(() => {
     localStorage.setItem('userId', String(meInfo?.userId))
-    setStatusAcc(localStorage.getItem('statusAcc') || 'personal')
   }, [meInfo])
 
   const checkedRadio = (type: string) => {
@@ -43,7 +44,7 @@ export const ManagementSettings = () => {
 
   return (
     <div>
-      {data?.data[0].autoRenewal && <AutoRenewal />}
+      {data?.data[0] && <AutoRenewal />}
       <div>
         <h3 className={s.Title}>{t.accountManagement.accountType}</h3>
         <div className={s.accountTypeBlock}>

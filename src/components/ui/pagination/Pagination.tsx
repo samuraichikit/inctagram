@@ -1,5 +1,6 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 
+import { CustomSelect } from '@/components/ui/pagination/customSelect/CustomSelect'
 import { NavigationBlock } from '@/components/ui/pagination/navigation-block'
 import { PageSizeSelect } from '@/components/ui/pagination/page-size-select/page-size-select'
 import { usePagination } from '@/components/ui/pagination/usePagination'
@@ -11,6 +12,7 @@ import s from './pagination.module.scss'
 export type PaginationProps = {
   className?: string
   currentPage: number
+  getPageSize: (value: number) => void
   onPageChange: (newPage: number) => void
   onPageSizeChange: (newPageSize: number) => void
   pageSize: number
@@ -22,6 +24,7 @@ export const Pagination = memo(
   ({
     className,
     currentPage,
+    getPageSize,
     onPageChange,
     onPageSizeChange,
     pageSize,
@@ -29,6 +32,13 @@ export const Pagination = memo(
     totalCount = 10,
   }: PaginationProps) => {
     const classes = clsx(s.root, className)
+
+    const [selectValue, setSelectValue] = useState('5')
+
+    const changeSelect = (value: string) => {
+      getPageSize(Number(value))
+      setSelectValue(value)
+    }
 
     const paginationRange = usePagination({
       currentPage,
@@ -38,7 +48,18 @@ export const Pagination = memo(
     })
 
     if (currentPage === 0 || paginationRange.length < 2) {
-      return null
+      return (
+        <div className={s.wrapperShowPage}>
+          <Typography variant={'regular_text_14'}>Show</Typography>
+          {/*<PageSizeSelect onPageSizeChange={onPageSizeChange} pageSize={pageSize} />*/}
+          <CustomSelect
+            changeSelect={changeSelect}
+            className={s.Select}
+            selectValue={selectValue}
+          />
+          <Typography variant={'regular_text_14'}>on page</Typography>
+        </div>
+      )
     }
 
     return (
@@ -50,7 +71,12 @@ export const Pagination = memo(
         />
         <div className={s.selectBlock}>
           <Typography variant={'regular_text_14'}>Show</Typography>
-          <PageSizeSelect onPageSizeChange={onPageSizeChange} pageSize={pageSize} />
+          {/*<PageSizeSelect onPageSizeChange={onPageSizeChange} pageSize={pageSize} />*/}
+          <CustomSelect
+            changeSelect={changeSelect}
+            className={s.Select}
+            selectValue={selectValue}
+          />
           <Typography variant={'regular_text_14'}>on page</Typography>
         </div>
       </div>
