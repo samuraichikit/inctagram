@@ -2,15 +2,15 @@ import { pluralizeRu } from '@/common/utils'
 
 export const ru = {
   accountManagement: {
+    DAY: 'день',
+    MONTHLY: 'месяц',
+    WEEKLY: 'неделю',
     accountType: 'Тип аккаунта:',
     business: 'Бизнес',
-    day: 'день',
-    monthly: 'месяц',
     or: 'или',
     per: 'за',
     personal: 'Личный',
     priceSubscription: 'Стоимость подписки:',
-    weekly: 'неделю',
   },
   agreementMsg: 'Я соглашаюсь с ',
   emailVerification: {
