@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { AutoRenewal } from '@/components/forms/managementSettings/autoRenewal/AutoRenewal'
 import { Prices } from '@/components/forms/managementSettings/prices/Prices'
+import { useGetCurrentPaymentSubscriptionsQuery } from '@/services/accountSubscriptions/accountSubsService'
 import { useMeQuery } from '@/services/auth'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 
@@ -10,6 +12,7 @@ import styles from './styles.module.scss'
 
 export const ManagementSettings = () => {
   const { data: meInfo } = useMeQuery()
+  const { data } = useGetCurrentPaymentSubscriptionsQuery()
   const [statusAcc, setStatusAcc] = useState('personal')
   const { t } = useTranslation()
 
@@ -23,12 +26,24 @@ export const ManagementSettings = () => {
     localStorage.setItem('statusAcc', type)
   }
 
+  useEffect(() => {
+    if (data?.data[0].autoRenewal === false) {
+      const time = new Date()
+
+      data?.data[0].endDateOfSubscription >= time.toLocaleString() &&
+        localStorage.setItem('statusAcc', 'personal')
+
+      data?.data[0].endDateOfSubscription >= time.toLocaleString() && setStatusAcc('personal')
+    }
+  }, [data])
+
   if (!meInfo) {
     return <div>Loading...</div> // todo - скелетоны сделать
   }
 
   return (
     <div>
+      {data?.data[0].autoRenewal && <AutoRenewal />}
       <div>
         <h3 className={s.Title}>{t.accountManagement.accountType}</h3>
         <div className={s.accountTypeBlock}>

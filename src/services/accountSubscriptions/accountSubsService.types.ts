@@ -1,6 +1,8 @@
+export type DescriptionType = 'DAY' | 'MONTHLY' | 'WEEKLY'
+
 export type pricesPayType = {
   amount: number
-  typeDescription: string
+  typeDescription: DescriptionType
 }
 
 export type ResponseGetPricesPay = {
@@ -14,4 +16,26 @@ export type RequestPostSubscriptions = {
   baseUrl: string
   paymentType: PaymentType
   typeSubscription: string
+}
+
+export type myPaymentType = {
+  dateOfPayment: string
+  endDateOfSubscription: string
+  paymentType: string
+  price: number
+  subscriptionId: string
+  subscriptionType: string
+  userId: number
+}
+
+export type ResponseCurrPaymentSubs = {
+  data: RootObjectData[]
+  hasAutoRenewal: boolean
+}
+export type RootObjectData = {
+  autoRenewal: boolean
+  dateOfPayment: string
+  endDateOfSubscription: string
+  subscriptionId: string
+  userId: number
 }

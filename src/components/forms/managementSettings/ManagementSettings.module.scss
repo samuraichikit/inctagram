@@ -1,5 +1,5 @@
 .Title {
-  margin: 0 0 7px;
+  margin: 0 0 15px;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
@@ -51,7 +51,44 @@
   width: 80px;
   height: 60px;
   margin-right: 12px;
+  margin-left: 10px;
 
   line-height: 60px;
   text-align: center;
+}
+
+.wrapperDatePayments {
+  display: flex;
+  gap: 50px;
+
+  padding: 15px 20px;
+
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-300);
+}
+
+.datePayment {
+  display: flex;
+  flex-direction: column;
+  row-gap: 13px;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.datePaymentText {
+  font-weight: 400;
+  color: #8d9094;
+}
+
+.autoRenewal {
+  margin: 15px 0 25px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+
+  & > span {
+    margin-left: 5px;
+  }
 }
