@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { useTransformDate } from '@/common/hooks/useTransformDate'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import {
   useGetCurrentPaymentSubscriptionsQuery,
   usePostCanceledAutoRenewalMutation,
@@ -12,48 +13,49 @@ import s from '../ManagementSettings.module.scss'
 
 export const AutoRenewal = () => {
   const { data } = useGetCurrentPaymentSubscriptionsQuery()
-  const [PostCanceledAutoRenewal] = usePostCanceledAutoRenewalMutation()
+  const [postCanceledAutoRenewal] = usePostCanceledAutoRenewalMutation()
 
   const dateOfPayment = useTransformDate(data ? data.data[0].dateOfPayment : '')
   const endDateOfSubscription = useTransformDate(data ? data.data[0].endDateOfSubscription : '')
 
   const [isRenewal, setIsRenewal] = useState(data?.data[0].autoRenewal)
 
+  const { t } = useTranslation()
+
   useEffect(() => {
-    setIsRenewal(data?.data[0].autoRenewal)
+    setIsRenewal(data?.hasAutoRenewal)
   }, [data])
 
-  useEffect(() => {
-    if (data?.data[0].autoRenewal === true && !isRenewal) {
-      PostCanceledAutoRenewal()
-    }
-  }, [isRenewal])
+  const changeCheckbox = () => {
+    setIsRenewal(!isRenewal)
+    postCanceledAutoRenewal()
+  }
 
   if (!data) {
-    return <></>
+    return <>Loading...</>
   }
 
   return (
     <>
-      <h3 className={s.Title}>Current Subscription:</h3>
+      <h3 className={s.Title}>{t.blockAutoRenewal.CurrentSubscription}:</h3>
       <div className={s.wrapperDatePayments}>
         <div className={s.datePayment}>
-          <span className={s.datePaymentText}>Expire at</span>
+          <span className={s.datePaymentText}>{t.blockAutoRenewal.ExpireAt}</span>
           <span>{dateOfPayment}</span>
         </div>
         <div className={s.datePayment}>
-          <span className={s.datePaymentText}>Next payment</span>
+          <span className={s.datePaymentText}>{t.blockAutoRenewal.NextPayment}</span>
           <span>{endDateOfSubscription}</span>
         </div>
       </div>
       <div className={s.autoRenewal}>
         <input
           checked={isRenewal}
-          disabled={!data.data[0].autoRenewal}
-          onChange={() => setIsRenewal(!isRenewal)}
+          disabled={!isRenewal}
+          onChange={changeCheckbox}
           type={'checkbox'}
         />
-        <span>Auto-Renewal</span>
+        <span>{t.blockAutoRenewal.AutoRenewal}</span>
       </div>
     </>
   )

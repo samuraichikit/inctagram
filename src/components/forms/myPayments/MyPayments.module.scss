@@ -10,16 +10,37 @@
 }
 
 .blockTitle {
+  position: relative;
+
   display: flex;
-  column-gap: 75px;
+
+  height: 50px;
   padding: 13px 20px;
+
   background-color: var(--color-dark-500);
 
   & > span {
+    position: absolute;
     font-size: 14px;
     font-weight: 600;
     line-height: 24px;
   }
+}
+
+.two {
+  left: 206px;
+}
+
+.three {
+  left: 446px;
+}
+
+.fo {
+  left: 554px;
+}
+
+.five {
+  left: 752px;
 }
 
 .blockMobile {

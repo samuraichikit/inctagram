@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import { useTranslation } from '@/common/hooks/useTranslation'
+import { MobileMyPayments } from '@/components/forms/myPayments/mobileMyPayments/MobileMyPayments'
 import { Pagination } from '@/components/ui/pagination'
 import { useGetMyPaymentsQuery } from '@/services/accountSubscriptions/accountSubsService'
 
@@ -9,6 +11,8 @@ export const MyPayments = () => {
   const { data, isLoading } = useGetMyPaymentsQuery()
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(5)
+
+  const { t } = useTranslation()
 
   const [width, setWidth] = useState(window.innerWidth)
   const breakpoint = 1177
@@ -71,40 +75,15 @@ export const MyPayments = () => {
   return (
     <div className={s.container}>
       {width < breakpoint ? (
-        <div className={s.blockMobile}>
-          {currentData.map((p, i) => (
-            <div className={s.blockInfo} key={i}>
-              <div className={s.blockInfoChildren}>
-                <span>Date of Payment:</span>
-                <span>{p.dateOfPayment}</span>
-              </div>
-              <div className={s.blockInfoChildren}>
-                <span>End data of subscription:</span>
-                <span>{p.endDateOfSubscription}</span>
-              </div>
-              <div className={s.blockInfoChildren}>
-                <span>Subscription Type:</span>
-                <span>{p.subscriptionType}</span>
-              </div>
-              <div className={s.blockInfoChildren}>
-                <span>Price:</span>
-                <span>${p.price}</span>
-              </div>
-              <div className={s.blockInfoChildren}>
-                <span>Payment Type:</span>
-                <span>{p.paymentType}</span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <MobileMyPayments currentData={currentData} t={t} />
       ) : (
         <div className={s.blockPayments}>
           <div className={s.blockTitle}>
-            <span>Date of Payment</span>
-            <span>End data of subscription</span>
-            <span>Price</span>
-            <span>Subscription Type</span>
-            <span>Payment Type</span>
+            <span className={s.one}>{t.myPayments.DateOfPayment}</span>
+            <span className={s.two}>{t.myPayments.EndDataOfSubscription}</span>
+            <span className={s.three}>{t.myPayments.Price}</span>
+            <span className={s.fo}>{t.myPayments.SubscriptionType}</span>
+            <span className={s.five}>{t.myPayments.PaymentType}</span>
           </div>
           {currentData.map((p, i) => (
             <div className={s.blockInfoPrice} key={i}>
