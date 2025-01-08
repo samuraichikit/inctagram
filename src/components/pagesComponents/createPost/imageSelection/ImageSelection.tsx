@@ -2,6 +2,7 @@ import { ChangeEvent, useRef } from 'react'
 
 import { useAppDispatch } from '@/app/store'
 import { CrossIcon } from '@/assets/icons/CrossIcon'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import {
   resetState,
   setNextStage,
@@ -24,7 +25,7 @@ export const ImageSelection = ({ onCloseBtn }: ImageSelectionProps) => {
   const setNext = () => dispatch(setNextStage())
   const setPhotos = (pictures: string[]) => dispatch(setPictures({ pictures }))
   const inputRef = useRef<HTMLInputElement>(null)
-
+  const { t } = useTranslation()
   const changePhotoHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     const readyForSetFiles = uploadPhotos(e)
@@ -49,7 +50,7 @@ export const ImageSelection = ({ onCloseBtn }: ImageSelectionProps) => {
   return (
     <div>
       <div className={s.title}>
-        <Typography variant={'h1'}>Add Photo</Typography>
+        <Typography variant={'h1'}>{t.postModal.addPhoto}</Typography>
         <button className={s.closeBtn} onClick={onCloseBtn} type={'button'}>
           <CrossIcon />
         </button>
@@ -66,10 +67,10 @@ export const ImageSelection = ({ onCloseBtn }: ImageSelectionProps) => {
               ref={inputRef}
               type={'file'}
             />
-            <Button onClick={selectPhoto}>Select from Computer</Button>
+            <Button onClick={selectPhoto}>{t.postModal.selectFromComputeBtn}</Button>
           </label>
           <Button fullWidth={false} onClick={openDraftHandler} variant={'outlined'}>
-            Open Draft
+            {t.postModal.openDraftBtn}
           </Button>
         </div>
       </div>
