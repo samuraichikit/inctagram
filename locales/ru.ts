@@ -67,14 +67,17 @@ export const ru = {
   },
   postModal: {
     addComment: 'Добависть комментарий',
+    addPhoto: 'Добавить фото',
     addPublicationDesc: 'Добавить описание поста',
     confirmationMsg:
       'Вы действительно хотите завершить редактирование? Если вы закроете окно, внесённые изменения не будут сохранены.',
     deleteConfirmMsg: 'Вы уверены, что хотите удалить этот пост?',
     deletePost: 'Удалить пост',
     editPost: 'Редактировать пост',
+    openDraftBtn: 'Открыть черновик',
     publishMsg: 'Отправить',
     saveChangesBtn: 'Сохранить изменения',
+    selectFromComputeBtn: 'Добавить с компьютера',
   },
   privacyPolicy: {
     title: 'Политика конфиденциальности',
