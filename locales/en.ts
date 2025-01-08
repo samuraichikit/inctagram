@@ -69,14 +69,17 @@ export const en: Locale = {
   },
   postModal: {
     addComment: 'Add a comment',
+    addPhoto: 'Add Photo',
     addPublicationDesc: 'Add Publication Description',
     confirmationMsg:
       'Do you really want to finish editing? If you close the changes you have made will not be saved.',
     deleteConfirmMsg: 'Are you sure you want to delete this post?',
     deletePost: 'Delete Post',
     editPost: 'Edit Post',
+    openDraftBtn: 'Open Draft',
     publishMsg: 'Publish',
     saveChangesBtn: 'Save Changes',
+    selectFromComputeBtn: 'Select from Computer',
   },
   privacyPolicy: {
     title: 'Privacy Policy',
