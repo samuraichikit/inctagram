@@ -39,7 +39,7 @@ export const Profile = () => {
     profileInfo?.userMetadata.publications,
   ]
 
-  const userName = meInfo?.userName ?? profileInfo?.userName
+  const userName = profileInfo?.userName
   const aboutMe = profileInfo?.aboutMe
   const avatarSrc = profileInfo?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
   const profileId = profileInfo?.id
