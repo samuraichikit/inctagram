@@ -18,7 +18,6 @@ import s from './profile.module.scss'
 export const Profile = () => {
   const router = useRouter()
   const { push } = router
-
   const { id, skipSSR } = router.query
   const userId = id?.[0] ?? ''
   const postId = id?.[1] ?? ''
@@ -40,7 +39,7 @@ export const Profile = () => {
     profileInfo?.userMetadata.publications,
   ]
 
-  const userName = meInfo?.userName ?? profileInfo?.userName
+  const userName = profileInfo?.userName
   const aboutMe = profileInfo?.aboutMe
   const avatarSrc = profileInfo?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
   const profileId = profileInfo?.id
@@ -52,12 +51,13 @@ export const Profile = () => {
   useEffect(() => {
     if (postId) {
       setIsOpen(true)
+      push(`/profile/${userId}/${postId}`)
     }
   }, [postId])
 
   const closeHandler = () => {
     setIsOpen(false)
-    push('/')
+    push(`/profile/${userId}`)
   }
 
   return (
