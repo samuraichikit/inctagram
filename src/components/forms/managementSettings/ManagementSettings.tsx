@@ -14,12 +14,16 @@ export const ManagementSettings = () => {
   const { data: meInfo } = useMeQuery()
   const { data } = useGetCurrentPaymentSubscriptionsQuery()
   const [statusAcc, setStatusAcc] = useState('personal')
+  const [init, setInit] = useState(false)
   const { t } = useTranslation()
 
   useEffect(() => {
     localStorage.setItem('userId', String(meInfo?.userId))
-    setStatusAcc(localStorage.getItem('statusAcc') || 'personal')
   }, [meInfo])
+
+  useEffect(() => {
+    setStatusAcc(localStorage.getItem('statusAcc') || 'personal')
+  }, [meInfo, data])
 
   const checkedRadio = (type: string) => {
     setStatusAcc(type)
@@ -27,13 +31,15 @@ export const ManagementSettings = () => {
   }
 
   useEffect(() => {
-    if (data?.data[0].autoRenewal === false) {
-      const time = new Date()
+    if (data?.data[0]) {
+      if (data?.data[0].autoRenewal === false) {
+        const time = new Date()
 
-      data?.data[0].endDateOfSubscription >= time.toLocaleString() &&
-        localStorage.setItem('statusAcc', 'personal')
-
-      data?.data[0].endDateOfSubscription >= time.toLocaleString() && setStatusAcc('personal')
+        if (data?.data[0].endDateOfSubscription <= time.toLocaleString()) {
+          localStorage.setItem('statusAcc', 'personal')
+          setStatusAcc('personal')
+        }
+      }
     }
   }, [data])
 
@@ -43,14 +49,14 @@ export const ManagementSettings = () => {
 
   return (
     <div>
-      {data?.data[0].autoRenewal && <AutoRenewal />}
+      {data?.data[0] && <AutoRenewal />}
       <div>
         <h3 className={s.Title}>{t.accountManagement.accountType}</h3>
         <div className={s.accountTypeBlock}>
           <RadioGroup.Root
             aria-label={'Account type'}
             className={styles.Root}
-            defaultValue={statusAcc}
+            defaultValue={localStorage.getItem('statusAcc') || statusAcc}
           >
             <div style={{ alignItems: 'center', display: 'flex' }}>
               <RadioGroup.Item

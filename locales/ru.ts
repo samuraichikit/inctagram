@@ -13,6 +13,12 @@ export const ru = {
     priceSubscription: 'Стоимость подписки:',
   },
   agreementMsg: 'Я соглашаюсь с ',
+  blockAutoRenewal: {
+    AutoRenewal: 'Авто-Продление',
+    CurrentSubscription: 'Текущая подписка',
+    ExpireAt: 'Истекает в',
+    NextPayment: 'Следующий платеж',
+  },
   emailVerification: {
     expiredLinkMsg: 'Ссылка на подтверждение пароля истекла',
     msg: 'Вероятно, сcылка на подтверждение пароля истекла.  Не волнуйтесь - мы вышлем вам новую!',
@@ -34,6 +40,13 @@ export const ru = {
     myProfile: 'Мой профиль',
     search: 'Поиск',
     statistics: 'Статистика',
+  },
+  myPayments: {
+    DateOfPayment: 'Дата платежа',
+    EndDataOfSubscription: 'Конечные данные подписки',
+    PaymentType: 'Тип оплаты',
+    Price: 'Цена',
+    SubscriptionType: 'Тип подписки',
   },
   passwordForm: {
     backToSignIn: 'Вернуться на страницу входа',

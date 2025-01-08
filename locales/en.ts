@@ -15,6 +15,12 @@ export const en: Locale = {
     priceSubscription: 'Your subscription costs:',
   },
   agreementMsg: 'I agree to the',
+  blockAutoRenewal: {
+    AutoRenewal: 'Auto-Renewal',
+    CurrentSubscription: 'Current Subscription',
+    ExpireAt: 'Expire at',
+    NextPayment: 'Next payment',
+  },
   emailVerification: {
     expiredLinkMsg: 'Email verification link expired',
     msg: 'Looks like the verification link has expired. Not to worry, we can send the link again',
@@ -36,6 +42,13 @@ export const en: Locale = {
     myProfile: 'My Profile',
     search: 'Search',
     statistics: 'Statistics',
+  },
+  myPayments: {
+    DateOfPayment: 'Date of Payment',
+    EndDataOfSubscription: 'End data of subscription',
+    PaymentType: 'Payment Type',
+    Price: 'Price',
+    SubscriptionType: 'Subscription Type',
   },
   passwordForm: {
     backToSignIn: 'Back to Sign In',
