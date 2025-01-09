@@ -12,7 +12,6 @@ import s from './pagination.module.scss'
 export type PaginationProps = {
   className?: string
   currentPage: number
-  getPageSize: (value: number) => void
   onPageChange: (newPage: number) => void
   onPageSizeChange: (newPageSize: number) => void
   pageSize: number
@@ -24,7 +23,6 @@ export const Pagination = memo(
   ({
     className,
     currentPage,
-    getPageSize,
     onPageChange,
     onPageSizeChange,
     pageSize,
@@ -36,7 +34,7 @@ export const Pagination = memo(
     const [selectValue, setSelectValue] = useState('5')
 
     const changeSelect = (value: string) => {
-      getPageSize(Number(value))
+      onPageSizeChange(Number(value))
       setSelectValue(value)
     }
 

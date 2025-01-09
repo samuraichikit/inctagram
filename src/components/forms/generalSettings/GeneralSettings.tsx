@@ -252,7 +252,9 @@ export const GeneralSettings = () => {
             />
           </form>
         </div>
-      ) : null}
+      ) : (
+        <div>Loading...</div>
+      )}
       {profile && initCountryAndCity && (
         <Button
           className={s.formSubmitButton}

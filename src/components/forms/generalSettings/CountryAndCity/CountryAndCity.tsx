@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { countryAndCityApi } from '@/components/forms/generalSettings/CountryAndCity/CountryAndCity-API/countryAndCityApi'
 import { cityType, countryType } from '@/components/forms/generalSettings/GeneralSettings.types'
+import { useGetProfileQuery } from '@/services/profile'
 
 import s from '../generalSettings.module.scss'
 
@@ -32,6 +33,7 @@ export const CountryAndCity = ({
   const [disableCity, setDisableCity] = useState(false)
   const [valueCity, setValueCity] = useState('city')
   const [valueCountry, setValueCountry] = useState('country')
+  const { data: profile } = useGetProfileQuery()
 
   const changeSelectCountry = (countryName: string) => {
     setValueCountry(countryName)
@@ -88,7 +90,7 @@ export const CountryAndCity = ({
           aria-label={t.profile.selectCountry}
           defaultValue={'country'}
           onChange={e => changeSelectCountry(e.target.value)}
-          value={valueCountry}
+          value={profile?.country || valueCountry}
         >
           {countries?.map((c, i) => {
             return (

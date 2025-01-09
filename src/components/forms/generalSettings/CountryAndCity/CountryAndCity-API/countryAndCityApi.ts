@@ -8,7 +8,7 @@ export const countryAndCityApi = {
     profile: { city?: string; country: string } | undefined
   ) {
     return axios
-      .get(`https://api.countrystatecity.in/v1/countries/${selectedValue}/states`, {
+      .get(`https://api.countrystatecity.in/v1/countries/${selectedValue}/cities`, {
         headers: {
           'X-CSCAPI-KEY': 'SnNMWVd2MkNId09vUlhtSmVFWkRGWERPNVV1eGlucVBRTGc3RTVUVg==',
         },

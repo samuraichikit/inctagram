@@ -58,19 +58,14 @@ export const MyPayments = () => {
   }
 
   const handlePageSizeChange = (newSize: number) => {
+    if (currentPage > 1) {
+      setCurrentPage(1)
+    }
     setPageSize(newSize)
-    setCurrentPage(1) // Сброс на первую страницу при изменении размера
   }
 
   const pages = getPages()
   const currentData = pages[currentPage - 1] || []
-
-  const getPageSizeHandler = (value: number) => {
-    if (currentPage > 1) {
-      setCurrentPage(1)
-    }
-    setPageSize(value)
-  }
 
   return (
     <div className={s.container}>
@@ -101,7 +96,6 @@ export const MyPayments = () => {
       <Pagination
         className={s.PaginationBlock}
         currentPage={currentPage}
-        getPageSize={getPageSizeHandler}
         onPageChange={handlePageChange}
         onPageSizeChange={handlePageSizeChange}
         pageSize={pageSize}
