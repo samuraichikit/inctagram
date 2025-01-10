@@ -16,18 +16,26 @@ export const ProfileSettingsLayout: NextPage<PropsWithChildren> = ({ children })
 
   const isMyProfile = !isLoading && !isError
 
+  if (!isMyProfile) {
+    return (
+      <>
+        <Header />
+        <main className={s.mainBase}></main>
+      </>
+    )
+  }
+
   const classNames = {
-    main: clsx(
-      !isMyProfile && s.mainBase,
-      isMyProfile && s.mainAuth,
-      (path === '/auth/privacyPolicy' || path === '/auth/termsOfService') && s.privacyPolicy
-    ),
+    main: clsx({
+      [s.mainAuth]: true,
+      [s.privacyPolicy]: path && ['/auth/privacyPolicy', '/auth/termsOfService'].includes(path),
+    }),
   }
 
   return (
     <>
       <Header />
-      {isMyProfile && <MainSidebar />}
+      <MainSidebar />
       <main className={classNames.main}>
         <div className={s.formButtonWrapper}>
           <div className={s.wrapper}>
