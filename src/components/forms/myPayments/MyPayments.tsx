@@ -7,23 +7,40 @@ import { useGetMyPaymentsQuery } from '@/services/accountSubscriptions/accountSu
 
 import s from './MyPayments.module.scss'
 
-export const MyPayments = () => {
+export const getServerSideProps = () => {
+  const windowInnerWidth = window.innerWidth
+
+  return {
+    props: {
+      windowInnerWidth,
+    },
+  }
+}
+
+type PropsType = {
+  windowInnerWidth: number
+}
+
+export const MyPayments = ({ windowInnerWidth }: PropsType) => {
   const { data, isLoading } = useGetMyPaymentsQuery()
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(5)
 
   const { t } = useTranslation()
 
-  const [width, setWidth] = useState(window.innerWidth)
+  const [init, setInit] = useState(false)
+  const [width, setWidth] = useState(windowInnerWidth)
   const breakpoint = 1177
 
   useEffect(() => {
-    const handleWindowResize = () => setWidth(window.innerWidth)
+    if (typeof window !== 'undefined') {
+      const handleWindowResize = () => setWidth(window.innerWidth)
 
-    window.addEventListener('resize', handleWindowResize)
+      setInit(true)
+      window.addEventListener('resize', handleWindowResize)
 
-    // Return a function from the effect that removes the event listener
-    return () => window.removeEventListener('resize', handleWindowResize)
+      return () => window.removeEventListener('resize', handleWindowResize)
+    }
   }, [])
 
   if (isLoading) {
@@ -68,40 +85,46 @@ export const MyPayments = () => {
   const currentData = pages[currentPage - 1] || []
 
   return (
-    <div className={s.container}>
-      {width < breakpoint ? (
-        <MobileMyPayments currentData={currentData} t={t} />
+    <>
+      {!init ? (
+        <div>Loading...</div>
       ) : (
-        <div className={s.blockPayments}>
-          <div className={s.blockTitle}>
-            <span className={s.one}>{t.myPayments.DateOfPayment}</span>
-            <span className={s.two}>{t.myPayments.EndDataOfSubscription}</span>
-            <span className={s.three}>{t.myPayments.Price}</span>
-            <span className={s.fo}>{t.myPayments.SubscriptionType}</span>
-            <span className={s.five}>{t.myPayments.PaymentType}</span>
-          </div>
-          {currentData.map((p, i) => (
-            <div className={s.blockInfoPrice} key={i}>
-              <span>{p.dateOfPayment}</span>
-              <span>{p.endDateOfSubscription}</span>
-              <span className={s.Price}>
-                <span>${p.price}</span>
-              </span>
-              <span className={s.SubsType}>{p.subscriptionType}</span>
-              <span className={s.PaymentType}>{p.paymentType}</span>
+        <div className={s.container}>
+          {width < breakpoint ? (
+            <MobileMyPayments currentData={currentData} t={t} />
+          ) : (
+            <div className={s.blockPayments}>
+              <div className={s.blockTitle}>
+                <span className={s.one}>{t.myPayments.DateOfPayment}</span>
+                <span className={s.two}>{t.myPayments.EndDataOfSubscription}</span>
+                <span className={s.three}>{t.myPayments.Price}</span>
+                <span className={s.fo}>{t.myPayments.SubscriptionType}</span>
+                <span className={s.five}>{t.myPayments.PaymentType}</span>
+              </div>
+              {currentData.map((p, i) => (
+                <div className={s.blockInfoPrice} key={i}>
+                  <span>{p.dateOfPayment}</span>
+                  <span>{p.endDateOfSubscription}</span>
+                  <span className={s.Price}>
+                    <span>${p.price}</span>
+                  </span>
+                  <span className={s.SubsType}>{p.subscriptionType}</span>
+                  <span className={s.PaymentType}>{p.paymentType}</span>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
+          <Pagination
+            className={s.PaginationBlock}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+            onPageSizeChange={handlePageSizeChange}
+            pageSize={pageSize}
+            totalCount={formattedData.length}
+          />
         </div>
       )}
-      <Pagination
-        className={s.PaginationBlock}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-        onPageSizeChange={handlePageSizeChange}
-        pageSize={pageSize}
-        totalCount={formattedData.length}
-      />
-    </div>
+    </>
   )
 }
 
