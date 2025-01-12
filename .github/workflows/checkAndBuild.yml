@@ -32,3 +32,6 @@ jobs:
 
       - name: Run Prettier, ESLint, Stylelint
         run: npm run check
+
+      - name: Build project
+        run: npm run build
