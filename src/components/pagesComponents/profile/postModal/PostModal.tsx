@@ -43,7 +43,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
     if (postById && postById.description !== description) {
       setDescription(postById.description)
     }
-  }, [postById])
+  }, [postById, description])
 
   const handleSetEditPost = (isShow: boolean) => {
     setIsEditModalOpen(isShow)
