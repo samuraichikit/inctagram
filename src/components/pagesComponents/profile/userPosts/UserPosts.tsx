@@ -110,9 +110,7 @@ export const UserPosts = ({ isPublic, userName }: Props) => {
           key={post.id}
           ref={index === posts.length - 1 ? targetRef : null}
         >
-          <Link
-            href={`/profile/${postsByUserName?.items[0].ownerId}/${postsByUserName?.items[0].id}`}
-          >
+          <Link href={`/profile/${post.ownerId}/${post.id}`}>
             <PostImages fill images={post.images} />
           </Link>
         </div>

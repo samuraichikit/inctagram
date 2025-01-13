@@ -28,15 +28,19 @@ type Props = {
 export const PostModal = ({ isOpen, onClose }: Props) => {
   const params = useParams()
 
-  const { data: postById } = useGetPostByIdQuery(params?.id[1] as string)
-  const { data: comments } = useGetPostMessageByIdQuery(params?.id[0] as string)
+  const { data: postById } = useGetPostByIdQuery(params?.id[1] as string, {
+    refetchOnMountOrArgChange: true,
+  })
+  const { data: comments } = useGetPostMessageByIdQuery(params?.id[0] as string, {
+    refetchOnMountOrArgChange: true,
+  })
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [description, setDescription] = useState<string>('')
   const { t } = useTranslation()
 
   useEffect(() => {
-    if (postById) {
+    if (postById && postById.description !== description) {
       setDescription(postById.description)
     }
   }, [postById])
