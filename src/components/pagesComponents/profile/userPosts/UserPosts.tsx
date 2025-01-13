@@ -1,6 +1,4 @@
-import { use, useEffect, useRef, useState } from 'react'
-
-import { get } from 'http'
+import { useEffect, useRef, useState } from 'react'
 
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { PostImages } from '@/components/pagesComponents/publicPage/publicPosts/postImages'
