@@ -40,9 +40,9 @@
   gap: 8px;
 
   padding: 3px 8px;
+  border-radius: 2px;
 
   background-color: rgba(51 51 51 / 50%);
-  border-radius: 2px;
 }
 
 .image {
@@ -56,9 +56,9 @@
 
   width: 6px;
   height: 6px;
+  border-radius: 100%;
 
   background-color: var(--color-light-100);
-  border-radius: 100%;
 }
 
 .activeCustomBullet {
