@@ -157,10 +157,6 @@ export const GeneralSettings = () => {
           }
         })
     } else {
-      if (countries.length > 0) {
-        setInitCountryAndCity(true)
-      }
-
       countryAndCityApi
         .getCountries(profile)
         .then(data => {
@@ -168,6 +164,9 @@ export const GeneralSettings = () => {
         })
         .then(() => {
           setFindRes(true)
+        })
+        .finally(() => {
+          setInitCountryAndCity(true)
         })
     }
   }, [profile])
