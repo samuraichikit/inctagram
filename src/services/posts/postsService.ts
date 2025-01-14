@@ -36,7 +36,7 @@ const postService = baseApi.injectEndpoints({
         result
           ? [
               { id: 'LIST', type: 'Posts' },
-              ...result.items.map(post => ({ id: post.id.toString(), type: 'Posts' })),
+              ...result.items.map(post => ({ id: post.id.toString(), type: 'Posts' }) as const),
             ]
           : [{ id: 'LIST', type: 'Posts' }],
       query: ({ userName, ...params }) => ({

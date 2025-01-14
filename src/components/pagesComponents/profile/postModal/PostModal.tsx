@@ -28,7 +28,7 @@ type Props = {
 export const PostModal = ({ isOpen, onClose }: Props) => {
   const params = useParams()
 
-  const { data: postById } = useGetPostByIdQuery(params?.id[1] as string, {
+  const { data: postById, isLoading } = useGetPostByIdQuery(params?.id[1] as string, {
     refetchOnMountOrArgChange: true,
   })
   const { data: comments } = useGetPostMessageByIdQuery(params?.id[0] as string, {
@@ -52,70 +52,72 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
     setDescription(newDescription)
   }
 
-  if (!postById) {
+  if (!postById || !params?.id) {
     return
   }
   const { avatarOwner, avatarWhoLikes, createdAt, id, images, likesCount, userName } = postById
 
   return (
-    <Modal onOpenChange={onClose} open={isOpen}>
-      <div className={s.container}>
-        <PostImages className={s.images} height={562} images={images} width={490} />
-        <div className={s.postDetails}>
-          {!isEditModalOpen && (
-            <div className={s.userInfoContainer}>
-              <UserInfo src={avatarOwner} userName={userName} />
-              <PostActionsMenu
-                showDeleteModal={isShow => setIsDeleteModalOpen(isShow)}
-                showEditModal={isShow => handleSetEditPost(isShow)}
+    postById?.id === +params?.id[1] && (
+      <Modal onOpenChange={onClose} open={isOpen}>
+        <div className={s.container}>
+          <PostImages className={s.images} height={562} images={images} width={490} />
+          <div className={s.postDetails}>
+            {!isEditModalOpen && (
+              <div className={s.userInfoContainer}>
+                <UserInfo src={avatarOwner} userName={userName} />
+                <PostActionsMenu
+                  showDeleteModal={isShow => setIsDeleteModalOpen(isShow)}
+                  showEditModal={isShow => handleSetEditPost(isShow)}
+                />
+              </div>
+            )}
+            {isDeleteModalOpen && (
+              <DeletePost
+                closeDeleteModal={isShow => setIsDeleteModalOpen(isShow)}
+                isOpen={isDeleteModalOpen}
+                onCloseModalPost={onClose}
               />
-            </div>
-          )}
-          {isDeleteModalOpen && (
-            <DeletePost
-              closeDeleteModal={isShow => setIsDeleteModalOpen(isShow)}
-              isOpen={isDeleteModalOpen}
-              onCloseModalPost={onClose}
-            />
-          )}
-          {isEditModalOpen ? (
-            <EditPost
-              closeEditModal={isShow => handleSetEditPost(isShow)}
-              onUpdateDescription={handleUpdateDescription}
-              postId={id.toString()}
-            />
-          ) : (
-            <div className={s.aboutPost}>
-              <PostComments
-                avatarSrc={avatarOwner}
-                comments={comments?.items ?? []}
-                createdAt={createdAt}
-                description={description}
-                userName={userName}
+            )}
+            {isEditModalOpen ? (
+              <EditPost
+                closeEditModal={isShow => handleSetEditPost(isShow)}
+                onUpdateDescription={handleUpdateDescription}
+                postId={id.toString()}
               />
-              <div className={s.icon3}>
-                <div className={s.icon2}>
-                  <HeartIcon />
-                  <PaperPlaneIcon />
+            ) : (
+              <div className={s.aboutPost}>
+                <PostComments
+                  avatarSrc={avatarOwner}
+                  comments={comments?.items ?? []}
+                  createdAt={createdAt}
+                  description={description}
+                  userName={userName}
+                />
+                <div className={s.icon3}>
+                  <div className={s.icon2}>
+                    <HeartIcon />
+                    <PaperPlaneIcon />
+                  </div>
+                  <BookmarkIcon />
                 </div>
-                <BookmarkIcon />
+                <PostLikes
+                  avatarsSrc={avatarWhoLikes}
+                  className={s.postLikes}
+                  createdAt={createdAt}
+                  likesCount={likesCount}
+                />
+                <div className={s.addComment}>
+                  <Typography className={s.addText} variant={'regular_text_14'}>
+                    {t.postModal.addComment}
+                  </Typography>
+                  <Button variant={'text'}>{t.postModal.publishMsg}</Button>
+                </div>
               </div>
-              <PostLikes
-                avatarsSrc={avatarWhoLikes}
-                className={s.postLikes}
-                createdAt={createdAt}
-                likesCount={likesCount}
-              />
-              <div className={s.addComment}>
-                <Typography className={s.addText} variant={'regular_text_14'}>
-                  {t.postModal.addComment}
-                </Typography>
-                <Button variant={'text'}>{t.postModal.publishMsg}</Button>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
-      </div>
-    </Modal>
+      </Modal>
+    )
   )
 }

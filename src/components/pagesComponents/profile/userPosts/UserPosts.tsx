@@ -36,7 +36,9 @@ export const UserPosts = ({ isPublic, userName }: Props) => {
       pageSize: 8,
       userName,
     },
-    { skip: isPublic }
+    {
+      skip: isPublic,
+    }
   )
 
   const { data: publicPostsByUserId } = useGetPublicPostsByUserIdQuery(
