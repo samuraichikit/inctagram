@@ -5,9 +5,9 @@
 
   width: $width;
   height: $height;
+  border-radius: $radius;
 
   background-color: var(--color-dark-500);
-  border-radius: $radius;
 }
 
 .circle {

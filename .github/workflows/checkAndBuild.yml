@@ -1,4 +1,4 @@
-name: Lint and Prettier Check
+name: Check before merge to dev or main
 
 on:
   pull_request:
@@ -24,14 +24,19 @@ jobs:
         with:
           node-version: 20.11
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.3
+
       - name: Install dependencies
-        run: npm install
+        run: pnpm i
 
       - name: Install missing dependency
-        run: npm install @typescript-eslint/types
+        run: pnpm i @typescript-eslint/types -D
 
       - name: Run Prettier, ESLint, Stylelint
-        run: npm run check
+        run: pnpm check
 
       - name: Build project
-        run: npm run build
+        run: pnpm build
