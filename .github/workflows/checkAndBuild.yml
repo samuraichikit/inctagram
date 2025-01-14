@@ -25,13 +25,13 @@ jobs:
           node-version: 20.11
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm i
 
       - name: Install missing dependency
-        run: npm install @typescript-eslint/types
+        run: pnpm i @typescript-eslint/types -D
 
       - name: Run Prettier, ESLint, Stylelint
-        run: npm run check
+        run: pnpm check
 
       - name: Build project
-        run: npm run build
+        run: pnpm build
