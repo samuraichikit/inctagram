@@ -20,9 +20,7 @@ export const DeletePost = ({ closeDeleteModal, isOpen, onCloseModalPost }: Props
   const { t } = useTranslation()
 
   const handlerBtnYes = () => {
-    deletePost({
-      postId: params?.id[1] as string,
-    })
+    deletePost(params?.id[1] as string)
     setIsOpened(false)
     onCloseModalPost()
     closeDeleteModal(false)

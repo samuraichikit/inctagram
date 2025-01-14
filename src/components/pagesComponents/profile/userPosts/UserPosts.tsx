@@ -1,6 +1,4 @@
-import { use, useEffect, useRef, useState } from 'react'
-
-import { get } from 'http'
+import { useEffect, useRef, useState } from 'react'
 
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { PostImages } from '@/components/pagesComponents/publicPage/publicPosts/postImages'
@@ -38,7 +36,9 @@ export const UserPosts = ({ isPublic, userName }: Props) => {
       pageSize: 8,
       userName,
     },
-    { skip: isPublic }
+    {
+      skip: isPublic,
+    }
   )
 
   const { data: publicPostsByUserId } = useGetPublicPostsByUserIdQuery(
@@ -110,9 +110,7 @@ export const UserPosts = ({ isPublic, userName }: Props) => {
           key={post.id}
           ref={index === posts.length - 1 ? targetRef : null}
         >
-          <Link
-            href={`/profile/${postsByUserName?.items[0].ownerId}/${postsByUserName?.items[0].id}`}
-          >
+          <Link href={`/profile/${post.ownerId}/${post.id}`}>
             <PostImages fill images={post.images} />
           </Link>
         </div>
