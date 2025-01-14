@@ -1,5 +1,6 @@
 import { useEffect, useId, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import Skeleton from 'react-loading-skeleton'
 import { toast } from 'react-toastify'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
@@ -24,6 +25,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import router from 'next/router'
 import { z } from 'zod'
+
+import 'react-loading-skeleton/dist/skeleton.css'
 
 import s from './generalSettings.module.scss'
 
@@ -174,87 +177,103 @@ export const GeneralSettings = () => {
 
   return (
     <>
-      {profile && initCountryAndCity ? (
-        <div className={s.photoAndFormWrapper}>
-          {profile?.avatars.length !== 0 ? (
-            <ProfilePhotoEdit avatar={profileWithPosts?.avatars[0]?.url ?? null} />
-          ) : (
-            <ProfilePhotoEdit />
-          )}
-          <form className={s.formWrapper} id={formId} onSubmit={handleSubmit(onSubmitHandler)}>
-            <FormTextField
-              control={control}
-              label={t.signUp.username}
-              mandatory
-              name={'userName'}
-            />
-            <FormTextField
-              control={control}
-              label={t.profile.firstName}
-              mandatory
-              name={'firstName'}
-            />
-            <FormTextField
-              control={control}
-              label={t.profile.lastName}
-              mandatory
-              name={'lastName'}
-            />
-            <div>
-              <Typography asChild className={s.dateOfBirthLabel} variant={'regular_text_14'}>
-                <label>{t.profile.dOB}</label>
-              </Typography>
-
-              <Controller
+      <div className={s.rootBlock}>
+        {profile ? (
+          <div className={s.photoAndFormWrapper}>
+            {profile?.avatars.length !== 0 ? (
+              <ProfilePhotoEdit avatar={profileWithPosts?.avatars[0]?.url ?? null} />
+            ) : (
+              <ProfilePhotoEdit />
+            )}
+            <form className={s.formWrapper} id={formId} onSubmit={handleSubmit(onSubmitHandler)}>
+              <FormTextField
                 control={control}
-                name={'dateOfBirth'}
-                render={({ field }) => {
-                  let dateValue: Date | undefined
-
-                  if (field.value !== undefined && field.value !== '') {
-                    dateValue = new Date(field.value)
-                  }
-
-                  return (
-                    <div>
-                      <Datepicker onChange={field.onChange} value={dateValue} />
-                      {errors.dateOfBirth?.message ===
-                      'A user under 13 cannot create a profile.' ? (
-                        <Typography variant={'error'}>
-                          A user under 13 cannot create a profile.{' '}
-                          <Link href={'/auth/privacyPolicy'}>Privacy Policy</Link>
-                        </Typography>
-                      ) : (
-                        errors.dateOfBirth?.message
-                      )}
-                    </div>
-                  )
-                }}
+                label={t.signUp.username}
+                mandatory
+                name={'userName'}
               />
-            </div>
-            <div className={s.locationWrapper}>
-              <CountryAndCity
-                cities={cities}
-                countries={countries}
-                findRes={findRes}
-                form={form}
-                setCities={setCities}
-                setCountries={setCountries}
-                setFocusCity={setFocusCity}
-                setFocusCountry={setFocusCountry}
+              <FormTextField
+                control={control}
+                label={t.profile.firstName}
+                mandatory
+                name={'firstName'}
               />
+              <FormTextField
+                control={control}
+                label={t.profile.lastName}
+                mandatory
+                name={'lastName'}
+              />
+              <div>
+                <Typography asChild className={s.dateOfBirthLabel} variant={'regular_text_14'}>
+                  <label>{t.profile.dOB}</label>
+                </Typography>
+
+                <Controller
+                  control={control}
+                  name={'dateOfBirth'}
+                  render={({ field }) => {
+                    let dateValue: Date | undefined
+
+                    if (field.value !== undefined && field.value !== '') {
+                      dateValue = new Date(field.value)
+                    }
+
+                    return (
+                      <div>
+                        <Datepicker onChange={field.onChange} value={dateValue} />
+                        {errors.dateOfBirth?.message ===
+                        'A user under 13 cannot create a profile.' ? (
+                          <Typography variant={'error'}>
+                            A user under 13 cannot create a profile.{' '}
+                            <Link href={'/auth/privacyPolicy'}>Privacy Policy</Link>
+                          </Typography>
+                        ) : (
+                          errors.dateOfBirth?.message
+                        )}
+                      </div>
+                    )
+                  }}
+                />
+              </div>
+              <div className={s.locationWrapper}>
+                <CountryAndCity
+                  cities={cities}
+                  countries={countries}
+                  findRes={findRes}
+                  form={form}
+                  initCountryAndCity={initCountryAndCity}
+                  setCities={setCities}
+                  setCountries={setCountries}
+                  setFocusCity={setFocusCity}
+                  setFocusCountry={setFocusCountry}
+                />
+              </div>
+              <FormTextArea
+                className={s.aboutMe}
+                control={control}
+                label={t.profile.aboutMe}
+                name={'aboutMe'}
+              />
+            </form>
+          </div>
+        ) : (
+          <div className={s.blockSkeleton}>
+            <div className={s.blockAvatar}>
+              <Skeleton circle height={192} />
+              <Skeleton height={62} />
             </div>
-            <FormTextArea
-              className={s.aboutMe}
-              control={control}
-              label={t.profile.aboutMe}
-              name={'aboutMe'}
-            />
-          </form>
-        </div>
-      ) : (
-        <div>Loading...</div>
-      )}
+            <div className={s.blockInputs}>
+              <Skeleton className={s.blockInputsChildren} count={4} height={32} />
+              <div className={s.blockInputsCoutryAndCity}>
+                <Skeleton className={s.blockInputsChildren} height={33} />
+                <Skeleton className={s.blockInputsChildren} height={33} />
+              </div>
+              <Skeleton className={s.blockTextarea} height={84} />
+            </div>
+          </div>
+        )}
+      </div>
       {profile && initCountryAndCity && (
         <Button
           className={s.formSubmitButton}
