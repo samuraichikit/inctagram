@@ -8,11 +8,10 @@
   cursor: pointer;
 
   padding: 6px 24px;
+  border-bottom: 2px solid var(--color-dark-100);
 
   font-weight: var(--font-weight-semi-bold);
   color: var(--color-dark-100);
-
-  border-bottom: 2px solid var(--color-dark-100);
 
   &:focus-visible {
     border-radius: 2px;
@@ -21,8 +20,8 @@
 
   &[data-disabled] {
     cursor: not-allowed;
-    color: var(--color-dark-300);
     border-bottom-color: var(--color-dark-300);
+    color: var(--color-dark-300);
   }
 
   &:not([data-disabled]) {
@@ -36,12 +35,12 @@
   }
 
   &[data-state='active'] {
-    color: var(--color-accent-500);
     border-bottom-color: var(--color-accent-500);
+    color: var(--color-accent-500);
 
     &[data-disabled] {
-      color: var(--color-accent-900);
       border-bottom-color: var(--color-accent-900);
+      color: var(--color-accent-900);
     }
   }
 }

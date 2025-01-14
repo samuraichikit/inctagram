@@ -138,6 +138,7 @@ export const GeneralSettings = () => {
   const [initCountryAndCity, setInitCountryAndCity] = useState(false)
 
   useEffect(() => {
+    // api
     if (profile?.country) {
       countryAndCityApi
         .getCountries(profile)
@@ -157,10 +158,6 @@ export const GeneralSettings = () => {
           }
         })
     } else {
-      if (countries.length > 0) {
-        setInitCountryAndCity(true)
-      }
-
       countryAndCityApi
         .getCountries(profile)
         .then(data => {
@@ -168,6 +165,9 @@ export const GeneralSettings = () => {
         })
         .then(() => {
           setFindRes(true)
+        })
+        .finally(() => {
+          setInitCountryAndCity(true)
         })
     }
   }, [profile])

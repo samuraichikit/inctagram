@@ -23,28 +23,27 @@ export const Profile = () => {
   const postId = id?.[1] ?? ''
   const isPublic = !skipSSR
 
-  const { data: meInfo, isError: isMeError, isLoading: isMeLoading } = useMeQuery()
-  const { data: profileWithPosts } = useGetProfileWithPostsQuery(meInfo?.userName as string, {
-    skip: isPublic,
-  })
   const { data: profileInfo } = useGetPublicProfileQuery(
     { profileId: userId },
     { skip: router.isFallback }
   )
+  const { data: meInfo } = useMeQuery()
+  const { data: profileWithPosts } = useGetProfileWithPostsQuery(profileInfo?.userName as string, {
+    skip: !profileInfo?.userName,
+  })
 
   const { t } = useTranslation()
   const followArray = [
-    profileInfo?.userMetadata.following,
-    profileInfo?.userMetadata.followers,
-    profileInfo?.userMetadata.publications,
+    profileWithPosts?.followingCount,
+    profileWithPosts?.followersCount,
+    profileWithPosts?.publicationsCount,
   ]
-
   const userName = profileInfo?.userName
   const aboutMe = profileInfo?.aboutMe
   const avatarSrc = profileInfo?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
   const profileId = profileInfo?.id
 
-  const isMyProfile = !isMeLoading && !isMeError
+  const isMyProfile = !!meInfo
 
   const [isOpen, setIsOpen] = useState(false)
 
