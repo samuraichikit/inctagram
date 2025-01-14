@@ -17,12 +17,12 @@
   justify-content: space-between;
 
   padding: 6px 12px;
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
 
   color: var(--color-light-900);
 
   background-color: transparent;
-  border: 1px solid var(--color-dark-100);
-  border-radius: 2px;
 
   .dropDownArrowIcon {
     transition: 0.2s;
@@ -34,9 +34,9 @@
   }
 
   &[data-state='open'] {
+    border: 1px solid var(--color-light-100);
     color: var(--color-light-100);
     background-color: var(--color-dark-500);
-    border: 1px solid var(--color-light-100);
 
     &.small {
       border: 1px solid var(--color-dark-100);
@@ -65,10 +65,10 @@
   z-index: 9999;
 
   width: var(--radix-select-trigger-width);
-
-  background-color: var(--color-dark-500);
   border: 1px solid var(--color-light-100);
   border-top: none;
+
+  background-color: var(--color-dark-500);
 
   &.small {
     border: 1px solid var(--color-dark-100);

@@ -5,7 +5,9 @@ export type GetUserPostsArgs = {
   sortDirection?: string
   userName: string
 }
-
+export type DeletePostArgs = {
+  postId: string
+}
 export type PostsByUserNameResponse = {
   items: PostItemResponse[]
   notReadCount: number

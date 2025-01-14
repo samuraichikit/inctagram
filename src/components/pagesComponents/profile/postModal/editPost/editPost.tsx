@@ -36,7 +36,7 @@ export const EditPost = ({ closeEditModal, onUpdateDescription, postId }: Props)
 
   const handleSubmit = () => {
     if (id) {
-      updatePost({ description: desc, postId: +id ?? 0 })
+      updatePost({ description: desc, postId: +id })
     }
     closeEditModal(false)
     onUpdateDescription(desc)
