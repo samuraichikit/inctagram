@@ -28,7 +28,7 @@ type Props = {
 export const PostModal = ({ isOpen, onClose }: Props) => {
   const params = useParams()
 
-  const { data: postById, isLoading } = useGetPostByIdQuery(params?.id[1] as string, {
+  const { data: postById } = useGetPostByIdQuery(params?.id[1] as string, {
     refetchOnMountOrArgChange: true,
   })
   const { data: comments } = useGetPostMessageByIdQuery(params?.id[0] as string, {
