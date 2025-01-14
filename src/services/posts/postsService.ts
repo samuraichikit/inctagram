@@ -2,6 +2,7 @@ import { CommentsResponse } from '@/services/publicPosts'
 
 import { baseApi } from '../baseApi'
 import {
+  DeletePostArgs,
   GetUserPostsArgs,
   PostItemResponse,
   PostUpdate,
@@ -10,10 +11,11 @@ import {
 
 const postService = baseApi.injectEndpoints({
   endpoints: builder => ({
-    deletePost: builder.mutation<void, string>({
-      query: postId => ({
+    deletePost: builder.mutation<void, DeletePostArgs>({
+      invalidatesTags: ['Me'],
+      query: args => ({
         method: 'DELETE',
-        url: `/v1/posts/${postId}`,
+        url: `/v1/posts/${args.postId}`,
       }),
     }),
     getPostById: builder.query<PostItemResponse, string>({
