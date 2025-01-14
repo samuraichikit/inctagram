@@ -1,4 +1,4 @@
-name: Lint and Prettier Check
+name: Check before merge to dev or main
 
 on:
   pull_request:
@@ -26,6 +26,8 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.3
 
       - name: Install dependencies
         run: pnpm i
