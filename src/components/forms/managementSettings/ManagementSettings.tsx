@@ -14,7 +14,6 @@ export const ManagementSettings = () => {
   const { data: meInfo } = useMeQuery()
   const { data } = useGetCurrentPaymentSubscriptionsQuery()
   const [statusAcc, setStatusAcc] = useState('personal')
-  const [init, setInit] = useState(false)
   const { t } = useTranslation()
 
   useEffect(() => {

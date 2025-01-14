@@ -69,10 +69,13 @@ export const Prices = () => {
       typeSubscription: data.data[Number(localStorage.getItem('price'))].typeDescription,
     }
 
-    postSubscriptions(requestData).then(res => {
-      res.data?.url && router.push(res.data.url)
-      setIsDisable(false)
-    })
+    postSubscriptions(requestData)
+      .then(res => {
+        res.data?.url && router.push(res.data.url)
+      })
+      .then(() => {
+        setIsDisable(false)
+      })
   }
 
   const closeModal = () => {
