@@ -8,13 +8,13 @@
     "build:production": "npm run build",
     "start": "next start",
     "format": "prettier --write src",
-    "lint": "eslint src --ext .jsx,.js,.tsx,.ts  --no-error-on-unmatched-pattern --fix && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input",
+    "lint": "eslint src --ext .jsx,.js,.tsx,.ts  --no-error-on-unmatched-pattern --fix && stylelint --fix src/**/*.{scss,css} --allow-empty-input",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "check": "npm run check:prettier && npm run check:eslint && npm run check:stylelint",
     "check:prettier": "prettier src --check",
     "check:eslint": "eslint src --ext .jsx,.js,.tsx,.ts --no-error-on-unmatched-pattern",
-    "check:stylelint": "stylelint src/{,*/}*.{scss,css} --allow-empty-input"
+    "check:stylelint": "stylelint src/**/*.{scss,css} --allow-empty-input"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.0.20",
