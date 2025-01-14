@@ -2,6 +2,7 @@ import { CommentsResponse } from '@/services/publicPosts'
 
 import { baseApi } from '../baseApi'
 import {
+  DeletePostArgs,
   GetUserPostsArgs,
   PostItemResponse,
   PostUpdate,

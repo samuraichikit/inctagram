@@ -16,7 +16,7 @@ export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
   const { isError, isLoading } = useMeQuery()
   const router = useRouter()
 
-  const isMyProfile = !isLoading && !isError && router.pathname === '/profile/[...id]'
+  const isMyProfile = !isLoading && !isError && router.pathname !== '/auth/signIn'
 
   const classNames = {
     main: clsx(

@@ -138,6 +138,7 @@ export const GeneralSettings = () => {
   const [initCountryAndCity, setInitCountryAndCity] = useState(false)
 
   useEffect(() => {
+    // api
     if (profile?.country) {
       countryAndCityApi
         .getCountries(profile)

@@ -88,9 +88,7 @@ export const CountryAndCity = ({
     <>
       <div className={s.selectWrapper}>
         <span>{t.profile.selectCountry}</span>
-        {profile && !initCountryAndCity ? (
-          <Skeleton height={33} />
-        ) : (
+        {initCountryAndCity ? (
           <select
             {...form.register('country')}
             aria-label={t.profile.selectCountry}
@@ -106,14 +104,14 @@ export const CountryAndCity = ({
               )
             })}
           </select>
+        ) : (
+          <Skeleton height={33} />
         )}
       </div>
 
       <div className={s.selectWrapper}>
         <span>{t.profile.selectCity}</span>
-        {profile && !initCountryAndCity ? (
-          <Skeleton height={33} />
-        ) : (
+        {initCountryAndCity ? (
           <select
             {...form.register('city')}
             aria-label={t.profile.selectCountry}
@@ -131,6 +129,8 @@ export const CountryAndCity = ({
               <option value={'city'}>city</option>
             )}
           </select>
+        ) : (
+          <Skeleton height={33} />
         )}
       </div>
     </>
