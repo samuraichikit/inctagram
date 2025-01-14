@@ -4,6 +4,7 @@ import { useMeQuery } from '@/services/auth'
 import clsx from 'clsx'
 import { NextPage } from 'next'
 import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 import s from './baseLayout.module.scss'
 
@@ -13,8 +14,9 @@ import { MainSidebar } from '../sidebar/mainSidebar'
 export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
   const path = usePathname()
   const { isError, isLoading } = useMeQuery()
+  const router = useRouter()
 
-  const isMyProfile = !isLoading && !isError
+  const isMyProfile = !isLoading && !isError && router.pathname !== '/auth/signIn'
 
   const classNames = {
     main: clsx(
