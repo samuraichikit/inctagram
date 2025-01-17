@@ -48,7 +48,7 @@ export const ManagementSettings = () => {
 
   return (
     <div>
-      {data?.data[0] && <AutoRenewal />}
+      {data?.hasAutoRenewal && <AutoRenewal />}
       <div>
         <h3 className={s.Title}>{t.accountManagement.accountType}</h3>
         <div className={s.accountTypeBlock}>
