@@ -1,6 +1,5 @@
-import { useEffect, useId, useState } from 'react'
+import { ChangeEvent, useEffect, useId, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import Skeleton from 'react-loading-skeleton'
 import { toast } from 'react-toastify'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
@@ -8,14 +7,13 @@ import { generalSettingsSchemas } from '@/common/schemas'
 import { FormTextArea } from '@/components/controlled/formTextArea'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { CountryAndCity } from '@/components/forms/generalSettings/CountryAndCity/CountryAndCity'
-import { countryAndCityApi } from '@/components/forms/generalSettings/CountryAndCity/CountryAndCity-API/countryAndCityApi'
-import { cityType, countryType } from '@/components/forms/generalSettings/GeneralSettings.types'
+import { SkeletonGeneralSettings } from '@/components/forms/generalSettings/SkeletonGeneralSettings'
 import { Button } from '@/components/ui/button'
 import { Datepicker } from '@/components/ui/datepicker'
 import { ProfilePhotoEdit } from '@/components/ui/profile/profilePhoto/profilePhotoEdit/ProfilePhotoEdit'
-import { ProfileSettingsBar } from '@/components/ui/profileSettingsBar'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
+import { useGetCountryQuery, useGetRegionsQuery } from '@/services/countryAndCity'
 import {
   useGetProfileQuery,
   useGetProfileWithPostsQuery,
@@ -25,8 +23,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import router from 'next/router'
 import { z } from 'zod'
-
-import 'react-loading-skeleton/dist/skeleton.css'
 
 import s from './generalSettings.module.scss'
 
@@ -38,6 +34,8 @@ export const GeneralSettings = () => {
   const { data: profile, isLoading } = useGetProfileQuery()
   const [updateProfile] = useUpdateProfileMutation()
   const formId = 'formId' + useId()
+
+  const [initCountry, setInitCountry] = useState(false)
 
   const profileValues: GeneralSettingsSchemasType = {
     aboutMe: profile?.aboutMe ?? '',
@@ -132,53 +130,76 @@ export const GeneralSettings = () => {
     }
   }, [])
 
-  const [findRes, setFindRes] = useState(false)
-  const [countries, setCountries] = useState<countryType[]>([])
-  const [cities, setCities] = useState<cityType[]>([])
-  const [initCountryAndCity, setInitCountryAndCity] = useState(false)
+  const ServerCountry = profile?.country || 0
+  const ServerCity = profile?.city || 0
+
+  const { data: countries } = useGetCountryQuery()
 
   useEffect(() => {
-    // api
-    if (profile?.country) {
-      countryAndCityApi
-        .getCountries(profile)
-        .then(data => {
-          setCountries(data)
+    if (countries) {
+      const initCountry = countries.find(c => c.id === ServerCountry)
 
-          return data
-        })
-        .then(data => {
-          countryAndCityApi.getCities(data[0].iso2, profile).then(data => {
-            setCities(data)
-          })
-        })
-        .finally(() => {
-          if (countries && cities) {
-            setInitCountryAndCity(true)
-          }
-        })
-    } else {
-      countryAndCityApi
-        .getCountries(profile)
-        .then(data => {
-          setCountries(data)
-        })
-        .then(() => {
-          setFindRes(true)
-        })
-        .finally(() => {
-          setInitCountryAndCity(true)
-        })
+      if (initCountry) {
+        setParentIdCountry(Number(initCountry.id))
+      }
     }
-  }, [profile])
+  }, [countries])
+  const [parentIdCountry, setParentIdCountry] = useState<number>(0)
 
-  const [focusCountry, setFocusCountry] = useState(false)
-  const [focusCity, setFocusCity] = useState(false)
+  const { data: region } = useGetRegionsQuery(parentIdCountry, { skip: parentIdCountry === 0 })
+
+  useEffect(() => {
+    if (region) {
+      const initCity = region.edges.find(c => c.node.id === ServerCity)
+
+      if (initCity) {
+        setParentIdCity(Number(initCity.node.id))
+      }
+    }
+  }, [region])
+  const [parentIdCity, setParentIdCity] = useState<number>(0)
+
+  const [disableRegion, setDisableRegion] = useState(true)
+
+  useEffect(() => {
+    if (region) {
+      setDisableRegion(false)
+    }
+  }, [region])
+
+  useEffect(() => {
+    if (countries) {
+      setInitCountry(true)
+    }
+  }, [countries])
+
+  const [validateCountry, setValidateCountry] = useState(false)
+  const [validateCity, setValidateCity] = useState(false)
+
+  const changeCountrySelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    if (!disableRegion) {
+      setDisableRegion(true)
+    }
+    if (validateCity) {
+      setValidateCity(false)
+    }
+    setValidateCountry(true)
+    const parentId = e.currentTarget.value
+
+    setParentIdCountry(Number(parentId))
+  }
+
+  const changeCitySelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    const parentId = e.currentTarget.value
+
+    setValidateCity(true)
+    setParentIdCity(Number(parentId))
+  }
 
   return (
     <>
       <div className={s.rootBlock}>
-        {profile ? (
+        {profile && initCountry ? (
           <div className={s.photoAndFormWrapper}>
             {profile?.avatars.length !== 0 ? (
               <ProfilePhotoEdit avatar={profileWithPosts?.avatars[0]?.url ?? null} />
@@ -238,15 +259,15 @@ export const GeneralSettings = () => {
               </div>
               <div className={s.locationWrapper}>
                 <CountryAndCity
-                  cities={cities}
+                  changeCitySelect={changeCitySelect}
+                  changeCountrySelect={changeCountrySelect}
                   countries={countries}
-                  findRes={findRes}
+                  disableRegion={disableRegion}
                   form={form}
-                  initCountryAndCity={initCountryAndCity}
-                  setCities={setCities}
-                  setCountries={setCountries}
-                  setFocusCity={setFocusCity}
-                  setFocusCountry={setFocusCountry}
+                  parentIdCity={parentIdCity}
+                  parentIdCountry={parentIdCountry}
+                  profile={profile}
+                  region={region}
                 />
               </div>
               <FormTextArea
@@ -258,26 +279,13 @@ export const GeneralSettings = () => {
             </form>
           </div>
         ) : (
-          <div className={s.blockSkeleton}>
-            <div className={s.blockAvatar}>
-              <Skeleton circle height={192} />
-              <Skeleton height={62} />
-            </div>
-            <div className={s.blockInputs}>
-              <Skeleton className={s.blockInputsChildren} count={4} height={32} />
-              <div className={s.blockInputsCoutryAndCity}>
-                <Skeleton className={s.blockInputsChildren} height={33} />
-                <Skeleton className={s.blockInputsChildren} height={33} />
-              </div>
-              <Skeleton className={s.blockTextarea} height={84} />
-            </div>
-          </div>
+          <SkeletonGeneralSettings />
         )}
       </div>
-      {profile && initCountryAndCity && (
+      {profile && initCountry && (
         <Button
           className={s.formSubmitButton}
-          disabled={!mandatoryFieldsFilled || (focusCountry && !focusCity)}
+          disabled={!mandatoryFieldsFilled || (validateCountry && !validateCity)}
           form={formId}
           type={'submit'}
         >
