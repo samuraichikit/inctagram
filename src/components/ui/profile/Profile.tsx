@@ -42,8 +42,8 @@ export const Profile = () => {
   const aboutMe = profileInfo?.aboutMe
   const avatarSrc = profileInfo?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
   const profileId = profileInfo?.id
-
   const isMyProfile = !!meInfo
+  const isDisplayButtonSettings = meInfo?.userId === Number(userId)
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -79,7 +79,7 @@ export const Profile = () => {
         <div className={s.profileWrapper}>
           <div className={s.userNameWrapper}>
             <Typography variant={'h1'}>{userName}</Typography>
-            {isMyProfile && (
+            {isDisplayButtonSettings && (
               <Button
                 onClick={() => router.push(`/profile/settings/general/${profileId}`)}
                 variant={'secondary'}
