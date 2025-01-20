@@ -56,6 +56,7 @@ export const UserPosts = ({ userName }: Props) => {
   const totalPages = Math.ceil(totalCount / 8)
   const isSetNextPage = isInView && pageNumber < totalPages
   const initialPosts = publicPostsByUserId?.items ?? postsByUserName?.items
+  const publicPosts = publicPostsByUserId?.items || []
 
   useEffect(() => {
     endCursorPostIdRef.current = posts[posts.length - 1]?.id.toString()
@@ -105,29 +106,17 @@ export const UserPosts = ({ userName }: Props) => {
 
   return (
     <>
-      {pageNumber === 1
-        ? publicPostsByUserId?.items.map((post, index) => (
-            <div
-              className={classNames.container}
-              key={post.id}
-              ref={index === posts.length - 1 ? targetRef : null}
-            >
-              <Link href={`/profile/${post.ownerId}/${post.id}`}>
-                <PostImages fill images={post.images} />
-              </Link>
-            </div>
-          ))
-        : posts.map((post, index) => (
-            <div
-              className={classNames.container}
-              key={post.id}
-              ref={index === posts.length - 1 ? targetRef : null}
-            >
-              <Link href={`/profile/${post.ownerId}/${post.id}`}>
-                <PostImages fill images={post.images} />
-              </Link>
-            </div>
-          ))}
+      {(pageNumber === 1 ? publicPosts : posts).map((post, index) => (
+        <div
+          className={classNames.container}
+          key={post.id}
+          ref={index === (pageNumber === 1 ? publicPosts : posts).length - 1 ? targetRef : null}
+        >
+          <Link href={`/profile/${post.ownerId}/${post.id}`}>
+            <PostImages fill images={post.images} />
+          </Link>
+        </div>
+      ))}
     </>
   )
 }
