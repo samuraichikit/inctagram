@@ -46,15 +46,16 @@ export const Profile = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
-    if (postId) {
-      setIsOpen(true)
-      push(`/profile/${userId}/${postId}`)
+    if (!postId) {
+      return
     }
+    setIsOpen(true)
+    push(`/profile/${userId}/${postId}`, undefined, { shallow: true })
   }, [postId])
 
   const closeHandler = () => {
     setIsOpen(false)
-    push(`/profile/${userId}`)
+    push(`/profile/${userId}`, undefined, { shallow: true })
   }
 
   return (
