@@ -18,18 +18,18 @@ import s from './profile.module.scss'
 export const Profile = () => {
   const router = useRouter()
   const { push } = router
-  const { id, skipSSR } = router.query
+  const { id } = router.query
   const userId = id?.[0] ?? ''
   const postId = id?.[1] ?? ''
-  const isPublic = !skipSSR
 
+  const { data: meInfo } = useMeQuery()
+  const isMyProfile = meInfo?.userId === Number(userId)
   const { data: profileInfo } = useGetPublicProfileQuery(
     { profileId: userId },
     { skip: router.isFallback }
   )
-  const { data: meInfo } = useMeQuery()
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(profileInfo?.userName as string, {
-    skip: !profileInfo?.userName,
+    skip: !profileInfo?.userName || !isMyProfile,
   })
 
   const { t } = useTranslation()
@@ -42,8 +42,6 @@ export const Profile = () => {
   const aboutMe = profileInfo?.aboutMe
   const avatarSrc = profileInfo?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
   const profileId = profileInfo?.id
-  const isMyProfile = !!meInfo
-  const isDisplayButtonSettings = meInfo?.userId === Number(userId)
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -79,7 +77,7 @@ export const Profile = () => {
         <div className={s.profileWrapper}>
           <div className={s.userNameWrapper}>
             <Typography variant={'h1'}>{userName}</Typography>
-            {isDisplayButtonSettings && (
+            {isMyProfile && (
               <Button
                 onClick={() => router.push(`/profile/settings/general/${profileId}`)}
                 variant={'secondary'}
@@ -107,9 +105,7 @@ export const Profile = () => {
           </div>
         </div>
       </div>
-      <div className={s.userPostsContainer}>
-        {userName && <UserPosts isPublic={isPublic} userName={userName} />}
-      </div>
+      <div className={s.userPostsContainer}>{userName && <UserPosts userName={userName} />}</div>
     </div>
   )
 }

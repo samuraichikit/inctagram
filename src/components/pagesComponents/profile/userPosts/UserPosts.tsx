@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { PostImages } from '@/components/pagesComponents/publicPage/publicPosts/postImages'
+import { useMeQuery } from '@/services/auth'
 import { PostResponse, useGetUserPostsQuery, useLazyGetUserPostsQuery } from '@/services/posts'
 import {
   useGetPublicPostsByUserIdQuery,
@@ -13,11 +14,10 @@ import { useRouter } from 'next/router'
 import s from './userPosts.module.scss'
 
 type Props = {
-  isPublic?: boolean
   userName: string
 }
 
-export const UserPosts = ({ isPublic, userName }: Props) => {
+export const UserPosts = ({ userName }: Props) => {
   const classNames = {
     container: s.container,
   }
@@ -30,15 +30,16 @@ export const UserPosts = ({ isPublic, userName }: Props) => {
   const [posts, setPosts] = useState<PostResponse[]>([])
   const endCursorPostIdRef = useRef<null | string>(null)
 
+  const { data: meData } = useMeQuery()
+  const isMyProfile = meData?.userId === Number(userId)
+
   const { data: postsByUserName } = useGetUserPostsQuery(
     {
       pageNumber,
       pageSize: 8,
       userName,
     },
-    {
-      skip: isPublic,
-    }
+    { skip: !isMyProfile }
   )
 
   const { data: publicPostsByUserId } = useGetPublicPostsByUserIdQuery(
@@ -54,7 +55,7 @@ export const UserPosts = ({ isPublic, userName }: Props) => {
   const totalCount = publicPostsByUserId?.totalCount ?? postsByUserName?.totalCount ?? 0
   const totalPages = Math.ceil(totalCount / 8)
   const isSetNextPage = isInView && pageNumber < totalPages
-  const initialPosts = isPublic ? publicPostsByUserId?.items : postsByUserName?.items
+  const initialPosts = publicPostsByUserId?.items ?? postsByUserName?.items
 
   useEffect(() => {
     endCursorPostIdRef.current = posts[posts.length - 1]?.id.toString()
@@ -88,13 +89,13 @@ export const UserPosts = ({ isPublic, userName }: Props) => {
     }
 
     if (pageNumber > 1 && pageNumber <= totalPages) {
-      if (isPublic) {
-        fetchPublicPosts()
-      } else {
+      if (isMyProfile) {
         fetchPosts()
+      } else {
+        fetchPublicPosts()
       }
     }
-  }, [pageNumber, getNextPosts, totalPages, userName, userId, isPublic, getNextPublicPosts])
+  }, [pageNumber, getNextPosts, totalPages, userName, userId, getNextPublicPosts, isMyProfile])
 
   useEffect(() => {
     if (isSetNextPage) {
