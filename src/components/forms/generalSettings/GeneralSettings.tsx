@@ -35,8 +35,6 @@ export const GeneralSettings = () => {
   const [updateProfile] = useUpdateProfileMutation()
   const formId = 'formId' + useId()
 
-  const [initCountry, setInitCountry] = useState(false)
-
   const profileValues: GeneralSettingsSchemasType = {
     aboutMe: profile?.aboutMe ?? '',
     city: profile?.city ?? '',
@@ -133,7 +131,7 @@ export const GeneralSettings = () => {
   const ServerCountry = profile?.country || 0
   const ServerCity = profile?.city || 0
 
-  const { data: countries } = useGetCountryQuery()
+  const { data: countries, isLoading: isLoadingCountry } = useGetCountryQuery()
 
   useEffect(() => {
     if (countries) {
@@ -146,7 +144,9 @@ export const GeneralSettings = () => {
   }, [countries])
   const [parentIdCountry, setParentIdCountry] = useState<number>(0)
 
-  const { data: region } = useGetRegionsQuery(parentIdCountry, { skip: parentIdCountry === 0 })
+  const { data: region, refetch } = useGetRegionsQuery(parentIdCountry, {
+    skip: parentIdCountry === 0,
+  })
 
   useEffect(() => {
     if (region) {
@@ -167,16 +167,12 @@ export const GeneralSettings = () => {
     }
   }, [region])
 
-  useEffect(() => {
-    if (countries) {
-      setInitCountry(true)
-    }
-  }, [countries])
-
   const [validateCountry, setValidateCountry] = useState(false)
   const [validateCity, setValidateCity] = useState(false)
 
   const changeCountrySelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    const parentId = e.currentTarget.value
+
     if (!disableRegion) {
       setDisableRegion(true)
     }
@@ -184,7 +180,6 @@ export const GeneralSettings = () => {
       setValidateCity(false)
     }
     setValidateCountry(true)
-    const parentId = e.currentTarget.value
 
     setParentIdCountry(Number(parentId))
   }
@@ -199,7 +194,7 @@ export const GeneralSettings = () => {
   return (
     <>
       <div className={s.rootBlock}>
-        {profile && initCountry ? (
+        {profile && !isLoadingCountry ? (
           <div className={s.photoAndFormWrapper}>
             {profile?.avatars.length !== 0 ? (
               <ProfilePhotoEdit avatar={profileWithPosts?.avatars[0]?.url ?? null} />
@@ -266,7 +261,6 @@ export const GeneralSettings = () => {
                   form={form}
                   parentIdCity={parentIdCity}
                   parentIdCountry={parentIdCountry}
-                  profile={profile}
                   region={region}
                 />
               </div>
@@ -282,11 +276,15 @@ export const GeneralSettings = () => {
           <SkeletonGeneralSettings />
         )}
       </div>
-      {profile && initCountry && (
+      {profile && !isLoadingCountry && (
         <Button
           className={s.formSubmitButton}
           disabled={!mandatoryFieldsFilled || (validateCountry && !validateCity)}
           form={formId}
+          onClick={() => {
+            setValidateCountry(false)
+            setValidateCity(false)
+          }}
           type={'submit'}
         >
           {t.profile.saveChanges}

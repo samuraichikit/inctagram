@@ -14,7 +14,6 @@ type PropsType = {
   form: any
   parentIdCity: number
   parentIdCountry: number
-  profile: GetProfileResponse
   region: ResponseCity | undefined
 }
 
@@ -26,7 +25,6 @@ export const CountryAndCity = ({
   form,
   parentIdCity,
   parentIdCountry,
-  profile,
   region,
 }: PropsType) => {
   const { t } = useTranslation()
@@ -41,6 +39,7 @@ export const CountryAndCity = ({
           onChange={changeCountrySelect}
           value={parentIdCountry}
         >
+          <option value={0}>Country</option>
           {countries?.map(country => (
             <option key={country.id} value={country.id}>
               {country.name}
@@ -58,6 +57,7 @@ export const CountryAndCity = ({
           onChange={changeCitySelect}
           value={parentIdCity}
         >
+          <option value={0}>City</option>
           {region?.edges.map(city => (
             <option key={city.node.id} value={city.node.id}>
               {city.node.name}
