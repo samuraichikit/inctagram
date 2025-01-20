@@ -1,0 +1,57 @@
+.Content {
+  position: relative;
+  background-color: var(--color-dark-700);
+  border-radius: 4px;
+  border: 1px solid var(--color-dark-500);
+  padding: 12px 12px;
+  margin-top: 4px;
+}
+
+.Trigger {
+  position: relative;
+  cursor: pointer;
+}
+
+.Item {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-s);
+  color: var(--color-light-100);
+  position: relative;
+  user-select: none;
+  outline: none;
+  margin-right: 6px;
+
+  &:not(:last-of-type) {
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-dark-500);
+  }
+
+  &:not(:first-of-type) {
+    padding-top: 12px;
+  }
+
+  &[data-disabled] {
+    color: var(--color-dark-300);
+    pointer-events: none;
+  }
+
+  & > :not(:last-child) {
+    margin-right: 6px;
+  }
+
+  &[data-highlighted] {
+    color: var(--color-accent-500);
+  }
+}
+
+.Arrow {
+  position: absolute;
+  right: -5px;
+  fill: var(--color-dark-700);
+  stroke: var(--color-dark-500);
+  visibility: visible;
+}
