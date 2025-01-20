@@ -105,17 +105,29 @@ export const UserPosts = ({ userName }: Props) => {
 
   return (
     <>
-      {posts.map((post, index) => (
-        <div
-          className={classNames.container}
-          key={post.id}
-          ref={index === posts.length - 1 ? targetRef : null}
-        >
-          <Link href={`/profile/${post.ownerId}/${post.id}`}>
-            <PostImages fill images={post.images} />
-          </Link>
-        </div>
-      ))}
+      {pageNumber === 1
+        ? publicPostsByUserId?.items.map((post, index) => (
+            <div
+              className={classNames.container}
+              key={post.id}
+              ref={index === posts.length - 1 ? targetRef : null}
+            >
+              <Link href={`/profile/${post.ownerId}/${post.id}`}>
+                <PostImages fill images={post.images} />
+              </Link>
+            </div>
+          ))
+        : posts.map((post, index) => (
+            <div
+              className={classNames.container}
+              key={post.id}
+              ref={index === posts.length - 1 ? targetRef : null}
+            >
+              <Link href={`/profile/${post.ownerId}/${post.id}`}>
+                <PostImages fill images={post.images} />
+              </Link>
+            </div>
+          ))}
     </>
   )
 }
