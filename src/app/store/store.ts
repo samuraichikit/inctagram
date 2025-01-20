@@ -2,14 +2,17 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 import { createPostSlice } from '@/components/pagesComponents/createPost/service/createPost.slice'
 import { baseApi } from '@/services/baseApi'
+import { countryAndCity } from '@/services/countryAndCity/countryAndCityService'
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 
 const makeStore = () =>
   configureStore({
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware().concat(baseApi.middleware).prepend(countryAndCity.middleware),
     reducer: {
       [baseApi.reducerPath]: baseApi.reducer,
+      [countryAndCity.reducerPath]: countryAndCity.reducer,
       [createPostSlice.name]: createPostSlice.reducer,
     },
   })
