@@ -34,13 +34,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
     }
 )
 
-const UserProfile: NextPageWithLayout = () => {
-  return (
-    <>
-      <Profile />
-    </>
-  )
-}
+const UserProfile: NextPageWithLayout = () => <Profile />
 
 UserProfile.getLayout = getBaseLayout
 
