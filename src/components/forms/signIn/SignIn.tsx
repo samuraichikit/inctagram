@@ -77,13 +77,7 @@ export const SignIn = () => {
         const payload = data.accessToken.split('.')[1]
         const id = JSON.parse(atob(payload)).userId
 
-        router.push(
-          {
-            pathname: `/profile/${id}`,
-            query: { skipSSR: true },
-          },
-          `/profile/${id}`
-        )
+        router.push(`/profile/${id}`)
       })
       .catch(err => {
         if (err.data.messages === 'invalid password or email') {
