@@ -96,14 +96,16 @@ export const MyPayments = () => {
         ))}
       </div>
       {/*)}*/}
-      <Pagination
-        className={s.PaginationBlock}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-        onPageSizeChange={handlePageSizeChange}
-        pageSize={pageSize}
-        totalCount={formattedData.length}
-      />
+      {data?.length > 5 && (
+        <Pagination
+          className={s.PaginationBlock}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+          onPageSizeChange={handlePageSizeChange}
+          pageSize={pageSize}
+          totalCount={formattedData.length}
+        />
+      )}
     </div>
   )
 }

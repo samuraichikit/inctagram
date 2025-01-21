@@ -18,45 +18,44 @@ import s from './profile.module.scss'
 export const Profile = () => {
   const router = useRouter()
   const { push } = router
-  const { id, skipSSR } = router.query
+  const { id } = router.query
   const userId = id?.[0] ?? ''
   const postId = id?.[1] ?? ''
-  const isPublic = !skipSSR
 
+  const { data: meInfo } = useMeQuery()
+  const isMyProfile = meInfo?.userId === Number(userId)
   const { data: profileInfo } = useGetPublicProfileQuery(
     { profileId: userId },
     { skip: router.isFallback }
   )
-  const { data: meInfo } = useMeQuery()
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(profileInfo?.userName as string, {
-    skip: !profileInfo?.userName,
+    skip: !profileInfo?.userName || !isMyProfile,
   })
 
   const { t } = useTranslation()
   const followArray = [
-    profileWithPosts?.followingCount,
-    profileWithPosts?.followersCount,
-    profileWithPosts?.publicationsCount,
+    profileInfo?.userMetadata.following ?? profileWithPosts?.followingCount,
+    profileInfo?.userMetadata.followers ?? profileWithPosts?.followersCount,
+    profileInfo?.userMetadata.publications ?? profileWithPosts?.publicationsCount,
   ]
   const userName = profileInfo?.userName
   const aboutMe = profileInfo?.aboutMe
   const avatarSrc = profileInfo?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
   const profileId = profileInfo?.id
 
-  const isMyProfile = !!meInfo
-
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
-    if (postId) {
-      setIsOpen(true)
-      push(`/profile/${userId}/${postId}`)
+    if (!postId) {
+      return
     }
+    setIsOpen(true)
+    push(`/profile/${userId}/${postId}`, undefined, { shallow: true })
   }, [postId])
 
   const closeHandler = () => {
     setIsOpen(false)
-    push(`/profile/${userId}`)
+    push(`/profile/${userId}`, undefined, { shallow: true })
   }
 
   return (
@@ -107,9 +106,7 @@ export const Profile = () => {
           </div>
         </div>
       </div>
-      <div className={s.userPostsContainer}>
-        {userName && <UserPosts isPublic={isPublic} userName={userName} />}
-      </div>
+      <div className={s.userPostsContainer}>{userName && <UserPosts userName={userName} />}</div>
     </div>
   )
 }

@@ -9,6 +9,7 @@ import { baseApi } from '@/services/baseApi'
 export const accountService = baseApi.injectEndpoints({
   endpoints: builder => ({
     getCurrentPaymentSubscriptions: builder.query<ResponseCurrPaymentSubs, void>({
+      providesTags: ['Payment'],
       query: () => ({ url: `/v1/subscriptions/current-payment-subscriptions` }),
     }),
     getMyPayments: builder.query<myPaymentType[], void>({
@@ -18,6 +19,7 @@ export const accountService = baseApi.injectEndpoints({
       query: () => ({ url: `/v1/subscriptions/cost-of-payment-subscriptions` }),
     }),
     postCanceledAutoRenewal: builder.mutation<void, void>({
+      invalidatesTags: ['Payment'],
       query: () => ({ method: 'POST', url: '/v1/subscriptions/canceled-auto-renewal' }),
     }),
     postSubscriptions: builder.mutation<{ url: string }, RequestPostSubscriptions>({

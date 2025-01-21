@@ -64,7 +64,7 @@ export const Prices = () => {
     setIsDisable(true)
     const requestData: RequestPostSubscriptions = {
       amount: data.data[Number(localStorage.getItem('price'))].amount || 10,
-      baseUrl: `${process.env.NEXT_PUBLIC_LOCAL_URL}/profile/settings/management/${meInfo.userId}`,
+      baseUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/profile/settings/management/${meInfo.userId}`,
       paymentType: paymentType,
       typeSubscription: data.data[Number(localStorage.getItem('price'))].typeDescription,
     }
@@ -89,28 +89,57 @@ export const Prices = () => {
           className={styles.Root}
           defaultValue={String(choiceSelect)}
         >
-          {data?.data &&
-            data.data.map((p, i) => (
-              <div key={i}>
-                <div style={{ alignItems: 'center', display: 'flex' }}>
-                  <RadioGroup.Item
-                    className={styles.Item}
-                    onClick={() => checkedRadio(i + 1)}
-                    value={`${i + 1}`}
-                  >
-                    <RadioGroup.Indicator className={styles.Indicator} />
-                  </RadioGroup.Item>
-                  <label className={styles.Label} htmlFor={'r2'}>
-                    <span>
-                      <span>
-                        ${p.amount} {t.accountManagement.per}
-                      </span>
-                      <span className={s.date}>{t.accountManagement[p.typeDescription]}</span>
-                    </span>
-                  </label>
-                </div>
-              </div>
-            ))}
+          <div>
+            <div style={{ alignItems: 'center', display: 'flex' }}>
+              <RadioGroup.Item className={styles.Item} onClick={() => checkedRadio(1)} value={`1`}>
+                <RadioGroup.Indicator className={styles.Indicator} />
+              </RadioGroup.Item>
+              <label className={styles.Label} htmlFor={'r2'}>
+                <span>
+                  <span>
+                    ${data.data[0].amount} {t.accountManagement.per} 1
+                  </span>
+                  <span className={s.date}>
+                    {t.accountManagement[data.data[0].typeDescription]}
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div>
+            <div style={{ alignItems: 'center', display: 'flex' }}>
+              <RadioGroup.Item className={styles.Item} onClick={() => checkedRadio(2)} value={`2`}>
+                <RadioGroup.Indicator className={styles.Indicator} />
+              </RadioGroup.Item>
+              <label className={styles.Label} htmlFor={'r2'}>
+                <span>
+                  <span>
+                    ${data.data[1].amount} {t.accountManagement.per} 7
+                  </span>
+                  <span className={s.date}>
+                    {t.accountManagement[data.data[1].typeDescription]}
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div>
+            <div style={{ alignItems: 'center', display: 'flex' }}>
+              <RadioGroup.Item className={styles.Item} onClick={() => checkedRadio(3)} value={`3`}>
+                <RadioGroup.Indicator className={styles.Indicator} />
+              </RadioGroup.Item>
+              <label className={styles.Label} htmlFor={'r2'}>
+                <span>
+                  <span>
+                    ${data.data[2].amount} {t.accountManagement.per}
+                  </span>
+                  <span className={s.date}>
+                    {t.accountManagement[data.data[2].typeDescription]}
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
         </RadioGroup.Root>
       </div>
       <div className={s.wrapperPayments}>

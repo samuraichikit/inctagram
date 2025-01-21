@@ -32,7 +32,7 @@ export const PostComments = ({ avatarSrc, comments, createdAt, description, user
         {comments.map(({ answerCount, content, createdAt, from, id }) => (
           <PostComment
             answerCount={answerCount}
-            avatarSrc={from.avatars[0].url}
+            avatarSrc={from.avatars[0]?.url}
             comment={content}
             createdAt={createdAt}
             key={id}
