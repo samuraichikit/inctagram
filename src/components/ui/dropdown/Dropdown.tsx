@@ -1,13 +1,8 @@
-import {
-  CSSProperties,
-  ComponentPropsWithoutRef,
-  ElementRef,
-  ReactNode,
-  forwardRef,
-  useState,
-} from 'react'
+import { CSSProperties, ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
 
+import { ScrollArea } from '@/components/ui/scrollArea'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import { DropdownMenuLabel } from '@radix-ui/react-dropdown-menu'
 import clsx from 'clsx'
 
 import s from './dropdown.module.scss'
@@ -16,20 +11,41 @@ export type DropdownProps = {
   align?: 'center' | 'end' | 'start'
   children?: ReactNode
   className?: string
+  open?: boolean
   style?: CSSProperties
+  title?: ReactNode
   trigger?: ReactNode
 } & ComponentPropsWithoutRef<typeof DropdownMenu.Root>
 export const Dropdown = forwardRef<ElementRef<typeof DropdownMenu.Trigger>, DropdownProps>(
-  ({ align = 'start', children, className, defaultOpen, style, trigger, ...rest }, ref) => {
-    const [open, setOpen] = useState(false)
+  (
+    {
+      align = 'start',
+      children,
+      className,
+      defaultOpen,
+      onOpenChange,
+      open,
+      style,
+      title,
+      trigger,
+      ...rest
+    },
+    ref
+  ) => {
     const classNames = {
       arrow: clsx(s.Arrow),
       content: clsx(s.Content, className),
+      scrollArea: clsx(s.ScrollArea),
       trigger: clsx(s.Trigger),
     }
 
     return (
-      <DropdownMenu.Root defaultOpen={defaultOpen} onOpenChange={setOpen} open={open} {...rest}>
+      <DropdownMenu.Root
+        defaultOpen={defaultOpen}
+        onOpenChange={onOpenChange}
+        open={open}
+        {...rest}
+      >
         <DropdownMenu.Trigger asChild className={classNames.trigger} ref={ref}>
           {trigger}
         </DropdownMenu.Trigger>
@@ -41,7 +57,12 @@ export const Dropdown = forwardRef<ElementRef<typeof DropdownMenu.Trigger>, Drop
             style={style}
           >
             <DropdownMenu.Arrow className={classNames.arrow} />
-            {children}
+            {title && <DropdownMenuLabel className={s.Label}>{title}</DropdownMenuLabel>}
+            <div className={s.ScrollArea}>
+              <ScrollArea className={clsx(s.ScrollArea)} orientation={'vertical'}>
+                {children}
+              </ScrollArea>
+            </div>
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>

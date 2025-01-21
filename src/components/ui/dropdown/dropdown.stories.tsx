@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { BellOutline } from '@/assets/icons/BellOutline'
-import { Dropdown } from '@/components/ui/dropdown/Dropdown'
 import { DropdownItem } from '@/components/ui/dropdown/DropdownItems'
+import { Dropdown } from '@/components/ui/dropdown/dropdown'
 
 const meta = {
   argTypes: {},
@@ -19,12 +19,19 @@ export const DropdownDefault: Story = {
     return (
       <Dropdown
         align={'start'}
+        title={'Notifications'}
         trigger={
           <div>
             <BellOutline />
           </div>
         }
       >
+        <DropdownItem>Lorem ipsum</DropdownItem>
+        <DropdownItem>Lorem ipsum</DropdownItem>
+        <DropdownItem>Lorem ipsum</DropdownItem>
+        <DropdownItem>Lorem ipsum</DropdownItem>
+        <DropdownItem>Lorem ipsum</DropdownItem>
+        <DropdownItem>Lorem ipsum</DropdownItem>
         <DropdownItem>Lorem ipsum</DropdownItem>
         <DropdownItem>Lorem ipsum</DropdownItem>
         <DropdownItem>Lorem ipsum</DropdownItem>
