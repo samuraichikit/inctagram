@@ -5,10 +5,11 @@
   justify-content: center;
   cursor: pointer;
 }
+
 .messagesCount {
   position: absolute;
   background: var(--color-danger-500);
-  color: white;
+  color: var(--color-light-100);
   border-radius: 50%;
   top: 5px;
   left: 11px;
