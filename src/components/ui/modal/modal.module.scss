@@ -2,10 +2,9 @@
   position: fixed;
   left: 50%;
 
+  background-color: var(--color-dark-300);
   border: 1px solid var(--color-dark-100);
   border-radius: 2px;
-
-  background-color: var(--color-dark-300);
 }
 
 .header button {
@@ -30,10 +29,10 @@
 
   width: 100%;
   max-width: 492px;
-  border: 1px solid var(--color-dark-100);
-  border-radius: 2px;
 
   background-color: var(--color-dark-300);
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
 }
 
 .DialogContent:focus {
@@ -52,10 +51,11 @@
 .IconButton {
   width: 18px;
   height: 18px;
-  border-radius: 100%;
 
   font-family: inherit;
   color: var(--color-light-100);
+
+  border-radius: 100%;
 }
 
 .IconButton:hover {
