@@ -1,30 +1,28 @@
 import { useState } from 'react'
 
-import { BellChecked } from '@/assets/icons/BellChecked'
-import { BellOutline } from '@/assets/icons/BellOutline'
+import { BellTrigger } from '@/components/notificationDropdown/bellTrigger/bellTrigger'
+import { NotificationItem } from '@/components/notificationDropdown/notificationItems/notificationItem'
 import { Dropdown } from '@/components/ui/dropdown'
-import { DropdownItem } from '@/components/ui/dropdown/DropdownItems'
+import { Typography } from '@/components/ui/typography'
+import { useGetNotificationsQuery } from '@/services/notifications/notificationsService'
 
-export const NotificationsDropDown = () => {
+type Props = {}
+export const NotificationsDropDown = ({}: Props) => {
   const [isOpen, setIsOpen] = useState(false)
+  const { data } = useGetNotificationsQuery()
+  const notifications = data?.items
 
   return (
     <Dropdown
-      trigger={
-        isOpen ? (
-          <div>
-            <BellChecked />
-          </div>
-        ) : (
-          <div>
-            <BellOutline />
-          </div>
-        )
-      }
+      align={'end'}
+      onOpenChange={setIsOpen}
+      open={isOpen}
+      title={<Typography variant={'bold_text_14'}>Уведомления</Typography>}
+      trigger={<BellTrigger isOpen={isOpen} notificationsCount={data?.notReadCount} />}
     >
-      <DropdownItem>Lorem ipsum</DropdownItem>
-      <DropdownItem>Lorem ipsum</DropdownItem>
-      <DropdownItem>Lorem ipsum</DropdownItem>
+      {notifications?.map(notification => (
+        <NotificationItem key={notification.id} notification={notification} />
+      ))}
     </Dropdown>
   )
 }
