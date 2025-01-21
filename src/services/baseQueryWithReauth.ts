@@ -1,4 +1,5 @@
 import { BASE_URL } from '@/common/constants'
+import { websocketsService } from '@/services/websockets/websocketsService'
 import {
   type BaseQueryFn,
   type FetchArgs,
@@ -48,6 +49,7 @@ export const baseQueryWithReauth: BaseQueryFn<
 
           setCookie('accessToken', responseData.accessToken)
           result = await baseQuery(args, api, extraOptions)
+          websocketsService(responseData.accessToken)
         }
       } finally {
         release()

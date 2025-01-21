@@ -1,23 +1,29 @@
 .triggerButton {
+  cursor: pointer;
+
   position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 }
 
 .messagesCount {
   position: absolute;
-  background: var(--color-danger-500);
-  color: var(--color-light-100);
-  border-radius: 50%;
   top: 5px;
   left: 11px;
-  width: 13px;
-  height: 13px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  width: 13px;
+  height: 13px;
+
   font-size: 10px;
   line-height: 8px;
+  color: var(--color-light-100);
+
+  background: var(--color-danger-500);
+  border-radius: 50%;
 }

@@ -75,13 +75,13 @@
   height: var(--rdp-day_button-height);
   margin: 0;
   padding: 0;
-  border: var(--rdp-day_button-border);
-  border-radius: var(--rdp-day_button-border-radius);
 
   font: inherit;
   color: inherit;
 
   background: none;
+  border: var(--rdp-day_button-border);
+  border-radius: var(--rdp-day_button-border-radius);
 }
 
 .rdp-day_button:disabled {
@@ -95,9 +95,9 @@
   display: inline-flex;
   align-items: center;
 
-  border: 0;
-
   white-space: nowrap;
+
+  border: 0;
 }
 
 .rdp-button_next,
@@ -114,13 +114,13 @@
   height: var(--rdp-nav_button-height);
   margin: 0;
   padding: 0;
-  border: none;
 
   font: inherit;
   color: inherit;
 
   appearance: none;
   background: none;
+  border: none;
 }
 
 .rdp-button_next:disabled,
@@ -161,7 +161,6 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  border: none;
 
   line-height: inherit;
 
@@ -169,6 +168,7 @@
 
   /* Reset */
   opacity: 0;
+  border: none;
 }
 
 .rdp-dropdown_root {
@@ -230,14 +230,14 @@
 .rdp-week_number {
   width: var(--rdp-week_number-width);
   height: var(--rdp-week_number-height);
-  border: var(--rdp-week_number-border);
-  border-radius: var(--rdp-week_number-border-radius);
 
   font-size: small;
   font-weight: 400;
   text-align: var(--rdp-weeknumber-text-align);
 
   opacity: var(--rdp-week_number-opacity);
+  border: var(--rdp-week_number-border);
+  border-radius: var(--rdp-week_number-border-radius);
 }
 
 /* DAY MODIFIERS */
@@ -281,10 +281,10 @@
 }
 
 .rdp-range_middle .rdp-day_button {
+  color: var(--rdp-range_middle-color);
   border: unset;
   border-color: transparent;
   border-radius: unset;
-  color: var(--rdp-range_middle-color);
 }
 
 .rdp-range_end {
