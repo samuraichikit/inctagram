@@ -4,7 +4,7 @@ export const ru = {
   accountManagement: {
     DAY: 'день',
     MONTHLY: 'месяц',
-    WEEKLY: 'неделю',
+    WEEKLY: 'дней',
     accountType: 'Тип аккаунта:',
     business: 'Бизнес',
     or: 'или',

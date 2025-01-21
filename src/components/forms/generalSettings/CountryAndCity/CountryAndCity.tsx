@@ -1,137 +1,69 @@
-import { useState } from 'react'
-import Skeleton from 'react-loading-skeleton'
+import { ChangeEvent } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { countryAndCityApi } from '@/components/forms/generalSettings/CountryAndCity/CountryAndCity-API/countryAndCityApi'
-import { cityType, countryType } from '@/components/forms/generalSettings/GeneralSettings.types'
-import { useGetProfileQuery } from '@/services/profile'
+import { ResponseCity, ResponseCountry } from '@/services/countryAndCity'
+import { GetProfileResponse } from '@/services/profile'
 
 import s from '../generalSettings.module.scss'
 
 type PropsType = {
-  cities: cityType[]
-  countries: countryType[]
-  findRes: boolean
+  changeCitySelect: (e: ChangeEvent<HTMLSelectElement>) => void
+  changeCountrySelect: (e: ChangeEvent<HTMLSelectElement>) => void
+  countries: ResponseCountry[] | undefined
+  disableRegion: boolean
   form: any
-  initCountryAndCity: boolean
-  setCities: (cityType: cityType[]) => void
-  setCountries: (countries: countryType[]) => void
-  setFocusCity: (isFocus: boolean) => void
-  setFocusCountry: (isFocus: boolean) => void
+  parentIdCity: number
+  parentIdCountry: number
+  region: ResponseCity | undefined
 }
 
 export const CountryAndCity = ({
-  cities,
+  changeCitySelect,
+  changeCountrySelect,
   countries,
-  findRes,
+  disableRegion,
   form,
-  initCountryAndCity,
-  setCities,
-  setCountries,
-  setFocusCity,
-  setFocusCountry,
+  parentIdCity,
+  parentIdCountry,
+  region,
 }: PropsType) => {
   const { t } = useTranslation()
-
-  const [disableCity, setDisableCity] = useState(false)
-  const [valueCity, setValueCity] = useState('city')
-  const [valueCountry, setValueCountry] = useState('country')
-  const { data: profile } = useGetProfileQuery()
-
-  const changeSelectCountry = (countryName: string) => {
-    setValueCountry(countryName)
-    setValueCity('city')
-    setFocusCountry(true)
-    setFocusCity(false)
-    setDisableCity(true)
-    countryAndCityApi
-      .getCountries({ country: countryName })
-      .then(data => {
-        setCountries(data)
-
-        return data
-      })
-      .then(data => {
-        countryAndCityApi
-          .getCities(data[0].iso2, { country: countryName })
-          .then(data => {
-            setCities(data)
-
-            return data
-          })
-          .then(data => {
-            if (data.length === 1) {
-              setFocusCity(true)
-            } else {
-              setFocusCity(false)
-            }
-          })
-      })
-      .finally(() => {
-        setTimeout(() => {
-          setDisableCity(false)
-        }, 700)
-      })
-  }
-
-  const changeCity = (cityName: string) => {
-    if (findRes) {
-      setFocusCountry(false)
-      setFocusCity(true)
-    } else {
-      setFocusCity(true)
-    }
-    setValueCity(cityName)
-  }
 
   return (
     <>
       <div className={s.selectWrapper}>
         <span>{t.profile.selectCountry}</span>
-        {profile && !initCountryAndCity ? (
-          <Skeleton height={33} />
-        ) : (
-          <select
-            {...form.register('country')}
-            aria-label={t.profile.selectCountry}
-            defaultValue={'country'}
-            onChange={e => changeSelectCountry(e.target.value)}
-            value={profile?.country || valueCountry}
-          >
-            {countries?.map((c, i) => {
-              return (
-                <option key={i} value={c.name}>
-                  {c.name}
-                </option>
-              )
-            })}
-          </select>
-        )}
+        <select
+          {...form.register('country')}
+          aria-label={t.profile.selectCountry}
+          onChange={changeCountrySelect}
+          value={parentIdCountry}
+        >
+          <option value={0}>Country</option>
+          {countries?.map(country => (
+            <option key={country.id} value={country.id}>
+              {country.name}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className={s.selectWrapper}>
         <span>{t.profile.selectCity}</span>
-        {profile && !initCountryAndCity ? (
-          <Skeleton height={33} />
-        ) : (
-          <select
-            {...form.register('city')}
-            aria-label={t.profile.selectCountry}
-            disabled={!!disableCity}
-            onChange={e => changeCity(e.target.value)}
-            value={valueCity}
-          >
-            {cities.length > 1 ? (
-              cities?.map((c, i) => (
-                <option key={i} value={c.name}>
-                  {c.name}
-                </option>
-              ))
-            ) : (
-              <option value={'city'}>city</option>
-            )}
-          </select>
-        )}
+        <select
+          {...form.register('city')}
+          aria-label={t.profile.selectCountry}
+          disabled={disableRegion}
+          onChange={changeCitySelect}
+          value={parentIdCity}
+        >
+          <option value={0}>City</option>
+          {region?.edges.map(city => (
+            <option key={city.node.id} value={city.node.id}>
+              {city.node.name}
+            </option>
+          ))}
+        </select>
       </div>
     </>
   )

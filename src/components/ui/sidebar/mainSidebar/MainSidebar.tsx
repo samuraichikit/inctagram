@@ -51,10 +51,7 @@ export const MainSidebar = () => {
               {t.mainSidebar.create}
             </div>
           </SidebarItem>
-          <SidebarItem
-            as={`/profile/${data?.userId}`}
-            href={{ pathname: `/profile/${data?.userId}`, query: { skipSSR: 'true' } }}
-          >
+          <SidebarItem href={`/profile/${data?.userId}`}>
             <MyProfileIcon />
             {t.mainSidebar.myProfile}
           </SidebarItem>

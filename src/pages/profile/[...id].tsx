@@ -13,15 +13,9 @@ type Params = {
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
   (store: AppStore) =>
-    async ({ params, query }) => {
+    async ({ params }) => {
       const { id } = params as Params
       const [userId, postId] = id
-
-      if (query.skipSSR) {
-        return {
-          props: {},
-        }
-      }
 
       store.dispatch(publicUserService.endpoints.getPublicProfile.initiate({ profileId: userId }))
       store.dispatch(
@@ -40,13 +34,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
     }
 )
 
-const UserProfile: NextPageWithLayout = () => {
-  return (
-    <>
-      <Profile />
-    </>
-  )
-}
+const UserProfile: NextPageWithLayout = () => <Profile />
 
 UserProfile.getLayout = getBaseLayout
 
