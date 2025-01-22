@@ -1,90 +1,83 @@
-import { useEffect, useState } from 'react'
-
-import { useTranslation } from '@/common/hooks/useTranslation'
+import { RadioAccountType } from '@/components/forms/managementSettings/RadioAccountType/RadioAccountType'
 import { AutoRenewal } from '@/components/forms/managementSettings/autoRenewal/AutoRenewal'
 import { Prices } from '@/components/forms/managementSettings/prices/Prices'
+import { useManagementSettings } from '@/components/forms/managementSettings/useManagementSettings'
 import { useGetCurrentPaymentSubscriptionsQuery } from '@/services/accountSubscriptions/accountSubsService'
-import { useMeQuery } from '@/services/auth'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 
 import s from './ManagementSettings.module.scss'
 import styles from './styles.module.scss'
 
+export enum AccountTypeValue {
+  Business = 'BUSINESS',
+  Personal = 'PERSONAL',
+}
+
 export const ManagementSettings = () => {
-  const { data: meInfo } = useMeQuery()
-  const { data } = useGetCurrentPaymentSubscriptionsQuery()
-  const [statusAcc, setStatusAcc] = useState('personal')
-  const { t } = useTranslation()
+  const { data: currentPayment } = useGetCurrentPaymentSubscriptionsQuery()
 
-  useEffect(() => {
-    localStorage.setItem('userId', String(meInfo?.userId))
-  }, [meInfo])
+  const {
+    checkedRadio,
+    isLoadingCurrentPayment,
+    isLoadingMeInfo,
+    isLoadingPricesPayment,
+    meInfo,
+    pricesPayment,
+    statusAccount,
+    t,
+  } = useManagementSettings()
 
-  useEffect(() => {
-    setStatusAcc(localStorage.getItem('statusAcc') || 'personal')
-  }, [meInfo, data])
-
-  const checkedRadio = (type: string) => {
-    setStatusAcc(type)
-    localStorage.setItem('statusAcc', type)
+  if (!currentPayment) {
+    return <div></div>
   }
 
-  useEffect(() => {
-    if (data?.data[0]) {
-      if (data?.data[0].autoRenewal === false) {
-        const time = new Date()
-
-        if (data?.data[0].endDateOfSubscription <= time.toLocaleString()) {
-          localStorage.setItem('statusAcc', 'personal')
-          setStatusAcc('personal')
-        }
-      }
-    }
-  }, [data])
-
-  if (!meInfo) {
+  if (isLoadingMeInfo) {
     return <div>Loading...</div> // todo - скелетоны сделать
   }
 
+  const statusAccountEnabled =
+    statusAccount === AccountTypeValue.Business && meInfo && pricesPayment
+
   return (
     <div>
-      {data?.hasAutoRenewal && <AutoRenewal />}
+      {currentPayment.hasAutoRenewal && (
+        <AutoRenewal
+          currentPayment={currentPayment}
+          isLoadingCurrentPayment={isLoadingCurrentPayment}
+          t={t}
+        />
+      )}
       <div>
         <h3 className={s.Title}>{t.accountManagement.accountType}</h3>
         <div className={s.accountTypeBlock}>
           <RadioGroup.Root
             aria-label={'Account type'}
             className={styles.Root}
-            defaultValue={localStorage.getItem('statusAcc') || statusAcc}
+            defaultValue={localStorage.getItem('statusAccount') || statusAccount}
           >
-            <div style={{ alignItems: 'center', display: 'flex' }}>
-              <RadioGroup.Item
-                className={styles.Item}
-                onClick={() => checkedRadio('personal')}
-                value={'personal'}
-              >
-                <RadioGroup.Indicator className={styles.Indicator} />
-              </RadioGroup.Item>
-              <label className={styles.Label} htmlFor={'r1'}>
-                {t.accountManagement.personal}
-              </label>
-            </div>
-            <div style={{ alignItems: 'center', display: 'flex' }}>
-              <RadioGroup.Item
-                className={styles.Item}
-                onClick={() => checkedRadio('business')}
-                value={'business'}
-              >
-                <RadioGroup.Indicator className={styles.Indicator} />
-              </RadioGroup.Item>
-              <label className={styles.Label} htmlFor={'r2'}>
-                {t.accountManagement.business}
-              </label>
-            </div>
+            <RadioAccountType
+              accountTypeValue={AccountTypeValue.Personal}
+              accountTypeValueLanguage={t.accountManagement.personal}
+              getCheckedRadio={checkedRadio}
+              value={AccountTypeValue.Personal}
+            />
+            <RadioAccountType
+              accountTypeValue={AccountTypeValue.Business}
+              accountTypeValueLanguage={t.accountManagement.business}
+              getCheckedRadio={checkedRadio}
+              value={AccountTypeValue.Business}
+            />
           </RadioGroup.Root>
         </div>
       </div>
-      {statusAcc === 'business' && <Prices />}
+      {statusAccountEnabled && (
+        <Prices
+          isLoadingPricesPayment={isLoadingPricesPayment}
+          meInfo={meInfo}
+          pricesPayment={pricesPayment}
+          t={t}
+        />
+      )}
     </div>
   )
 }

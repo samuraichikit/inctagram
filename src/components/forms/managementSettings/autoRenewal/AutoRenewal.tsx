@@ -6,32 +6,40 @@ import {
   useGetCurrentPaymentSubscriptionsQuery,
   usePostCanceledAutoRenewalMutation,
 } from '@/services/accountSubscriptions/accountSubsService'
+import { ResponseCurrPaymentSubs } from '@/services/accountSubscriptions/accountSubsService.types'
 import axios from 'axios'
 import { getCookie } from 'cookies-next/client'
 
 import s from '../ManagementSettings.module.scss'
 
-export const AutoRenewal = () => {
-  const { data } = useGetCurrentPaymentSubscriptionsQuery()
+import { Locale } from '../../../../../locales/ru'
+
+type Props = {
+  currentPayment: ResponseCurrPaymentSubs
+  isLoadingCurrentPayment: boolean
+  t: Locale
+}
+
+export const AutoRenewal = ({ currentPayment, isLoadingCurrentPayment, t }: Props) => {
   const [postCanceledAutoRenewal] = usePostCanceledAutoRenewalMutation()
+  const dateOfPayment = useTransformDate(currentPayment ? currentPayment.data[0].dateOfPayment : '')
+  const endDateOfSubscription = useTransformDate(
+    currentPayment ? currentPayment.data[0].endDateOfSubscription : ''
+  )
 
-  const dateOfPayment = useTransformDate(data ? data.data[0].dateOfPayment : '')
-  const endDateOfSubscription = useTransformDate(data ? data.data[0].endDateOfSubscription : '')
-
-  const [isRenewal, setIsRenewal] = useState(data?.data[0].autoRenewal)
-
-  const { t } = useTranslation()
+  const [isRenewal, setIsRenewal] = useState(currentPayment?.data[0].autoRenewal)
 
   useEffect(() => {
-    setIsRenewal(data?.hasAutoRenewal)
-  }, [data])
+    setIsRenewal(currentPayment?.hasAutoRenewal)
+  }, [currentPayment])
 
   const changeCheckbox = () => {
+    localStorage.setItem('statusAccount', 'BUSINESS')
     setIsRenewal(!isRenewal)
     postCanceledAutoRenewal()
   }
 
-  if (!data) {
+  if (isLoadingCurrentPayment) {
     return <>Loading...</>
   }
 
