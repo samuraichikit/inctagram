@@ -1,11 +1,14 @@
 import { baseApi } from '@/services/baseApi'
-import { getNotificationsType } from '@/services/notifications/notificationsService.types'
+import {
+  getNotificationsParams,
+  getNotificationsType,
+} from '@/services/notifications/notificationsService.types'
 
 export const notificationsService = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getNotifications: builder.query<getNotificationsType, void>({
+    getNotifications: builder.query<getNotificationsType, getNotificationsParams>({
       providesTags: ['Notifications'],
-      query: () => ({ url: `/v1/notifications/` }),
+      query: params => ({ params: params, url: `/v1/notifications/` }),
     }),
   }),
 })

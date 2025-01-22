@@ -16,8 +16,8 @@ export const Header = () => {
     navContainer: s.navContainer,
   }
 
-  const { isError, isLoading } = useMeQuery()
-  const isMyProfile = !isError && !isLoading
+  const { data } = useMeQuery()
+  const isMyProfile = !!data
 
   const { t } = useTranslation()
 
@@ -26,7 +26,7 @@ export const Header = () => {
       <div className={classNames.container}>
         <Typography variant={'large'}>Inctagram</Typography>
         <div className={classNames.navContainer}>
-          <NotificationsDropDown />
+          {data && <NotificationsDropDown />}
           <LangSelect />
           {!isMyProfile && (
             <div className={classNames.buttonsContainer}>

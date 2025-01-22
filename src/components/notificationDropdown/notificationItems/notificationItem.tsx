@@ -1,18 +1,14 @@
 import { DropdownItem } from '@/components/ui/dropdown/DropdownItems'
+import { TimeAgoDisplay } from '@/components/ui/timeAgoDisplay'
 import { Typography } from '@/components/ui/typography'
-import { Notification } from '@/services/notifications/notificationsService.types'
-import { formatDistanceToNow } from 'date-fns'
-import { ru } from 'date-fns/locale'
+import { NotificationType } from '@/services/notifications/notificationsService.types'
 
 import s from './notificationItem.module.scss'
+
 type Props = {
-  notification: Notification
+  notification: NotificationType
 }
 export const NotificationItem = ({ notification }: Props) => {
-  function formatRelativeTime(isoDate: string) {
-    return formatDistanceToNow(new Date(isoDate), { addSuffix: true, locale: ru })
-  }
-
   return (
     <DropdownItem>
       <div className={s.itemContainer}>
@@ -26,7 +22,9 @@ export const NotificationItem = ({ notification }: Props) => {
         </div>
 
         <div>{notification.message}</div>
-        <div>{formatRelativeTime(notification.createdAt)}</div>
+        <div>
+          <TimeAgoDisplay date={notification.createdAt} />
+        </div>
       </div>
     </DropdownItem>
   )
