@@ -11,8 +11,8 @@
   @include flex($justify: center, $align: center);
 
   overflow: hidden;
-  border-radius: 50%;
   background-color: var(--color-accent-500);
+  border-radius: 50%;
 
   .userName {
     font-weight: 700;
