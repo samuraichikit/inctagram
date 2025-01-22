@@ -16,13 +16,24 @@ export const useManagementSettings = () => {
     isLoading: isLoadingCurrentPayment,
   } = useGetCurrentPaymentSubscriptionsQuery()
   const { data: pricesPayment, isLoading: isLoadingPricesPayment } = useGetPricesPaymentQuery()
+  const [statusInit, setStatusInit] = useState(false)
   const [statusAccount, setStatusAccount] = useState<AccountTypeValue>(AccountTypeValue.Personal)
   const { t } = useTranslation()
 
   useEffect(() => {
-    setStatusAccount(
-      (localStorage.getItem('statusAccount') as AccountTypeValue) || AccountTypeValue.Personal
-    )
+    if (localStorage.getItem('statusAccount')) {
+      setStatusAccount(localStorage.getItem('statusAccount') as AccountTypeValue)
+      setStatusInit(true)
+    }
+    {
+      setStatusInit(true)
+    }
+  }, [pricesPayment, currentPayment])
+
+  useEffect(() => {
+    if (localStorage.getItem('statusAccount')) {
+      setStatusAccount(localStorage.getItem('statusAccount') as AccountTypeValue)
+    }
   }, [meInfo, currentPayment])
 
   useEffect(() => {
@@ -30,12 +41,12 @@ export const useManagementSettings = () => {
       if (currentPayment?.data[0].autoRenewal === false) {
         const time = new Date()
 
-        if (currentPayment?.data[0].endDateOfSubscription <= time.toLocaleString()) {
+        if (currentPayment?.data[0].endDateOfSubscription >= time.toLocaleString()) {
           localStorage.setItem('statusAccount', AccountTypeValue.Personal)
         }
       }
     }
-  }, [isFetchingCurrentPayment])
+  }, [])
 
   const checkedRadio = (type: AccountTypeValue) => {
     setStatusAccount(type)
@@ -50,6 +61,7 @@ export const useManagementSettings = () => {
     meInfo,
     pricesPayment,
     statusAccount,
+    statusInit,
     t,
   }
 }
