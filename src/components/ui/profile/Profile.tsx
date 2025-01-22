@@ -34,9 +34,9 @@ export const Profile = () => {
 
   const { t } = useTranslation()
   const followArray = [
-    profileInfo?.userMetadata.following ?? profileWithPosts?.followingCount,
-    profileInfo?.userMetadata.followers ?? profileWithPosts?.followersCount,
-    profileInfo?.userMetadata.publications ?? profileWithPosts?.publicationsCount,
+    profileWithPosts?.followingCount,
+    profileWithPosts?.followersCount,
+    profileWithPosts?.publicationsCount,
   ]
   const userName = profileInfo?.userName
   const aboutMe = profileInfo?.aboutMe
