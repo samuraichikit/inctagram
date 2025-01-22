@@ -1,0 +1,15 @@
+.itemContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.labelContainer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.newMessage {
+  color: var(--color-accent-300);
+}
