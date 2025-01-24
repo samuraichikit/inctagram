@@ -14,11 +14,11 @@ type Props = {
 
 export const SidebarItem = ({ children, className, disabled, href, ...rest }: Props) => {
   const router = useRouter()
-  const isActive = router.pathname === href
+  const isActive = router.asPath === href
 
   const classNames = {
-    item: clsx(s.item, className),
-    link: clsx(s.link, isActive && s.active, disabled && s.disabled),
+    item: clsx(s.item, isActive && s.active, className),
+    link: clsx(s.link, disabled && s.disabled),
   }
 
   return (
