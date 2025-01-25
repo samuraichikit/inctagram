@@ -8,9 +8,16 @@ import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { z } from 'zod'
 
+import s from './signInAdmin.module.scss'
+
 type FormValues = z.infer<ReturnType<typeof signInAdminSchema>>
 
 export const SignInAdmin = () => {
+  const classNames = {
+    card: s.card,
+    textFieldPassword: s.textFieldPassword,
+    title: s.title,
+  }
   const { t } = useTranslation()
   const { control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
@@ -22,8 +29,10 @@ export const SignInAdmin = () => {
   const submitHandler = (data: FormValues) => {}
 
   return (
-    <Card>
-      <Typography variant={'h1'}>{t.signInAdmin.signIn}</Typography>
+    <Card className={classNames.card}>
+      <Typography className={classNames.title} variant={'h1'}>
+        {t.signInAdmin.signIn}
+      </Typography>
       <form onSubmit={handleSubmit(submitHandler)}>
         <FormTextField
           control={control}
@@ -32,6 +41,7 @@ export const SignInAdmin = () => {
           placeholder={'Epam@epam.com'}
         />
         <FormTextField
+          className={classNames.textFieldPassword}
           control={control}
           label={t.signInAdmin.password}
           name={'password'}
