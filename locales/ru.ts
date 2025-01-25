@@ -156,6 +156,11 @@ export const ru = {
     logOutConfirmation: 'Вы действительно хотите выйти из своей учетной записи?',
     rejectButton: 'Нет',
   },
+  signInAdmin: {
+    email: 'Адрес электронной почты',
+    password: 'Пароль',
+    signIn: 'Войти',
+  },
   signUp: {
     and: 'и',
     backToSignUp: 'Назад к регистрации',
