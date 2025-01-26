@@ -158,6 +158,7 @@ export const en: Locale = {
   },
   signInAdmin: {
     email: 'Email',
+    error: 'The email or password are incorrect',
     password: 'Password',
     signIn: 'Sign In',
   },
