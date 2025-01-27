@@ -17,3 +17,6 @@ export type getNotificationsParams = {
   sortBy?: string
   sortDirection?: string
 }
+export type setNotificationReadBody = {
+  ids: Number[]
+}
