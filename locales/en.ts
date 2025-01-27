@@ -50,6 +50,9 @@ export const en: Locale = {
     Price: 'Price',
     SubscriptionType: 'Subscription Type',
   },
+  notifications: {
+    notificationsTitle: 'Notifications',
+  },
   passwordForm: {
     backToSignIn: 'Back to Sign In',
     confirmationLinkMsg: 'We have sent a link to confirm your email to ',
