@@ -1,6 +1,7 @@
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { LangSelect } from '@/components/langSelect/LangSelect'
 import { NotificationsDropDown } from '@/components/notificationDropdown/notificationsDropDown'
+import { useNotifications } from '@/components/notificationDropdown/useNotifications'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
@@ -17,6 +18,9 @@ export const Header = () => {
   }
 
   const { data } = useMeQuery()
+
+  const { notifications } = useNotifications()
+
   const isMyProfile = !!data
 
   const { t } = useTranslation()
@@ -26,7 +30,7 @@ export const Header = () => {
       <div className={classNames.container}>
         <Typography variant={'large'}>Inctagram</Typography>
         <div className={classNames.navContainer}>
-          {data && <NotificationsDropDown />}
+          {data && <NotificationsDropDown notifications={notifications} />}
           <LangSelect />
           {!isMyProfile && (
             <div className={classNames.buttonsContainer}>
