@@ -34,7 +34,7 @@ export const useNotifications = () => {
     [setNotifications]
   )
   const accessToken = getCookie('accessToken') as string
-  const socket = useSocket(accessToken)
+  const { socket } = useSocket(accessToken)
 
   useEffect(() => {
     socket?.on('notification', handleNewNotification)
