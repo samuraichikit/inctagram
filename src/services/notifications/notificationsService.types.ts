@@ -7,7 +7,7 @@ export type getNotificationsType = {
 export type NotificationType = {
   createdAt: string
   id: number
-  isRead: true
+  isRead: boolean
   message: string
 }
 export type getNotificationsParams = {
