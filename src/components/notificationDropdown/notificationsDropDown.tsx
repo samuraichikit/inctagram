@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { BellTrigger } from '@/components/notificationDropdown/bellTrigger/bellTrigger'
 import { NotificationItem } from '@/components/notificationDropdown/notificationItems/notificationItem'
 import { Dropdown } from '@/components/ui/dropdown'
@@ -13,6 +14,7 @@ type Props = {
 export const NotificationsDropDown = ({ notifications }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [markAsRead] = useMarkAsReadMutation()
+  const { t } = useTranslation()
   const handleDropdownClose = (open: boolean) => {
     setIsOpen(open)
     if (!open) {
@@ -29,7 +31,7 @@ export const NotificationsDropDown = ({ notifications }: Props) => {
       align={'end'}
       onOpenChange={handleDropdownClose}
       open={isOpen}
-      title={<Typography variant={'bold_text_14'}>Уведомления</Typography>}
+      title={<Typography variant={'bold_text_14'}>{t.notifications.notificationsTitle}</Typography>}
       trigger={<BellTrigger isOpen={isOpen} notifications={notifications} />}
     >
       {notifications?.map(notification => (

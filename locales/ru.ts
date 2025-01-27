@@ -48,6 +48,9 @@ export const ru = {
     Price: 'Цена',
     SubscriptionType: 'Тип подписки',
   },
+  notifications: {
+    notificationsTitle: 'Уведомления',
+  },
   passwordForm: {
     backToSignIn: 'Вернуться на страницу входа',
     confirmationLinkMsg: 'Мы отправили вам ссылку для подтверждения на ',
