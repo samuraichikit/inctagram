@@ -159,6 +159,12 @@ export const en: Locale = {
     logOutConfirmation: 'Are you really want to log out of your account',
     rejectButton: 'No',
   },
+  signInAdmin: {
+    email: 'Email',
+    error: 'The email or password are incorrect',
+    password: 'Password',
+    signIn: 'Sign In',
+  },
   signUp: {
     and: 'and',
     backToSignUp: 'Back to Sign Up',
