@@ -1,30 +1,19 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { WEBSOCKET_URL } from '@/common/constants'
-import { Socket, io } from 'socket.io-client'
+import { WS_EVENT_PATH } from '@/common/constants/websocketConstants'
+import { createSocket } from '@/services/socketService/createSocket'
+import { Socket } from 'socket.io-client'
 
 export const useSocket = (accessToken: string) => {
   const [socket, setSocket] = useState<Socket | null>(null)
   const socketRef = useRef<Socket | null>(null)
   const [connected, setConnected] = useState(false)
-  const queryParams = {
-    query: {
-      accessToken: accessToken,
-    },
-  }
   const connectSocket = useCallback(() => {
     if (accessToken && !socketRef.current) {
-      const newSocket = io(WEBSOCKET_URL, queryParams)
+      const newSocket = createSocket(accessToken)
 
-      newSocket.on('connect', () => {
-        console.log('Socket connected:', newSocket.id)
-        setConnected(true)
-      })
-
-      newSocket.on('disconnect', () => {
-        console.log('Socket disconnected')
-        setConnected(false)
-      })
+      newSocket.on(WS_EVENT_PATH.CONNECT, () => setConnected(true))
+      newSocket.on(WS_EVENT_PATH.DISCONNECT, () => setConnected(false))
 
       socketRef.current = newSocket
       setSocket(newSocket)
@@ -39,14 +28,12 @@ export const useSocket = (accessToken: string) => {
     return () => {
       if (socketRef.current) {
         socketRef.current.disconnect()
-        console.log('Socket disconnected on component unmount')
       }
     }
   }, [accessToken, connectSocket])
 
   const reconnectSocket = useCallback(() => {
     if (!connected && accessToken) {
-      console.log('Attempting to reconnect socket...')
       socketRef.current?.connect()
     }
   }, [connected, accessToken])
