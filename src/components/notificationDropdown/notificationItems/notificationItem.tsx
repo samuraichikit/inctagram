@@ -1,3 +1,4 @@
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { DropdownItem } from '@/components/ui/dropdown/DropdownItems'
 import { TimeAgoDisplay } from '@/components/ui/timeAgoDisplay'
 import { Typography } from '@/components/ui/typography'
@@ -9,14 +10,16 @@ type Props = {
   notification: NotificationType
 }
 export const NotificationItem = ({ notification }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <DropdownItem>
       <div className={s.itemContainer}>
         <div className={s.labelContainer}>
-          <Typography variant={'bold_text_14'}>Новое уведомление!</Typography>
+          <Typography variant={'bold_text_14'}>{t.notifications.newNotification}</Typography>
           {!notification.isRead && (
             <Typography className={s.newMessage} variant={'small_text'}>
-              Новое
+              {t.notifications.new}
             </Typography>
           )}
         </div>
