@@ -49,6 +49,8 @@ export const ru = {
     SubscriptionType: 'Тип подписки',
   },
   notifications: {
+    new: 'Новое',
+    newNotification: 'Новое увдомление!',
     notificationsTitle: 'Уведомления',
   },
   passwordForm: {

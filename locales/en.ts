@@ -51,6 +51,8 @@ export const en: Locale = {
     SubscriptionType: 'Subscription Type',
   },
   notifications: {
+    new: 'New',
+    newNotification: 'New message!',
     notificationsTitle: 'Notifications',
   },
   passwordForm: {
