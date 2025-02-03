@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { usePostSubscriptionsMutation } from '@/services/accountSubscriptions/accountSubsService'
 import {
   RequestPostSubscriptions,
@@ -16,6 +17,7 @@ type Props = {
 export const usePrices = ({ meInfo, pricesPayment }: Props) => {
   const [postSubscriptions] = usePostSubscriptionsMutation()
   const router = useRouter()
+  const { t } = useTranslation()
 
   const [choiceSelect, setChoiceSelect] = useState<number>(
     Number(localStorage.getItem('price')) + 1 || 1
@@ -26,20 +28,22 @@ export const usePrices = ({ meInfo, pricesPayment }: Props) => {
 
   useEffect(() => {
     if (router.query.success === 'true') {
-      setModalArguments({
-        buttonValue: 'Ok',
-        message: 'Payment was successful!',
-        title: 'Success',
-      })
-      setIsModal(true)
+      if (router.locale === 'en') {
+        setModalArguments({
+          buttonValue: t.modalMessage.Success.ok,
+          message: t.modalMessage.Success.message,
+          title: t.modalMessage.Success.title,
+        })
+        setIsModal(true)
+      }
 
       return
     }
     if (router.query.success === 'false') {
       setModalArguments({
-        buttonValue: 'Back to payment',
-        message: 'Transaction failed, please try again',
-        title: 'Error',
+        buttonValue: t.modalMessage.Error.ok,
+        message: t.modalMessage.Error.message,
+        title: t.modalMessage.Error.title,
       })
 
       setIsModal(true)
