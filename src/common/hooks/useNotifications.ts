@@ -37,7 +37,7 @@ export const useNotifications = () => {
       toast.info(notification.message)
     }
 
-    socket?.on(WS_EVENT_PATH.NOTIFICATION, handleNewNotification)
+    socket?.on(WS_EVENT_PATH.NOTIFICATIONS, handleNewNotification)
   }, [socket])
   useEffect(() => {
     if (serverNotifications?.items) {
