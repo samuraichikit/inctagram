@@ -69,6 +69,7 @@ export const SignUp = () => {
     const { email, password, userName } = data
 
     try {
+      sessionStorage.clear()
       await signUp({ email, password, userName }).unwrap()
       setEmailModal(email)
       setIsOpen(true)
