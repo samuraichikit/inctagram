@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react'
+
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { NotificationMessage } from '@/components/notificationDropdown/notificationItems/notificationMessage/NotificationMessage'
 import { DropdownItem } from '@/components/ui/dropdown/DropdownItems'
 import { TimeAgoDisplay } from '@/components/ui/timeAgoDisplay'
 import { Typography } from '@/components/ui/typography'
@@ -23,9 +26,9 @@ export const NotificationItem = ({ notification }: Props) => {
             </Typography>
           )}
         </div>
-
-        <div>{notification.message}</div>
+        <NotificationMessage message={notification.message} />
         <div>
+          <div id={'google_translate_element'}></div>
           <TimeAgoDisplay date={notification.createdAt} />
         </div>
       </div>
