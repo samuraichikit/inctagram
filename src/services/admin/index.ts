@@ -1,2 +1,2 @@
-export * from './client'
 export * from './authAdminService'
+export * from './client'
