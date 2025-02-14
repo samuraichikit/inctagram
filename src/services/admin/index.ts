@@ -1,2 +1,2 @@
+export * from './authAdminService'
 export * from './client'
-export * from './mutations'
