@@ -63,11 +63,21 @@ export const Prices = ({ isLoadingPricesPayment, meInfo, pricesPayment, t }: Pro
         </RadioGroup.Root>
       </div>
       <div className={s.wrapperPayments}>
-        <Button disabled={isDisable} onClick={() => clickPaymentButton('PAYPAL')} variant={'icon'}>
+        <Button
+          className={isDisable ? s.loading : ''}
+          disabled={isDisable}
+          onClick={() => clickPaymentButton('PAYPAL')}
+          variant={'icon'}
+        >
           <PaypalPayment />
         </Button>
         <span className={s.or}>{t.accountManagement.or}</span>
-        <Button disabled={isDisable} onClick={() => clickPaymentButton('STRIPE')} variant={'icon'}>
+        <Button
+          className={isDisable ? s.loading : ''}
+          disabled={isDisable}
+          onClick={() => clickPaymentButton('STRIPE')}
+          variant={'icon'}
+        >
           <StripePayment />
         </Button>
       </div>
