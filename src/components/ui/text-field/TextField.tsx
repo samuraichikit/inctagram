@@ -9,6 +9,7 @@ import clsx from 'clsx'
 import s from './textField.module.scss'
 
 export type TextFieldProps = {
+  className?: string
   errorMessage?: string
   id?: string
   label?: string
