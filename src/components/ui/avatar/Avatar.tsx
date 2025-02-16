@@ -8,7 +8,7 @@ import defaultAvatar from './../../../../public/defaultAvatar.png'
 type Props = {
   className?: string
   height: number
-  src: string
+  src?: null | string
   width: number
 }
 
