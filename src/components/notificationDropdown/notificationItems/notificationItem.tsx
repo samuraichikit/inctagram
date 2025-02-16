@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { NotificationMessage } from '@/components/notificationDropdown/notificationItems/notificationMessage/NotificationMessage'
 import { DropdownItem } from '@/components/ui/dropdown/DropdownItems'
