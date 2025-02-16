@@ -1,0 +1,30 @@
+.adminUserInfoContainer {
+  width: 100%;
+  max-width: 360px;
+}
+
+.userDetailsContainer {
+  display: flex;
+  gap: 24px;
+}
+
+.userName {
+  color: var(--color-light-100);
+}
+
+.accountInfoContainer {
+  display: flex;
+  gap: 12px;
+  margin-top: 19px;
+}
+
+.userIdContainer,
+.creationDateContainer {
+  width: 100%;
+  max-width: 172px;
+}
+
+.userId,
+.creationDate {
+  color: var(--color-light-900);
+}
