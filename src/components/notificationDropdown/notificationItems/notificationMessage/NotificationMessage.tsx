@@ -7,7 +7,7 @@ type Props = {
 }
 
 export const NotificationMessage = ({ message }: Props) => {
-  const [translate, setTranslate] = useState('loading...')
+  const [translate, setTranslate] = useState('Loading...')
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {

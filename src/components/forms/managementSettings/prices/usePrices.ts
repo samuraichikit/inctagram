@@ -28,14 +28,12 @@ export const usePrices = ({ meInfo, pricesPayment }: Props) => {
 
   useEffect(() => {
     if (router.query.success === 'true') {
-      if (router.locale === 'en') {
-        setModalArguments({
-          buttonValue: t.modalMessage.Success.ok,
-          message: t.modalMessage.Success.message,
-          title: t.modalMessage.Success.title,
-        })
-        setIsModal(true)
-      }
+      setModalArguments({
+        buttonValue: t.modalMessage.Success.ok,
+        message: t.modalMessage.Success.message,
+        title: t.modalMessage.Success.title,
+      })
+      setIsModal(true)
 
       return
     }
