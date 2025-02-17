@@ -2,7 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export const AdminUserTabs = () => {
   return (
-    <Tabs defaultValue="uploadedPhotos">
+    <Tabs defaultValue={'uploadedPhotos'}>
       <TabsList>
         <TabsTrigger value={'uploadedPhotos'}>Uploaded Photos</TabsTrigger>
         <TabsTrigger value={'payments'}>Payments</TabsTrigger>

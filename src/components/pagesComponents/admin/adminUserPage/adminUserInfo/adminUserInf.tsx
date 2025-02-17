@@ -3,18 +3,19 @@ import { Avatar } from '@/components/ui/avatar'
 import { Typography } from '@/components/ui/typography'
 import { useGetUserQuery } from '@/services/admin/usersService.generated'
 import { useRouter } from 'next/router'
+
 import s from './adminUserInfo.module.scss'
 
 export const AdminUserInfo = () => {
   const classNames = {
-    userDetailsContainer: s.userDetailsContainer,
     accountInfoContainer: s.accountInfoContainer,
-    userIdContainer: s.userIdContainer,
-    creationDateContainer: s.creationDateContainer,
-    userName: s.userName,
     adminUserInfoContainer: s.adminUserInfoContainer,
-    userId: s.userId,
     creationDate: s.creationDate,
+    creationDateContainer: s.creationDateContainer,
+    userDetailsContainer: s.userDetailsContainer,
+    userId: s.userId,
+    userIdContainer: s.userIdContainer,
+    userName: s.userName,
   }
   const { query } = useRouter()
   const userId = Number(query.id)
@@ -36,7 +37,7 @@ export const AdminUserInfo = () => {
               {firstName} {lastName}
             </h1>
           </Typography>
-          <Typography variant={'regular_link'} className={classNames.userName}>
+          <Typography className={classNames.userName} variant={'regular_link'}>
             {userName}
           </Typography>
         </div>
