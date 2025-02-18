@@ -1,1 +1,1 @@
-export * from './adminUserInf'
+export * from './AdminUserInfo'
