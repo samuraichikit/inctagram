@@ -23,7 +23,7 @@ export const UserUploadedPhotos = () => {
   const { data } = useGetPostsByUserQuery({ variables: { userId } })
   const [getPostsByUserLazy] = useGetPostsByUserLazyQuery()
   const [photos, setPhotos] = useState<ImagePost[]>([])
-  const { isInView, targetRef } = useElementInView({ threshold: 0.6 })
+  const { isInView, targetRef } = useElementInView({ threshold: 0.8 })
 
   const { items, pagesCount } = data?.getPostsByUser ?? {}
   const totalPagesCount = pagesCount ?? 0
