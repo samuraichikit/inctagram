@@ -1,3 +1,5 @@
+import { Key, ReactNode } from 'react'
+
 import {
   Table,
   TableBody,
@@ -6,16 +8,16 @@ import {
   TableHeadCell,
   TableRow,
 } from '@/components/ui/tables'
-import { Key, ReactNode } from 'react'
+
 import { formatCellValue } from './formatCellValue'
 
 export type Column<T> = {
   accessor: keyof T
-  title: ReactNode
   sortable?: boolean
+  title: ReactNode
 }
 
-type Row<T> = T & { id: Key }
+type Row<T> = { id: Key } & T
 type TableBodyData<T> = Row<T>[]
 
 type Props<T> = {
@@ -40,6 +42,7 @@ export const CommonTable = <T,>({ columns, tableBodyData }: Props<T>) => {
               {columns.map(column => {
                 const cellValue = row[column.accessor as keyof typeof row]
                 const formattedValue = formatCellValue(cellValue)
+
                 return (
                   <TableBodyCell key={String(column.accessor)}>
                     {formattedValue as ReactNode}
