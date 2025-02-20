@@ -39,7 +39,7 @@ export const UserUploadedPhotos = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       const { data: lazyData } = await getPostsByUserLazy({
-        variables: { endCursorId: endCursorPostIdRef.current, userId: 1758 },
+        variables: { endCursorId: endCursorPostIdRef.current, userId },
       })
 
       if (lazyData?.getPostsByUser.items) {
