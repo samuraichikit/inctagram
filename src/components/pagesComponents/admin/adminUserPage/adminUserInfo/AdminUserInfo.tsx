@@ -19,7 +19,7 @@ export const AdminUserInfo = () => {
   }
   const { query } = useRouter()
   const userId = Number(query.id)
-  const { data } = useGetUserQuery({ variables: { userId: userId } })
+  const { data } = useGetUserQuery({ variables: { userId } })
 
   if (!data?.getUser.profile) {
     return null

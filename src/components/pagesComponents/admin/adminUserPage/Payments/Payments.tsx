@@ -7,11 +7,12 @@ import {
 } from '@/services/admin/paymentsService.generated'
 import { useRouter } from 'next/router'
 
+import s from './payments.module.scss'
+
 export const Payments = () => {
-  const router = useRouter()
-  const { query } = router
-  const { searchParams, setQueryParams } = useQueryParams()
-  const userId = Number(query.id)
+  const classNames = {
+    pagination: s.pagination,
+  }
   const columns: Column<GetPaymentsByUserQuery['getPaymentsByUser']['items'][number]>[] = [
     { accessor: 'dateOfPayment', sortable: true, title: 'Date of Payment' },
     { accessor: 'endDate', title: 'End date of subscription' },
@@ -19,11 +20,16 @@ export const Payments = () => {
     { accessor: 'type', title: 'Subscription Type' },
     { accessor: 'paymentType', sortable: true, title: 'Payment Type' },
   ]
+  const router = useRouter()
+  const { query } = router
+  const { searchParams, setQueryParams } = useQueryParams()
+  const userId = Number(query.id)
+
   const currentPage = Number(searchParams?.get('currentPage') ?? 1)
   const pageSize = Number(searchParams?.get('pageSize') ?? 10)
 
   const { data } = useGetPaymentsByUserQuery({
-    variables: { userId: 1736, pageNumber: currentPage, pageSize },
+    variables: { pageNumber: currentPage, pageSize, userId },
   })
 
   const paymentsData = data?.getPaymentsByUser.items ?? []
@@ -34,13 +40,14 @@ export const Payments = () => {
   }
 
   const handlePageSizeChange = (pageSize: number) => {
-    setQueryParams({ pageSize: String(pageSize), currentPage: '1' })
+    setQueryParams({ currentPage: '1', pageSize: String(pageSize) })
   }
 
   return (
     <>
       <CommonTable columns={columns} tableBodyData={paymentsData} />
       <Pagination
+        className={classNames.pagination}
         currentPage={currentPage}
         onPageChange={handleChangeCurrentPage}
         onPageSizeChange={handlePageSizeChange}
