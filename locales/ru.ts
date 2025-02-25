@@ -41,6 +41,18 @@ export const ru = {
     search: 'Поиск',
     statistics: 'Статистика',
   },
+  modalMessage: {
+    Error: {
+      message: 'Транзакция не удалась, попробуйте еще раз',
+      ok: 'Вернуться к оплате!',
+      title: 'Ошибка',
+    },
+    Success: {
+      message: 'Оплата прошла успешно!',
+      ok: 'Хорошо',
+      title: 'Успех',
+    },
+  },
   myPayments: {
     DateOfPayment: 'Дата платежа',
     EndDataOfSubscription: 'Конечные данные подписки',

@@ -43,6 +43,18 @@ export const en: Locale = {
     search: 'Search',
     statistics: 'Statistics',
   },
+  modalMessage: {
+    Error: {
+      message: 'Transaction failed, please try again',
+      ok: 'Back to payment!',
+      title: 'Error',
+    },
+    Success: {
+      message: 'Payment was successful!',
+      ok: 'Ok',
+      title: 'Success',
+    },
+  },
   myPayments: {
     DateOfPayment: 'Date of Payment',
     EndDataOfSubscription: 'End data of subscription',
