@@ -18,12 +18,6 @@ export const useNotifications = () => {
   const accessToken = getCookie('accessToken') as string
   const { socket } = useSocket(accessToken)
 
-  useEffect(() => {
-    if (initialData?.totalCount) {
-      setPageSize(initialData.totalCount)
-    }
-  }, [initialData?.totalCount])
-
   const lastMonthNotifications = useMemo(
     () => getLastMonthNotifications(serverNotifications?.items),
     [serverNotifications?.items]
@@ -33,17 +27,23 @@ export const useNotifications = () => {
   )
 
   useEffect(() => {
+    if (initialData?.totalCount) {
+      setPageSize(initialData.totalCount)
+    }
     const handleNewNotification = (notification: NotificationType) => {
       toast.info(notification.message)
     }
 
     socket?.on(WS_EVENT_PATH.NOTIFICATIONS, handleNewNotification)
-  }, [socket])
-  useEffect(() => {
+
     if (serverNotifications?.items) {
       setNotifications(serverNotifications?.items)
     }
-  }, [serverNotifications?.items])
+
+    return () => {
+      socket?.off(WS_EVENT_PATH.NOTIFICATIONS, handleNewNotification)
+    }
+  }, [socket, serverNotifications, initialData])
 
   return { notifications }
 }

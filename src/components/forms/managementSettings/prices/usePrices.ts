@@ -52,7 +52,9 @@ export const usePrices = ({ meInfo, pricesPayment }: Props) => {
     setIsDisable(true)
     const requestData: RequestPostSubscriptions = {
       amount: pricesPayment.data[Number(localStorage.getItem('price'))].amount || 10,
-      baseUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/profile/settings/management/${meInfo.userId}`,
+      baseUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${
+        router.locale === 'en' ? '/en' : ''
+      }/profile/settings/management/${meInfo.userId}`,
       paymentType: paymentType,
       typeSubscription: pricesPayment.data[Number(localStorage.getItem('price'))].typeDescription,
     }
@@ -68,7 +70,9 @@ export const usePrices = ({ meInfo, pricesPayment }: Props) => {
 
   const closeModal = () => {
     setIsModal(false)
-    router.push(`/profile/settings/management/${meInfo.userId}`)
+    router.push(
+      `${router.locale === 'en' ? '/en' : ''}/profile/settings/management/${meInfo.userId}`
+    )
   }
 
   const checkedRadio = (type: number) => {
