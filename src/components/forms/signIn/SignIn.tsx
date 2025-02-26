@@ -58,6 +58,19 @@ export const SignIn = () => {
     }
   }, [email, password])
 
+  useEffect(() => {
+    if (email === '') {
+      setError('email', { message: '' })
+
+      return
+    }
+    if (password === '') {
+      setError('password', { message: '' })
+
+      return
+    }
+  }, [email, password])
+
   const [signIn] = useSignInMutation()
   const router = useRouter()
 
