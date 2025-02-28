@@ -15,8 +15,7 @@
     "check:prettier": "prettier src --check",
     "check:eslint": "eslint src --ext .jsx,.js,.tsx,.ts --no-error-on-unmatched-pattern",
     "check:stylelint": "stylelint src/**/*.{scss,css} --allow-empty-input",
-    "compile": "graphql-codegen",
-    "watch": "graphql-codegen -w"
+    "generate": "graphql-codegen && pnpm run lint"
   },
   "dependencies": {
     "@apollo/client": "^3.12.7",
