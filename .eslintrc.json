@@ -2,5 +2,13 @@
   "extends": [
     "@it-incubator/eslint-config",
     "plugin:storybook/recommended"
+  ],
+  "overrides": [
+    {
+      "files": ["src/services/admin/**/*.{ts,tsx,js,jsx}"],
+      "rules": {
+        "max-lines": "off"
+      }
+    }
   ]
 }
