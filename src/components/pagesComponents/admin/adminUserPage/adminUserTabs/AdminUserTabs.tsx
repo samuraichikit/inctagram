@@ -2,7 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import s from './adminUserTabs.module.scss'
 
-import { Payments } from '../Payments'
+import { Payments } from '../payments'
 import { UserUploadedPhotos } from '../userUploadedPhotos'
 
 export const AdminUserTabs = () => {
