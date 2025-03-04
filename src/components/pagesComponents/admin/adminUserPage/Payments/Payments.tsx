@@ -25,22 +25,22 @@ export const Payments = () => {
   const { searchParams, setQueryParams } = useQueryParams()
   const userId = Number(query.id)
 
-  const currentPage = Number(searchParams?.get('currentPage') ?? 1)
+  const pageNumber = Number(searchParams?.get('pageNumber') ?? 1)
   const pageSize = Number(searchParams?.get('pageSize') ?? 10)
 
   const { data } = useGetPaymentsByUserQuery({
-    variables: { pageNumber: currentPage, pageSize, userId },
+    variables: { pageNumber, pageSize, userId },
   })
 
   const paymentsData = data?.getPaymentsByUser.items ?? []
   const totalCount = data?.getPaymentsByUser.totalCount
 
   const handleChangeCurrentPage = (value: number) => {
-    setQueryParams({ currentPage: String(value) })
+    setQueryParams({ pageNumber: String(value) })
   }
 
   const handlePageSizeChange = (pageSize: number) => {
-    setQueryParams({ currentPage: '1', pageSize: String(pageSize) })
+    setQueryParams({ pageNumber: '1', pageSize: String(pageSize) })
   }
 
   return (
@@ -48,7 +48,7 @@ export const Payments = () => {
       <CommonTable columns={columns} tableBodyData={paymentsData} />
       <Pagination
         className={classNames.pagination}
-        currentPage={currentPage}
+        currentPage={pageNumber}
         onPageChange={handleChangeCurrentPage}
         onPageSizeChange={handlePageSizeChange}
         pageSize={pageSize}
