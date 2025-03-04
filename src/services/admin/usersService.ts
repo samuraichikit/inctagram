@@ -34,3 +34,20 @@ export const GET_FOLLOWERS = gql(`
       }
     } 
 `)
+
+export const GET_FOLLOWING = gql(`
+  query GetFollowing($userId: Int!, $pageSize: Int, $pageNumber: Int, $sortBy: String, $sortDirection: SortDirection) {
+    getFollowing(userId: $userId, pageNumber: $pageNumber, pageSize: $pageSize, sortBy: $sortBy, sortDirection: $sortDirection) {
+      pagesCount,
+      page,
+      totalCount,
+      pageSize,
+      items {
+        id,
+        userId,
+        userName,
+        createdAt,
+      }
+      }
+    } 
+`)
