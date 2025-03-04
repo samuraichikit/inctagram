@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { useQueryParams } from '@/common/hooks/useQueryParams'
+import { useCommonTablePagination } from '@/common/hooks/useCommonTablePagination'
 import { Column, CommonTable } from '@/components/ui/commonTable'
 import { Pagination } from '@/components/ui/pagination'
 import { Follow } from '@/services/admin/types'
@@ -25,9 +25,9 @@ export const Followers = () => {
   const router = useRouter()
   const { query } = router
   const userId = Number(query.id)
-  const { searchParams, setQueryParams } = useQueryParams()
-  const pageNumber = Number(searchParams?.get('pageNumber') ?? 1)
-  const pageSize = Number(searchParams?.get('pageSize') ?? 10)
+  const { handleChangeCurrentPage, handlePageSizeChange, pageNumber, pageSize } =
+    useCommonTablePagination({ defaultPageNumber: 1, defaultPageSize: 10 })
+
   const { data: followersData } = useGetFollowersQuery({
     variables: { pageNumber, pageSize, userId: 1 },
   })
@@ -36,14 +36,6 @@ export const Followers = () => {
   const [followersWithFullNames, setFollowersWithFullNames] = useState<FollowersWithFullNames>([])
   const followers = followersData?.getFollowers.items
   const totalCount = followersData?.getFollowers.totalCount
-
-  const handleChangeCurrentPage = (value: number) => {
-    setQueryParams({ pageNumber: String(value) })
-  }
-
-  const handlePageSizeChange = (pageSize: number) => {
-    setQueryParams({ pageNumber: '1', pageSize: String(pageSize) })
-  }
 
   useEffect(() => {
     const fetchFollowersFullNames = async () => {

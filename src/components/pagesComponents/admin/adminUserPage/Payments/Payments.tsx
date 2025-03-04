@@ -1,4 +1,4 @@
-import { useQueryParams } from '@/common/hooks/useQueryParams'
+import { useCommonTablePagination } from '@/common/hooks/useCommonTablePagination'
 import { Column, CommonTable } from '@/components/ui/commonTable'
 import { Pagination } from '@/components/ui/pagination'
 import {
@@ -22,11 +22,10 @@ export const Payments = () => {
   ]
   const router = useRouter()
   const { query } = router
-  const { searchParams, setQueryParams } = useQueryParams()
   const userId = Number(query.id)
 
-  const pageNumber = Number(searchParams?.get('pageNumber') ?? 1)
-  const pageSize = Number(searchParams?.get('pageSize') ?? 10)
+  const { handleChangeCurrentPage, handlePageSizeChange, pageNumber, pageSize } =
+    useCommonTablePagination({ defaultPageNumber: 1, defaultPageSize: 10 })
 
   const { data } = useGetPaymentsByUserQuery({
     variables: { pageNumber, pageSize, userId },
@@ -34,14 +33,6 @@ export const Payments = () => {
 
   const paymentsData = data?.getPaymentsByUser.items ?? []
   const totalCount = data?.getPaymentsByUser.totalCount
-
-  const handleChangeCurrentPage = (value: number) => {
-    setQueryParams({ pageNumber: String(value) })
-  }
-
-  const handlePageSizeChange = (pageSize: number) => {
-    setQueryParams({ pageNumber: '1', pageSize: String(pageSize) })
-  }
 
   return (
     <>
