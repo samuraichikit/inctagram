@@ -13,7 +13,13 @@ export const Followers = () => {
   const columns: Column<FollowersWithFullNames[number]>[] = [
     { accessor: 'userId', title: 'User ID' },
     { accessor: 'fullName', title: 'Username' },
-    { accessor: 'userName', sortable: true, title: 'Profile link' },
+    {
+      accessor: 'userName',
+      href: row => `/profile/${row.userId}`,
+      isLink: true,
+      sortable: true,
+      title: 'Profile link',
+    },
     { accessor: 'createdAt', sortable: true, title: 'Subscription Date' },
   ]
   const router = useRouter()
