@@ -1,5 +1,6 @@
 import { memo } from 'react'
 
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { CustomSelect } from '@/components/ui/pagination/customSelect/CustomSelect'
 import { NavigationBlock } from '@/components/ui/pagination/navigation-block'
 import { usePagination } from '@/components/ui/pagination/usePagination'
@@ -37,6 +38,8 @@ export const Pagination = memo(
       totalCount,
     })
 
+    const { t } = useTranslation()
+
     return (
       <div className={classes}>
         <NavigationBlock
@@ -45,13 +48,13 @@ export const Pagination = memo(
           paginationRange={paginationRange}
         />
         <div className={s.selectBlock}>
-          <Typography variant={'regular_text_14'}>Show</Typography>
+          <Typography variant={'regular_text_14'}>{t.pagination.show}</Typography>
           <CustomSelect
             changeSelect={page => onPageSizeChange(Number(page))}
             className={s.Select}
             selectValue={String(pageSize)}
           />
-          <Typography variant={'regular_text_14'}>on page</Typography>
+          <Typography variant={'regular_text_14'}>{t.pagination.onPage}</Typography>
         </div>
       </div>
     )

@@ -67,6 +67,10 @@ export const en: Locale = {
     newNotification: 'New message!',
     notificationsTitle: 'Notifications',
   },
+  pagination: {
+    onPage: 'on page',
+    show: 'Show',
+  },
   passwordForm: {
     backToSignIn: 'Back to Sign In',
     confirmationLinkMsg: 'We have sent a link to confirm your email to ',
@@ -192,4 +196,12 @@ export const en: Locale = {
   },
   termsOfService: { title: 'Terms of Service' },
   test: 'Lorem Ipsum is simply dummy text of the printing',
+  usersListAdmin: {
+    dateAdded: 'Date added',
+    profileLink: 'Profile link',
+    selectBlocked: 'Blocked',
+    selectNoSelected: 'Not selected',
+    userId: 'User ID',
+    userName: 'User name',
+  },
 }
