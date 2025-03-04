@@ -29,7 +29,7 @@ export const GET_FOLLOWERS = gql(`
         id,
         userId,
         userName,
-        createdAt
+        createdAt,
       }
       }
     } 

@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import s from './adminUserTabs.module.scss'
 
+import { Followers } from '../followers'
 import { Payments } from '../payments'
 import { UserUploadedPhotos } from '../userUploadedPhotos'
 
@@ -34,7 +35,9 @@ export const AdminUserTabs = () => {
       <TabsContent value={'payments'}>
         <Payments />
       </TabsContent>
-      <TabsContent value={'followers'}>followers content</TabsContent>
+      <TabsContent value={'followers'}>
+        <Followers />
+      </TabsContent>
       <TabsContent value={'following'}>following content</TabsContent>
     </Tabs>
   )
