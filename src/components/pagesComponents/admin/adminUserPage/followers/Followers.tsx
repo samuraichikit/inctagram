@@ -13,7 +13,7 @@ export const Followers = () => {
     useCommonTablePagination({ defaultPageNumber: 1, defaultPageSize: 10 })
 
   const { data: followersData } = useGetFollowersQuery({
-    variables: { pageNumber, pageSize, userId: 1 },
+    variables: { pageNumber, pageSize, userId },
   })
 
   const followers = followersData?.getFollowers.items ?? []

@@ -14,7 +14,7 @@ export const Following = () => {
     useCommonTablePagination({ defaultPageNumber: 1, defaultPageSize: 10 })
 
   const { data: followingData } = useGetFollowingQuery({
-    variables: { pageNumber, pageSize, userId: 7 },
+    variables: { pageNumber, pageSize, userId },
   })
 
   const following = followingData?.getFollowing.items ?? []
