@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react'
 
+import { useCommonTablePagination } from '@/common/hooks/useCommonTablePagination'
 import { Column, CommonTable } from '@/components/ui/commonTable'
+import { Pagination } from '@/components/ui/pagination'
 import { Follow } from '@/services/admin/types'
 import { useGetFollowingQuery, useGetUserLazyQuery } from '@/services/admin/usersService.generated'
 import { useRouter } from 'next/router'
 
-type FollowingsWithFullNames = ({ fullName: string } & Follow)[]
+type FollowingWithFullNames = ({ fullName: string } & Follow)[]
 
 export const Following = () => {
-  const columns: Column<FollowingsWithFullNames[number]>[] = [
+  const columns: Column<FollowingWithFullNames[number]>[] = [
     { accessor: 'userId', title: 'User ID' },
     { accessor: 'fullName', title: 'Username' },
     {
@@ -24,13 +26,17 @@ export const Following = () => {
   const { query } = router
   const userId = Number(query.id)
 
+  const { handleChangeCurrentPage, handlePageSizeChange, pageNumber, pageSize } =
+    useCommonTablePagination({ defaultPageNumber: 1, defaultPageSize: 10 })
+
   const { data: followingData } = useGetFollowingQuery({
-    variables: { userId: 7 },
+    variables: { pageNumber, pageSize, userId: 7 },
   })
 
   const [getFollowingFullName] = useGetUserLazyQuery()
-  const [followingWithFullNames, setFollowingWithFullNames] = useState<FollowingsWithFullNames>([])
+  const [followingWithFullNames, setFollowingWithFullNames] = useState<FollowingWithFullNames>([])
   const following = followingData?.getFollowing.items
+  const totalCount = followingData?.getFollowing.totalCount
 
   useEffect(() => {
     const fetchFollowingsFullNames = async () => {
@@ -54,5 +60,16 @@ export const Following = () => {
     fetchFollowingsFullNames()
   }, [following, getFollowingFullName])
 
-  return <CommonTable columns={columns} tableBodyData={followingWithFullNames} />
+  return (
+    <>
+      <CommonTable columns={columns} tableBodyData={followingWithFullNames} />
+      <Pagination
+        currentPage={pageNumber}
+        onPageChange={handleChangeCurrentPage}
+        onPageSizeChange={handlePageSizeChange}
+        pageSize={pageSize}
+        totalCount={totalCount}
+      />
+    </>
+  )
 }
