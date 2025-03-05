@@ -17,11 +17,11 @@ export const Header = () => {
     navContainer: s.navContainer,
   }
 
-  const { data } = useMeQuery()
+  const { data, isError, isLoading } = useMeQuery()
 
   const { notifications } = useNotifications()
 
-  const isMyProfile = !!data
+  const isMyProfile = !isError && !isLoading // Вадим не трогай! Кнопки а то снова будут пропадать!
 
   const { t } = useTranslation()
 
