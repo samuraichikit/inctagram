@@ -1,4 +1,3 @@
-import { AdminUserPage } from '@/components/pagesComponents/admin/adminUserPage'
 import { getAdminLayout } from '@/components/ui/layout/adminLayout'
 import { NextPageWithLayout } from '@/pages/_app'
 
