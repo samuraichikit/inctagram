@@ -65,6 +65,10 @@ export const ru = {
     newNotification: 'Новое увдомление!',
     notificationsTitle: 'Уведомления',
   },
+  pagination: {
+    onPage: 'на странице',
+    show: 'Показать',
+  },
   passwordForm: {
     backToSignIn: 'Вернуться на страницу входа',
     confirmationLinkMsg: 'Мы отправили вам ссылку для подтверждения на ',
@@ -192,6 +196,15 @@ export const ru = {
   },
   termsOfService: { title: 'Пользовательское соглашение' },
   test: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати',
+  usersListAdmin: {
+    dateAdded: 'Дата добавления',
+    notSpecified: 'Не указано',
+    profileLink: 'Ссылка на профиль',
+    selectBlocked: 'Заблокировано',
+    selectNoSelected: 'Не выбрано',
+    userId: 'ID пользователя',
+    userName: 'Имя пользователя',
+  },
 }
 
 export type Locale = typeof ru

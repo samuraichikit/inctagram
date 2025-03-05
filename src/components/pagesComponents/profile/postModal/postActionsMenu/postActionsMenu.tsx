@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { EditIcon } from '@/assets/icons/EditIcon'
 import { TrashIcon } from '@/assets/icons/TrashIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { QuestionModal } from '@/components/pagesComponents/profile/postModal/questionModal'
 import { Button } from '@/components/ui/button'
 
 import s from './postActionsMenu.module.scss'
