@@ -10,7 +10,7 @@ export const BackToUsersListLink = () => {
   }
 
   return (
-    <Link className={classNames.container} href={'#'}>
+    <Link className={classNames.container} href={'/admin/usersList'}>
       <ArrowLeftIcon />
       <Typography variant={'medium_text_14'}>Back to Users List</Typography>
     </Link>
