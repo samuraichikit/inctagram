@@ -22,6 +22,7 @@ export type GetUsersQuery = {
       createdAt: any
       email: string
       id: number
+      profile: { __typename?: 'Profile'; firstName?: null | string; lastName?: null | string }
       userName: string
     }>
   }
@@ -49,6 +50,10 @@ export const GetUsersDocument = gql`
         userName
         email
         createdAt
+        profile {
+          firstName
+          lastName
+        }
       }
     }
   }

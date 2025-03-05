@@ -198,6 +198,7 @@ export const ru = {
   test: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати',
   usersListAdmin: {
     dateAdded: 'Дата добавления',
+    notSpecified: 'Не указано',
     profileLink: 'Ссылка на профиль',
     selectBlocked: 'Заблокировано',
     selectNoSelected: 'Не выбрано',

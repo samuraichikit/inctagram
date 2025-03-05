@@ -198,6 +198,7 @@ export const en: Locale = {
   test: 'Lorem Ipsum is simply dummy text of the printing',
   usersListAdmin: {
     dateAdded: 'Date added',
+    notSpecified: 'Not specified',
     profileLink: 'Profile link',
     selectBlocked: 'Blocked',
     selectNoSelected: 'Not selected',

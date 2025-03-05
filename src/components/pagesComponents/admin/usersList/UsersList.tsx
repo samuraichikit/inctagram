@@ -23,7 +23,7 @@ import s from './usersList.module.scss'
 
 export const UserList = () => {
   const [page, setPage] = useState(1)
-  const [pageSize, setPageSize] = useState(5)
+  const [pageSize, setPageSize] = useState(8)
   const { t } = useTranslation()
   const { data, error, loading } = useQuery<GetUsersQuery>(GET_USERS, {
     variables: {
@@ -67,7 +67,8 @@ export const UserList = () => {
               return (
                 <TableRow key={el.id}>
                   <TableBodyCell>{el.id}</TableBodyCell>
-                  <TableBodyCell>{el.userName}</TableBodyCell>
+                  <TableBodyCell>{`${el.profile.firstName || t.usersListAdmin.notSpecified} 
+                  ${el.profile.lastName || ''}`}</TableBodyCell>
                   <TableBodyCell>{el.userName}</TableBodyCell>
                   <TableBodyCell>
                     {new Date(el.createdAt).toLocaleDateString('ru-RU')}
