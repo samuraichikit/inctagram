@@ -5,7 +5,12 @@ import { Pagination } from '@/components/ui/pagination'
 import { useGetFollowersQuery } from '@/services/admin/usersService.generated'
 import { useRouter } from 'next/router'
 
+import s from './followers.module.scss'
+
 export const Followers = () => {
+  const classNames = {
+    pagination: s.pagination,
+  }
   const router = useRouter()
   const { query } = router
   const userId = Number(query.id)
@@ -25,6 +30,7 @@ export const Followers = () => {
     <>
       <CommonTable columns={columns} tableBodyData={followersWithFullNames} />
       <Pagination
+        className={classNames.pagination}
         currentPage={pageNumber}
         onPageChange={handleChangeCurrentPage}
         onPageSizeChange={handlePageSizeChange}
