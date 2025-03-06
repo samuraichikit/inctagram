@@ -22,7 +22,12 @@ export const useQueryParams = () => {
     router.push(`${pathnameWithUserId}?${urlSearchParams.toString()}`)
   }
 
+  const resetQueryParams = () => {
+    router.push(pathnameWithUserId)
+  }
+
   return {
+    resetQueryParams,
     searchParams,
     setQueryParams,
   }
