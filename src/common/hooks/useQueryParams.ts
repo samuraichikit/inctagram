@@ -22,12 +22,20 @@ export const useQueryParams = () => {
     router.push(`${pathnameWithUserId}?${urlSearchParams.toString()}`)
   }
 
-  const resetQueryParams = () => {
-    router.push(pathnameWithUserId)
+  const resetOldQueryParamsAndSetNewQueryParams = (newParams: Record<string, string>) => {
+    if (!searchParams) {
+      return null
+    }
+    const urlSearchParams = new URLSearchParams()
+
+    Object.keys(newParams).forEach(key => {
+      urlSearchParams.set(key, newParams[key])
+    })
+    router.push(`${pathnameWithUserId}?${urlSearchParams.toString()}`)
   }
 
   return {
-    resetQueryParams,
+    resetOldQueryParamsAndSetNewQueryParams,
     searchParams,
     setQueryParams,
   }

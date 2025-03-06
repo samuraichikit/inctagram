@@ -3,9 +3,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import s from './adminUserTabs.module.scss'
 
+import { Payments } from '../Payment'
 import { Followers } from '../followers'
 import { Following } from '../following'
-import { Payments } from '../payments'
 import { UserUploadedPhotos } from '../userUploadedPhotos'
 
 export const AdminUserTabs = () => {
@@ -15,13 +15,10 @@ export const AdminUserTabs = () => {
     trigger: s.trigger,
   }
 
-  const { resetQueryParams, searchParams, setQueryParams } = useQueryParams()
+  const { resetOldQueryParamsAndSetNewQueryParams, searchParams, setQueryParams } = useQueryParams()
 
   const handleChangeTab = (value: string) => {
-    resetQueryParams()
-    setTimeout(() => {
-      setQueryParams({ tab: value })
-    }, 0)
+    resetOldQueryParamsAndSetNewQueryParams({ tab: value })
   }
 
   const currentTab = searchParams?.get('tab') ?? 'uploadedPhotos'
