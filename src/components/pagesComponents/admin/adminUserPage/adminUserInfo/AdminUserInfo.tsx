@@ -2,6 +2,7 @@ import { formatDate } from '@/common/utils'
 import { Avatar } from '@/components/ui/avatar'
 import { Typography } from '@/components/ui/typography'
 import { useGetUserQuery } from '@/services/admin/usersService.generated'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import s from './adminUserInfo.module.scss'
@@ -37,8 +38,8 @@ export const AdminUserInfo = () => {
               {firstName} {lastName}
             </h1>
           </Typography>
-          <Typography className={classNames.userName} variant={'regular_link'}>
-            {userName}
+          <Typography asChild className={classNames.userName} variant={'regular_link'}>
+            <Link href={`/profile/${userId}`}>{userName}</Link>
           </Typography>
         </div>
       </div>
