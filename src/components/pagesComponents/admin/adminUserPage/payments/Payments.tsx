@@ -1,4 +1,5 @@
 import { useCommonTablePagination } from '@/common/hooks/useCommonTablePagination'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { Column, CommonTable } from '@/components/ui/commonTable'
 import { Pagination } from '@/components/ui/pagination'
 import {
@@ -13,12 +14,13 @@ export const Payments = () => {
   const classNames = {
     pagination: s.pagination,
   }
+  const { t } = useTranslation()
   const columns: Column<GetPaymentsByUserQuery['getPaymentsByUser']['items'][number]>[] = [
-    { accessor: 'dateOfPayment', sortable: true, title: 'Date of Payment' },
-    { accessor: 'endDate', title: 'End date of subscription' },
-    { accessor: 'price', title: 'Amount, $' },
-    { accessor: 'type', title: 'Subscription Type' },
-    { accessor: 'paymentType', sortable: true, title: 'Payment Type' },
+    { accessor: 'dateOfPayment', sortable: true, title: t.adminUserPage.dateOfPayment },
+    { accessor: 'endDate', title: t.adminUserPage.endDateOfSubscription },
+    { accessor: 'price', title: `${t.adminUserPage.amount}, $` },
+    { accessor: 'type', title: t.adminUserPage.subscriptionType },
+    { accessor: 'paymentType', sortable: true, title: t.adminUserPage.paymentType },
   ]
   const router = useRouter()
   const { query } = router

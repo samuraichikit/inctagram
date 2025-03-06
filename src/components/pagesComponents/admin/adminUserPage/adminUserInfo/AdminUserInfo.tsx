@@ -1,3 +1,4 @@
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { formatDate } from '@/common/utils'
 import { Avatar } from '@/components/ui/avatar'
 import { Typography } from '@/components/ui/typography'
@@ -21,6 +22,7 @@ export const AdminUserInfo = () => {
   const { query } = useRouter()
   const userId = Number(query.id)
   const { data } = useGetUserQuery({ variables: { userId } })
+  const { t } = useTranslation()
 
   if (!data?.getUser.profile) {
     return null
@@ -45,11 +47,13 @@ export const AdminUserInfo = () => {
       </div>
       <div className={classNames.accountInfoContainer}>
         <div className={classNames.userIdContainer}>
-          <Typography className={classNames.userId}>UserID</Typography>
+          <Typography className={classNames.userId}>{t.adminUserPage.userId}</Typography>
           <Typography variant={'regular_text_16'}>{id}</Typography>
         </div>
         <div className={classNames.creationDateContainer}>
-          <Typography className={classNames.creationDate}>Profile Creation Date</Typography>
+          <Typography className={classNames.creationDate}>
+            {t.adminUserPage.profileCreationDate}
+          </Typography>
           <Typography variant={'regular_text_16'}>{formatDate(createdAt)}</Typography>
         </div>
       </div>

@@ -1,11 +1,12 @@
 import { useQueryParams } from '@/common/hooks/useQueryParams'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import s from './adminUserTabs.module.scss'
 
-import { Payments } from '../Payment'
 import { Followers } from '../followers'
 import { Following } from '../following'
+import { Payments } from '../payments'
 import { UserUploadedPhotos } from '../userUploadedPhotos'
 
 export const AdminUserTabs = () => {
@@ -15,7 +16,8 @@ export const AdminUserTabs = () => {
     trigger: s.trigger,
   }
 
-  const { resetOldQueryParamsAndSetNewQueryParams, searchParams, setQueryParams } = useQueryParams()
+  const { resetOldQueryParamsAndSetNewQueryParams, searchParams } = useQueryParams()
+  const { t } = useTranslation()
 
   const handleChangeTab = (value: string) => {
     resetOldQueryParamsAndSetNewQueryParams({ tab: value })
@@ -27,16 +29,16 @@ export const AdminUserTabs = () => {
     <Tabs className={classNames.container} onValueChange={handleChangeTab} value={currentTab}>
       <TabsList className={classNames.list}>
         <TabsTrigger className={classNames.trigger} value={'uploadedPhotos'}>
-          Uploaded Photos
+          {t.adminUserPage.uploadedPhotos}
         </TabsTrigger>
         <TabsTrigger className={classNames.trigger} value={'payments'}>
-          Payments
+          {t.adminUserPage.payments}
         </TabsTrigger>
         <TabsTrigger className={classNames.trigger} value={'followers'}>
-          Followers
+          {t.adminUserPage.followers}
         </TabsTrigger>
         <TabsTrigger className={classNames.trigger} value={'following'}>
-          Following
+          {t.adminUserPage.following}
         </TabsTrigger>
       </TabsList>
       <TabsContent value={'uploadedPhotos'}>

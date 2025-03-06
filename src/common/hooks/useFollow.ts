@@ -4,23 +4,26 @@ import { Column } from '@/components/ui/commonTable'
 import { Follow } from '@/services/admin/types'
 import { useGetUserLazyQuery } from '@/services/admin/usersService.generated'
 
+import { useTranslation } from './useTranslation'
+
 type Props = {
   items: Follow[]
 }
 type FollowWithFullNames = ({ fullName: string } & Follow)[]
 
 export const useFollow = ({ items }: Props) => {
+  const { t } = useTranslation()
   const columns: Column<FollowWithFullNames[number]>[] = [
-    { accessor: 'userId', title: 'User ID' },
-    { accessor: 'fullName', title: 'Username' },
+    { accessor: 'userId', title: t.adminUserPage.userId },
+    { accessor: 'fullName', title: t.adminUserPage.userName },
     {
       accessor: 'userName',
       href: row => `/profile/${row.userId}`,
       isLink: true,
       sortable: true,
-      title: 'Profile link',
+      title: t.adminUserPage.profileLink,
     },
-    { accessor: 'createdAt', sortable: true, title: 'Subscription Date' },
+    { accessor: 'createdAt', sortable: true, title: t.adminUserPage.subscriptionDate },
   ]
 
   const [getFullName] = useGetUserLazyQuery()
