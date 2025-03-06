@@ -1,3 +1,4 @@
+import { useQueryParams } from '@/common/hooks/useQueryParams'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import s from './adminUserTabs.module.scss'
@@ -14,8 +15,19 @@ export const AdminUserTabs = () => {
     trigger: s.trigger,
   }
 
+  const { resetQueryParams, searchParams, setQueryParams } = useQueryParams()
+
+  const handleChangeTab = (value: string) => {
+    resetQueryParams()
+    setTimeout(() => {
+      setQueryParams({ tab: value })
+    }, 0)
+  }
+
+  const currentTab = searchParams?.get('tab') ?? 'uploadedPhotos'
+
   return (
-    <Tabs className={classNames.container} defaultValue={'uploadedPhotos'}>
+    <Tabs className={classNames.container} onValueChange={handleChangeTab} value={currentTab}>
       <TabsList className={classNames.list}>
         <TabsTrigger className={classNames.trigger} value={'uploadedPhotos'}>
           Uploaded Photos
