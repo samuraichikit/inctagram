@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { Filter } from '@/assets/icons/PolygonIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
@@ -24,18 +24,24 @@ import s from './usersList.module.scss'
 export const UserList = () => {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(8)
+  const [searchTerm, setSearchTerm] = useState<string>('')
   const { t } = useTranslation()
   const { data, error, loading } = useQuery<GetUsersQuery>(GET_USERS, {
     variables: {
       pageNumber: page,
       pageSize: pageSize,
+      searchTerm: searchTerm,
     },
   })
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value.toLowerCase())
+  }
 
   return (
     <div className={s.wholeList}>
       <div className={s.searchSelect}>
-        <TextField className={s.searchWidth} type={'search'} />
+        <TextField onChange={handleChange} style={{ width: '644px' }} type={'search'} />
         <Select className={s.selectWidth} placeholder={t.usersListAdmin.selectNoSelected}>
           <SelectItem value={t.usersListAdmin.selectBlocked}>
             {t.usersListAdmin.selectBlocked}
