@@ -1,5 +1,6 @@
 import { useCommonTablePagination } from '@/common/hooks/useCommonTablePagination'
 import { useFollow } from '@/common/hooks/useFollow'
+import { CommonTableWithPaginationSkeleton } from '@/components/skeletons/commonTableWithPaginationSkeleton'
 import { CommonTable } from '@/components/ui/commonTable'
 import { Pagination } from '@/components/ui/pagination'
 import { useGetFollowingQuery } from '@/services/admin/usersService.generated'
@@ -18,14 +19,22 @@ export const Following = () => {
   const { handleChangeCurrentPage, handlePageSizeChange, pageNumber, pageSize } =
     useCommonTablePagination({ defaultPageNumber: 1, defaultPageSize: 10 })
 
-  const { data: followingData } = useGetFollowingQuery({
+  const { data: followingData, loading } = useGetFollowingQuery({
     variables: { pageNumber, pageSize, userId },
   })
 
   const following = followingData?.getFollowing.items ?? []
   const totalCount = followingData?.getFollowing.totalCount
 
-  const { columns, itemsWithFullNames: followingWithFullNames } = useFollow({ items: following })
+  const {
+    columns,
+    itemsWithFullNames: followingWithFullNames,
+    loadingGetFullName,
+  } = useFollow({ items: following })
+
+  if (loading || loadingGetFullName) {
+    return <CommonTableWithPaginationSkeleton count={11} height={42} />
+  }
 
   return (
     <>

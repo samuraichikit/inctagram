@@ -26,7 +26,7 @@ export const useFollow = ({ items }: Props) => {
     { accessor: 'createdAt', sortable: true, title: t.adminUserPage.subscriptionDate },
   ]
 
-  const [getFullName] = useGetUserLazyQuery()
+  const [getFullName, { loading: loadingGetFullName }] = useGetUserLazyQuery()
   const [itemsWithFullNames, setItemsWithFullNames] = useState<FollowWithFullNames>([])
 
   useEffect(() => {
@@ -52,5 +52,5 @@ export const useFollow = ({ items }: Props) => {
     fetchFollowersFullNames()
   }, [items, getFullName])
 
-  return { columns, itemsWithFullNames }
+  return { columns, itemsWithFullNames, loadingGetFullName }
 }

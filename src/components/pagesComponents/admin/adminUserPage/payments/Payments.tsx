@@ -1,5 +1,6 @@
 import { useCommonTablePagination } from '@/common/hooks/useCommonTablePagination'
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { CommonTableWithPaginationSkeleton } from '@/components/skeletons/commonTableWithPaginationSkeleton'
 import { Column, CommonTable } from '@/components/ui/commonTable'
 import { Pagination } from '@/components/ui/pagination'
 import {
@@ -29,12 +30,16 @@ export const Payments = () => {
   const { handleChangeCurrentPage, handlePageSizeChange, pageNumber, pageSize } =
     useCommonTablePagination({ defaultPageNumber: 1, defaultPageSize: 10 })
 
-  const { data } = useGetPaymentsByUserQuery({
+  const { data, loading } = useGetPaymentsByUserQuery({
     variables: { pageNumber, pageSize, userId },
   })
 
   const paymentsData = data?.getPaymentsByUser.items ?? []
   const totalCount = data?.getPaymentsByUser.totalCount
+
+  if (loading) {
+    return <CommonTableWithPaginationSkeleton count={11} height={42} />
+  }
 
   return (
     <>
