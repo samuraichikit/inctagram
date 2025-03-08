@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { formatDate } from '@/common/utils'
+import { UploadedPhotosSkeleton } from '@/components/skeletons/uploadedPhotosSkeleton'
 import {
   useGetPostsByUserLazyQuery,
   useGetPostsByUserQuery,
@@ -20,7 +21,7 @@ export const UserUploadedPhotos = () => {
   const userId = Number(query.id)
   const [pageNumber, setPageNumber] = useState(1)
   const endCursorPostIdRef = useRef<null | number>(null)
-  const { data } = useGetPostsByUserQuery({ variables: { userId } })
+  const { data, loading } = useGetPostsByUserQuery({ variables: { userId } })
   const [getPostsByUserLazy] = useGetPostsByUserLazyQuery()
   const [photos, setPhotos] = useState<ImagePost[]>([])
   const { isInView, targetRef } = useElementInView({ threshold: 0.8 })
@@ -64,6 +65,7 @@ export const UserUploadedPhotos = () => {
 
   return (
     <div className={classNames.container}>
+      {loading && <UploadedPhotosSkeleton count={12} height={228} width={234} />}
       {photos?.map((item, index) => {
         return (
           <Image
