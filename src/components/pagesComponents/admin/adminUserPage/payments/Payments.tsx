@@ -1,20 +1,14 @@
 import { useCommonTablePagination } from '@/common/hooks/useCommonTablePagination'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { CommonTableWithPaginationSkeleton } from '@/components/skeletons/commonTableWithPaginationSkeleton'
-import { Column, CommonTable } from '@/components/ui/commonTableWithPagination'
-import { Pagination } from '@/components/ui/pagination'
+import { Column, CommonTableWithPagination } from '@/components/ui/commonTableWithPagination'
 import {
   GetPaymentsByUserQuery,
   useGetPaymentsByUserQuery,
 } from '@/services/admin/paymentsService.generated'
 import { useRouter } from 'next/router'
 
-import s from './payments.module.scss'
-
 export const Payments = () => {
-  const classNames = {
-    pagination: s.pagination,
-  }
   const { t } = useTranslation()
   const columns: Column<GetPaymentsByUserQuery['getPaymentsByUser']['items'][number]>[] = [
     { accessor: 'dateOfPayment', sortable: true, title: t.adminUserPage.dateOfPayment },
@@ -42,16 +36,14 @@ export const Payments = () => {
   }
 
   return (
-    <>
-      <CommonTable columns={columns} tableBodyData={paymentsData} />
-      <Pagination
-        className={classNames.pagination}
-        currentPage={pageNumber}
-        onPageChange={handleChangeCurrentPage}
-        onPageSizeChange={handlePageSizeChange}
-        pageSize={pageSize}
-        totalCount={totalCount}
-      />
-    </>
+    <CommonTableWithPagination
+      columns={columns}
+      currentPage={pageNumber}
+      onPageChange={handleChangeCurrentPage}
+      onPageSizeChange={handlePageSizeChange}
+      pageSize={pageSize}
+      tableBodyData={paymentsData}
+      totalCount={totalCount}
+    />
   )
 }
