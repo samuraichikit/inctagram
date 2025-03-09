@@ -38,6 +38,9 @@ export const en: Locale = {
     ExpireAt: 'Expire at',
     NextPayment: 'Next payment',
   },
+  commonTableWithPagination: {
+    noData: 'No data',
+  },
   emailVerification: {
     expiredLinkMsg: 'Email verification link expired',
     msg: 'Looks like the verification link has expired. Not to worry, we can send the link again',

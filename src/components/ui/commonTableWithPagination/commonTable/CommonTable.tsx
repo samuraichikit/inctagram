@@ -12,7 +12,7 @@ import Link from 'next/link'
 
 import s from './commonTable.module.scss'
 
-import { Typography } from '../typography'
+import { Typography } from '../../typography'
 import { formatCellValue } from './formatCellValue'
 
 export type Column<T> =
@@ -33,12 +33,12 @@ export type Column<T> =
 type Row<T> = { id: Key } & T
 type TableBodyData<T> = Row<T>[]
 
-type Props<T> = {
+export type CommonTableProps<T> = {
   columns: Column<T>[]
   tableBodyData: TableBodyData<T>
 }
 
-export const CommonTable = <T,>({ columns, tableBodyData }: Props<T>) => {
+export const CommonTable = <T,>({ columns, tableBodyData }: CommonTableProps<T>) => {
   const classNames = {
     link: s.link,
   }

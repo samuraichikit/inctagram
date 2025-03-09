@@ -36,6 +36,9 @@ export const ru = {
     ExpireAt: 'Истекает в',
     NextPayment: 'Следующий платеж',
   },
+  commonTableWithPagination: {
+    noData: 'Данных нет',
+  },
   emailVerification: {
     expiredLinkMsg: 'Ссылка на подтверждение пароля истекла',
     msg: 'Вероятно, сcылка на подтверждение пароля истекла.  Не волнуйтесь - мы вышлем вам новую!',

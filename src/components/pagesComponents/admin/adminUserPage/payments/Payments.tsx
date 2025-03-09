@@ -1,7 +1,7 @@
 import { useCommonTablePagination } from '@/common/hooks/useCommonTablePagination'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { CommonTableWithPaginationSkeleton } from '@/components/skeletons/commonTableWithPaginationSkeleton'
-import { Column, CommonTable } from '@/components/ui/commonTable'
+import { Column, CommonTable } from '@/components/ui/commonTableWithPagination'
 import { Pagination } from '@/components/ui/pagination'
 import {
   GetPaymentsByUserQuery,

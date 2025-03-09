@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Column } from '@/components/ui/commonTable'
+import { Column } from '@/components/ui/commonTableWithPagination'
 import { Follow } from '@/services/admin/types'
 import { useGetUserLazyQuery } from '@/services/admin/usersService.generated'
 

@@ -1,7 +1,7 @@
 import { useCommonTablePagination } from '@/common/hooks/useCommonTablePagination'
 import { useFollow } from '@/common/hooks/useFollow'
 import { CommonTableWithPaginationSkeleton } from '@/components/skeletons/commonTableWithPaginationSkeleton'
-import { CommonTable } from '@/components/ui/commonTable'
+import { CommonTable } from '@/components/ui/commonTableWithPagination'
 import { Pagination } from '@/components/ui/pagination'
 import { useGetFollowingQuery } from '@/services/admin/usersService.generated'
 import { useRouter } from 'next/router'
