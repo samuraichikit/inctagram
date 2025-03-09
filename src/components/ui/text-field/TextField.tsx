@@ -9,6 +9,7 @@ import clsx from 'clsx'
 import s from './textField.module.scss'
 
 export type TextFieldProps = {
+  className?: string
   errorMessage?: string
   id?: string
   label?: string
@@ -16,7 +17,7 @@ export type TextFieldProps = {
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ errorMessage, id, label, mandatory, type, ...props }, ref) => {
+  ({ className, errorMessage, id, label, mandatory, type, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false)
 
     const isPassword = type === 'password'
@@ -35,7 +36,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     const showPasswordClickHandler = () => setShowPassword(prev => !prev)
 
     return (
-      <div className={clsx(s.wrapper)}>
+      <div className={clsx(s.wrapper, className)}>
         {!!label && (
           <Typography asChild className={s.label} variant={'regular_text_14'}>
             <label htmlFor={idToUse}>
