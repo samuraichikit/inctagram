@@ -1,3 +1,8 @@
+import {
+  DEFAULT_HEIGHT_COMMON_TABLE_ROW,
+  DEFAULT_PAGE_NUMBER,
+  DEFAULT_PAGE_SIZE,
+} from '@/common/constants'
 import { useCommonTablePagination } from '@/common/hooks/useCommonTablePagination'
 import { useFollow } from '@/common/hooks/useFollow'
 import { CommonTableWithPaginationSkeleton } from '@/components/skeletons/commonTableWithPaginationSkeleton'
@@ -10,7 +15,10 @@ export const Followers = () => {
   const { query } = router
   const userId = Number(query.id)
   const { handleChangeCurrentPage, handlePageSizeChange, pageNumber, pageSize } =
-    useCommonTablePagination({ defaultPageNumber: 1, defaultPageSize: 10 })
+    useCommonTablePagination({
+      defaultPageNumber: DEFAULT_PAGE_NUMBER,
+      defaultPageSize: DEFAULT_PAGE_SIZE,
+    })
 
   const { data: followersData, loading } = useGetFollowersQuery({
     variables: { pageNumber, pageSize, userId },
@@ -26,7 +34,12 @@ export const Followers = () => {
   } = useFollow({ items: followers })
 
   if (loading || loadingGetFullName) {
-    return <CommonTableWithPaginationSkeleton count={11} height={42} />
+    return (
+      <CommonTableWithPaginationSkeleton
+        count={DEFAULT_PAGE_SIZE + 1}
+        height={DEFAULT_HEIGHT_COMMON_TABLE_ROW}
+      />
+    )
   }
 
   return (
