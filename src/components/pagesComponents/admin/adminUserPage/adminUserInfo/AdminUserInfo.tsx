@@ -8,6 +8,8 @@ import { useRouter } from 'next/router'
 
 import s from './adminUserInfo.module.scss'
 
+import { AdminUserInfoSkeleton } from './AdminUserInfoSkeleton'
+
 export const AdminUserInfo = () => {
   const classNames = {
     accountInfoContainer: s.accountInfoContainer,
@@ -21,8 +23,14 @@ export const AdminUserInfo = () => {
   }
   const { query } = useRouter()
   const userId = Number(query.id)
-  const { data } = useGetUserQuery({ variables: { userId } })
+  const { data, loading } = useGetUserQuery({
+    variables: { userId },
+  })
   const { t } = useTranslation()
+
+  if (loading) {
+    return <AdminUserInfoSkeleton />
+  }
 
   if (!data?.getUser.profile) {
     return null
