@@ -1,8 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 
-import 'react-loading-skeleton/dist/skeleton.css'
-
 import s from '@/components/forms/generalSettings/generalSettings.module.scss'
 
 export const SkeletonGeneralSettings = () => {
