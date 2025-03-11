@@ -39,8 +39,6 @@ export const Pagination = memo(
     })
     const { t } = useTranslation()
 
-    const { t } = useTranslation()
-
     return (
       <div className={classes}>
         <NavigationBlock
