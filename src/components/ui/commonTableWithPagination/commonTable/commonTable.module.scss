@@ -1,3 +1,29 @@
 .link {
   color: var(--color-light-100);
 }
+
+.columnTitleContainer {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.sortableColumn {
+  cursor: pointer;
+}
+
+.arrowsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: var(--color-dark-100);
+}
+
+.sortArrowDown {
+  transform: rotate(180deg);
+}
+
+.activeSortDesc,
+.activeSortAsc {
+  color: var(--color-light-100);
+}

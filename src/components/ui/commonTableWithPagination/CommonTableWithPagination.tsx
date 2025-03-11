@@ -1,4 +1,5 @@
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { SortDirection } from '@/services/admin/types'
 
 import s from './commonTableWithPagination.module.scss'
 
@@ -8,7 +9,14 @@ import { CommonTable, CommonTableProps } from './commonTable'
 
 type Props<T> = CommonTableProps<T> & PaginationProps
 
-export const CommonTableWithPagination = <T,>({ columns, tableBodyData, ...rest }: Props<T>) => {
+export const CommonTableWithPagination = <T,>({
+  columns,
+  onChangeSort,
+  sortColumn,
+  sortDirection,
+  tableBodyData,
+  ...rest
+}: Props<T>) => {
   const classNames = {
     pagination: s.pagination,
     text: s.text,
@@ -25,10 +33,19 @@ export const CommonTableWithPagination = <T,>({ columns, tableBodyData, ...rest 
       </Typography>
     )
   }
+  const handleChangeSort = (sortColumn: keyof T, sortDirection: SortDirection) => {
+    onChangeSort?.(sortColumn, sortDirection)
+  }
 
   return (
     <>
-      <CommonTable columns={columns} tableBodyData={tableBodyData} />
+      <CommonTable
+        columns={columns}
+        onChangeSort={handleChangeSort}
+        sortColumn={sortColumn}
+        sortDirection={sortDirection}
+        tableBodyData={tableBodyData}
+      />
       <Pagination className={classNames.pagination} {...rest} />
     </>
   )
