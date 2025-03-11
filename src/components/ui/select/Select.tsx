@@ -8,6 +8,7 @@ import clsx from 'clsx'
 import s from './select.module.scss'
 
 export type SelectProps = {
+  className?: string
   id?: string
   label?: string
   placeholder?: ReactNode
@@ -15,12 +16,12 @@ export type SelectProps = {
 } & ComponentPropsWithoutRef<typeof SelectRadix.Root>
 
 export const Select = forwardRef<ElementRef<typeof SelectRadix.Root>, SelectProps>(
-  ({ children, id, label, placeholder, small, ...rest }, ref) => {
+  ({ children, className, id, label, placeholder, small, ...rest }, ref) => {
     const generatedId = useId()
     const idToUse = id ?? generatedId
 
     return (
-      <div className={s.wrapper}>
+      <div className={clsx(s.wrapper, className)}>
         {!!label && (
           <Typography asChild className={s.label} variant={'regular_text_14'}>
             <label htmlFor={idToUse}>{label}</label>
