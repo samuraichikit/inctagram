@@ -2,10 +2,9 @@ import {
   DEFAULT_HEIGHT_COMMON_TABLE_ROW,
   DEFAULT_PAGE_NUMBER,
   DEFAULT_PAGE_SIZE,
-  QUERY_PARAMS,
 } from '@/common/constants'
 import { useCommonTablePagination } from '@/common/hooks/useCommonTablePagination'
-import { useQueryParams } from '@/common/hooks/useQueryParams'
+import { useSort } from '@/common/hooks/useSort'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { CommonTableWithPaginationSkeleton } from '@/components/skeletons/commonTableWithPaginationSkeleton'
 import { Column, CommonTableWithPagination } from '@/components/ui/commonTableWithPagination'
@@ -17,7 +16,7 @@ import { SortDirection } from '@/services/admin/types'
 import { useRouter } from 'next/router'
 
 type PaymentColumn = Column<GetPaymentsByUserQuery['getPaymentsByUser']['items'][number]>
-type PaymentColumnAccessor = PaymentColumn['accessor']
+type PaymentColumnAccessors = PaymentColumn['accessor']
 
 export const Payments = () => {
   const { t } = useTranslation()
@@ -37,13 +36,10 @@ export const Payments = () => {
       defaultPageNumber: DEFAULT_PAGE_NUMBER,
       defaultPageSize: DEFAULT_PAGE_SIZE,
     })
-
-  const { searchParams, setQueryParams } = useQueryParams()
-
-  const sortDirection =
-    (searchParams?.get(QUERY_PARAMS.SORT.DIRECTION) as SortDirection) ?? SortDirection.Desc
-  const sortBy =
-    (searchParams?.get(QUERY_PARAMS.SORT.BY) as PaymentColumnAccessor) ?? 'dateOfPayment'
+  const { handleChangeSort, sortBy, sortDirection } = useSort<PaymentColumnAccessors>({
+    defaultSortBy: 'dateOfPayment',
+    defaultSortDirection: SortDirection.Desc,
+  })
 
   const { data, loading } = useGetPaymentsByUserQuery({
     variables: { pageNumber, pageSize, sortBy, sortDirection, userId },
@@ -51,10 +47,6 @@ export const Payments = () => {
 
   const paymentsData = data?.getPaymentsByUser.items ?? []
   const totalCount = data?.getPaymentsByUser.totalCount
-
-  const handleChangeSort = (sortBy: string, sortDirection: SortDirection) => {
-    setQueryParams({ sortBy, sortDirection })
-  }
 
   if (loading) {
     return (

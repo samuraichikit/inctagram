@@ -33,15 +33,12 @@ export const CommonTableWithPagination = <T,>({
       </Typography>
     )
   }
-  const handleChangeSort = (sortColumn: keyof T, sortDirection: SortDirection) => {
-    onChangeSort?.(sortColumn, sortDirection)
-  }
 
   return (
     <>
       <CommonTable
         columns={columns}
-        onChangeSort={handleChangeSort}
+        onChangeSort={onChangeSort}
         sortColumn={sortColumn}
         sortDirection={sortDirection}
         tableBodyData={tableBodyData}
