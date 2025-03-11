@@ -1,3 +1,4 @@
+import { QUERY_PARAMS } from '@/common/constants'
 import { useQueryParams } from '@/common/hooks/useQueryParams'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -20,10 +21,10 @@ export const AdminUserTabs = () => {
   const { t } = useTranslation()
 
   const handleChangeTab = (value: string) => {
-    resetOldQueryParamsAndSetNewQueryParams({ tab: value })
+    resetOldQueryParamsAndSetNewQueryParams({ [QUERY_PARAMS.TAB]: value })
   }
 
-  const currentTab = searchParams?.get('tab') ?? 'uploadedPhotos'
+  const currentTab = searchParams?.get(QUERY_PARAMS.TAB) ?? 'uploadedPhotos'
 
   return (
     <Tabs className={classNames.container} onValueChange={handleChangeTab} value={currentTab}>

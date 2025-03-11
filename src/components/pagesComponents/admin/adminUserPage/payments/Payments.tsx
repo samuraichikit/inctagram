@@ -2,6 +2,7 @@ import {
   DEFAULT_HEIGHT_COMMON_TABLE_ROW,
   DEFAULT_PAGE_NUMBER,
   DEFAULT_PAGE_SIZE,
+  QUERY_PARAMS,
 } from '@/common/constants'
 import { useCommonTablePagination } from '@/common/hooks/useCommonTablePagination'
 import { useQueryParams } from '@/common/hooks/useQueryParams'
@@ -39,8 +40,10 @@ export const Payments = () => {
 
   const { searchParams, setQueryParams } = useQueryParams()
 
-  const sortDirection = (searchParams?.get('sortDirection') as SortDirection) ?? SortDirection.Desc
-  const sortBy = (searchParams?.get('sortBy') as PaymentColumnAccessor) ?? 'dateOfPayment'
+  const sortDirection =
+    (searchParams?.get(QUERY_PARAMS.SORT.DIRECTION) as SortDirection) ?? SortDirection.Desc
+  const sortBy =
+    (searchParams?.get(QUERY_PARAMS.SORT.BY) as PaymentColumnAccessor) ?? 'dateOfPayment'
 
   const { data, loading } = useGetPaymentsByUserQuery({
     variables: { pageNumber, pageSize, sortBy, sortDirection, userId },
