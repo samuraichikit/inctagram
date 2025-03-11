@@ -1,4 +1,4 @@
-import { QUERY_PARAMS } from '@/common/constants'
+import { QUERY_PARAMS, TABS_CONSTANTS } from '@/common/constants'
 import { useQueryParams } from '@/common/hooks/useQueryParams'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -24,34 +24,39 @@ export const AdminUserTabs = () => {
     resetOldQueryParamsAndSetNewQueryParams({ [QUERY_PARAMS.TAB]: value })
   }
 
-  const currentTab = searchParams?.get(QUERY_PARAMS.TAB) ?? 'uploadedPhotos'
+  const uploadedPhotos = TABS_CONSTANTS.ADMIN_USER_PAGE.UPLOADED_PHOTOS
+  const payments = TABS_CONSTANTS.ADMIN_USER_PAGE.PAYMENTS
+  const followers = TABS_CONSTANTS.ADMIN_USER_PAGE.FOLLOWERS
+  const following = TABS_CONSTANTS.ADMIN_USER_PAGE.FOLLOWING
+
+  const currentTab = searchParams?.get(QUERY_PARAMS.TAB) ?? uploadedPhotos
 
   return (
     <Tabs className={classNames.container} onValueChange={handleChangeTab} value={currentTab}>
       <TabsList className={classNames.list}>
-        <TabsTrigger className={classNames.trigger} value={'uploadedPhotos'}>
+        <TabsTrigger className={classNames.trigger} value={uploadedPhotos}>
           {t.adminUserPage.uploadedPhotos}
         </TabsTrigger>
-        <TabsTrigger className={classNames.trigger} value={'payments'}>
+        <TabsTrigger className={classNames.trigger} value={payments}>
           {t.adminUserPage.payments}
         </TabsTrigger>
-        <TabsTrigger className={classNames.trigger} value={'followers'}>
+        <TabsTrigger className={classNames.trigger} value={followers}>
           {t.adminUserPage.followers}
         </TabsTrigger>
-        <TabsTrigger className={classNames.trigger} value={'following'}>
+        <TabsTrigger className={classNames.trigger} value={following}>
           {t.adminUserPage.following}
         </TabsTrigger>
       </TabsList>
-      <TabsContent value={'uploadedPhotos'}>
+      <TabsContent value={uploadedPhotos}>
         <UserUploadedPhotos />
       </TabsContent>
-      <TabsContent value={'payments'}>
+      <TabsContent value={payments}>
         <Payments />
       </TabsContent>
-      <TabsContent value={'followers'}>
+      <TabsContent value={followers}>
         <Followers />
       </TabsContent>
-      <TabsContent value={'following'}>
+      <TabsContent value={following}>
         <Following />
       </TabsContent>
     </Tabs>
