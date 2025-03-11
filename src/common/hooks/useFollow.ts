@@ -10,6 +10,7 @@ type Props = {
   items: Follow[]
 }
 type FollowWithFullNames = ({ fullName: string } & Follow)[]
+export type FollowAccessors = Column<FollowWithFullNames[number]>['accessor']
 
 export const useFollow = ({ items }: Props) => {
   const { t } = useTranslation()
