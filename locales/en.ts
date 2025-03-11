@@ -216,4 +216,13 @@ export const en: Locale = {
   },
   termsOfService: { title: 'Terms of Service' },
   test: 'Lorem Ipsum is simply dummy text of the printing',
+  usersListAdmin: {
+    dateAdded: 'Date added',
+    notSpecified: 'Not specified',
+    profileLink: 'Profile link',
+    selectBlocked: 'Blocked',
+    selectNoSelected: 'Not selected',
+    userId: 'User ID',
+    userName: 'User name',
+  },
 }
