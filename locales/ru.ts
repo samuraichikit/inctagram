@@ -16,7 +16,7 @@ export const ru = {
   blockAutoRenewal: {
     AutoRenewal: 'Авто-Продление',
     CurrentSubscription: 'Текущая подписка',
-    ExpireAt: 'Истекает в',
+    ExpireAt: 'Дата платежа',
     NextPayment: 'Следующий платеж',
   },
   emailVerification: {

@@ -112,7 +112,6 @@ export const createPostSlice = createSlice({
       state.pictures = state.pictures.concat(newPictureObjs)
     },
     setPicturesIds: (state, action: PayloadAction<{ uploadId: string }>) => {
-      debugger
       state.picturesIds.push(action.payload)
     },
     setPrevStage: state => {

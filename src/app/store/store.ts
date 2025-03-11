@@ -1,5 +1,6 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
+import { appSlice } from '@/components/pagesComponents/app/service/app.slice'
 import { createPostSlice } from '@/components/pagesComponents/createPost/service/createPost.slice'
 import { baseApi } from '@/services/baseApi'
 import { countryAndCity } from '@/services/countryAndCity/countryAndCityService'
@@ -11,6 +12,7 @@ const makeStore = () =>
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware().concat(baseApi.middleware).prepend(countryAndCity.middleware),
     reducer: {
+      [appSlice.name]: appSlice.reducer,
       [baseApi.reducerPath]: baseApi.reducer,
       [countryAndCity.reducerPath]: countryAndCity.reducer,
       [createPostSlice.name]: createPostSlice.reducer,

@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement } from 'react'
+import React, { PropsWithChildren, ReactElement } from 'react'
 
 import { useMeQuery } from '@/services/auth'
 import clsx from 'clsx'

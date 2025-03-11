@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement } from 'react'
+import React, { PropsWithChildren, ReactElement } from 'react'
 
 import { Header } from '@/components/ui/header'
 import { ProfileSettingsBar } from '@/components/ui/profileSettingsBar'

@@ -18,7 +18,7 @@ export const en: Locale = {
   blockAutoRenewal: {
     AutoRenewal: 'Auto-Renewal',
     CurrentSubscription: 'Current Subscription',
-    ExpireAt: 'Expire at',
+    ExpireAt: 'Payment date',
     NextPayment: 'Next payment',
   },
   emailVerification: {

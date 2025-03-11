@@ -1,11 +1,13 @@
 import type { AppProps } from 'next/app'
 
-import { ReactElement, ReactNode } from 'react'
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import React, { ReactElement, ReactNode } from 'react'
+import { SkeletonTheme } from 'react-loading-skeleton'
 import { Provider } from 'react-redux'
 
 import { wrapper } from '@/app/store'
 import { useLoader } from '@/common/hooks/useLoader'
+import { Devices } from '@/components/forms/device/Devices'
+import { Loader } from '@/components/ui/loader/Loader'
 import { NotificationContainer } from '@/components/ui/notificationContainer'
 import { ScrollArea } from '@/components/ui/scrollArea'
 import { client } from '@/services/admin'
@@ -35,23 +37,27 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
 
   // @ts-ignore
   return (
-    <SkeletonTheme baseColor={'#397df6'} highlightColor={'#73a5ff'}>
-      <PayPalScriptProvider
-        options={
-          {
-            ['client-id']: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
-          } as unknown as ReactPayPalScriptOptions
-        }
-      >
-        <ApolloProvider client={client}>
-          <Provider store={store}>
-            <ScrollArea style={{ marginTop: '60px' }}>
-              {getLayout(<Component {...props.pageProps} />)}
-              <NotificationContainer />
-            </ScrollArea>
-          </Provider>
-        </ApolloProvider>
-      </PayPalScriptProvider>
-    </SkeletonTheme>
+    <>
+      <Provider store={store}>
+        <Loader />
+        <Devices />
+        <SkeletonTheme baseColor={'#397df6'} highlightColor={'#73a5ff'}>
+          <PayPalScriptProvider
+            options={
+              {
+                ['client-id']: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+              } as unknown as ReactPayPalScriptOptions
+            }
+          >
+            <ApolloProvider client={client}>
+              <ScrollArea style={{ marginTop: '60px' }}>
+                {getLayout(<Component {...props.pageProps} />)}
+                <NotificationContainer />
+              </ScrollArea>
+            </ApolloProvider>
+          </PayPalScriptProvider>
+        </SkeletonTheme>
+      </Provider>
+    </>
   )
 }

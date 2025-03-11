@@ -30,3 +30,33 @@
   flex-direction: column;
   gap: 48px;
 }
+
+.wrapperLoader {
+  background-color: black;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+}
+
+.loader {
+  border: 10px solid #f3f3f3; /* Серый цвет фона */
+  border-top: 10px solid #4c8dff; /* Цвет лоадера */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 0.6s linear infinite;
+
+  position: absolute;
+  left: 48%;
+  top: 46%;
+
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
