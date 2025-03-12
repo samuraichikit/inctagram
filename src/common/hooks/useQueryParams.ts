@@ -6,7 +6,13 @@ export const useQueryParams = () => {
   const searchParams = useSearchParams()
   const { pathname, query } = router
 
-  const userId = query.id?.[0] ?? ''
+  let userId = ''
+
+  if (Array.isArray(query.id)) {
+    userId = query.id?.[0]
+  } else {
+    userId = query.id ?? ''
+  }
 
   const pathnameWithUserId = pathname.replace('[id]', userId)
 

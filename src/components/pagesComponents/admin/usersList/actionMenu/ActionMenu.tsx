@@ -6,12 +6,15 @@ import { PersonRemoveIcon } from '@/assets/icons/PersonRemoveIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
+import Link from 'next/link'
 
 import s from './actionMenu.module.scss'
 
-type Props = {}
+type Props = {
+  id: number
+}
 
-export const ActionsMenu = ({}: Props) => {
+export const ActionsMenu = ({ id }: Props) => {
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false)
   const { t } = useTranslation()
 
@@ -32,8 +35,10 @@ export const ActionsMenu = ({}: Props) => {
           <Button className={s.btn} variant={'icon'}>
             <BanIcon /> <Typography variant={'regular_text_14'}>Ban in the system</Typography>
           </Button>
-          <Button className={s.btn} variant={'icon'}>
-            <MoreIcon /> <Typography variant={'regular_text_14'}>More Information</Typography>
+          <Button asChild className={s.btn} variant={'icon'}>
+            <Link href={`/admin/usersList/${id}`} target={'_blank'}>
+              <MoreIcon /> <Typography variant={'regular_text_14'}>More Information</Typography>
+            </Link>
           </Button>
         </div>
       )}

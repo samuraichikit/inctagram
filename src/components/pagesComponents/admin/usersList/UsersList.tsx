@@ -111,7 +111,7 @@ export const UserList = () => {
                     {new Date(el.createdAt).toLocaleDateString('ru-RU')}
                   </TableBodyCell>
                   <TableBodyCell className={s.actionMenu}>
-                    <ActionsMenu />
+                    <ActionsMenu id={el.id} />
                   </TableBodyCell>
                 </TableRow>
               )
