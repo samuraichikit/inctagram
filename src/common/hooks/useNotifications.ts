@@ -2,11 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import { WS_EVENT_PATH } from '@/common/constants/websocketConstants'
-import { useSocket } from '@/common/hooks/useSocket'
 import { getLastMonthNotifications } from '@/common/utils/getLastMonthNotifications'
 import { useGetNotificationsQuery } from '@/services/notifications/notificationsService'
 import { NotificationType } from '@/services/notifications/notificationsService.types'
-import { getCookie } from 'cookies-next/client'
+import { socketApi } from '@/services/socket/socketApi'
 
 export const useNotifications = () => {
   const [pageSize, setPageSize] = useState(10)
@@ -14,9 +13,6 @@ export const useNotifications = () => {
   const { data: serverNotifications } = useGetNotificationsQuery({
     pageSize,
   })
-
-  const accessToken = getCookie('accessToken') as string
-  const { socket } = useSocket(accessToken)
 
   const lastMonthNotifications = useMemo(
     () => getLastMonthNotifications(serverNotifications?.items),
@@ -34,16 +30,16 @@ export const useNotifications = () => {
       toast.info(notification.message)
     }
 
-    socket?.on(WS_EVENT_PATH.NOTIFICATIONS, handleNewNotification)
+    socketApi?.on(WS_EVENT_PATH.NOTIFICATIONS, handleNewNotification)
 
     if (serverNotifications?.items) {
       setNotifications(serverNotifications?.items)
     }
 
     return () => {
-      socket?.off(WS_EVENT_PATH.NOTIFICATIONS, handleNewNotification)
+      socketApi?.off(WS_EVENT_PATH.NOTIFICATIONS, handleNewNotification)
     }
-  }, [socket, serverNotifications, initialData])
+  }, [socketApi, serverNotifications, initialData])
 
   return { notifications }
 }
