@@ -12,6 +12,11 @@ export const ru = {
     personal: 'Личный',
     priceSubscription: 'Стоимость подписки:',
   },
+  actionMenuAdmin: {
+    banInSystem: 'Бан в системе',
+    deleteUser: 'Удалить аккаунт',
+    moreInformation: 'Подробнее',
+  },
   adminUserPage: {
     amount: 'Сумма',
     backToUsersList: 'Вернуться к списку пользователей',
@@ -178,6 +183,10 @@ export const ru = {
     hide: 'Скрыть',
     registeredUsers: 'Зарегистрированные пользователи',
     showMore: 'Показать больше',
+  },
+  removeUserAdmin: {
+    questionModal: 'Вы уверены, что хотите удалить',
+    titleModal: 'Удалить пользователся',
   },
   schemaErrorMsg: {
     emailFormat: 'Адрес эл.почты должен быть в формате',
