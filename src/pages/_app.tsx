@@ -5,6 +5,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import { Provider } from 'react-redux'
 
 import { wrapper } from '@/app/store'
+import { useConnectSocket } from '@/common/hooks/useConnectSocket'
 import { useLoader } from '@/common/hooks/useLoader'
 import { NotificationContainer } from '@/components/ui/notificationContainer'
 import { ScrollArea } from '@/components/ui/scrollArea'
@@ -31,6 +32,7 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
   const { props, store } = wrapper.useWrappedStore(rest)
 
   useLoader()
+  useConnectSocket()
 
   const getLayout = Component.getLayout ?? (page => page)
 
