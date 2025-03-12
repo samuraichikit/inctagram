@@ -14,6 +14,11 @@ export const en: Locale = {
     personal: 'Personal',
     priceSubscription: 'Your subscription costs:',
   },
+  actionMenuAdmin: {
+    banInSystem: 'Ban in the system',
+    deleteUser: 'Delete user',
+    moreInformation: 'More Information',
+  },
   adminUserPage: {
     amount: 'Amount',
     backToUsersList: 'Back to Users List',
@@ -179,6 +184,10 @@ export const en: Locale = {
     registeredUsers: 'Registered users',
     showMore: 'Show more',
   },
+  removeUserAdmin: {
+    questionModal: 'Are you sure you want to delete',
+    titleModal: 'Delete user',
+  },
   schemaErrorMsg: {
     emailFormat: 'The email must match the format',
     maxAboutMe: 'Maximum number of characters 200',
@@ -223,6 +232,6 @@ export const en: Locale = {
     selectBlocked: 'Blocked',
     selectNoSelected: 'Not selected',
     userId: 'User ID',
-    userName: 'User name',
+    userName: 'Username',
   },
 }
