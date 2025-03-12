@@ -7,6 +7,7 @@ import { useTranslation } from '@/common/hooks/useTranslation'
 import { RemoveUserModal } from '@/components/pagesComponents/admin/usersList/actionMenu/removeUserModal/removeUserModal'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
+import Link from 'next/link'
 
 import s from './actionMenu.module.scss'
 
@@ -45,9 +46,10 @@ export const ActionsMenu = ({ userId, userName }: Props) => {
             <BanIcon />{' '}
             <Typography variant={'regular_text_14'}>{t.actionMenuAdmin.banInSystem}</Typography>
           </Button>
-          <Button className={s.btn} variant={'icon'}>
-            <MoreIcon />{' '}
-            <Typography variant={'regular_text_14'}>{t.actionMenuAdmin.moreInformation}</Typography>
+          <Button asChild className={s.btn} variant={'icon'}>
+            <Link href={`/admin/usersList/${userId}`} target={'_blank'}>
+              <MoreIcon /> <Typography variant={'regular_text_14'}>More Information</Typography>
+            </Link>
           </Button>
         </div>
       )}

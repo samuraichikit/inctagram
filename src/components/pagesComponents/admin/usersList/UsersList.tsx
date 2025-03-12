@@ -31,7 +31,6 @@ export const UserList = () => {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(8)
   const [searchTerm, setSearchTerm] = useState<string>('')
-
   const { t } = useTranslation()
   const { data, error, loading } = useQuery<GetUsersQuery>(GET_USERS, {
     variables: {
@@ -120,7 +119,6 @@ export const UserList = () => {
           </TableBody>
         </Table>
       </div>
-
       <div className={s.pagination}>
         <Pagination
           currentPage={page}
