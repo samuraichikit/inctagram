@@ -1,23 +1,23 @@
-import { CodegenConfig } from '@graphql-codegen/cli';
+import { CodegenConfig } from '@graphql-codegen/cli'
 
 const config: CodegenConfig = {
-  schema: `https://inctagram.work/api/v1/graphql`,
-  documents: ['src/**/*.{ts,tsx}'],
+  documents: ['src/**/!(*.generated).{ts,tsx}'],
   generates: {
-    'src/services/admin/types.ts': { plugins: ['typescript'] },
     'src/': {
-        preset: 'near-operation-file',
-        presetConfig: {
-            extension: '.generated.tsx',
-            baseTypesPath: './services/admin/types.ts',
-        },
-        plugins: ['typescript-operations', 'typescript-react-apollo'],
-        config: {
-            withHooks: true
-        }
+      config: {
+        withHooks: true,
+      },
+      plugins: ['typescript-operations', 'typescript-react-apollo'],
+      preset: 'near-operation-file',
+      presetConfig: {
+        baseTypesPath: './services/admin/types.ts',
+        extension: '.generated.tsx',
+      },
     },
-},
+    'src/services/admin/types.ts': { plugins: ['typescript'] },
+  },
   ignoreNoDocuments: true,
-};
+  schema: `https://inctagram.work/api/v1/graphql`,
+}
 
-export default config;
+export default config

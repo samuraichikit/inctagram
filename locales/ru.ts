@@ -12,12 +12,37 @@ export const ru = {
     personal: 'Личный',
     priceSubscription: 'Стоимость подписки:',
   },
+  actionMenuAdmin: {
+    banInSystem: 'Бан в системе',
+    deleteUser: 'Удалить аккаунт',
+    moreInformation: 'Подробнее',
+  },
+  adminUserPage: {
+    amount: 'Сумма',
+    backToUsersList: 'Вернуться к списку пользователей',
+    dateOfPayment: 'Дата платежа',
+    endDateOfSubscription: 'Дата окончания подписки',
+    followers: 'Подписчики',
+    following: 'Отслеживаемые',
+    paymentType: 'Тип оплаты',
+    payments: 'Платежи',
+    profileCreationDate: 'Дата создания профиля',
+    profileLink: 'Ссылка на профиль',
+    subscriptionDate: 'Дата подписки',
+    subscriptionType: 'Тип подписки',
+    uploadedPhotos: 'Загруженные фотографии',
+    userId: 'ID пользователя',
+    userName: 'Имя пользователя',
+  },
   agreementMsg: 'Я соглашаюсь с ',
   blockAutoRenewal: {
     AutoRenewal: 'Авто-Продление',
     CurrentSubscription: 'Текущая подписка',
     ExpireAt: 'Истекает в',
     NextPayment: 'Следующий платеж',
+  },
+  commonTableWithPagination: {
+    noData: 'Данных нет',
   },
   emailVerification: {
     expiredLinkMsg: 'Ссылка на подтверждение пароля истекла',
@@ -64,6 +89,10 @@ export const ru = {
     new: 'Новое',
     newNotification: 'Новое увдомление!',
     notificationsTitle: 'Уведомления',
+  },
+  pagination: {
+    onPage: 'на странице',
+    show: 'Показать',
   },
   passwordForm: {
     backToSignIn: 'Вернуться на страницу входа',
@@ -155,6 +184,10 @@ export const ru = {
     registeredUsers: 'Зарегистрированные пользователи',
     showMore: 'Показать больше',
   },
+  removeUserAdmin: {
+    questionModal: 'Вы уверены, что хотите удалить',
+    titleModal: 'Удалить пользователся',
+  },
   schemaErrorMsg: {
     emailFormat: 'Адрес эл.почты должен быть в формате',
     maxAboutMe: 'Максимальное число символов - 200',
@@ -192,6 +225,15 @@ export const ru = {
   },
   termsOfService: { title: 'Пользовательское соглашение' },
   test: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати',
+  usersListAdmin: {
+    dateAdded: 'Дата добавления',
+    notSpecified: 'Не указано',
+    profileLink: 'Ссылка на профиль',
+    selectBlocked: 'Заблокировано',
+    selectNoSelected: 'Не выбрано',
+    userId: 'ID пользователя',
+    userName: 'Имя пользователя',
+  },
 }
 
 export type Locale = typeof ru

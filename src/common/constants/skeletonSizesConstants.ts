@@ -1,0 +1,1 @@
+export const DEFAULT_HEIGHT_COMMON_TABLE_ROW = 42

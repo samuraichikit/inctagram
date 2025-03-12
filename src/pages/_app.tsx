@@ -18,6 +18,7 @@ import '@/styles/index.scss'
 import '@/styles/nprogress.scss'
 import '@fontsource-variable/inter'
 import '@stripe/stripe-js'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export type NextPageWithLayout<P = {}, IP = P> = {
   getLayout?: (page: ReactElement) => ReactNode
@@ -37,7 +38,7 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
 
   // @ts-ignore
   return (
-    <SkeletonTheme baseColor={'#397df6'} highlightColor={'#73a5ff'}>
+    <SkeletonTheme baseColor={'#0d0d0d'} highlightColor={'#333'}>
       <PayPalScriptProvider
         options={
           {

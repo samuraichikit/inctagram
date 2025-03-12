@@ -5,7 +5,7 @@ import { useTranslation } from '@/common/hooks/useTranslation'
 import { clsx } from 'clsx'
 import { enIN, ru } from 'date-fns/locale'
 
-import 'react-day-picker/style.css'
+import 'react-day-picker/src/style.css'
 
 import s from './calendar.module.scss'
 
