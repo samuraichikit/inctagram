@@ -23,6 +23,8 @@ export const MyPayments = () => {
     return <div>Loading...</div>
   }
 
+  // test
+
   return (
     <div className={s.container}>
       <div className={s.blockPayments}>
