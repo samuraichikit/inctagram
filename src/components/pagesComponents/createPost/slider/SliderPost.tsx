@@ -1,4 +1,4 @@
-import React, { ComponentProps, ReactNode, useState } from 'react'
+import React, { ComponentProps, useState } from 'react'
 import SlickSlider, { Settings } from 'react-slick'
 
 import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
@@ -9,13 +9,12 @@ import { SliderDot } from '@/components/pagesComponents/createPost/sliderButton/
 import s from './SliderPost.module.scss'
 
 type Props = {
-  children: ReactNode
   isDots: boolean
   setSlideId?: (id: number) => void
   sizeBtn: number
   slideId?: number
   sliderLength: number
-}
+} & Settings
 
 export const SliderPost = ({
   children,

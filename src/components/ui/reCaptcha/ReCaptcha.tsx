@@ -1,6 +1,5 @@
-import React, { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-// eslint-disable-next-line import/no-named-as-default
-import ReCAPTCHA from 'react-google-recaptcha'
+import React, { ComponentProps, forwardRef } from 'react'
+import { ReCAPTCHA } from 'react-google-recaptcha'
 
 import { Typography } from '@/components/ui/typography'
 import clsx from 'clsx'
@@ -10,9 +9,9 @@ import s from './reCaptcha.module.scss'
 
 type Props = {
   errorMessage?: string
-} & ComponentPropsWithoutRef<typeof ReCAPTCHA>
+} & ComponentProps<typeof ReCAPTCHA>
 
-export const ReCaptcha = forwardRef<ElementRef<typeof ReCAPTCHA>, Props>(
+export const ReCaptcha = forwardRef<ReCAPTCHA, Props>(
   ({ errorMessage, hl, style, ...props }, ref) => {
     const router = useRouter()
 
