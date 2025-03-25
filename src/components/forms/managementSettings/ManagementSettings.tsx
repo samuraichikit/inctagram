@@ -43,7 +43,7 @@ export const ManagementSettings = () => {
     <>
       {statusInit && (
         <div>
-          {currentPayment.hasAutoRenewal && (
+          {currentPayment.hasAutoRenewal && currentPayment.data[0].subscriptionId && (
             <AutoRenewal
               currentPayment={currentPayment}
               isLoadingCurrentPayment={isLoadingCurrentPayment}
