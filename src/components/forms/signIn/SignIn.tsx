@@ -1,17 +1,20 @@
-import React, {useEffect, useState} from 'react'
-import {SubmitHandler, useForm, useWatch} from 'react-hook-form'
 
-import {GitHubIcon} from '@/assets/icons/GitHubIcon'
-import {useTranslation} from '@/common/hooks/useTranslation'
-import {signInSchema} from '@/common/schemas/signInSchema'
-import {FormTextField} from '@/components/controlled/formTextField'
-import {Button} from '@/components/ui/button'
-import {Card} from '@/components/ui/card'
-import {GoogleAuthButton} from '@/components/ui/googleAuthButton'
-import {Typography} from '@/components/ui/typography'
-import {useSignInMutation} from '@/services/auth'
-import {zodResolver} from '@hookform/resolvers/zod'
+import { useEffect, useState } from 'react'
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form'
+
+import { GitHubIcon } from '@/assets/icons/GitHubIcon'
+import { EMAIL_REGEX, PASSWORD_REGEX } from '@/common/constants'
+import { useTranslation } from '@/common/hooks/useTranslation'
+import { signInSchema } from '@/common/schemas/signInSchema'
+import { FormTextField } from '@/components/controlled/formTextField'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { GoogleAuthButton } from '@/components/ui/googleAuthButton'
+import { Typography } from '@/components/ui/typography'
+import { useSignInMutation } from '@/services/auth'
+import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
+import { setCookie } from 'cookies-next/client'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {z} from 'zod'
@@ -34,46 +37,54 @@ export const SignIn = () => {
         wrapper: s.wrapper,
     }
 
-    const {
-        control,
-        formState: {isValid},
-        handleSubmit,
-        setError,
-    } = useForm<SignInSchemaType>({
-        defaultValues: {
-            email: '',
-            password: '',
-        },
-        mode: 'onBlur',
-        resolver: zodResolver(signInSchema(t)),
-    })
+  const { control, handleSubmit, setError } = useForm<SignInSchemaType>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    mode: 'onBlur',
+    resolver: zodResolver(signInSchema(t)),
+  })
 
-    const [isDisabled, setIsDisabled] = useState(!isValid)
+  const [isDisabled, setIsDisabled] = useState(true)
+
 
     const email = useWatch({control, name: 'email'})
     const password = useWatch({control, name: 'password'})
 
-    useEffect(() => {
-        const emailField = document.querySelector('input[name="email"]') as HTMLInputElement
-        const passwordField = document.querySelector('input[name="password"]') as HTMLInputElement
+  useEffect(() => {
+    if (EMAIL_REGEX.test(email) && PASSWORD_REGEX.test(password)) {
+      setIsDisabled(false)
+    } else {
+      setIsDisabled(true)
+    }
+  }, [email, password])
 
-        if (emailField.value.includes('@') && passwordField.value.length > 5) {
-            setIsDisabled(false)
-        } else {
-            setIsDisabled(true)
-        }
-    }, [email, password])
+  // нужен для сбрасывания ошибки если поле пусто!
+  useEffect(() => {
+    if (email === '') {
+      setError('email', { message: '' })
 
-    const [signIn] = useSignInMutation()
-    const router = useRouter()
+      return
+    }
+    if (password === '') {
+      setError('password', { message: '' })
 
-    const onSubmitHandler: SubmitHandler<SignInSchemaType> = (data: SignInSchemaType) => {
-        signIn(data)
-            .unwrap()
-            .then(data => {
-                localStorage.setItem('accessToken', data.accessToken)
-                const payload = data.accessToken.split('.')[1]
-                const id = JSON.parse(atob(payload)).userId
+      return
+    }
+  }, [email, password])
+
+  const [signIn] = useSignInMutation()
+  const router = useRouter()
+
+  const onSubmitHandler: SubmitHandler<SignInSchemaType> = (data: SignInSchemaType) => {
+    signIn(data)
+      .unwrap()
+      .then(data => {
+        setCookie('accessToken', data.accessToken)
+        const payload = data.accessToken.split('.')[1]
+        const id = JSON.parse(atob(payload)).userId
+
 
                 router.push(`/profile/${id}`)
             })

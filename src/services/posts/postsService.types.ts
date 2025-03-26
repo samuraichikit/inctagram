@@ -1,11 +1,13 @@
-export type GetUserPosts = {
+export type GetUserPostsArgs = {
   pageNumber?: number
   pageSize?: number
   sortBy?: string
   sortDirection?: string
   userName: string
 }
-
+export type DeletePostArgs = {
+  postId: string
+}
 export type PostsByUserNameResponse = {
   items: PostItemResponse[]
   notReadCount: number
@@ -13,12 +15,28 @@ export type PostsByUserNameResponse = {
   totalCount: number
 }
 
-interface Owner {
+export type PostResponse = {
+  avatarOwner: string
+  avatarWhoLikes: string[]
+  createdAt: string
+  description: string
+  id: number
+  images: Image[]
+  isLiked: boolean
+  likesCount: number
+  location: null | string
+  owner: Owner
+  ownerId: number
+  updatedAt: string
+  userName: string
+}
+
+type Owner = {
   firstName: string
   lastName: string
 }
 
-interface Image {
+type Image = {
   createdAt: string
   fileSize: number
   height: number

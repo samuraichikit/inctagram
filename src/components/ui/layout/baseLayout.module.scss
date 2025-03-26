@@ -1,15 +1,32 @@
-.main {
+.mainBase {
   display: flex;
   align-items: start;
   justify-content: center;
 
   max-width: 1280px;
   height: 100%;
-  margin: 60px auto 0;
+  margin: 0 auto;
+}
+
+.mainAuth {
+  margin: 0 0 0 220px;
+  padding: 36px 60px 36px 24px;
 }
 
 .privacyPolicy {
   display: block;
   height: auto;
   padding: 24px 60px;
+}
+
+.formButtonWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
 }

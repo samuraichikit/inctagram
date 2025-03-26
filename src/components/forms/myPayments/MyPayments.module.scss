@@ -1,0 +1,124 @@
+.container {
+  width: 100%;
+  max-width: 972px;
+  margin: 0 auto;
+}
+
+.blockPayments {
+  width: 100%;
+  border: 1px solid var(--color-dark-500);
+}
+
+.blockTitle {
+  position: relative;
+
+  display: flex;
+
+  height: 50px;
+  padding: 13px 20px;
+
+  background-color: var(--color-dark-500);
+
+  & > span {
+    position: absolute;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+}
+
+.two {
+  left: 206px;
+}
+
+.three {
+  left: 446px;
+}
+
+.fo {
+  left: 554px;
+}
+
+.five {
+  left: 752px;
+}
+
+.blockMobile {
+  width: 100%;
+  min-width: 330px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.blockInfoPrice {
+  position: relative;
+
+  display: flex;
+  column-gap: 113px;
+
+  padding: 13px 20px;
+
+  border-bottom: 1px solid var(--color-dark-500);
+
+  & > span {
+    font-size: 14px;
+    line-height: 24px;
+  }
+}
+
+.Price {
+  position: absolute;
+  left: 393px;
+
+  display: flex;
+  justify-content: end;
+
+  width: 32px;
+  margin-left: 54px;
+}
+
+.SubsType {
+  position: absolute;
+  left: 557px;
+  text-transform: lowercase;
+}
+
+.PaymentType {
+  position: absolute;
+  left: 755px;
+  text-transform: lowercase;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.PaginationBlock {
+  width: max-content;
+  margin-top: 30px;
+}
+
+.blockInfo {
+  display: flex;
+  flex-direction: column;
+  row-gap: 13px;
+
+  margin-bottom: 13px;
+  padding: 20px 10px;
+
+  font-size: 14px;
+  line-height: 24px;
+
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+}
+
+.blockInfoChildren {
+  display: flex;
+  justify-content: space-between;
+
+  & > span:last-child {
+    font-weight: 700;
+  }
+}

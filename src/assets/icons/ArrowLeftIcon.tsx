@@ -1,11 +1,13 @@
-import { SVGProps } from 'react'
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
 
-type Props = SVGProps<SVGSVGElement>
-export const ArrowLeftIcon = (props: Props) => {
+type Props = ComponentPropsWithoutRef<'svg'>
+
+export const ArrowLeftIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
   return (
     <svg
       fill={'none'}
       height={14}
+      ref={ref}
       viewBox={'0 0 16 14'}
       width={16}
       xmlns={'http://www.w3.org/2000/svg'}
@@ -19,4 +21,4 @@ export const ArrowLeftIcon = (props: Props) => {
       />
     </svg>
   )
-}
+})

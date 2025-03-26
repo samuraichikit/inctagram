@@ -10,7 +10,7 @@ import Link from 'next/link'
 import s from './forgotPassword.module.scss'
 
 type Props = {}
-export const ForgotPassword = (props: Props) => {
+export const ForgotPassword = ({}: Props) => {
   const {
     buttonSentText,
     control,
@@ -47,19 +47,20 @@ export const ForgotPassword = (props: Props) => {
             {t.passwordForm.linkSentMsg_1}
           </Typography>
         )}
+        {!isUserEmail && (
+          <ReCaptcha
+            className={s.recaptcha}
+            onChange={handleChangeRecaptcha}
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+            theme={'dark'}
+          />
+        )}
         <Button className={s.button} disabled={isDisabled} type={'submit'}>
           {buttonSentText}
         </Button>
         <Button className={s.button} variant={'text'}>
           <Link href={'/auth/signIn'}>{t.passwordForm.backToSignIn}</Link>
         </Button>
-        {!isUserEmail && (
-          <ReCaptcha
-            onChange={handleChangeRecaptcha}
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
-            theme={'dark'}
-          />
-        )}
         <Modal onOpenChange={setShowModal} open={showModal} title={'Email sent'}>
           <div className={s.modalContent}>
             <Typography variant={'regular_text_16'}>

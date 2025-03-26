@@ -2,7 +2,6 @@ import { baseApi } from '../baseApi'
 import {
   GetProfileResponse,
   GetProfileWithPostsResponse,
-  GetPublicProfileResponse,
   UpdateProfile,
 } from './profileService.types'
 
@@ -23,10 +22,6 @@ const profileService = baseApi.injectEndpoints({
     getProfileWithPosts: builder.query<GetProfileWithPostsResponse, string>({
       providesTags: ['Me'],
       query: userId => ({ url: `v1/users/${userId}` }),
-    }),
-    getPublicProfile: builder.query<GetPublicProfileResponse, string>({
-      providesTags: ['Profile'],
-      query: profileId => ({ url: `v1/public-user/profile/${profileId}` }),
     }),
     updateProfile: builder.mutation<void, UpdateProfile>({
       invalidatesTags: ['Me'],
@@ -53,7 +48,6 @@ export const {
   useDeleteAvatarMutation,
   useGetProfileQuery,
   useGetProfileWithPostsQuery,
-  useGetPublicProfileQuery,
   useUpdateProfileMutation,
   useUploadAvatarMutation,
 } = profileService

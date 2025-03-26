@@ -5,6 +5,8 @@ import { useTranslation } from '@/common/hooks/useTranslation'
 import { clsx } from 'clsx'
 import { enIN, ru } from 'date-fns/locale'
 
+import 'react-day-picker/src/style.css'
+
 import s from './calendar.module.scss'
 
 import { en } from '../../../../../locales/en'
@@ -35,6 +37,7 @@ function Calendar({ className, classNames, ...props }: CalendarProps) {
           caption_label: s.caption_label,
           chevron: s.chevron,
           day: s.day,
+          day_button: s.day_button,
           day_disabled: s.day_disabled,
           day_hidden: s.day_hidden,
           day_outside: s.day_outside,
@@ -49,7 +52,6 @@ function Calendar({ className, classNames, ...props }: CalendarProps) {
           today: s.day_today,
           week: s.week,
           weekday: s.weekday,
-          weeks: s.weeks,
           years_dropdown: s.years_dropdown,
           ...classNames,
         }}

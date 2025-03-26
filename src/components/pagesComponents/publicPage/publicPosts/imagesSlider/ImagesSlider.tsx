@@ -27,6 +27,7 @@ export const ImagesSlider = ({ fill, height, images, width }: Props) => {
     container: s.container,
     customBullet: s.customBullet,
     customPagination: s.customPagination,
+    image: s.image,
   }
 
   return (
@@ -50,16 +51,14 @@ export const ImagesSlider = ({ fill, height, images, width }: Props) => {
         {images.map(image => {
           return (
             <SwiperSlide key={image.uploadId}>
-              <div style={{ height: '100%', position: 'relative', width: '100%' }}>
-                <Image
-                  alt={`Image uploaded on ${formatDate(image.createdAt)}`}
-                  fill={fill}
-                  height={height}
-                  objectFit={'cover'}
-                  src={image.url}
-                  width={width}
-                />
-              </div>
+              <Image
+                alt={`Image uploaded on ${formatDate(image.createdAt)}`}
+                className={classNames.image}
+                fill={fill}
+                height={height}
+                src={image.url}
+                width={width}
+              />
             </SwiperSlide>
           )
         })}

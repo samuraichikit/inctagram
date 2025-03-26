@@ -1,7 +1,49 @@
 import { pluralizeRu } from '@/common/utils'
 
 export const ru = {
+  accountManagement: {
+    DAY: 'день',
+    MONTHLY: 'месяц',
+    WEEKLY: 'дней',
+    accountType: 'Тип аккаунта:',
+    business: 'Бизнес',
+    or: 'или',
+    per: 'за',
+    personal: 'Личный',
+    priceSubscription: 'Стоимость подписки:',
+  },
+  actionMenuAdmin: {
+    banInSystem: 'Бан в системе',
+    deleteUser: 'Удалить аккаунт',
+    moreInformation: 'Подробнее',
+  },
+  adminUserPage: {
+    amount: 'Сумма',
+    backToUsersList: 'Вернуться к списку пользователей',
+    dateOfPayment: 'Дата платежа',
+    endDateOfSubscription: 'Дата окончания подписки',
+    followers: 'Подписчики',
+    following: 'Отслеживаемые',
+    paymentType: 'Тип оплаты',
+    payments: 'Платежи',
+    profileCreationDate: 'Дата создания профиля',
+    profileLink: 'Ссылка на профиль',
+    subscriptionDate: 'Дата подписки',
+    subscriptionType: 'Тип подписки',
+    uploadedPhotos: 'Загруженные фотографии',
+    userId: 'ID пользователя',
+    userName: 'Имя пользователя',
+  },
   agreementMsg: 'Я соглашаюсь с ',
+  blockAutoRenewal: {
+    AutoRenewal: 'Авто-Продление',
+    CurrentSubscription: 'Текущая подписка',
+    ExpireAt: 'Истекает в',
+    NextPayment: 'Следующий платеж',
+  },
+  commonTableWithPagination: {
+    noData: 'Данных нет',
+  },
   emailVerification: {
     expiredLinkMsg: 'Ссылка на подтверждение пароля истекла',
     msg: 'Вероятно, сcылка на подтверждение пароля истекла.  Не волнуйтесь - мы вышлем вам новую!',
@@ -23,6 +65,34 @@ export const ru = {
     myProfile: 'Мой профиль',
     search: 'Поиск',
     statistics: 'Статистика',
+  },
+  modalMessage: {
+    Error: {
+      message: 'Транзакция не удалась, попробуйте еще раз',
+      ok: 'Вернуться к оплате!',
+      title: 'Ошибка',
+    },
+    Success: {
+      message: 'Оплата прошла успешно!',
+      ok: 'Хорошо',
+      title: 'Успех',
+    },
+  },
+  myPayments: {
+    DateOfPayment: 'Дата платежа',
+    EndDataOfSubscription: 'Конечные данные подписки',
+    PaymentType: 'Тип оплаты',
+    Price: 'Цена',
+    SubscriptionType: 'Тип подписки',
+  },
+  notifications: {
+    new: 'Новое',
+    newNotification: 'Новое увдомление!',
+    notificationsTitle: 'Уведомления',
+  },
+  pagination: {
+    onPage: 'на странице',
+    show: 'Показать',
   },
   passwordForm: {
     backToSignIn: 'Вернуться на страницу входа',
@@ -56,13 +126,17 @@ export const ru = {
   },
   postModal: {
     addComment: 'Добависть комментарий',
+    addPhoto: 'Добавить фото',
     addPublicationDesc: 'Добавить описание поста',
     confirmationMsg:
       'Вы действительно хотите завершить редактирование? Если вы закроете окно, внесённые изменения не будут сохранены.',
+    deleteConfirmMsg: 'Вы уверены, что хотите удалить этот пост?',
     deletePost: 'Удалить пост',
     editPost: 'Редактировать пост',
+    openDraftBtn: 'Открыть черновик',
     publishMsg: 'Отправить',
     saveChangesBtn: 'Сохранить изменения',
+    selectFromComputeBtn: 'Добавить с компьютера',
   },
   privacyPolicy: {
     title: 'Политика конфиденциальности',
@@ -110,6 +184,10 @@ export const ru = {
     registeredUsers: 'Зарегистрированные пользователи',
     showMore: 'Показать больше',
   },
+  removeUserAdmin: {
+    questionModal: 'Вы уверены, что хотите удалить',
+    titleModal: 'Удалить пользователся',
+  },
   schemaErrorMsg: {
     emailFormat: 'Адрес эл.почты должен быть в формате',
     maxAboutMe: 'Максимальное число символов - 200',
@@ -128,6 +206,12 @@ export const ru = {
     logOutConfirmation: 'Вы действительно хотите выйти из своей учетной записи?',
     rejectButton: 'Нет',
   },
+  signInAdmin: {
+    email: 'Адрес электронной почты',
+    error: 'Адрес электронной почты или пароль неверны',
+    password: 'Пароль',
+    signIn: 'Войти',
+  },
   signUp: {
     and: 'и',
     backToSignUp: 'Назад к регистрации',
@@ -141,6 +225,15 @@ export const ru = {
   },
   termsOfService: { title: 'Пользовательское соглашение' },
   test: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати',
+  usersListAdmin: {
+    dateAdded: 'Дата добавления',
+    notSpecified: 'Не указано',
+    profileLink: 'Ссылка на профиль',
+    selectBlocked: 'Заблокировано',
+    selectNoSelected: 'Не выбрано',
+    userId: 'ID пользователя',
+    userName: 'Имя пользователя',
+  },
 }
 
 export type Locale = typeof ru

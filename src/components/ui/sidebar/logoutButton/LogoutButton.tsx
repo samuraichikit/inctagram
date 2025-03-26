@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'
 import { useLogoutMutation } from '@/services/auth'
+import { deleteCookie } from 'cookies-next/client'
 import { useRouter } from 'next/router'
 
 import s from './logoutButton.module.scss'
@@ -25,8 +26,8 @@ export const LogoutButton = () => {
     setIsOpen(false)
     try {
       await logOut().unwrap()
-      localStorage.removeItem('accessToken')
-      router.push('/auth/signIn')
+      deleteCookie('accessToken')
+      router.push('/')
     } catch (error) {
       alert('error')
     }

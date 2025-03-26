@@ -1,7 +1,8 @@
 import { memo } from 'react'
 
+import { useTranslation } from '@/common/hooks/useTranslation'
+import { CustomSelect } from '@/components/ui/pagination/customSelect/CustomSelect'
 import { NavigationBlock } from '@/components/ui/pagination/navigation-block'
-import { PageSizeSelect } from '@/components/ui/pagination/page-size-select/page-size-select'
 import { usePagination } from '@/components/ui/pagination/usePagination'
 import { Typography } from '@/components/ui/typography'
 import clsx from 'clsx'
@@ -36,10 +37,7 @@ export const Pagination = memo(
       siblingCount,
       totalCount,
     })
-
-    if (currentPage === 0 || paginationRange.length < 2) {
-      return null
-    }
+    const { t } = useTranslation()
 
     return (
       <div className={classes}>
@@ -49,9 +47,13 @@ export const Pagination = memo(
           paginationRange={paginationRange}
         />
         <div className={s.selectBlock}>
-          <Typography variant={'regular_text_14'}>Show</Typography>
-          <PageSizeSelect onPageSizeChange={onPageSizeChange} pageSize={pageSize} />
-          <Typography variant={'regular_text_14'}>on page</Typography>
+          <Typography variant={'regular_text_14'}>{t.pagination.show}</Typography>
+          <CustomSelect
+            changeSelect={page => onPageSizeChange(Number(page))}
+            className={s.Select}
+            selectValue={String(pageSize)}
+          />
+          <Typography variant={'regular_text_14'}>{t.pagination.onPage}</Typography>
         </div>
       </div>
     )

@@ -23,6 +23,8 @@ export const PostImages = forwardRef<ElementRef<'div'>, Props>(
     const shouldDisplayImagesSlider = images.length > 1
     const classNames = {
       container: clsx(s.container, isExpanded && s.expanded, className),
+      image: s.image,
+      imageContainer: s.imageContainer,
     }
 
     return (
@@ -32,9 +34,9 @@ export const PostImages = forwardRef<ElementRef<'div'>, Props>(
         ) : (
           <Image
             alt={`Image uploaded on ${formatDate(images[0]?.createdAt)}`}
+            className={classNames.image}
             fill={fill}
             height={height}
-            objectFit={'cover'}
             src={images[0]?.url}
             width={width}
           />

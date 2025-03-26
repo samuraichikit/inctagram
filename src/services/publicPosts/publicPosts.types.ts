@@ -66,3 +66,24 @@ export type Avatar = {
   url: string
   width: number
 }
+
+export type GetCommentsArgs = {
+  page?: number
+  pageSize?: number
+  postId: string
+  sortBy?: string
+  sortDirection?: string
+}
+
+export type GetPublicPostArgs = {
+  postId: string
+}
+
+export type GetPublicPostsArgs = {
+  endCursorPostId?: string
+  pageSize?: number
+  sortBy?: string
+  sortDirection?: string
+}
+
+export type GetPublicPostsByUserIdArgs = { userId: string } & GetPublicPostsArgs

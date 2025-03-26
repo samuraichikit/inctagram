@@ -33,9 +33,11 @@ export const ExpiredLink = () => {
     resolver: zodResolver(ExpiredSchema),
   })
   const [passwordRecovery] = usePasswordRecoveryMutation()
+
+  const currentBaseUrl = typeof window !== 'undefined' ? window.location.origin : ''
   const onResendEmailHandler = (data: ExpiredValues) => {
     passwordRecovery({
-      baseUrl: 'http://localhost:3000',
+      baseUrl: currentBaseUrl,
       email: data.email,
       recaptcha: data.reCaptcha ?? '',
     })

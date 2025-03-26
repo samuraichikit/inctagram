@@ -36,7 +36,7 @@ export const EditPost = ({ closeEditModal, onUpdateDescription, postId }: Props)
 
   const handleSubmit = () => {
     if (id) {
-      updatePost({ description: desc, postId: +id ?? 0 })
+      updatePost({ description: desc, postId: +id })
     }
     closeEditModal(false)
     onUpdateDescription(desc)
@@ -61,6 +61,7 @@ export const EditPost = ({ closeEditModal, onUpdateDescription, postId }: Props)
         <button className={s.closeButton} onClick={toggleModal} type={'button'}>
           <CloseIcon />
         </button>
+
         {isOpen && (
           <QuestionModal
             btnNo={toggleModal}

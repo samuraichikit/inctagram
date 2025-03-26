@@ -3,7 +3,49 @@ import { pluralizeEn } from '@/common/utils'
 import { Locale } from './ru'
 
 export const en: Locale = {
+  accountManagement: {
+    DAY: 'day',
+    MONTHLY: 'monthly',
+    WEEKLY: 'weekly',
+    accountType: 'Account type:',
+    business: 'Business',
+    or: 'or',
+    per: 'per',
+    personal: 'Personal',
+    priceSubscription: 'Your subscription costs:',
+  },
+  actionMenuAdmin: {
+    banInSystem: 'Ban in the system',
+    deleteUser: 'Delete user',
+    moreInformation: 'More Information',
+  },
+  adminUserPage: {
+    amount: 'Amount',
+    backToUsersList: 'Back to Users List',
+    dateOfPayment: 'Date of Payment',
+    endDateOfSubscription: 'End date of subscription',
+    followers: 'Followers',
+    following: 'Following',
+    paymentType: 'Payment Type',
+    payments: 'Payments',
+    profileCreationDate: 'Profile Creation Date',
+    profileLink: 'Profile link',
+    subscriptionDate: 'Subscription Date',
+    subscriptionType: 'Subscription Type',
+    uploadedPhotos: 'Uploaded Photos',
+    userId: 'UserID',
+    userName: 'Username',
+  },
   agreementMsg: 'I agree to the',
+  blockAutoRenewal: {
+    AutoRenewal: 'Auto-Renewal',
+    CurrentSubscription: 'Current Subscription',
+    ExpireAt: 'Expire at',
+    NextPayment: 'Next payment',
+  },
+  commonTableWithPagination: {
+    noData: 'No data',
+  },
   emailVerification: {
     expiredLinkMsg: 'Email verification link expired',
     msg: 'Looks like the verification link has expired. Not to worry, we can send the link again',
@@ -25,6 +67,34 @@ export const en: Locale = {
     myProfile: 'My Profile',
     search: 'Search',
     statistics: 'Statistics',
+  },
+  modalMessage: {
+    Error: {
+      message: 'Transaction failed, please try again',
+      ok: 'Back to payment!',
+      title: 'Error',
+    },
+    Success: {
+      message: 'Payment was successful!',
+      ok: 'Ok',
+      title: 'Success',
+    },
+  },
+  myPayments: {
+    DateOfPayment: 'Date of Payment',
+    EndDataOfSubscription: 'End data of subscription',
+    PaymentType: 'Payment Type',
+    Price: 'Price',
+    SubscriptionType: 'Subscription Type',
+  },
+  notifications: {
+    new: 'New',
+    newNotification: 'New message!',
+    notificationsTitle: 'Notifications',
+  },
+  pagination: {
+    onPage: 'on page',
+    show: 'Show',
   },
   passwordForm: {
     backToSignIn: 'Back to Sign In',
@@ -58,13 +128,17 @@ export const en: Locale = {
   },
   postModal: {
     addComment: 'Add a comment',
+    addPhoto: 'Add Photo',
     addPublicationDesc: 'Add Publication Description',
     confirmationMsg:
       'Do you really want to finish editing? If you close the changes you have made will not be saved.',
+    deleteConfirmMsg: 'Are you sure you want to delete this post?',
     deletePost: 'Delete Post',
     editPost: 'Edit Post',
+    openDraftBtn: 'Open Draft',
     publishMsg: 'Publish',
     saveChangesBtn: 'Save Changes',
+    selectFromComputeBtn: 'Select from Computer',
   },
   privacyPolicy: {
     title: 'Privacy Policy',
@@ -110,6 +184,10 @@ export const en: Locale = {
     registeredUsers: 'Registered users',
     showMore: 'Show more',
   },
+  removeUserAdmin: {
+    questionModal: 'Are you sure you want to delete',
+    titleModal: 'Delete user',
+  },
   schemaErrorMsg: {
     emailFormat: 'The email must match the format',
     maxAboutMe: 'Maximum number of characters 200',
@@ -128,6 +206,12 @@ export const en: Locale = {
     logOutConfirmation: 'Are you really want to log out of your account',
     rejectButton: 'No',
   },
+  signInAdmin: {
+    email: 'Email',
+    error: 'The email or password are incorrect',
+    password: 'Password',
+    signIn: 'Sign In',
+  },
   signUp: {
     and: 'and',
     backToSignUp: 'Back to Sign Up',
@@ -141,4 +225,13 @@ export const en: Locale = {
   },
   termsOfService: { title: 'Terms of Service' },
   test: 'Lorem Ipsum is simply dummy text of the printing',
+  usersListAdmin: {
+    dateAdded: 'Date added',
+    notSpecified: 'Not specified',
+    profileLink: 'Profile link',
+    selectBlocked: 'Blocked',
+    selectNoSelected: 'Not selected',
+    userId: 'User ID',
+    userName: 'Username',
+  },
 }

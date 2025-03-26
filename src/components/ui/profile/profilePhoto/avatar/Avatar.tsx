@@ -18,13 +18,7 @@ export const Avatar = ({ className, size, src }: Props) => {
   return (
     <div className={classNames.root} style={{ height: `${size}px`, width: `${size}px` }}>
       {src && (
-        <Image
-          alt={'Avatar'}
-          className={classNames.image}
-          height={size}
-          src={src}
-          width={size}
-        />
+        <Image alt={'Avatar'} className={classNames.image} height={size} src={src} width={size} />
       )}
     </div>
   )
