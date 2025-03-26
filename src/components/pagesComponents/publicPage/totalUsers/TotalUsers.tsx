@@ -21,7 +21,7 @@ export const TotalUsers = ({ totalUsers }: Props) => {
   const totalUsersFormatted = totalUsers.toString().padStart(DIGITS_COUNT, '0').split('')
 
   return (
-    <Card data-cy={'registeredUsers'} className={classNames.container}>
+    <Card data-pw={'registeredUsers'} className={classNames.container}>
       <Typography asChild variant={'h2'}>
         <h2> {t.publicPosts.registeredUsers}:</h2>
       </Typography>

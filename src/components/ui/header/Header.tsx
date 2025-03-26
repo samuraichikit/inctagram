@@ -24,26 +24,29 @@ export const Header = () => {
     const {t} = useTranslation()
 
     return (
-        <header className = {classNames.header}>
-            <div className = {classNames.container}>
-                <Typography data-cy = {'logo'}
-                            variant = {'large'}>Inctagram</Typography>
-                <div className = {classNames.navContainer}>
-                    <LangSelect />
-                    {!accessToken && (
-                        <div className = {classNames.buttonsContainer}>
-                            <Button asChild variant = {'text'}>
-                                <Link href = {'/auth/signIn'}
-                                      data-cy = "logIn">{t.header.signIn}</Link>
-                            </Button>
-                            <Button asChild data-cy = "signUp">
-                                <Link href = {'/auth/signUp'}
-                                      data-cy = "signUp">{t.header.signUp}</Link>
-                            </Button>
-                        </div>
-                    )}
-                </div>
-            </div>
-        </header>
+      <header className={classNames.header}>
+        <div className={classNames.container}>
+          <Typography data-pw={'logo'} variant={'large'}>
+            Inctagram
+          </Typography>
+          <div className={classNames.navContainer}>
+            <LangSelect />
+            {!accessToken && (
+              <div className={classNames.buttonsContainer}>
+                <Button asChild variant={'text'}>
+                  <Link href={'/auth/signIn'} data-pw="logIn">
+                    {t.header.signIn}
+                  </Link>
+                </Button>
+                <Button asChild data-pw="signUp">
+                  <Link href={'/auth/signUp'} data-pw="signUp">
+                    {t.header.signUp}
+                  </Link>
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
     )
 }

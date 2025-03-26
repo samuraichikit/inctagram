@@ -88,52 +88,46 @@ export const SignIn = () => {
     }
 
     return (
-        <Card className = {classNames.wrapper}>
-            <Typography asChild className = {classNames.title} variant = {'h1'}>
-                <h1>{t.passwordForm.signIn}</h1>
-            </Typography>
-            <div className = {classNames.iconWrapper}>
-                <GoogleAuthButton />
-                <GitHubIcon height = {36} width = {36} />
-            </div>
-            <form className = {classNames.form}
-                  onSubmit = {handleSubmit(onSubmitHandler)}>
-                <FormTextField
-                    data-cy = {'email'}
-                    className = {classNames.emailTextField}
-                    control = {control}
-                    label = {t.passwordForm.email}
-                    name = {'email'}
-                    placeholder = {'Epam@epam.com'}
-                    type = {'email'}
-                />
-                <FormTextField
-                    data-cy={'password'}
-                    className = {classNames.passwordTextField}
-                    control = {control}
-                    label = {t.passwordForm.password}
-                    name = {'password'}
-                    placeholder = {t.passwordForm.enterPassword}
-                    type = {'password'}
-                />
-                <Typography asChild className = {classNames.forgotPassword}
-                            variant = {'regular_text_14'}>
-                    <a href = {'/auth/forgotPassword'}>{t.passwordForm.forgotPassword}</a>
-                </Typography>
-                <Button
-                    data-cy = {'signIn'}
-                    className = {classNames.signInButton}
-                        disabled = {isDisabled}>
-                    {t.passwordForm.signIn}
-                </Button>
-                <Typography className = {s.signUpQuestion}
-                            variant = {'regular_text_16'}>
-                    {t.passwordForm.noAccount}
-                </Typography>
-                <Button asChild variant = {'text'}>
-                    <Link href = {'/auth/signUp'}>{t.passwordForm.signUp}</Link>
-                </Button>
-            </form>
-        </Card>
+      <Card className={classNames.wrapper}>
+        <Typography asChild className={classNames.title} variant={'h1'}>
+          <h1>{t.passwordForm.signIn}</h1>
+        </Typography>
+        <div className={classNames.iconWrapper}>
+          <GoogleAuthButton />
+          <GitHubIcon height={36} width={36} />
+        </div>
+        <form className={classNames.form} onSubmit={handleSubmit(onSubmitHandler)}>
+          <FormTextField
+            data-pw={'email'}
+            className={classNames.emailTextField}
+            control={control}
+            label={t.passwordForm.email}
+            name={'email'}
+            placeholder={'Epam@epam.com'}
+            type={'email'}
+          />
+          <FormTextField
+            data-pw={'password'}
+            className={classNames.passwordTextField}
+            control={control}
+            label={t.passwordForm.password}
+            name={'password'}
+            placeholder={t.passwordForm.enterPassword}
+            type={'password'}
+          />
+          <Typography asChild className={classNames.forgotPassword} variant={'regular_text_14'}>
+            <a href={'/auth/forgotPassword'}>{t.passwordForm.forgotPassword}</a>
+          </Typography>
+          <Button data-pw={'signIn'} className={classNames.signInButton} disabled={isDisabled}>
+            {t.passwordForm.signIn}
+          </Button>
+          <Typography className={s.signUpQuestion} variant={'regular_text_16'}>
+            {t.passwordForm.noAccount}
+          </Typography>
+          <Button asChild variant={'text'}>
+            <Link href={'/auth/signUp'}>{t.passwordForm.signUp}</Link>
+          </Button>
+        </form>
+      </Card>
     )
 }
