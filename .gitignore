@@ -39,3 +39,10 @@ next-env.d.ts
 *storybook.log
 
 .idea/
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
