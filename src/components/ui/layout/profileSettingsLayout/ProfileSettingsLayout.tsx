@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement } from 'react'
+import React, { PropsWithChildren, ReactElement, useEffect, useState } from 'react'
 
 import { Header } from '@/components/ui/header'
 import { ProfileSettingsBar } from '@/components/ui/profileSettingsBar'
@@ -10,9 +10,21 @@ import { usePathname } from 'next/navigation'
 
 import s from '../baseLayout.module.scss'
 
+export type pageProfileSettings = 'devices' | 'general' | 'management' | 'payments'
+
 export const ProfileSettingsLayout: NextPage<PropsWithChildren> = ({ children }) => {
   const path = usePathname()
   const { isError, isLoading } = useMeQuery()
+
+  const [actualPage, setActualPage] = useState<pageProfileSettings>('general')
+
+  useEffect(() => {
+    const page = localStorage.getItem('selectProfileSettingPages')
+
+    if (page) {
+      setActualPage(JSON.parse(page))
+    }
+  }, [])
 
   const isMyProfile = !isLoading && !isError
 
@@ -39,7 +51,7 @@ export const ProfileSettingsLayout: NextPage<PropsWithChildren> = ({ children })
       <main className={classNames.main}>
         <div className={s.formButtonWrapper}>
           <div className={s.wrapper}>
-            <ProfileSettingsBar />
+            <ProfileSettingsBar actualPage={actualPage} />
             {children}
           </div>
         </div>
