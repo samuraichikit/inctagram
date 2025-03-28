@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
-import { useTransformDate } from '@/common/hooks/useTransformDate'
-import { useTranslation } from '@/common/hooks/useTranslation'
-import {
-  useGetCurrentPaymentSubscriptionsQuery,
-  usePostCanceledAutoRenewalMutation,
-} from '@/services/accountSubscriptions/accountSubsService'
+import { formatDate } from '@/common/utils'
+import { AccountTypeValue } from '@/components/forms/managementSettings'
+import { usePostCanceledAutoRenewalMutation } from '@/services/accountSubscriptions/accountSubsService'
 import { ResponseCurrPaymentSubs } from '@/services/accountSubscriptions/accountSubsService.types'
-import axios from 'axios'
-import { getCookie } from 'cookies-next/client'
 
-import s from '../ManagementSettings.module.scss'
+import s from '../managementSettings.module.scss'
 
 import { Locale } from '../../../../../locales/ru'
 
@@ -22,8 +17,8 @@ type Props = {
 
 export const AutoRenewal = ({ currentPayment, isLoadingCurrentPayment, t }: Props) => {
   const [postCanceledAutoRenewal] = usePostCanceledAutoRenewalMutation()
-  const dateOfPayment = useTransformDate(currentPayment ? currentPayment.data[0].dateOfPayment : '')
-  const endDateOfSubscription = useTransformDate(
+  const dateOfPayment = formatDate(currentPayment ? currentPayment.data[0].dateOfPayment : '')
+  const endDateOfSubscription = formatDate(
     currentPayment ? currentPayment.data[0].endDateOfSubscription : ''
   )
 
@@ -34,7 +29,7 @@ export const AutoRenewal = ({ currentPayment, isLoadingCurrentPayment, t }: Prop
   }, [currentPayment])
 
   const changeCheckbox = () => {
-    localStorage.setItem('statusAccount', 'BUSINESS')
+    localStorage.setItem('statusAccount', AccountTypeValue.Business)
     setIsRenewal(!isRenewal)
     postCanceledAutoRenewal()
   }
@@ -45,7 +40,7 @@ export const AutoRenewal = ({ currentPayment, isLoadingCurrentPayment, t }: Prop
 
   return (
     <>
-      <h3 className={s.Title}>{t.blockAutoRenewal.CurrentSubscription}:</h3>
+      <h3 className={s.title}>{t.blockAutoRenewal.CurrentSubscription}:</h3>
       <div className={s.wrapperDatePayments}>
         <div className={s.datePayment}>
           <span className={s.datePaymentText}>{t.blockAutoRenewal.ExpireAt}</span>

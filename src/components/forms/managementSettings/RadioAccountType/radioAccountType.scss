@@ -1,9 +1,3 @@
-.root {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-
 .Item {
   all: unset;
 
@@ -24,9 +18,37 @@
   }
 }
 
+.Indicator {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  &::after {
+    content: '';
+
+    display: block;
+
+    width: 12px;
+    height: 12px;
+
+    background-color: white;
+    border-radius: 50%;
+  }
+}
+
 .Label {
   padding-left: 15px;
   font-size: 14px;
   line-height: 24px;
   color: white;
+}
+
+.radioAccountContainer {
+  display: flex;
+  align-items: center;
 }

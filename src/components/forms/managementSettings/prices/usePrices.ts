@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { usePostSubscriptionsMutation } from '@/services/accountSubscriptions/accountSubsService'
+import { AccountTypeValue } from '@/components/forms/managementSettings'
+import { PaymentType } from '@/components/forms/managementSettings/prices'
+import { usePostSubscriptionsMutation } from '@/services/accountSubscriptions'
 import {
   RequestPostSubscriptions,
   ResponseGetPricesPay,
@@ -48,19 +50,21 @@ export const usePrices = ({ meInfo, pricesPayment }: Props) => {
     }
   }, [router.query])
 
-  const clickPaymentButton = (paymentType: 'PAYPAL' | 'STRIPE') => {
+  const priceCharacteristic = pricesPayment.data[Number(localStorage.getItem('price'))]
+
+  const clickPaymentButton = (paymentType: PaymentType) => {
     setIsDisable(true)
     const requestData: RequestPostSubscriptions = {
-      amount: pricesPayment.data[Number(localStorage.getItem('price'))].amount || 10,
+      amount: priceCharacteristic.amount || 10,
       baseUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${
         router.locale === 'en' ? '/en' : ''
       }/profile/settings/management/${meInfo.userId}`,
-      paymentType: paymentType,
-      typeSubscription: pricesPayment.data[Number(localStorage.getItem('price'))].typeDescription,
+      paymentType,
+      typeSubscription: priceCharacteristic.typeDescription,
     }
 
     postSubscriptions(requestData).then(res => {
-      localStorage.setItem('statusAccount', 'BUSINESS')
+      localStorage.setItem('statusAccount', AccountTypeValue.Business)
       res.data?.url && router.push(res.data.url)
       setTimeout(() => {
         setIsDisable(false)
