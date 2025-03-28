@@ -1,7 +1,7 @@
 import { AccountTypeValue } from '@/components/forms/managementSettings'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 
-import styles from './radioAccountType.scss'
+import s from './radioAccountType.module.scss'
 
 type Props = {
   accountTypeValue: AccountTypeValue
@@ -21,11 +21,11 @@ export const RadioAccountType = ({
   }
 
   return (
-    <div className={styles.radioAccountContainer}>
-      <RadioGroup.Item className={styles.Item} onClick={getCheckedRadioHandler} value={value}>
-        <RadioGroup.Indicator className={styles.Indicator} />
+    <div className={s.radioAccountContainer}>
+      <RadioGroup.Item className={s.item} onClick={getCheckedRadioHandler} value={value}>
+        <RadioGroup.Indicator className={s.indicator} />
       </RadioGroup.Item>
-      <label className={styles.Label} htmlFor={'r1'}>
+      <label className={s.label} htmlFor={'r1'}>
         {accountTypeValueLanguage}
       </label>
     </div>

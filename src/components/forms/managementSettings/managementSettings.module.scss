@@ -11,6 +11,26 @@
   line-height: 24px;
 }
 
+.item {
+  all: unset;
+
+  width: 20px;
+  height: 20px;
+
+  background-color: var(--color-dark-500);
+  border: 2px solid white;
+  border-radius: 100%;
+  box-shadow: 0 2px 10px black;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px black;
+  }
+}
+
 .accountTypeBlock {
   display: flex;
   flex-direction: column;

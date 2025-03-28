@@ -1,46 +1,56 @@
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { pageProfileSettings } from '@/components/ui/layout/profileSettingsLayout/ProfileSettingsLayout'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 import s from './profileSettingsBar.module.scss'
 
-export const ProfileSettingsBar = () => {
+type Props = {
+  actualPage: pageProfileSettings
+}
+
+export const ProfileSettingsBar = ({ actualPage }: Props) => {
   const { t } = useTranslation()
   const path = usePathname()
   const router = useRouter()
   const { accountManagement, devices, generalInformation, myPayments } = t.profile.settings
   const userId = path?.split('/').reverse()[0]
 
+  const tabTriggerHandler = (page: pageProfileSettings) => {
+    localStorage.setItem('selectProfileSettingPages', JSON.stringify(page))
+    router.push(`/profile/settings/${page}/${userId}`)
+  }
+
   return (
     <>
-      <Tabs defaultValue={generalInformation}>
+      <Tabs defaultValue={actualPage}>
         <TabsList className={s.settingsList}>
           <TabsTrigger
             className={s.settingsItem}
-            onClick={() => router.push(`/profile/settings/general/${userId}`)}
-            value={generalInformation}
+            onClick={() => tabTriggerHandler('general')}
+            value={'general'}
           >
             {generalInformation}
           </TabsTrigger>
           <TabsTrigger
             className={s.settingsItem}
-            onClick={() => router.push(`/profile/settings/devices/${userId}`)}
-            value={devices}
+            onClick={() => tabTriggerHandler('devices')}
+            value={'devices'}
           >
             {devices}
           </TabsTrigger>
           <TabsTrigger
             className={s.settingsItem}
-            onClick={() => router.push(`/profile/settings/management/${userId}`)}
-            value={accountManagement}
+            onClick={() => tabTriggerHandler('management')}
+            value={'management'}
           >
             {accountManagement}
           </TabsTrigger>
           <TabsTrigger
             className={s.settingsItem}
-            onClick={() => router.push(`/profile/settings/payments/${userId}`)}
-            value={myPayments}
+            onClick={() => tabTriggerHandler('payments')}
+            value={'payments'}
           >
             {myPayments}
           </TabsTrigger>
