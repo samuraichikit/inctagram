@@ -48,7 +48,10 @@ export const ActionsMenu = ({ userId, userName }: Props) => {
           </Button>
           <Button asChild className={s.btn} variant={'icon'}>
             <Link href={`/admin/usersList/${userId}`} target={'_blank'}>
-              <MoreIcon /> <Typography variant={'regular_text_14'}>More Information</Typography>
+              <MoreIcon />{' '}
+              <Typography variant={'regular_text_14'}>
+                {t.actionMenuAdmin.moreInformation}
+              </Typography>
             </Link>
           </Button>
         </div>
