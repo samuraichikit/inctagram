@@ -13,5 +13,5 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const ProfileStory: Story = {
-  args: {},
+  args: { actualPage: 'general' },
 }
