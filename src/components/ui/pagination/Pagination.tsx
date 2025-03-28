@@ -37,7 +37,6 @@ export const Pagination = memo(
       siblingCount,
       totalCount,
     })
-
     const { t } = useTranslation()
 
     return (

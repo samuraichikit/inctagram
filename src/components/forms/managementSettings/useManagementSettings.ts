@@ -1,28 +1,28 @@
 import { useEffect, useState } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { AccountTypeValue } from '@/components/forms/managementSettings/ManagementSettings'
 import {
   useGetCurrentPaymentSubscriptionsQuery,
   useGetPricesPaymentQuery,
-} from '@/services/accountSubscriptions/accountSubsService'
+} from '@/services/accountSubscriptions'
 import { useMeQuery } from '@/services/auth'
+
+import { AccountTypeValue } from './ManagementSettings'
 
 export const useManagementSettings = () => {
   const { data: meInfo, isLoading: isLoadingMeInfo } = useMeQuery()
-  const {
-    data: currentPayment,
-    isFetching: isFetchingCurrentPayment,
-    isLoading: isLoadingCurrentPayment,
-  } = useGetCurrentPaymentSubscriptionsQuery()
+  const { data: currentPayment, isLoading: isLoadingCurrentPayment } =
+    useGetCurrentPaymentSubscriptionsQuery()
   const { data: pricesPayment, isLoading: isLoadingPricesPayment } = useGetPricesPaymentQuery()
   const [statusInit, setStatusInit] = useState(false)
   const [statusAccount, setStatusAccount] = useState<AccountTypeValue>(AccountTypeValue.Personal)
   const { t } = useTranslation()
 
+  const setStatusAccountLocalStorage = localStorage.getItem('statusAccount') as AccountTypeValue
+
   useEffect(() => {
     if (localStorage.getItem('statusAccount')) {
-      setStatusAccount(localStorage.getItem('statusAccount') as AccountTypeValue)
+      setStatusAccount(setStatusAccountLocalStorage)
       setStatusInit(true)
     }
     {
@@ -32,7 +32,7 @@ export const useManagementSettings = () => {
 
   useEffect(() => {
     if (localStorage.getItem('statusAccount')) {
-      setStatusAccount(localStorage.getItem('statusAccount') as AccountTypeValue)
+      setStatusAccount(setStatusAccountLocalStorage)
     }
   }, [meInfo, currentPayment])
 

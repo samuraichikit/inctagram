@@ -1,19 +1,24 @@
 import { PaypalPayment } from '@/assets/icons/PaypalPayment'
 import { StripePayment } from '@/assets/icons/StripePayment'
-import { RadioPrice } from '@/components/forms/managementSettings/prices/radioPrice/RadioPrice'
+import { RadioPrice } from '@/components/forms/managementSettings/prices/radioPrice'
 import { usePrices } from '@/components/forms/managementSettings/prices/usePrices'
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
-import { ResponseGetPricesPay } from '@/services/accountSubscriptions/accountSubsService.types'
+import { ResponseGetPricesPay } from '@/services/accountSubscriptions'
 import { MeResponse } from '@/services/auth'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 
-import s from '../ManagementSettings.module.scss'
+import s from '../managementSettings.module.scss'
 import styles from '@/components/forms/managementSettings/styles.module.scss'
 
 import { Locale } from '../../../../../locales/ru'
 
-const price = [
+export enum PaymentType {
+  Paypal = 'PAYPAL',
+  Stripe = 'STRIPE',
+}
+
+const prices = [
   { day: '1', id: 1 },
   { day: '7', id: 2 },
   { day: '', id: 3 },
@@ -41,22 +46,30 @@ export const Prices = ({ isLoadingPricesPayment, meInfo, pricesPayment, t }: Pro
     return <div>Loading...</div>
   }
 
+  const btnCloseModal = modalArguments.buttonValue.length > 0 && (
+    <div style={{ marginTop: '55px' }}>
+      <Button onClick={closeModal} style={{ width: '100%' }}>
+        {modalArguments.buttonValue}
+      </Button>
+    </div>
+  )
+
   return (
     <div className={s.blockPrices}>
-      <h3 className={s.Title}>{t.accountManagement.priceSubscription}</h3>
+      <h3 className={s.title}>{t.accountManagement.priceSubscription}</h3>
       <div className={s.accountTypeBlock}>
         <RadioGroup.Root
           aria-label={'Account type'}
-          className={styles.Root}
+          className={styles.root}
           defaultValue={String(choiceSelect)}
         >
-          {price.map(p => (
+          {prices.map(p => (
             <RadioPrice
+              characteristicsPrices={pricesPayment}
               checkedRadio={checkedRadio}
               daysPrice={p.day}
               key={p.id}
               num={p.id}
-              pricesPayment={pricesPayment}
               t={t}
             />
           ))}
@@ -66,7 +79,7 @@ export const Prices = ({ isLoadingPricesPayment, meInfo, pricesPayment, t }: Pro
         <Button
           className={isDisable ? s.loading : ''}
           disabled={isDisable}
-          onClick={() => clickPaymentButton('PAYPAL')}
+          onClick={() => clickPaymentButton(PaymentType.Paypal)}
           variant={'icon'}
         >
           <PaypalPayment />
@@ -75,7 +88,7 @@ export const Prices = ({ isLoadingPricesPayment, meInfo, pricesPayment, t }: Pro
         <Button
           className={isDisable ? s.loading : ''}
           disabled={isDisable}
-          onClick={() => clickPaymentButton('STRIPE')}
+          onClick={() => clickPaymentButton(PaymentType.Stripe)}
           variant={'icon'}
         >
           <StripePayment />
@@ -88,13 +101,7 @@ export const Prices = ({ isLoadingPricesPayment, meInfo, pricesPayment, t }: Pro
         title={modalArguments.title}
       >
         <div>{modalArguments.message}</div>
-        {modalArguments.buttonValue.length > 0 && (
-          <div style={{ marginTop: '55px' }}>
-            <Button onClick={closeModal} style={{ width: '100%' }}>
-              {modalArguments.buttonValue}
-            </Button>
-          </div>
-        )}
+        {btnCloseModal}
       </Modal>
     </div>
   )

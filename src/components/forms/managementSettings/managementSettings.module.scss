@@ -1,4 +1,10 @@
-.Title {
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.title {
   margin: 0 0 15px;
   font-size: 16px;
   font-weight: 600;

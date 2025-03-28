@@ -14,12 +14,37 @@ export const en: Locale = {
     personal: 'Personal',
     priceSubscription: 'Your subscription costs:',
   },
+  actionMenuAdmin: {
+    banInSystem: 'Ban in the system',
+    deleteUser: 'Delete user',
+    moreInformation: 'More Information',
+  },
+  adminUserPage: {
+    amount: 'Amount',
+    backToUsersList: 'Back to Users List',
+    dateOfPayment: 'Date of Payment',
+    endDateOfSubscription: 'End date of subscription',
+    followers: 'Followers',
+    following: 'Following',
+    paymentType: 'Payment Type',
+    payments: 'Payments',
+    profileCreationDate: 'Profile Creation Date',
+    profileLink: 'Profile link',
+    subscriptionDate: 'Subscription Date',
+    subscriptionType: 'Subscription Type',
+    uploadedPhotos: 'Uploaded Photos',
+    userId: 'UserID',
+    userName: 'Username',
+  },
   agreementMsg: 'I agree to the',
   blockAutoRenewal: {
     AutoRenewal: 'Auto-Renewal',
     CurrentSubscription: 'Current Subscription',
     ExpireAt: 'Payment date',
     NextPayment: 'Next payment',
+  },
+  commonTableWithPagination: {
+    noData: 'No data',
   },
   emailVerification: {
     expiredLinkMsg: 'Email verification link expired',
@@ -159,6 +184,10 @@ export const en: Locale = {
     registeredUsers: 'Registered users',
     showMore: 'Show more',
   },
+  removeUserAdmin: {
+    questionModal: 'Are you sure you want to delete',
+    titleModal: 'Delete user',
+  },
   schemaErrorMsg: {
     emailFormat: 'The email must match the format',
     maxAboutMe: 'Maximum number of characters 200',
@@ -203,6 +232,6 @@ export const en: Locale = {
     selectBlocked: 'Blocked',
     selectNoSelected: 'Not selected',
     userId: 'User ID',
-    userName: 'User name',
+    userName: 'Username',
   },
 }

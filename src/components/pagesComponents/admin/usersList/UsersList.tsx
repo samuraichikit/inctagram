@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 
 import { Filter } from '@/assets/icons/PolygonIcon'
+import { FilterActive } from '@/assets/icons/PolygonIconActive'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { ActionsMenu } from '@/components/pagesComponents/admin/usersList/actionMenu/ActionMenu'
 import { Pagination } from '@/components/ui/pagination'
@@ -15,13 +16,18 @@ import {
   TableRow,
 } from '@/components/ui/tables'
 import { TextField } from '@/components/ui/text-field'
+import { SortDirection } from '@/services/admin/types'
 import { GET_USERS } from '@/services/admin/usersPaginationService'
 import { GetUsersQuery } from '@/services/admin/usersPaginationService.generated'
 import { useQuery } from '@apollo/client'
 
 import s from './usersList.module.scss'
 
+type SortByType = 'createdAt' | 'userName'
+
 export const UserList = () => {
+  const [sortBy, setSortBy] = useState<SortByType>('createdAt')
+  const [sortDirection, setSortDirection] = useState<SortDirection>(SortDirection.Desc)
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(8)
   const [searchTerm, setSearchTerm] = useState<string>('')
@@ -31,11 +37,28 @@ export const UserList = () => {
       pageNumber: page,
       pageSize: pageSize,
       searchTerm: searchTerm,
+      sortBy: sortBy,
+      sortDirection: sortDirection,
     },
   })
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value.toLowerCase())
+  }
+
+  const handleDirectionChange = (sortParams: {
+    newDirection: SortDirection
+    newSortBy: SortByType
+  }) => {
+    setSortBy(sortParams.newSortBy)
+    setSortDirection(sortParams.newDirection)
+  }
+
+  const sortUsers = (newSortBy: SortByType) => {
+    const newDirection =
+      sortDirection === SortDirection.Asc ? SortDirection.Desc : SortDirection.Asc
+
+    handleDirectionChange({ newDirection, newSortBy })
   }
 
   return (
@@ -56,14 +79,22 @@ export const UserList = () => {
           <TableHead>
             <TableRow>
               <TableHeadCell>{t.usersListAdmin.userId}</TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell onClick={() => sortUsers('userName')}>
                 {t.usersListAdmin.userName}
-                <Filter className={s.gap} />
+                {SortDirection.Asc && sortBy === 'userName' ? (
+                  <FilterActive className={s.gap} />
+                ) : (
+                  <Filter className={s.gap} />
+                )}
               </TableHeadCell>
               <TableHeadCell>{t.usersListAdmin.profileLink}</TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell onClick={() => sortUsers('createdAt')}>
                 {t.usersListAdmin.dateAdded}
-                <Filter className={s.gap} />
+                {SortDirection.Asc && sortBy === 'createdAt' ? (
+                  <FilterActive className={s.gap} />
+                ) : (
+                  <Filter className={s.gap} />
+                )}
               </TableHeadCell>
               <TableHeadCell></TableHeadCell>
             </TableRow>
@@ -80,7 +111,7 @@ export const UserList = () => {
                     {new Date(el.createdAt).toLocaleDateString('ru-RU')}
                   </TableBodyCell>
                   <TableBodyCell className={s.actionMenu}>
-                    <ActionsMenu />
+                    <ActionsMenu userId={el.id} userName={el.userName} />
                   </TableBodyCell>
                 </TableRow>
               )
