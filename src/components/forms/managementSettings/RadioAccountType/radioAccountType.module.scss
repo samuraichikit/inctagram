@@ -1,4 +1,4 @@
-.Item {
+.item {
   all: unset;
 
   width: 20px;
@@ -18,7 +18,7 @@
   }
 }
 
-.Indicator {
+.indicator {
   position: relative;
 
   display: flex;
@@ -41,7 +41,7 @@
   }
 }
 
-.Label {
+.label {
   padding-left: 15px;
   font-size: 14px;
   line-height: 24px;

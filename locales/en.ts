@@ -40,7 +40,7 @@ export const en: Locale = {
   blockAutoRenewal: {
     AutoRenewal: 'Auto-Renewal',
     CurrentSubscription: 'Current Subscription',
-    ExpireAt: 'Payment date',
+    ExpireAt: 'First payment',
     NextPayment: 'Next payment',
   },
   commonTableWithPagination: {

@@ -38,7 +38,7 @@ export const ru = {
   blockAutoRenewal: {
     AutoRenewal: 'Авто-Продление',
     CurrentSubscription: 'Текущая подписка',
-    ExpireAt: 'Дата платежа',
+    ExpireAt: 'Первый платеж',
     NextPayment: 'Следующий платеж',
   },
   commonTableWithPagination: {

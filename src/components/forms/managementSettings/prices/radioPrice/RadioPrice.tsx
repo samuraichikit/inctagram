@@ -1,7 +1,6 @@
 import { ResponseGetPricesPay } from '@/services/accountSubscriptions'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 
-import s from '@/components/forms/managementSettings/managementSettings.module.scss'
 import styles from '@/components/forms/managementSettings/styles.module.scss'
 
 import { Locale } from '../../../../../../locales/ru'
@@ -26,13 +25,13 @@ export const RadioPrice = ({ characteristicsPrices, checkedRadio, daysPrice, num
 
   return (
     <div style={{ alignItems: 'center', display: 'flex' }}>
-      <RadioGroup.Item className={styles.Item} onClick={checkedRadioHandler} value={String(num)}>
-        <RadioGroup.Indicator className={styles.Indicator} />
+      <RadioGroup.Item className={styles.item} onClick={checkedRadioHandler} value={String(num)}>
+        <RadioGroup.Indicator className={styles.indicator} />
       </RadioGroup.Item>
-      <label className={styles.Label} htmlFor={'r2'}>
+      <label className={styles.label} htmlFor={'r2'}>
         <span>
           <span>{price}</span>
-          <span className={s.date}>{description}</span>
+          <span className={styles.date}>{description}</span>
         </span>
       </label>
     </div>
