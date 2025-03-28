@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { useGetMyPaymentsQuery } from '@/services/accountSubscriptions/accountSubsService'
+import { useGetMyPaymentsQuery } from '@/services/accountSubscriptions'
 
 export const useMyPayments = () => {
   const { data: myPayments, isLoading: isLoadingMyPayments } = useGetMyPaymentsQuery()

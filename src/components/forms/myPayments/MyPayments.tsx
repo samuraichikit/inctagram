@@ -1,10 +1,11 @@
 import React from 'react'
 
-import { SubscriptionHistory } from '@/components/forms/myPayments/ subscriptionHistory/SubscriptionHistory'
 import { useMyPayments } from '@/components/forms/myPayments/useMyPayments'
 import { Pagination } from '@/components/ui/pagination'
 
 import s from './MyPayments.module.scss'
+
+import { SubscriptionHistory } from './subscriptionHistory'
 
 export const MyPayments = () => {
   const {
@@ -23,7 +24,16 @@ export const MyPayments = () => {
     return <div>Loading...</div>
   }
 
-  // test
+  const pagination = myPayments?.length > 5 && (
+    <Pagination
+      className={s.PaginationBlock}
+      currentPage={currentPage}
+      onPageChange={handlePageChange}
+      onPageSizeChange={handlePageSizeChange}
+      pageSize={pageSize}
+      totalCount={formattedData?.length}
+    />
+  )
 
   return (
     <div className={s.container}>
@@ -39,16 +49,7 @@ export const MyPayments = () => {
           <SubscriptionHistory key={i} myPayment={p} />
         ))}
       </div>
-      {myPayments?.length > 5 && (
-        <Pagination
-          className={s.PaginationBlock}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-          onPageSizeChange={handlePageSizeChange}
-          pageSize={pageSize}
-          totalCount={formattedData?.length}
-        />
-      )}
+      {pagination}
     </div>
   )
 }

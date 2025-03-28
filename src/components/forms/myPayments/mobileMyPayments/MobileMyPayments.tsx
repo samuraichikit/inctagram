@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { myPaymentType } from '@/services/accountSubscriptions/accountSubsService.types'
+import { myPaymentType } from '@/services/accountSubscriptions'
 
 import s from '@/components/forms/myPayments/MyPayments.module.scss'
 

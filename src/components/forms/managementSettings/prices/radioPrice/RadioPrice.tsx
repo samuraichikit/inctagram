@@ -1,23 +1,28 @@
-import { ResponseGetPricesPay } from '@/services/accountSubscriptions/accountSubsService.types'
+import { ResponseGetPricesPay } from '@/services/accountSubscriptions'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 
-import s from '@/components/forms/managementSettings/ManagementSettings.module.scss'
+import s from '@/components/forms/managementSettings/managementSettings.module.scss'
 import styles from '@/components/forms/managementSettings/styles.module.scss'
 
 import { Locale } from '../../../../../../locales/ru'
 
 type Props = {
+  characteristicsPrices: ResponseGetPricesPay
   checkedRadio: (num: number) => void
   daysPrice: string
   num: number
-  pricesPayment: ResponseGetPricesPay
   t: Locale
 }
 
-export const RadioPrice = ({ checkedRadio, daysPrice, num, pricesPayment, t }: Props) => {
+export const RadioPrice = ({ characteristicsPrices, checkedRadio, daysPrice, num, t }: Props) => {
   const checkedRadioHandler = () => {
     checkedRadio(num)
   }
+
+  const price = `${characteristicsPrices.data[num - 1].amount} ${
+    t.accountManagement.per
+  } ${daysPrice}`
+  const description = `${t.accountManagement[characteristicsPrices.data[num - 1].typeDescription]}`
 
   return (
     <div style={{ alignItems: 'center', display: 'flex' }}>
@@ -26,12 +31,8 @@ export const RadioPrice = ({ checkedRadio, daysPrice, num, pricesPayment, t }: P
       </RadioGroup.Item>
       <label className={styles.Label} htmlFor={'r2'}>
         <span>
-          <span>
-            ${pricesPayment.data[num - 1].amount} {t.accountManagement.per} {daysPrice}
-          </span>
-          <span className={s.date}>
-            {t.accountManagement[pricesPayment.data[num - 1].typeDescription]}
-          </span>
+          <span>{price}</span>
+          <span className={s.date}>{description}</span>
         </span>
       </label>
     </div>

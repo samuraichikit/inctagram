@@ -1,12 +1,11 @@
-import { RadioAccountType } from '@/components/forms/managementSettings/RadioAccountType/RadioAccountType'
-import { AutoRenewal } from '@/components/forms/managementSettings/autoRenewal/AutoRenewal'
-import { Prices } from '@/components/forms/managementSettings/prices/Prices'
+import { RadioAccountType } from '@/components/forms/managementSettings/RadioAccountType'
+import { AutoRenewal } from '@/components/forms/managementSettings/autoRenewal'
+import { Prices } from '@/components/forms/managementSettings/prices'
 import { useManagementSettings } from '@/components/forms/managementSettings/useManagementSettings'
 import { useGetCurrentPaymentSubscriptionsQuery } from '@/services/accountSubscriptions/accountSubsService'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 
-import s from './ManagementSettings.module.scss'
-import styles from './styles.module.scss'
+import s from './managementSettings.module.scss'
 
 export enum AccountTypeValue {
   Business = 'BUSINESS',
@@ -28,12 +27,8 @@ export const ManagementSettings = () => {
     t,
   } = useManagementSettings()
 
-  if (!currentPayment) {
-    return <div></div>
-  }
-
   if (isLoadingMeInfo) {
-    return <div>Loading...</div> // todo - скелетоны сделать
+    return <div>Loading...</div>
   }
 
   const statusAccountEnabled =
@@ -41,7 +36,7 @@ export const ManagementSettings = () => {
 
   return (
     <>
-      {statusInit && (
+      {currentPayment && statusInit && (
         <div>
           {currentPayment.hasAutoRenewal && currentPayment.data[0].subscriptionId && (
             <AutoRenewal
@@ -51,11 +46,11 @@ export const ManagementSettings = () => {
             />
           )}
           <div>
-            <h3 className={s.Title}>{t.accountManagement.accountType}</h3>
+            <h3 className={s.title}>{t.accountManagement.accountType}</h3>
             <div className={s.accountTypeBlock}>
               <RadioGroup.Root
                 aria-label={'Account type'}
-                className={styles.Root}
+                className={s.root}
                 defaultValue={localStorage.getItem('statusAccount') || statusAccount}
               >
                 <RadioAccountType
