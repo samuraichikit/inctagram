@@ -79,15 +79,15 @@ export const UserList = () => {
           <TableHead>
             <TableRow>
               <TableHeadCell>{t.usersListAdmin.userId}</TableHeadCell>
+              <TableHeadCell>{t.usersListAdmin.userName}</TableHeadCell>
               <TableHeadCell onClick={() => sortUsers('userName')}>
-                {t.usersListAdmin.userName}
+                {t.usersListAdmin.profileLink}
                 {SortDirection.Asc && sortBy === 'userName' ? (
                   <FilterActive className={s.gap} />
                 ) : (
                   <Filter className={s.gap} />
                 )}
               </TableHeadCell>
-              <TableHeadCell>{t.usersListAdmin.profileLink}</TableHeadCell>
               <TableHeadCell onClick={() => sortUsers('createdAt')}>
                 {t.usersListAdmin.dateAdded}
                 {SortDirection.Asc && sortBy === 'createdAt' ? (
