@@ -49,10 +49,10 @@ export const RemoveUserModal = ({ closeModal, isShow, userId, userName }: Props)
     >
       {`${t.removeUserAdmin.questionModal} ${userName}`}
       <div className={s.yesNo}>
-        <Button className={s.buttons} onClick={handlerBtnYes} variant={'outlined'}>
+        <Button className={s.buttons} onClick={handlerBtnNo} variant={'outlined'}>
           {t.sideBar.rejectButton}
         </Button>
-        <Button className={s.buttons} onClick={handlerBtnNo}>
+        <Button className={s.buttons} onClick={handlerBtnYes}>
           {t.sideBar.confirmButton}
         </Button>
       </div>
