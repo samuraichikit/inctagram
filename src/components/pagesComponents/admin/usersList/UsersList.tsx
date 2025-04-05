@@ -20,6 +20,7 @@ import { SortDirection } from '@/services/admin/types'
 import { GET_USERS } from '@/services/admin/usersPaginationService'
 import { GetUsersQuery } from '@/services/admin/usersPaginationService.generated'
 import { useQuery } from '@apollo/client'
+import clsx from 'clsx'
 
 import s from './usersList.module.scss'
 
@@ -79,19 +80,31 @@ export const UserList = () => {
           <TableHead>
             <TableRow>
               <TableHeadCell>{t.usersListAdmin.userId}</TableHeadCell>
+              <TableHeadCell>{t.usersListAdmin.userName}</TableHeadCell>
               <TableHeadCell onClick={() => sortUsers('userName')}>
-                {t.usersListAdmin.userName}
+                {t.usersListAdmin.profileLink}
                 {SortDirection.Asc && sortBy === 'userName' ? (
-                  <FilterActive className={s.gap} />
+                  <FilterActive
+                    className={clsx(
+                      sortDirection === SortDirection.Desc &&
+                        sortBy === 'userName' &&
+                        s.activeSortIcon
+                    )}
+                  />
                 ) : (
                   <Filter className={s.gap} />
                 )}
               </TableHeadCell>
-              <TableHeadCell>{t.usersListAdmin.profileLink}</TableHeadCell>
               <TableHeadCell onClick={() => sortUsers('createdAt')}>
                 {t.usersListAdmin.dateAdded}
                 {SortDirection.Asc && sortBy === 'createdAt' ? (
-                  <FilterActive className={s.gap} />
+                  <FilterActive
+                    className={clsx(
+                      sortDirection === SortDirection.Desc &&
+                        sortBy === 'createdAt' &&
+                        s.activeSortIcon
+                    )}
+                  />
                 ) : (
                   <Filter className={s.gap} />
                 )}
