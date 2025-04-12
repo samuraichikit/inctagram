@@ -2,6 +2,7 @@ import React from 'react'
 
 import { useAppDispatch, useAppSelector } from '@/app/store'
 import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { ImageCropper } from '@/components/pagesComponents/createPost/cropping/imageCropper/ImageCropper'
 import { SelectedImagesPreview } from '@/components/pagesComponents/createPost/cropping/selectedImagesPreview/SelectedImagesPreview'
 import {
@@ -19,6 +20,7 @@ import s from './Cropping.module.scss'
 export const Cropping = () => {
   const photos = useAppSelector(state => state.createPostSlice.pictures)
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
 
   const savedImages = async () => {
     const images: string[] = []
@@ -45,9 +47,9 @@ export const Cropping = () => {
         <button className={s.backBtn} onClick={setPerv} type={'button'}>
           <ArrowLeftIcon />
         </button>
-        <Typography variant={'h1'}>Cropping</Typography>
+        <Typography variant={'h1'}>{t.postModal.cropping}</Typography>
         <Button onClick={setNext} style={{ padding: 'unset' }} variant={'outlined'}>
-          Next
+          {t.postModal.next}
         </Button>
       </div>
       <div className={s.body}>

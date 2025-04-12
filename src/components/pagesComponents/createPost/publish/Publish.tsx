@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 
 import { useAppDispatch, useAppSelector } from '@/app/store'
 import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import {
   resetState,
   setDescription,
@@ -31,6 +32,7 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
   const dispatch = useAppDispatch()
   const [createPost] = useCreatePostMutation()
   const imagesIds = useAppSelector(state => state.createPostSlice.picturesIds)
+  const { t } = useTranslation()
 
   const setPerv = () => {
     dispatch(setPrevStage())
@@ -48,7 +50,7 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
         dispatch(resetState())
         onCloseBtn()
 
-        toast.success('Post is published')
+        toast.success(t.postModal.postIsPublished)
       }
     } catch (error) {
       if (isFetchBaseQueryError(error)) {
@@ -65,14 +67,14 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
         <button className={s.backBtn} onClick={setPerv} type={'button'}>
           <ArrowLeftIcon />
         </button>
-        <Typography variant={'h1'}>Publication</Typography>
+        <Typography variant={'h1'}>{t.postModal.publication}</Typography>
         <Button
           disabled={!imagesIds.length}
           onClick={onPublishHandler}
           style={{ padding: 'unset' }}
           variant={'outlined'}
         >
-          Publish
+          {t.postModal.publishMsg}
         </Button>
       </div>
 
@@ -102,10 +104,10 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
             <Typography asChild>{data?.userName ?? 'URL Profile'}</Typography>
           </div>
           <TextArea
-            label={'Add publication description'}
+            label={t.postModal.addPublicationDesc}
             maxLength={500}
             onValueChange={changeDescHandler}
-            placeholder={"What's new?"}
+            placeholder={t.postModal.whatsNew}
             value={description}
           />
           <Typography

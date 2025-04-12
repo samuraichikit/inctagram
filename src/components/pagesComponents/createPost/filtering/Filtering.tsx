@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from '@/app/store'
 import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { FilterCard } from '@/components/pagesComponents/createPost/filtering/filterCard/FilterCard'
 import {
   setFilter,
@@ -23,6 +24,7 @@ export const Filtering = () => {
   const croppedPictures = useAppSelector(state => state.createPostSlice.croppedPictures)
   const dispatch = useAppDispatch()
   const [uploadToServer] = useUploadPostPhotoMutation()
+  const { t } = useTranslation()
 
   const savedImages = async () => {
     const images: string[] = []
@@ -54,9 +56,9 @@ export const Filtering = () => {
         <button className={s.backBtn} onClick={setPerv} type={'button'}>
           <ArrowLeftIcon />
         </button>
-        <Typography variant={'h1'}>Filtering</Typography>
+        <Typography variant={'h1'}>{t.postModal.filtering}</Typography>
         <Button onClick={setNext} style={{ padding: 'unset' }} variant={'outlined'}>
-          Next
+          {t.postModal.next}
         </Button>
       </div>
       <div className={s.body}>
@@ -82,7 +84,7 @@ export const Filtering = () => {
           </SliderPost>
         </div>
         <div className={s.filtersBlock}>
-          {FILTERS.map(el => (
+          {FILTERS().map(el => (
             <FilterCard
               filter={el.value}
               key={el.name}
@@ -96,45 +98,49 @@ export const Filtering = () => {
   )
 }
 
-export const FILTERS = [
-  {
-    name: 'Original',
-    value: 'none',
-  },
-  {
-    name: 'Amaro',
-    value: 'contrast(0.9) brightness(1.1) hue-rotate(-10deg) saturate(1.5)',
-  },
-  {
-    name: 'Brannan',
-    value: 'contrast(1.4) sepia(0.5)',
-  },
-  {
-    name: 'Clarendon',
-    value: 'contrast(1.2) saturate(1.35)',
-  },
-  {
-    name: 'Gingham',
-    value: 'brightness(1.05) hue-rotate(-10deg)',
-  },
-  {
-    name: 'Moon',
-    value: 'contrast(1.1) brightness(1.1) grayscale(1)',
-  },
-  {
-    name: 'Lark',
-    value: 'contrast(0.9)',
-  },
-  {
-    name: 'Lofi',
-    value: 'contrast(1.5) saturate(1.1)',
-  },
-  {
-    name: 'Maven',
-    value: 'contrast(0.95) brightness(0.95) saturate(1.5) sepia(0.25)',
-  },
-  {
-    name: 'Toaster',
-    value: 'contrast(1.5) brightness(0.9)',
-  },
-]
+export const FILTERS = () => {
+  const { t } = useTranslation()
+
+  return [
+    {
+      name: t.postModal.filter.original,
+      value: 'none',
+    },
+    {
+      name: t.postModal.filter.amaro,
+      value: 'contrast(0.9) brightness(1.1) hue-rotate(-10deg) saturate(1.5)',
+    },
+    {
+      name: t.postModal.filter.brannan,
+      value: 'contrast(1.4) sepia(0.5)',
+    },
+    {
+      name: t.postModal.filter.clarendon,
+      value: 'contrast(1.2) saturate(1.35)',
+    },
+    {
+      name: t.postModal.filter.gingham,
+      value: 'brightness(1.05) hue-rotate(-10deg)',
+    },
+    {
+      name: t.postModal.filter.moon,
+      value: 'contrast(1.1) brightness(1.1) grayscale(1)',
+    },
+    {
+      name: t.postModal.filter.lark,
+      value: 'contrast(0.9)',
+    },
+    {
+      name: t.postModal.filter.lofi,
+      value: 'contrast(1.5) saturate(1.1)',
+    },
+    {
+      name: t.postModal.filter.maven,
+      value: 'contrast(0.95) brightness(0.95) saturate(1.5) sepia(0.25)',
+    },
+    {
+      name: t.postModal.filter.toaster,
+      value: 'contrast(1.5) brightness(0.9)',
+    },
+  ]
+}

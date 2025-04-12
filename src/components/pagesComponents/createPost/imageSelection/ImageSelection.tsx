@@ -30,11 +30,9 @@ export const ImageSelection = ({ onCloseBtn }: ImageSelectionProps) => {
     e.preventDefault()
     const readyForSetFiles = uploadPhotos(e)
 
-    debugger
     if (readyForSetFiles.length > 0) {
       dispatch(resetState())
       setPhotos(readyForSetFiles)
-      debugger
       setNext()
     }
   }
