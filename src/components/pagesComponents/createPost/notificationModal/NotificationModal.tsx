@@ -1,4 +1,5 @@
 import { useAppDispatch } from '@/app/store'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import {
   resetState,
   setDraftedPage,
@@ -17,6 +18,7 @@ type Props = {
 
 export const NotificationModal = ({ closeOtherModal, isOpen, isOpenChange }: Props) => {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
 
   const onDiscardHandler = () => {
     dispatch(resetState())
@@ -34,18 +36,17 @@ export const NotificationModal = ({ closeOtherModal, isOpen, isOpenChange }: Pro
       className={s.notificationModal}
       onOpenChange={isOpenChange}
       open={isOpen}
-      title={'Close'}
+      title={t.postModal.close}
     >
       <div className={s.body}>
         <Typography className={s.warnCaption} variant={'regular_text_16'}>
-          Do you really want to close the creation of a publication? If you close everything will be
-          deleted
+          {t.postModal.confirmationMsg}
         </Typography>
         <div className={s.btnGroup}>
           <Button onClick={onDiscardHandler} variant={'outlined'}>
-            Discard
+            {t.postModal.discard}
           </Button>
-          <Button onClick={onSaveDraftHandler}>Save draft</Button>
+          <Button onClick={onSaveDraftHandler}>{t.postModal.save}</Button>
         </div>
       </div>
     </Modal>

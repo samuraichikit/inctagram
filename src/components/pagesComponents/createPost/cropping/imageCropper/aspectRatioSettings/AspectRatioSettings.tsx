@@ -1,6 +1,7 @@
 import React, { ComponentProps, useRef, useState } from 'react'
 
 import { ExpandIcon } from '@/assets/icons/ExpandIcon'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { useOutsideClick } from '@/components/pagesComponents/createPost/service/useOutsideClick'
 import { SliderButton } from '@/components/pagesComponents/createPost/sliderButton/SliderButton'
 import { Typography } from '@/components/ui/typography'
@@ -14,24 +15,28 @@ type Props = {
   setAspect: (id: number, aspect: number) => void
 }
 
-const options = [
-  {
-    name: 'Original',
-    value: 4 / 3,
-  },
-  {
-    name: '1:1',
-    value: 1,
-  },
-  {
-    name: '4:5',
-    value: 4 / 5,
-  },
-  {
-    name: '16:9',
-    value: 16 / 9,
-  },
-]
+const Options = () => {
+  const { t } = useTranslation()
+
+  return [
+    {
+      name: t.postModal.original,
+      value: 4 / 3,
+    },
+    {
+      name: '1:1',
+      value: 1,
+    },
+    {
+      name: '4:5',
+      value: 4 / 5,
+    },
+    {
+      name: '16:9',
+      value: 16 / 9,
+    },
+  ]
+}
 
 export const AspectRatioSettings = ({ aspect, imgId, setAspect }: Props) => {
   const [showAspectRatioSettings, setShowAspectRatioSettings] = useState<boolean>(false)
@@ -42,7 +47,7 @@ export const AspectRatioSettings = ({ aspect, imgId, setAspect }: Props) => {
   return (
     <div>
       <div className={clsx(s.arBlock, !showAspectRatioSettings && s.hide)} ref={aspectRef}>
-        {options.map(el => (
+        {Options().map(el => (
           <Typography
             className={clsx(s.item, aspect === el.value && s.active)}
             key={el.name}
