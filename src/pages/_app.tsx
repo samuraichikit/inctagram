@@ -14,7 +14,7 @@ import { ApolloProvider } from '@apollo/client'
 import { PayPalScriptProvider, ReactPayPalScriptOptions } from '@paypal/react-paypal-js'
 import { NextPage } from 'next'
 
-import '@/styles/index.scss'
+import '@samuraichikit/inc-ui-kit/dist/index.css'
 import '@/styles/nprogress.scss'
 import '@fontsource-variable/inter'
 import '@stripe/stripe-js'
