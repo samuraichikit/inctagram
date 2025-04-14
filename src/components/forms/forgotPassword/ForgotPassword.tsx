@@ -1,10 +1,10 @@
 import { FormTextField } from '@/components/controlled/formTextField'
 import { useForgotPassword } from '@/components/forms/forgotPassword/useForgotPassword'
-import { Card } from '@/components/ui/card'
+import {} from '@/components/ui/card'
 import { Modal } from '@/components/ui/modal'
 import { ReCaptcha } from '@/components/ui/reCaptcha'
 import { Typography } from '@/components/ui/typography'
-import { Button } from '@samuraichikit/inc-ui-kit'
+import { Button, Card } from '@samuraichikit/inc-ui-kit'
 import Link from 'next/link'
 
 import s from './forgotPassword.module.scss'

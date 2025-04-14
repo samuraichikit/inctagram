@@ -1,8 +1,7 @@
 import { FormTextField } from '@/components/controlled/formTextField'
 import { useCreateNewPassword } from '@/components/forms/createNewPassword/useCreateNewPassword'
-import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
-import { Button } from '@samuraichikit/inc-ui-kit'
+import { Button, Card } from '@samuraichikit/inc-ui-kit'
 
 import s from './createNewPassword.module.scss'
 
