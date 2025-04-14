@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 
 import { DeleteIcon } from '@/assets/icons/DeleteIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Button } from '@/components/ui/button'
 import { AddProfilePhotoModal } from '@/components/ui/profile/profilePhoto/addProfilePhotoModal/AddProfilePhotoModal'
 import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
 import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
 import { DeletePhotoModal } from '@/components/ui/profile/profilePhoto/deleteProfilePhotoModal/DeleteProfilePhotoModal'
+import { Button } from '@samuraichikit/inc-ui-kit'
 
 import s from './ProfilePhotoEdit.module.scss'
 

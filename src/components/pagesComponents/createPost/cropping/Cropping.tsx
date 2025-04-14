@@ -12,8 +12,8 @@ import {
 } from '@/components/pagesComponents/createPost/service/createPost.slice'
 import { getCroppedImage } from '@/components/pagesComponents/createPost/service/getCroppedImage'
 import { SliderPost } from '@/components/pagesComponents/createPost/slider/SliderPost'
-import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
+import { Button } from '@samuraichikit/inc-ui-kit'
 
 import s from './Cropping.module.scss'
 

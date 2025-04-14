@@ -10,9 +10,9 @@ import {
   setStageFromDraft,
 } from '@/components/pagesComponents/createPost/service/createPost.slice'
 import { uploadPhotos } from '@/components/pagesComponents/createPost/service/uploadPhotos'
-import { Button } from '@/components/ui/button'
 import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
 import { Typography } from '@/components/ui/typography'
+import { Button } from '@samuraichikit/inc-ui-kit'
 
 import s from './ImageSelection.module.scss'
 

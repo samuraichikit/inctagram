@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 import { useRemoveUserMutation } from '@/services/admin/removeUserService.generated'
 import { GET_USERS } from '@/services/admin/usersPaginationService'
+import { Button } from '@samuraichikit/inc-ui-kit'
 
 import s from './removeUserModal.module.scss'
 

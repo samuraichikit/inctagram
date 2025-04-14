@@ -1,7 +1,7 @@
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import { useResendVerificationLinkMutation } from '@/services/auth'
+import { Button } from '@samuraichikit/inc-ui-kit'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 

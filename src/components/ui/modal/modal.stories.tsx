@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@samuraichikit/inc-ui-kit'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { Modal } from './Modal'

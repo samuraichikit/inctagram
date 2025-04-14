@@ -12,9 +12,9 @@ import {
 } from '@/components/pagesComponents/createPost/service/createPost.slice'
 import { getFilteredImage } from '@/components/pagesComponents/createPost/service/getFilteredImages'
 import { SliderPost } from '@/components/pagesComponents/createPost/slider/SliderPost'
-import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import { useUploadPostPhotoMutation } from '@/services/publicPosts/post-api'
+import { Button } from '@samuraichikit/inc-ui-kit'
 import NextImage from 'next/image'
 
 import s from './Filtering.module.scss'

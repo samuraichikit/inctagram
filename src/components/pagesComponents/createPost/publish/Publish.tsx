@@ -11,12 +11,12 @@ import {
 } from '@/components/pagesComponents/createPost/service/createPost.slice'
 import { isFetchBaseQueryError } from '@/components/pagesComponents/createPost/service/getFilteredImages'
 import { SliderPost } from '@/components/pagesComponents/createPost/slider/SliderPost'
-import { Button } from '@/components/ui/button'
 import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
 import { TextArea } from '@/components/ui/text-area'
 import { Typography } from '@/components/ui/typography'
 import { useGetProfileQuery } from '@/services/profile'
 import { useCreatePostMutation } from '@/services/publicPosts/post-api'
+import { Button } from '@samuraichikit/inc-ui-kit'
 import NextImage from 'next/image'
 
 import s from './Publish.module.scss'
