@@ -1,8 +1,8 @@
 import { CSSProperties, ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
 
-import { ScrollArea } from '@/components/ui/scrollArea'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { DropdownMenuLabel } from '@radix-ui/react-dropdown-menu'
+import { ScrollArea } from '@samuraichikit/inc-ui-kit'
 import clsx from 'clsx'
 
 import s from './dropdown.module.scss'

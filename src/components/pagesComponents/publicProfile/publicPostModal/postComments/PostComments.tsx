@@ -1,5 +1,5 @@
-import { ScrollArea } from '@/components/ui/scrollArea'
 import { Comment } from '@/services/publicPosts'
+import { ScrollArea } from '@samuraichikit/inc-ui-kit'
 
 import s from './postComments.module.scss'
 
