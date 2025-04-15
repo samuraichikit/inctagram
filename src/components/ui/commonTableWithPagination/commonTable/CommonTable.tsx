@@ -1,6 +1,7 @@
 import { Key, ReactNode } from 'react'
 
 import { SortArrow } from '@/assets/icons/SortArrow'
+import { SortDirection } from '@/services/admin/types'
 import {
   Table,
   TableBody,
@@ -8,8 +9,7 @@ import {
   TableHead,
   TableHeadCell,
   TableRow,
-} from '@/components/ui/tables'
-import { SortDirection } from '@/services/admin/types'
+} from '@samuraichikit/inc-ui-kit'
 import clsx from 'clsx'
 import Link from 'next/link'
 
