@@ -8,9 +8,8 @@ import { DeletePost } from '@/components/pagesComponents/profile/postModal/delet
 import { EditPost } from '@/components/pagesComponents/profile/postModal/editPost'
 import { PostComments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComments'
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
-import { Modal } from '@/components/ui/modal'
 import { useGetPostByIdQuery, useGetPostMessageByIdQuery } from '@/services/posts'
-import { Button, Typography } from '@samuraichikit/inc-ui-kit'
+import { Button, Modal, Typography } from '@samuraichikit/inc-ui-kit'
 import { useParams } from 'next/navigation'
 
 import s from './postModal.module.scss'

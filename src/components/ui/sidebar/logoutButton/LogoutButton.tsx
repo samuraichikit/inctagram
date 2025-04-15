@@ -2,9 +2,8 @@ import { useState } from 'react'
 
 import { LogoutIcon } from '@/assets/icons/Logout'
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Modal } from '@/components/ui/modal'
 import { useLogoutMutation } from '@/services/auth'
-import { Button, Typography } from '@samuraichikit/inc-ui-kit'
+import { Button, Modal, Typography } from '@samuraichikit/inc-ui-kit'
 import { deleteCookie } from 'cookies-next/client'
 import { useRouter } from 'next/router'
 

@@ -6,10 +6,7 @@ import { Filtering } from '@/components/pagesComponents/createPost/filtering/Fil
 import { ImageSelection } from '@/components/pagesComponents/createPost/imageSelection/ImageSelection'
 import { NotificationModal } from '@/components/pagesComponents/createPost/notificationModal/NotificationModal'
 import { Publish } from '@/components/pagesComponents/createPost/publish/Publish'
-import { Modal } from '@/components/ui/modal'
-import { clsx } from 'clsx'
-
-import s from './CreatePost.module.scss'
+import { Modal } from '@samuraichikit/inc-ui-kit'
 
 type Props = {
   isOpen: boolean

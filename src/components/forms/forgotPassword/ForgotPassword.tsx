@@ -1,8 +1,7 @@
 import { FormTextField } from '@/components/controlled/formTextField'
 import { useForgotPassword } from '@/components/forms/forgotPassword/useForgotPassword'
-import { Modal } from '@/components/ui/modal'
 import { ReCaptcha } from '@/components/ui/reCaptcha'
-import { Button, Card, Typography } from '@samuraichikit/inc-ui-kit'
+import { Button, Card, Modal, Typography } from '@samuraichikit/inc-ui-kit'
 import Link from 'next/link'
 
 import s from './forgotPassword.module.scss'

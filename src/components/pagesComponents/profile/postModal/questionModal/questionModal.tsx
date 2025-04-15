@@ -1,6 +1,5 @@
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Modal } from '@/components/ui/modal'
-import { Button } from '@samuraichikit/inc-ui-kit'
+import { Button, Modal } from '@samuraichikit/inc-ui-kit'
 
 import s from './questionModal.module.scss'
 

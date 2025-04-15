@@ -1,5 +1,5 @@
-import { Modal } from '@/components/ui/modal'
 import { useGetCommentsQuery, useGetPublicPostQuery } from '@/services/publicPosts'
+import { Modal } from '@samuraichikit/inc-ui-kit'
 
 import s from './publicPostModal.module.scss'
 

@@ -4,8 +4,7 @@ import {
   resetState,
   setDraftedPage,
 } from '@/components/pagesComponents/createPost/service/createPost.slice'
-import { Modal } from '@/components/ui/modal'
-import { Button, Typography } from '@samuraichikit/inc-ui-kit'
+import { Button, Modal, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './NotificationModal.module.scss'
 

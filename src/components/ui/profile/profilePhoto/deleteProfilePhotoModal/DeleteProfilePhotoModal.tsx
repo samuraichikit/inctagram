@@ -1,9 +1,8 @@
 import React from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Modal } from '@/components/ui/modal'
 import { useDeleteAvatarMutation } from '@/services/profile'
-import { Button, Typography } from '@samuraichikit/inc-ui-kit'
+import { Button, Modal, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './DeleteProfilePhotoModal.module.scss'
 

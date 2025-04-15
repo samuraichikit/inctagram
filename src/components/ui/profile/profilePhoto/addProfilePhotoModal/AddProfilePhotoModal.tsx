@@ -2,10 +2,9 @@ import React, { ChangeEvent, useRef } from 'react'
 import AvatarEditor from 'react-avatar-editor'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Modal } from '@/components/ui/modal'
 import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
 import { useUploadAvatarMutation } from '@/services/profile'
-import { Button, Typography } from '@samuraichikit/inc-ui-kit'
+import { Button, Modal, Typography } from '@samuraichikit/inc-ui-kit'
 import { clsx } from 'clsx'
 
 import s from './AddProfilePhotoModal.module.scss'
