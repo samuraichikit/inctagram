@@ -1,5 +1,5 @@
 import { Avatar } from '@/components/ui/avatar'
-import { Typography } from '@/components/ui/typography'
+import { Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './userInfo.module.scss'
 

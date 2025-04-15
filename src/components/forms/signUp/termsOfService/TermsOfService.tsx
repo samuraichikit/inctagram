@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Typography } from '@/components/ui/typography'
+import { Typography } from '@samuraichikit/inc-ui-kit'
 import Link from 'next/link'
 
 import s from './termsOfService.module.scss'

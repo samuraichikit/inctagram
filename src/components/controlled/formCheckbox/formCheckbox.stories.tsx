@@ -3,8 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { CSSProperties } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Typography } from '@/components/ui/typography'
-import { Button } from '@samuraichikit/inc-ui-kit'
+import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 
 import { FormCheckbox } from './FormCheckbox'
 

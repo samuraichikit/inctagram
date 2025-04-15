@@ -2,8 +2,8 @@ import { useTranslation } from '@/common/hooks/useTranslation'
 import { NotificationMessage } from '@/components/notificationDropdown/notificationItems/notificationMessage/NotificationMessage'
 import { DropdownItem } from '@/components/ui/dropdown/DropdownItems'
 import { TimeAgoDisplay } from '@/components/ui/timeAgoDisplay'
-import { Typography } from '@/components/ui/typography'
 import { NotificationType } from '@/services/notifications/notificationsService.types'
+import { Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './notificationItem.module.scss'
 

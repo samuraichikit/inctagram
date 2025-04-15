@@ -9,9 +9,8 @@ import { EditPost } from '@/components/pagesComponents/profile/postModal/editPos
 import { PostComments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComments'
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
 import { Modal } from '@/components/ui/modal'
-import { Typography } from '@/components/ui/typography'
 import { useGetPostByIdQuery, useGetPostMessageByIdQuery } from '@/services/posts'
-import { Button } from '@samuraichikit/inc-ui-kit'
+import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 import { useParams } from 'next/navigation'
 
 import s from './postModal.module.scss'

@@ -1,6 +1,6 @@
 import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useId } from 'react'
 
-import { Typography } from '@/components/ui/typography'
+import { Typography } from '@samuraichikit/inc-ui-kit'
 import clsx from 'clsx'
 
 import s from './textArea.module.scss'

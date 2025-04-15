@@ -2,7 +2,7 @@ import { AVATARS_COUNT_WHO_LIKES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { formatDate } from '@/common/utils'
 import { Avatar } from '@/components/ui/avatar'
-import { Typography } from '@/components/ui/typography'
+import { Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './postLikes.module.scss'
 

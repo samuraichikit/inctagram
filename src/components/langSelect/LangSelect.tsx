@@ -1,10 +1,9 @@
-import { Select, SelectItem } from '@samuraichikit/inc-ui-kit'
+import { Select, SelectItem, Typography } from '@samuraichikit/inc-ui-kit'
 import Image, { StaticImageData } from 'next/image'
 import { useRouter } from 'next/router'
 
 import s from './langSelect.module.scss'
 
-import { Typography } from '../ui/typography'
 import flagRussia from './../../../public/flagRussia.png'
 import flagUnitedKingdom from './../../../public/flagUnitedKingdom.png'
 

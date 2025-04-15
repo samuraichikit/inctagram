@@ -1,9 +1,8 @@
 import { CSSProperties } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Typography } from '@/components/ui/typography'
 import { DevTool } from '@hookform/devtools'
-import { Button } from '@samuraichikit/inc-ui-kit'
+import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { FormTextField } from './FormTextField'

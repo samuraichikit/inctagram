@@ -1,9 +1,8 @@
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Pagination, PaginationProps } from '@samuraichikit/inc-ui-kit'
+import { Pagination, PaginationProps, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './commonTableWithPagination.module.scss'
 
-import { Typography } from '../typography'
 import { CommonTable, CommonTableProps } from './commonTable'
 
 type Props<T> = CommonTableProps<T> & PaginationProps

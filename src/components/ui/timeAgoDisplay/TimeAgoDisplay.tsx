@@ -1,11 +1,10 @@
 import TimeAgo from 'react-timeago'
 
+import { Typography } from '@samuraichikit/inc-ui-kit'
 import { useRouter } from 'next/router'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 import enStrings from 'react-timeago/lib/language-strings/en'
 import ruStrings from 'react-timeago/lib/language-strings/ru'
-
-import { Typography } from '../typography'
 
 type Props = {
   className?: string

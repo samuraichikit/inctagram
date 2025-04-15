@@ -13,10 +13,9 @@ import { isFetchBaseQueryError } from '@/components/pagesComponents/createPost/s
 import { SliderPost } from '@/components/pagesComponents/createPost/slider/SliderPost'
 import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
 import { TextArea } from '@/components/ui/text-area'
-import { Typography } from '@/components/ui/typography'
 import { useGetProfileQuery } from '@/services/profile'
 import { useCreatePostMutation } from '@/services/publicPosts/post-api'
-import { Button } from '@samuraichikit/inc-ui-kit'
+import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 import NextImage from 'next/image'
 
 import s from './Publish.module.scss'

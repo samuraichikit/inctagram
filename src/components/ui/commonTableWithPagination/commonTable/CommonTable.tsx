@@ -9,13 +9,13 @@ import {
   TableHead,
   TableHeadCell,
   TableRow,
+  Typography,
 } from '@samuraichikit/inc-ui-kit'
 import clsx from 'clsx'
 import Link from 'next/link'
 
 import s from './commonTable.module.scss'
 
-import { Typography } from '../../typography'
 import { formatCellValue } from './formatCellValue'
 
 export type Column<T> =

@@ -5,9 +5,8 @@ import { useTranslation } from '@/common/hooks/useTranslation'
 import { QuestionModal } from '@/components/pagesComponents/profile/postModal/questionModal/questionModal'
 import { UserInfo } from '@/components/pagesComponents/publicPage/publicPosts/userInfo'
 import { TextArea } from '@/components/ui/text-area'
-import { Typography } from '@/components/ui/typography'
 import { useGetPostByIdQuery, useUpdatePostMutation } from '@/services/posts'
-import { Button } from '@samuraichikit/inc-ui-kit'
+import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './editPost.module.scss'
 

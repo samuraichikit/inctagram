@@ -11,8 +11,7 @@ import {
 } from '@/components/pagesComponents/createPost/service/createPost.slice'
 import { uploadPhotos } from '@/components/pagesComponents/createPost/service/uploadPhotos'
 import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
-import { Typography } from '@/components/ui/typography'
-import { Button } from '@samuraichikit/inc-ui-kit'
+import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './ImageSelection.module.scss'
 

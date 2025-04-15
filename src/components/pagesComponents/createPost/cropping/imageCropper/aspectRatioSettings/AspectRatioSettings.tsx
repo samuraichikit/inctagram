@@ -4,7 +4,7 @@ import { ExpandIcon } from '@/assets/icons/ExpandIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { useOutsideClick } from '@/components/pagesComponents/createPost/service/useOutsideClick'
 import { SliderButton } from '@/components/pagesComponents/createPost/sliderButton/SliderButton'
-import { Typography } from '@/components/ui/typography'
+import { Typography } from '@samuraichikit/inc-ui-kit'
 import { clsx } from 'clsx'
 
 import s from './AspectRatioSettings.module.scss'

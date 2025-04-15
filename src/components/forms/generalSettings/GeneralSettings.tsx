@@ -10,7 +10,6 @@ import { CountryAndCity } from '@/components/forms/generalSettings/CountryAndCit
 import { SkeletonGeneralSettings } from '@/components/forms/generalSettings/SkeletonGeneralSettings'
 import { Datepicker } from '@/components/ui/datepicker'
 import { ProfilePhotoEdit } from '@/components/ui/profile/profilePhoto/profilePhotoEdit/ProfilePhotoEdit'
-import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/services/auth'
 import { useGetCountryQuery, useGetRegionsQuery } from '@/services/countryAndCity'
 import {
@@ -19,7 +18,7 @@ import {
   useUpdateProfileMutation,
 } from '@/services/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@samuraichikit/inc-ui-kit'
+import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 import Link from 'next/link'
 import router from 'next/router'
 import { z } from 'zod'
