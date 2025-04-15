@@ -46,7 +46,7 @@ export const Payments = () => {
   })
 
   const paymentsData = data?.getPaymentsByUser.items ?? []
-  const totalCount = data?.getPaymentsByUser.totalCount
+  const totalCount = data?.getPaymentsByUser.totalCount ?? 0
 
   if (loading) {
     return (

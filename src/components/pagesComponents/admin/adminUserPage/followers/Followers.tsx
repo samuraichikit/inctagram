@@ -32,7 +32,7 @@ export const Followers = () => {
   })
 
   const followers = followersData?.getFollowers.items ?? []
-  const totalCount = followersData?.getFollowers.totalCount
+  const totalCount = followersData?.getFollowers.totalCount ?? 0
 
   const {
     columns,

@@ -32,7 +32,7 @@ export const Following = () => {
   })
 
   const following = followingData?.getFollowing.items ?? []
-  const totalCount = followingData?.getFollowing.totalCount
+  const totalCount = followingData?.getFollowing.totalCount ?? 0
 
   const {
     columns,
