@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react'
 import { themes } from '@storybook/theming'
-import '../src/styles/index.scss'
+import '@samuraichikit/inc-ui-kit/dist/index.css'
 
 const preview: Preview = {
   parameters: {
