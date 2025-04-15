@@ -1,10 +1,10 @@
 import React, { ComponentProps, ReactNode, useState } from 'react'
 import SlickSlider, { Settings } from 'react-slick'
 
-import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
 import { ArrowRightIcon } from '@/assets/icons/ArrowRightIcon'
 import { SliderButton } from '@/components/pagesComponents/createPost/sliderButton/SliderButton'
 import { SliderDot } from '@/components/pagesComponents/createPost/sliderButton/SliderDot'
+import { ArrowLeftIcon } from '@samuraichikit/inc-ui-kit'
 
 import s from './SliderPost.module.scss'
 

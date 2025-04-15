@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Typography } from '@samuraichikit/inc-ui-kit'
+import { ArrowLeftIcon, Typography } from '@samuraichikit/inc-ui-kit'
 import { useRouter } from 'next/router'
 
 import s from './privacyPolicy.module.scss'

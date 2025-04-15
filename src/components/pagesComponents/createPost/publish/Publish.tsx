@@ -2,7 +2,6 @@ import React from 'react'
 import { toast } from 'react-toastify'
 
 import { useAppDispatch, useAppSelector } from '@/app/store'
-import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import {
   resetState,
@@ -14,7 +13,7 @@ import { SliderPost } from '@/components/pagesComponents/createPost/slider/Slide
 import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
 import { useGetProfileQuery } from '@/services/profile'
 import { useCreatePostMutation } from '@/services/publicPosts/post-api'
-import { Button, TextArea, Typography } from '@samuraichikit/inc-ui-kit'
+import { ArrowLeftIcon, Button, TextArea, Typography } from '@samuraichikit/inc-ui-kit'
 import NextImage from 'next/image'
 
 import s from './Publish.module.scss'

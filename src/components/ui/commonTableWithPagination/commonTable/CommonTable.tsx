@@ -1,8 +1,8 @@
 import { Key, ReactNode } from 'react'
 
-import { SortArrow } from '@/assets/icons/SortArrow'
 import { SortDirection } from '@/services/admin/types'
 import {
+  SortArrow,
   Table,
   TableBody,
   TableBodyCell,
