@@ -15,7 +15,6 @@ import { ScrollArea } from '@samuraichikit/inc-ui-kit'
 import { NextPage } from 'next'
 
 import '@/styles/nprogress.scss'
-import '@fontsource-variable/inter'
 import '@samuraichikit/inc-ui-kit/dist/index.css'
 import '@stripe/stripe-js'
 import 'react-loading-skeleton/dist/skeleton.css'

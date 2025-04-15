@@ -11,9 +11,6 @@ importers:
       '@apollo/client':
         specifier: ^3.12.7
         version: 3.12.7(@types/react@18.3.5)(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@fontsource-variable/inter':
-        specifier: ^5.0.20
-        version: 5.0.20
       '@fontsource/barlow':
         specifier: ^5.0.14
         version: 5.0.14
@@ -1232,9 +1229,6 @@ packages:
 
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
-
-  '@fontsource-variable/inter@5.0.20':
-    resolution: {integrity: sha512-dhzG4Zls/tIrf8h0FhTNi8jT/uFwNhdTY2vKe6DYqoXDYOfEcTVZDyh1hKml1rlLT44Y7OoKoGz8w7czDW7twQ==}
 
   '@fontsource-variable/inter@5.2.5':
     resolution: {integrity: sha512-TrWffUAFOnT8zroE9YmGybagoOgM/HjRqMQ8k9R0vVgXlnUh/vnpbGPAS/Caz1KIlOPnPGh6fvJbb7DHbFCncA==}
@@ -8895,8 +8889,6 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@floating-ui/utils@0.2.8': {}
-
-  '@fontsource-variable/inter@5.0.20': {}
 
   '@fontsource-variable/inter@5.2.5': {}
 
