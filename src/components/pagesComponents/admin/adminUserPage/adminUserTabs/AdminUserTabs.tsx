@@ -1,7 +1,7 @@
 import { QUERY_PARAMS, TABS_CONSTANTS } from '@/common/constants'
 import { useQueryParams } from '@/common/hooks/useQueryParams'
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@samuraichikit/inc-ui-kit'
 
 import s from './adminUserTabs.module.scss'
 

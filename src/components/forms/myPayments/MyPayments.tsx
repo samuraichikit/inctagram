@@ -1,7 +1,8 @@
 import React from 'react'
 
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { useMyPayments } from '@/components/forms/myPayments/useMyPayments'
-import { Pagination } from '@/components/ui/pagination'
+import { Pagination } from '@samuraichikit/inc-ui-kit'
 
 import s from './MyPayments.module.scss'
 
@@ -20,18 +21,22 @@ export const MyPayments = () => {
     purchaseInfo,
   } = useMyPayments()
 
+  const { t } = useTranslation()
+
   if (isLoadingMyPayments || !myPayments) {
     return <div>Loading...</div>
   }
 
   const pagination = myPayments?.length > 5 && (
     <Pagination
+      afterSelectContent={t.pagination.onPage}
+      beforeSelectContent={t.pagination.show}
       className={s.PaginationBlock}
       currentPage={currentPage}
       onPageChange={handlePageChange}
       onPageSizeChange={handlePageSizeChange}
       pageSize={pageSize}
-      totalCount={formattedData?.length}
+      totalCount={formattedData?.length ?? 0}
     />
   )
 

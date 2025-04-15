@@ -1,4 +1,4 @@
-import { ImageOutline } from '@/assets/icons/ImageOutline'
+import { ImageOutline } from '@samuraichikit/inc-ui-kit'
 import { clsx } from 'clsx'
 
 import s from './BlankCover.module.scss'

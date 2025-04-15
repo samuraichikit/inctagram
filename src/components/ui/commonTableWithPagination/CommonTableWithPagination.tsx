@@ -1,10 +1,8 @@
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { SortDirection } from '@/services/admin/types'
+import { Pagination, PaginationProps, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './commonTableWithPagination.module.scss'
 
-import { Pagination, PaginationProps } from '../pagination'
-import { Typography } from '../typography'
 import { CommonTable, CommonTableProps } from './commonTable'
 
 type Props<T> = CommonTableProps<T> & PaginationProps
@@ -43,7 +41,12 @@ export const CommonTableWithPagination = <T,>({
         sortDirection={sortDirection}
         tableBodyData={tableBodyData}
       />
-      <Pagination className={classNames.pagination} {...rest} />
+      <Pagination
+        className={classNames.pagination}
+        {...rest}
+        afterSelectContent={t.pagination.onPage}
+        beforeSelectContent={t.pagination.show}
+      />
     </>
   )
 }

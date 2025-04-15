@@ -5,11 +5,11 @@ import { HomeOutlineIcon } from '@/assets/icons/HomeOutline'
 import { MessengerIcon } from '@/assets/icons/Messenger'
 import { MyProfileIcon } from '@/assets/icons/MyProfile'
 import { PlusSquareOutlineIcon } from '@/assets/icons/PlusSquareOutline'
-import { SearchIcon } from '@/assets/icons/SearchIcon'
 import { TrendingUpOutlineIcon } from '@/assets/icons/TrendingUpOutline'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { CreatePost } from '@/components/pagesComponents/createPost/CreatePost'
 import { useMeQuery } from '@/services/auth'
+import { SearchIcon } from '@samuraichikit/inc-ui-kit'
 
 import s from './mainSidebar.module.scss'
 

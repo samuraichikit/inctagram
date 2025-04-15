@@ -4,22 +4,22 @@ import { Filter } from '@/assets/icons/PolygonIcon'
 import { FilterActive } from '@/assets/icons/PolygonIconActive'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { ActionsMenu } from '@/components/pagesComponents/admin/usersList/actionMenu/ActionMenu'
-import { Pagination } from '@/components/ui/pagination'
-import { Select } from '@/components/ui/select'
-import { SelectItem } from '@/components/ui/select/selectItem'
+import { SortDirection } from '@/services/admin/types'
+import { GET_USERS } from '@/services/admin/usersPaginationService'
+import { GetUsersQuery } from '@/services/admin/usersPaginationService.generated'
+import { useQuery } from '@apollo/client'
 import {
+  Pagination,
+  Select,
+  SelectItem,
   Table,
   TableBody,
   TableBodyCell,
   TableHead,
   TableHeadCell,
   TableRow,
-} from '@/components/ui/tables'
-import { TextField } from '@/components/ui/text-field'
-import { SortDirection } from '@/services/admin/types'
-import { GET_USERS } from '@/services/admin/usersPaginationService'
-import { GetUsersQuery } from '@/services/admin/usersPaginationService.generated'
-import { useQuery } from '@apollo/client'
+  TextField,
+} from '@samuraichikit/inc-ui-kit'
 import clsx from 'clsx'
 
 import s from './usersList.module.scss'
@@ -134,6 +134,8 @@ export const UserList = () => {
       </div>
       <div className={s.pagination}>
         <Pagination
+          afterSelectContent={t.pagination.onPage}
+          beforeSelectContent={t.pagination.show}
           currentPage={page}
           onPageChange={setPage}
           onPageSizeChange={setPageSize}

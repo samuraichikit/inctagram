@@ -1,8 +1,8 @@
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { formatDate } from '@/common/utils'
 import { Avatar } from '@/components/ui/avatar'
-import { Typography } from '@/components/ui/typography'
 import { useGetUserQuery } from '@/services/admin/usersService.generated'
+import { Typography } from '@samuraichikit/inc-ui-kit'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 

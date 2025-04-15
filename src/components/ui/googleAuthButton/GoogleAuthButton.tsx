@@ -1,7 +1,5 @@
-import { GoogleIcon } from '@/assets/icons/GoogleIcon'
 import { GOOGLE_URL } from '@/common/constants'
-
-import { Button } from '../button'
+import { Button, GoogleIcon } from '@samuraichikit/inc-ui-kit'
 
 export const GoogleAuthButton = () => {
   const googleAuthHandler = () => {

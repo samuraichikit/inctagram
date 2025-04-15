@@ -1,6 +1,6 @@
 import { Avatar } from '@/components/ui/avatar'
 import { TimeAgoDisplay } from '@/components/ui/timeAgoDisplay'
-import { Typography } from '@/components/ui/typography'
+import { Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './postComment.module.scss'
 

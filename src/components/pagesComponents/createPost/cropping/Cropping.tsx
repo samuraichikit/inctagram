@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { useAppDispatch, useAppSelector } from '@/app/store'
-import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { ImageCropper } from '@/components/pagesComponents/createPost/cropping/imageCropper/ImageCropper'
 import { SelectedImagesPreview } from '@/components/pagesComponents/createPost/cropping/selectedImagesPreview/SelectedImagesPreview'
@@ -12,8 +11,7 @@ import {
 } from '@/components/pagesComponents/createPost/service/createPost.slice'
 import { getCroppedImage } from '@/components/pagesComponents/createPost/service/getCroppedImage'
 import { SliderPost } from '@/components/pagesComponents/createPost/slider/SliderPost'
-import { Button } from '@/components/ui/button'
-import { Typography } from '@/components/ui/typography'
+import { ArrowLeftIcon, Button, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './Cropping.module.scss'
 

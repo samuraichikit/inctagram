@@ -1,9 +1,8 @@
 import { useEffect } from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Button } from '@/components/ui/button'
-import { Typography } from '@/components/ui/typography'
 import { useConfirmEmailMutation } from '@/services/auth'
+import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'

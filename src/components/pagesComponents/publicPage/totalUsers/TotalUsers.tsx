@@ -1,7 +1,6 @@
 import { DIGITS_COUNT } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Card } from '@/components/ui/card'
-import { Typography } from '@/components/ui/typography'
+import { Card, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './totalUsers.module.scss'
 

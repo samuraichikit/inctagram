@@ -1,13 +1,10 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 
-import { CloseIcon } from '@/assets/icons/Close'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { QuestionModal } from '@/components/pagesComponents/profile/postModal/questionModal/questionModal'
 import { UserInfo } from '@/components/pagesComponents/publicPage/publicPosts/userInfo'
-import { Button } from '@/components/ui/button'
-import { TextArea } from '@/components/ui/text-area'
-import { Typography } from '@/components/ui/typography'
 import { useGetPostByIdQuery, useUpdatePostMutation } from '@/services/posts'
+import { Button, CloseIcon, TextArea, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './editPost.module.scss'
 

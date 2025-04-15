@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form'
 
-import { Checkbox } from '@/components/ui/checkbox'
+import { Checkbox } from '@samuraichikit/inc-ui-kit'
 
 type Props<T extends FieldValues> = {
   control: Control<T>

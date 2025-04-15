@@ -1,6 +1,5 @@
-import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { Typography } from '@/components/ui/typography'
+import { ArrowLeftIcon, Typography } from '@samuraichikit/inc-ui-kit'
 import Link from 'next/link'
 
 import s from './backToUsersListLink.module.scss'

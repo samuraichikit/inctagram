@@ -1,21 +1,21 @@
 import { Key, ReactNode } from 'react'
 
-import { SortArrow } from '@/assets/icons/SortArrow'
+import { SortDirection } from '@/services/admin/types'
 import {
+  SortArrow,
   Table,
   TableBody,
   TableBodyCell,
   TableHead,
   TableHeadCell,
   TableRow,
-} from '@/components/ui/tables'
-import { SortDirection } from '@/services/admin/types'
+  Typography,
+} from '@samuraichikit/inc-ui-kit'
 import clsx from 'clsx'
 import Link from 'next/link'
 
 import s from './commonTable.module.scss'
 
-import { Typography } from '../../typography'
 import { formatCellValue } from './formatCellValue'
 
 export type Column<T> =

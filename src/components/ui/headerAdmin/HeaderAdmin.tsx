@@ -1,8 +1,7 @@
 import { LangSelect } from '@/components/langSelect/LangSelect'
+import { Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './headerAdmin.module.scss'
-
-import { Typography } from '../typography'
 
 export const HeaderAdmin = () => {
   const classNames = {

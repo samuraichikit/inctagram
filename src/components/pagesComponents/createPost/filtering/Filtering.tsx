@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from '@/app/store'
-import { ArrowLeftIcon } from '@/assets/icons/ArrowLeftIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { FilterCard } from '@/components/pagesComponents/createPost/filtering/filterCard/FilterCard'
 import {
@@ -12,9 +11,8 @@ import {
 } from '@/components/pagesComponents/createPost/service/createPost.slice'
 import { getFilteredImage } from '@/components/pagesComponents/createPost/service/getFilteredImages'
 import { SliderPost } from '@/components/pagesComponents/createPost/slider/SliderPost'
-import { Button } from '@/components/ui/button'
-import { Typography } from '@/components/ui/typography'
 import { useUploadPostPhotoMutation } from '@/services/publicPosts/post-api'
+import { ArrowLeftIcon, Button, Typography } from '@samuraichikit/inc-ui-kit'
 import NextImage from 'next/image'
 
 import s from './Filtering.module.scss'

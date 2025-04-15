@@ -1,4 +1,4 @@
-import { Typography } from '@/components/ui/typography'
+import { Typography } from '@samuraichikit/inc-ui-kit'
 import Image from 'next/image'
 
 import s from './FilterCard.module.scss'

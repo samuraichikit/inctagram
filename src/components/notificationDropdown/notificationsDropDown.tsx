@@ -4,9 +4,9 @@ import { useTranslation } from '@/common/hooks/useTranslation'
 import { BellTrigger } from '@/components/notificationDropdown/bellTrigger/bellTrigger'
 import { NotificationItem } from '@/components/notificationDropdown/notificationItems/notificationItem'
 import { Dropdown } from '@/components/ui/dropdown'
-import { Typography } from '@/components/ui/typography'
 import { useMarkAsReadMutation } from '@/services/notifications/notificationsService'
 import { NotificationType } from '@/services/notifications/notificationsService.types'
+import { Typography } from '@samuraichikit/inc-ui-kit'
 
 type Props = {
   notifications: NotificationType[]
