@@ -1,6 +1,6 @@
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
-import { TextField, TextFieldProps } from '@/components/ui/text-field'
+import { TextField, TextFieldProps } from '@samuraichikit/inc-ui-kit'
 
 type Props<T extends FieldValues> = { mandatory?: boolean } & Omit<
   TextFieldProps,
