@@ -1,6 +1,6 @@
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { pageProfileSettings } from '@/components/ui/layout/profileSettingsLayout/ProfileSettingsLayout'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger } from '@samuraichikit/inc-ui-kit'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/router'
 
