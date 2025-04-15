@@ -12,10 +12,9 @@ import {
 import { isFetchBaseQueryError } from '@/components/pagesComponents/createPost/service/getFilteredImages'
 import { SliderPost } from '@/components/pagesComponents/createPost/slider/SliderPost'
 import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
-import { TextArea } from '@/components/ui/text-area'
 import { useGetProfileQuery } from '@/services/profile'
 import { useCreatePostMutation } from '@/services/publicPosts/post-api'
-import { Button, Typography } from '@samuraichikit/inc-ui-kit'
+import { Button, TextArea, Typography } from '@samuraichikit/inc-ui-kit'
 import NextImage from 'next/image'
 
 import s from './Publish.module.scss'
