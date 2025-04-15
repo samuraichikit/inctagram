@@ -4,8 +4,6 @@ import { Filter } from '@/assets/icons/PolygonIcon'
 import { FilterActive } from '@/assets/icons/PolygonIconActive'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { ActionsMenu } from '@/components/pagesComponents/admin/usersList/actionMenu/ActionMenu'
-import { Select } from '@/components/ui/select'
-import { SelectItem } from '@/components/ui/select/selectItem'
 import {
   Table,
   TableBody,
@@ -19,7 +17,7 @@ import { SortDirection } from '@/services/admin/types'
 import { GET_USERS } from '@/services/admin/usersPaginationService'
 import { GetUsersQuery } from '@/services/admin/usersPaginationService.generated'
 import { useQuery } from '@apollo/client'
-import { Pagination } from '@samuraichikit/inc-ui-kit'
+import { Pagination, Select, SelectItem } from '@samuraichikit/inc-ui-kit'
 import clsx from 'clsx'
 
 import s from './usersList.module.scss'
