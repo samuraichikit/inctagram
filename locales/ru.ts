@@ -12,11 +12,6 @@ export const ru = {
     personal: 'Личный',
     priceSubscription: 'Стоимость подписки:',
   },
-  actionMenuAdmin: {
-    banInSystem: 'Бан в системе',
-    deleteUser: 'Удалить аккаунт',
-    moreInformation: 'Подробнее',
-  },
   adminUserPage: {
     amount: 'Сумма',
     backToUsersList: 'Вернуться к списку пользователей',
@@ -206,10 +201,6 @@ export const ru = {
     registeredUsers: 'Зарегистрированные пользователи',
     showMore: 'Показать больше',
   },
-  removeUserAdmin: {
-    questionModal: 'Вы уверены, что хотите удалить',
-    titleModal: 'Удалить пользователся',
-  },
   schemaErrorMsg: {
     emailFormat: 'Адрес эл.почты должен быть в формате',
     maxAboutMe: 'Максимальное число символов - 200',
@@ -247,15 +238,6 @@ export const ru = {
   },
   termsOfService: { title: 'Пользовательское соглашение' },
   test: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати',
-  usersListAdmin: {
-    dateAdded: 'Дата добавления',
-    notSpecified: 'Не указано',
-    profileLink: 'Ссылка на профиль',
-    selectBlocked: 'Заблокировано',
-    selectNoSelected: 'Не выбрано',
-    userId: 'ID пользователя',
-    userName: 'Имя пользователя',
-  },
 }
 
 export type Locale = typeof ru

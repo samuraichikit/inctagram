@@ -33,7 +33,7 @@
     "@radix-ui/react-popover": "^1.1.2",
     "@radix-ui/react-radio-group": "^1.2.0",
     "@reduxjs/toolkit": "^2.2.7",
-    "@samuraichikit/inc-ui-kit": "^0.17.3",
+    "@samuraichikit/inc-ui-kit": "^0.19.7",
     "@stripe/stripe-js": "^5.4.0",
     "@types/react-avatar-editor": "^13.0.3",
     "@types/react-google-recaptcha": "^2.1.9",
