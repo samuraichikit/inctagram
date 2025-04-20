@@ -42,8 +42,8 @@ importers:
         specifier: ^2.2.7
         version: 2.2.7(react-redux@9.1.2(@types/react@18.3.5)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
       '@samuraichikit/inc-ui-kit':
-        specifier: ^0.19.6
-        version: 0.19.6(@babel/core@7.25.2)(@playwright/test@1.51.1)(@types/react-dom@18.3.0)(@types/react@18.3.5)(sass@1.78.0)
+        specifier: ^0.19.7
+        version: 0.19.7(@babel/core@7.25.2)(@playwright/test@1.51.1)(@types/react-dom@18.3.0)(@types/react@18.3.5)(sass@1.78.0)
       '@stripe/stripe-js':
         specifier: ^5.4.0
         version: 5.4.0
@@ -2792,8 +2792,8 @@ packages:
   '@rushstack/eslint-patch@1.10.4':
     resolution: {integrity: sha512-WJgX9nzTqknM393q1QJDJmoW28kUfEnybeTfVNcNAPnIx210RXm2DiXiHzfNPJNIUUb1tJnz/l4QGtJ30PgWmA==}
 
-  '@samuraichikit/inc-ui-kit@0.19.6':
-    resolution: {integrity: sha512-ChiJfEYMtHd60yk1znYwau4c9ZzH27soOH0ZPE/yTri3N1CD9WvfgAsz8K1ft85J6TpVB7PKBDW+bUWI/6zEsw==}
+  '@samuraichikit/inc-ui-kit@0.19.7':
+    resolution: {integrity: sha512-U7nUU/rlVnaar3kEwGK5KKXf5Oqdn54oIpQSNoPf3uBwMkEr3IXun4HcSPJvyezQlSR30MUQ0TRhyRkc9SLAtA==}
 
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
@@ -10709,7 +10709,7 @@ snapshots:
 
   '@rushstack/eslint-patch@1.10.4': {}
 
-  '@samuraichikit/inc-ui-kit@0.19.6(@babel/core@7.25.2)(@playwright/test@1.51.1)(@types/react-dom@18.3.0)(@types/react@18.3.5)(sass@1.78.0)':
+  '@samuraichikit/inc-ui-kit@0.19.7(@babel/core@7.25.2)(@playwright/test@1.51.1)(@types/react-dom@18.3.0)(@types/react@18.3.5)(sass@1.78.0)':
     dependencies:
       '@fontsource-variable/inter': 5.2.5
       '@radix-ui/react-checkbox': 1.1.5(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
