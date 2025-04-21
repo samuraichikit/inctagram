@@ -4,6 +4,8 @@ import { useGoogleAuthMutation } from '@/services/auth'
 import { setCookie } from 'cookies-next/client'
 import { useRouter } from 'next/router'
 
+import { ROUTES } from '../constants'
+
 export const useGoogleAuth = () => {
   const router = useRouter()
   const { query } = router
@@ -20,7 +22,7 @@ export const useGoogleAuth = () => {
           const payload = data.accessToken.split('.')[1]
           const id = JSON.parse(atob(payload)).userId
 
-          router.replace(`/profile/${id}`)
+          router.replace(ROUTES.PROFILE.USER_PROFILE(id))
         } catch (error) {
           console.log(error)
         }

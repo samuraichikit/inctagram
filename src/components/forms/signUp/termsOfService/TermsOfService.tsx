@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { ArrowLeftIcon, Typography } from '@samuraichikit/inc-ui-kit'
 import Link from 'next/link'
@@ -11,7 +12,7 @@ export const TermsOfService = () => {
 
   return (
     <div className={s.wrapper}>
-      <Link className={s.linkWrapper} href={'/auth/signUp'}>
+      <Link className={s.linkWrapper} href={ROUTES.AUTH.SIGN_UP}>
         <ArrowLeftIcon />
         <Typography variant={'regular_text_14'}>{t.signUp.backToSignUp}</Typography>
       </Link>

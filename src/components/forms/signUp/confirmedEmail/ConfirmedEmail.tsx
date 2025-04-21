@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 
+import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { useConfirmEmailMutation } from '@/services/auth'
 import { Button, Typography } from '@samuraichikit/inc-ui-kit'
@@ -44,7 +45,7 @@ export const ConfirmedEmail = () => {
       </Typography>
       <div>
         <Button asChild className={s.button}>
-          <Link href={'/auth/signIn'}>{t.passwordForm.signIn}</Link>
+          <Link href={ROUTES.AUTH.SIGN_IN}>{t.passwordForm.signIn}</Link>
         </Button>
       </div>
       <div>

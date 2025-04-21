@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { MAX_COUNT_CHARACTERS, MIN_COUNT_CHARACTERS } from '@/common/constants'
+import { MAX_COUNT_CHARACTERS, MIN_COUNT_CHARACTERS, ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { TimeAgoDisplay } from '@/components/ui/timeAgoDisplay'
 import { PublicPostResponse } from '@/services/publicPosts'
@@ -54,10 +54,13 @@ export const PublicPost = ({ post }: Props) => {
 
   return (
     <div className={classNames.container}>
-      <Link className={classNames.postImagesContainer} href={`/profile/${ownerId}/${id}`}>
+      <Link
+        className={classNames.postImagesContainer}
+        href={ROUTES.PROFILE.USER_POST({ id: ownerId, postId: id })}
+      >
         <PostImages height={240} images={images} isExpanded={isExpanded} width={234} />
       </Link>
-      <Link className={classNames.userInfoContainer} href={`/profile/${ownerId}`}>
+      <Link className={classNames.userInfoContainer} href={ROUTES.PROFILE.USER_PROFILE(ownerId)}>
         <UserInfo src={avatarOwner} userName={userName} />
       </Link>
       <TimeAgoDisplay className={classNames.timeAgo} date={createdAt} />

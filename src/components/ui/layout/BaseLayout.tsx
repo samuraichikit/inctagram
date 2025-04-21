@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, ReactElement } from 'react'
 
+import { ROUTES } from '@/common/constants'
 import { useMeQuery } from '@/services/auth'
 import clsx from 'clsx'
 import { NextPage } from 'next'
@@ -16,13 +17,14 @@ export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
   const { isError, isLoading } = useMeQuery()
   const router = useRouter()
 
-  const isMyProfile = !isLoading && !isError && router.pathname !== '/auth/signIn'
+  const isMyProfile = !isLoading && !isError && router.pathname !== ROUTES.AUTH.SIGN_IN
 
   const classNames = {
     main: clsx(
       !isMyProfile && s.mainBase,
       isMyProfile && s.mainAuth,
-      (path === '/auth/privacyPolicy' || path === '/auth/termsOfService') && s.privacyPolicy
+      (path === ROUTES.AUTH.PRIVACY_POLICY || path === ROUTES.AUTH.TERMS_OF_SERVICE) &&
+        s.privacyPolicy
     ),
   }
 

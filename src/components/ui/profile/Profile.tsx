@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { PostModal } from '@/components/pagesComponents/profile/postModal/PostModal'
 import { UserPosts } from '@/components/pagesComponents/profile/userPosts'
@@ -40,7 +41,7 @@ export const Profile = () => {
   const userName = profileInfo?.userName
   const aboutMe = profileInfo?.aboutMe
   const avatarSrc = profileInfo?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
-  const profileId = profileInfo?.id
+  const profileId = profileInfo?.id ?? ''
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -49,12 +50,12 @@ export const Profile = () => {
       return
     }
     setIsOpen(true)
-    push(`/profile/${userId}/${postId}`, undefined, { shallow: true })
+    push(ROUTES.PROFILE.USER_POST({ id: userId, postId }), undefined, { shallow: true })
   }, [postId])
 
   const closeHandler = () => {
     setIsOpen(false)
-    push(`/profile/${userId}`, undefined, { shallow: true })
+    push(ROUTES.PROFILE.USER_PROFILE(userId), undefined, { shallow: true })
   }
 
   return (
@@ -79,7 +80,7 @@ export const Profile = () => {
             <Typography variant={'h1'}>{userName}</Typography>
             {isMyProfile && (
               <Button
-                onClick={() => router.push(`/profile/settings/general/${profileId}`)}
+                onClick={() => router.push(ROUTES.PROFILE.SETTINGS.GENERAL(profileId))}
                 variant={'secondary'}
               >
                 {t.profile.settings.profileSettings}

@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, ReactElement, useEffect, useState } from 'react'
 
+import { ROUTES } from '@/common/constants'
 import { Header } from '@/components/ui/header'
 import { ProfileSettingsBar } from '@/components/ui/profileSettingsBar'
 import { MainSidebar } from '@/components/ui/sidebar/mainSidebar'
@@ -40,7 +41,8 @@ export const ProfileSettingsLayout: NextPage<PropsWithChildren> = ({ children })
   const classNames = {
     main: clsx({
       [s.mainAuth]: true,
-      [s.privacyPolicy]: path && ['/auth/privacyPolicy', '/auth/termsOfService'].includes(path),
+      [s.privacyPolicy]:
+        path && [ROUTES.AUTH.PRIVACY_POLICY, ROUTES.AUTH.TERMS_OF_SERVICE].includes(path),
     }),
   }
 

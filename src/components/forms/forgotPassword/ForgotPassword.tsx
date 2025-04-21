@@ -1,3 +1,4 @@
+import { ROUTES } from '@/common/constants'
 import { FormTextField } from '@/components/controlled/formTextField'
 import { useForgotPassword } from '@/components/forms/forgotPassword/useForgotPassword'
 import { ReCaptcha } from '@/components/ui/reCaptcha'
@@ -56,7 +57,7 @@ export const ForgotPassword = ({}: Props) => {
           {buttonSentText}
         </Button>
         <Button className={s.button} variant={'text'}>
-          <Link href={'/auth/signIn'}>{t.passwordForm.backToSignIn}</Link>
+          <Link href={ROUTES.AUTH.SIGN_IN}>{t.passwordForm.backToSignIn}</Link>
         </Button>
         <Modal onOpenChange={setShowModal} open={showModal} title={'Email sent'}>
           <div className={s.modalContent}>

@@ -6,6 +6,7 @@ import { MessengerIcon } from '@/assets/icons/Messenger'
 import { MyProfileIcon } from '@/assets/icons/MyProfile'
 import { PlusSquareOutlineIcon } from '@/assets/icons/PlusSquareOutline'
 import { TrendingUpOutlineIcon } from '@/assets/icons/TrendingUpOutline'
+import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { CreatePost } from '@/components/pagesComponents/createPost/CreatePost'
 import { useMeQuery } from '@/services/auth'
@@ -29,11 +30,13 @@ export const MainSidebar = () => {
 
   const { t } = useTranslation()
 
+  const userId = data?.userId ?? ''
+
   return (
     <Sidebar className={classNames.sidebar}>
       <div>
         <ul className={classNames.mainItems}>
-          <SidebarItem href={'/'}>
+          <SidebarItem href={ROUTES.MAIN}>
             <HomeOutlineIcon />
             {t.mainSidebar.home}
           </SidebarItem>
@@ -51,7 +54,7 @@ export const MainSidebar = () => {
               {t.mainSidebar.create}
             </div>
           </SidebarItem>
-          <SidebarItem href={`/profile/${data?.userId}`}>
+          <SidebarItem href={ROUTES.PROFILE.USER_PROFILE(userId)}>
             <MyProfileIcon />
             {t.mainSidebar.myProfile}
           </SidebarItem>

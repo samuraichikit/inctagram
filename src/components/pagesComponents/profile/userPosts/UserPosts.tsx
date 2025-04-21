@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { ROUTES } from '@/common/constants'
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { PostImages } from '@/components/pagesComponents/publicPage/publicPosts/postImages'
 import { useMeQuery } from '@/services/auth'
@@ -112,7 +113,7 @@ export const UserPosts = ({ userName }: Props) => {
           key={post.id}
           ref={index === (pageNumber === 1 ? publicPosts : posts).length - 1 ? targetRef : null}
         >
-          <Link href={`/profile/${post.ownerId}/${post.id}`}>
+          <Link href={ROUTES.PROFILE.USER_POST({ id: post.ownerId, postId: post.id })}>
             <PostImages fill images={post.images} />
           </Link>
         </div>
