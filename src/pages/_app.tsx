@@ -8,8 +8,6 @@ import { wrapper } from '@/app/store'
 import { useConnectSocket } from '@/common/hooks/useConnectSocket'
 import { useLoader } from '@/common/hooks/useLoader'
 import { NotificationContainer } from '@/components/ui/notificationContainer'
-import { client } from '@/services/admin'
-import { ApolloProvider } from '@apollo/client'
 import { PayPalScriptProvider, ReactPayPalScriptOptions } from '@paypal/react-paypal-js'
 import { ScrollArea } from '@samuraichikit/inc-ui-kit'
 import { NextPage } from 'next'
@@ -44,14 +42,12 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
           } as unknown as ReactPayPalScriptOptions
         }
       >
-        <ApolloProvider client={client}>
-          <Provider store={store}>
-            <ScrollArea style={{ marginTop: '60px' }}>
-              {getLayout(<Component {...props.pageProps} />)}
-              <NotificationContainer />
-            </ScrollArea>
-          </Provider>
-        </ApolloProvider>
+        <Provider store={store}>
+          <ScrollArea style={{ marginTop: '60px' }}>
+            {getLayout(<Component {...props.pageProps} />)}
+            <NotificationContainer />
+          </ScrollArea>
+        </Provider>
       </PayPalScriptProvider>
     </SkeletonTheme>
   )
