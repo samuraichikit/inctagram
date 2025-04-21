@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useId, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { generalSettingsSchemas } from '@/common/schemas'
 import { FormTextArea } from '@/components/controlled/formTextArea'
@@ -114,7 +115,7 @@ export const GeneralSettings = () => {
 
   useEffect(() => {
     const unSubscription = (url: string) => {
-      if (url !== '/auth/privacyPolicy') {
+      if (url !== ROUTES.AUTH.PRIVACY_POLICY) {
         localStorage.removeItem('generalSettingsForm')
       }
     }
@@ -240,7 +241,7 @@ export const GeneralSettings = () => {
                         'A user under 13 cannot create a profile.' ? (
                           <Typography variant={'error'}>
                             A user under 13 cannot create a profile.{' '}
-                            <Link href={'/auth/privacyPolicy'}>Privacy Policy</Link>
+                            <Link href={ROUTES.AUTH.PRIVACY_POLICY}>Privacy Policy</Link>
                           </Typography>
                         ) : (
                           errors.dateOfBirth?.message

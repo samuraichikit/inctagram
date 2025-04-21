@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
-import { EMAIL_REGEX, PASSWORD_REGEX } from '@/common/constants'
+import { EMAIL_REGEX, PASSWORD_REGEX, ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { signInSchema } from '@/common/schemas/signInSchema'
 import { FormTextField } from '@/components/controlled/formTextField'
@@ -81,7 +81,7 @@ export const SignIn = () => {
         const payload = data.accessToken.split('.')[1]
         const id = JSON.parse(atob(payload)).userId
 
-        router.push(`/profile/${id}`)
+        router.push(ROUTES.PROFILE.USER_PROFILE(id))
       })
       .catch(err => {
         if (err.data.messages === 'invalid password or email') {
@@ -120,7 +120,7 @@ export const SignIn = () => {
           type={'password'}
         />
         <Typography asChild className={classNames.forgotPassword} variant={'regular_text_14'}>
-          <a href={'/auth/forgotPassword'}>{t.passwordForm.forgotPassword}</a>
+          <Link href={ROUTES.AUTH.FORGOT_PASSWORD}>{t.passwordForm.forgotPassword}</Link>
         </Typography>
         <Button className={classNames.signInButton} disabled={isDisabled}>
           {t.passwordForm.signIn}
@@ -129,7 +129,7 @@ export const SignIn = () => {
           {t.passwordForm.noAccount}
         </Typography>
         <Button asChild variant={'text'}>
-          <Link href={'/auth/signUp'}>{t.passwordForm.signUp}</Link>
+          <Link href={ROUTES.AUTH.SIGN_UP}>{t.passwordForm.signUp}</Link>
         </Button>
       </form>
     </Card>

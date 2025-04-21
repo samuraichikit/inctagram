@@ -1,3 +1,4 @@
+import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { formatDate } from '@/common/utils'
 import { Avatar } from '@/components/ui/avatar'
@@ -49,7 +50,7 @@ export const AdminUserInfo = () => {
             </h1>
           </Typography>
           <Typography asChild className={classNames.userName} variant={'regular_link'}>
-            <Link href={`/profile/${userId}`}>{userName}</Link>
+            <Link href={ROUTES.PROFILE.USER_PROFILE(userId)}>{userName}</Link>
           </Typography>
         </div>
       </div>

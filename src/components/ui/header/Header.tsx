@@ -1,3 +1,4 @@
+import { ROUTES } from '@/common/constants'
 import { useNotifications } from '@/common/hooks/useNotifications'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { LangSelect } from '@/components/langSelect/LangSelect'
@@ -34,12 +35,12 @@ export const Header = () => {
           {!isMyProfile && (
             <div className={classNames.buttonsContainer}>
               <Button asChild variant={'text'}>
-                <Link data-cy={'logIn'} href={'/auth/signIn'}>
+                <Link data-cy={'logIn'} href={ROUTES.AUTH.SIGN_IN}>
                   {t.header.signIn}
                 </Link>
               </Button>
               <Button asChild data-cy={'signUp'}>
-                <Link data-cy={'signUp'} href={'/auth/signUp'}>
+                <Link data-cy={'signUp'} href={ROUTES.AUTH.SIGN_UP}>
                   {t.header.signUp}
                 </Link>
               </Button>

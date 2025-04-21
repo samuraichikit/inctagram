@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
+import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { signUpSchema } from '@/common/schemas'
 import { FormCheckbox } from '@/components/controlled/formCheckbox'
@@ -140,11 +141,11 @@ export const SignUp = () => {
               <Typography slot={'span'} variant={'small_text'}>
                 {t.agreementMsg}{' '}
                 <Typography asChild variant={'small_link'}>
-                  <Link href={'/auth/termsOfService'}>{t.termsOfService.title}</Link>
+                  <Link href={ROUTES.AUTH.TERMS_OF_SERVICE}>{t.termsOfService.title}</Link>
                 </Typography>{' '}
                 {t.signUp.and}
                 <Typography asChild variant={'small_link'}>
-                  <Link href={'/auth/privacyPolicy'}> {t.privacyPolicy.title}</Link>
+                  <Link href={ROUTES.AUTH.PRIVACY_POLICY}> {t.privacyPolicy.title}</Link>
                 </Typography>
               </Typography>
             }
@@ -157,7 +158,7 @@ export const SignUp = () => {
             {t.signUp.haveAccount}
           </Typography>
           <Button asChild variant={'text'}>
-            <Link href={'/auth/signIn'}>{t.passwordForm.signIn}</Link>
+            <Link href={ROUTES.AUTH.SIGN_IN}>{t.passwordForm.signIn}</Link>
           </Button>
         </form>
       </Card>

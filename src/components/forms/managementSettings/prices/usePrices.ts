@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { AccountTypeValue } from '@/components/forms/managementSettings'
 import { PaymentType } from '@/components/forms/managementSettings/prices'
@@ -58,7 +59,7 @@ export const usePrices = ({ meInfo, pricesPayment }: Props) => {
       amount: priceCharacteristic.amount || 10,
       baseUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${
         router.locale === 'en' ? '/en' : ''
-      }/profile/settings/management/${meInfo.userId}`,
+      }${ROUTES.PROFILE.SETTINGS.MANAGEMENT(meInfo.userId)}`,
       paymentType,
       typeSubscription: priceCharacteristic.typeDescription,
     }
@@ -75,7 +76,7 @@ export const usePrices = ({ meInfo, pricesPayment }: Props) => {
   const closeModal = () => {
     setIsModal(false)
     router.push(
-      `${router.locale === 'en' ? '/en' : ''}/profile/settings/management/${meInfo.userId}`
+      `${router.locale === 'en' ? '/en' : ''}${ROUTES.PROFILE.SETTINGS.MANAGEMENT(meInfo.userId)}`
     )
   }
 

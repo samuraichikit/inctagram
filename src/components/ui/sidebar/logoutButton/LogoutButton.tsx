@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { LogoutIcon } from '@/assets/icons/Logout'
+import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { useLogoutMutation } from '@/services/auth'
 import { Button, Modal, Typography } from '@samuraichikit/inc-ui-kit'
@@ -25,7 +26,7 @@ export const LogoutButton = () => {
     try {
       await logOut().unwrap()
       deleteCookie('accessToken')
-      router.push('/')
+      router.push(ROUTES.MAIN)
     } catch (error) {
       alert('error')
     }

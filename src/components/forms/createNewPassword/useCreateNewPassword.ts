@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { newPasswordSchema } from '@/common/schemas'
 import { useCheckRecoveryCodeMutation, useCreateNewPasswordMutation } from '@/services/auth'
@@ -33,7 +34,7 @@ export const useCreateNewPassword = () => {
       .catch(error => {
         if (error.data) {
           if (error.data.messages[0].message === 'Code is not valid') {
-            router.push('/auth/expiredLink').then(() => {
+            router.push(ROUTES.AUTH.EXPIRED_LINK).then(() => {
               setLoading(false)
             })
           }
@@ -50,7 +51,7 @@ export const useCreateNewPassword = () => {
   const isLoading = loading
 
   if (result.isSuccess) {
-    router.push('/auth/signIn')
+    router.push(ROUTES.AUTH.SIGN_IN)
   }
 
   return { control, email, handleCreateNewPassword, handleSubmit, isLoading, isValid, t }
