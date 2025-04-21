@@ -18,11 +18,9 @@
     "check": "pnpm run check:prettier && pnpm run check:eslint && pnpm run check:stylelint",
     "check:prettier": "prettier src --check",
     "check:eslint": "eslint src --ext .jsx,.js,.tsx,.ts --no-error-on-unmatched-pattern",
-    "check:stylelint": "stylelint src/**/*.{scss,css} --allow-empty-input",
-    "generate": "graphql-codegen && pnpm run lint"
+    "check:stylelint": "stylelint src/**/*.{scss,css} --allow-empty-input"
   },
   "dependencies": {
-    "@apollo/client": "^3.12.7",
     "@fontsource/barlow": "^5.0.14",
     "@fontsource/roboto": "^5.0.14",
     "@hookform/resolvers": "^3.9.0",
@@ -62,7 +60,6 @@
     "react-slick": "^0.30.3",
     "react-timeago": "^7.2.0",
     "react-toastify": "^10.0.6",
-    "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
     "swiper": "^11.1.14",
     "zod": "^3.23.8"
