@@ -10,13 +10,11 @@ import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { CreatePost } from '@/components/pagesComponents/createPost/CreatePost'
 import { useMeQuery } from '@/services/auth'
-import { SearchIcon } from '@samuraichikit/inc-ui-kit'
+import { SearchIcon, Sidebar, SidebarItem } from '@samuraichikit/inc-ui-kit'
 
 import s from './mainSidebar.module.scss'
 
-import { Sidebar } from '..'
 import { LogoutButton } from '../logoutButton'
-import { SidebarItem } from '../sidebarItem'
 
 export const MainSidebar = () => {
   const classNames = {
