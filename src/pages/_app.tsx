@@ -17,6 +17,8 @@ import '@samuraichikit/inc-ui-kit/dist/index.css'
 import '@stripe/stripe-js'
 import 'react-loading-skeleton/dist/skeleton.css'
 
+import s from './app.module.scss'
+
 export type NextPageWithLayout<P = {}, IP = P> = {
   getLayout?: (page: ReactElement) => ReactNode
 } & NextPage<P, IP>
@@ -26,6 +28,9 @@ type AppPropsWithLayout = {
 } & AppProps
 
 export default function App({ Component, ...rest }: AppPropsWithLayout) {
+  const classNames = {
+    scrollArea: s.scrollArea,
+  }
   const { props, store } = wrapper.useWrappedStore(rest)
 
   useLoader()
@@ -43,7 +48,7 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
         }
       >
         <Provider store={store}>
-          <ScrollArea style={{ marginTop: '60px' }}>
+          <ScrollArea className={classNames.scrollArea}>
             {getLayout(<Component {...props.pageProps} />)}
             <NotificationContainer />
           </ScrollArea>
