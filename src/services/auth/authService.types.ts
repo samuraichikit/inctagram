@@ -6,6 +6,7 @@ export type MeResponse = {
 }
 
 export type SignUpArgs = {
+  baseUrl: string
   email: string
   password: string
   userName: string

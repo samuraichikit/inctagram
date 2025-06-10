@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { GitHubIcon } from '@/assets/icons/GitHubIcon'
-import { ROUTES } from '@/common/constants'
+import { REGISTRATION_CONFIRMATION_URL, ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { signUpSchema } from '@/common/schemas'
 import { FormCheckbox } from '@/components/controlled/formCheckbox'
@@ -67,7 +67,7 @@ export const SignUp = () => {
     const { email, password, userName } = data
 
     try {
-      await signUp({ email, password, userName }).unwrap()
+      await signUp({ baseUrl: REGISTRATION_CONFIRMATION_URL, email, password, userName }).unwrap()
       setEmailModal(email)
       setIsOpen(true)
       reset()
