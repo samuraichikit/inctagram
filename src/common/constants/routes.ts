@@ -25,4 +25,5 @@ export const ROUTES = {
     USER_POST: ({ id, postId }: UserPost) => `/profile/${id}/${postId}`,
     USER_PROFILE: (id: number | string) => `/profile/${id}`,
   },
+  USER_SEARCH: '/userSearch',
 }
