@@ -1,16 +1,19 @@
+import { ROUTES } from '@/common/constants'
 import { Avatar } from '@/components/ui/avatar'
 import { DefaultAvatar, Typography } from '@samuraichikit/inc-ui-kit'
+import Link from 'next/link'
 
 import s from './userSearchItem.module.scss'
 
 type Props = {
   firsName: string
+  id: number
   lastName: string
   src?: string
   userName: string
 }
 
-export const UserSearchItem = ({ firsName, lastName, src, userName }: Props) => {
+export const UserSearchItem = ({ firsName, id, lastName, src, userName }: Props) => {
   const classNames = {
     container: s.container,
     defaultAvatar: s.defaultAvatar,
@@ -19,7 +22,7 @@ export const UserSearchItem = ({ firsName, lastName, src, userName }: Props) => 
   }
 
   return (
-    <div className={classNames.container}>
+    <Link className={classNames.container} href={ROUTES.PROFILE.USER_PROFILE(id)}>
       {src ? (
         <Avatar height={48} src={src} width={48} />
       ) : (
@@ -33,6 +36,6 @@ export const UserSearchItem = ({ firsName, lastName, src, userName }: Props) => 
           {firsName} {lastName}
         </Typography>
       </div>
-    </div>
+    </Link>
   )
 }

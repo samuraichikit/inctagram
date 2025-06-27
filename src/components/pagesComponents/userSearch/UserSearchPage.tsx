@@ -38,6 +38,7 @@ export const UserSearchPage = () => {
         {usersProfiles?.map(({ avatars, firstName, id, lastName, userName }) => (
           <UserSearchItem
             firsName={firstName}
+            id={id}
             key={id}
             lastName={lastName}
             src={avatars[0]?.url}
