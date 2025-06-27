@@ -1,5 +1,5 @@
 export type UsersProfiles = {
-  items: UserProfile
+  items: UserProfile[]
   nextCursor: number
   page: number
   pageSize: number
@@ -28,6 +28,6 @@ type Avatar = {
 export type GetUsersProfilesArgs = {
   cursor?: number
   pageNumber?: number
-  pageSize?: string
+  pageSize?: number
   search?: string
 }

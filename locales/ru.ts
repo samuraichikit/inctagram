@@ -196,6 +196,9 @@ export const ru = {
     passwordContain: 'Пароль должен содержать ',
     passwordMatch: 'Пароли должны совпадать',
   },
+  searchPage: {
+    search: 'Поиск',
+  },
   sideBar: {
     confirmButton: 'Да',
     logOut: 'Выйти',

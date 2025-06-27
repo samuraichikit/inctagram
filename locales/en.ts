@@ -197,6 +197,9 @@ export const en: Locale = {
     passwordContain: 'Password must contain ',
     passwordMatch: 'Passwords must match',
   },
+  searchPage: {
+    search: 'Search',
+  },
   sideBar: {
     confirmButton: 'Yes',
     logOut: 'Log out',
