@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 
+import { useDebounce } from '@/common/hooks/useDebounce'
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { useGetUsersProfilesQuery } from '@/services/usersService'
@@ -19,15 +20,16 @@ export const UserSearchPage = () => {
   const { t } = useTranslation()
   const { isInView, targetRef } = useElementInView({ threshold: 0.5 })
   const prevInViewRef = useRef(false)
+  const debouncedSearch = useDebounce(search)
 
   const { data } = useGetUsersProfilesQuery(
-    { cursor, pageSize: 14, search },
+    { cursor, pageSize: 14, search: debouncedSearch },
 
-    { skip: !search }
+    { skip: !debouncedSearch }
   )
   const usersProfiles = data?.items
   const nextCursor = data?.nextCursor
-  const itemsToRender = search ? usersProfiles : []
+  const itemsToRender = debouncedSearch ? usersProfiles : []
 
   const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.currentTarget.value)
@@ -36,7 +38,7 @@ export const UserSearchPage = () => {
   useEffect(() => {
     prevInViewRef.current = false
     setCursor(0)
-  }, [search])
+  }, [debouncedSearch])
 
   useEffect(() => {
     const becameVisible = isInView && !prevInViewRef.current
