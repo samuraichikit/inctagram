@@ -10,6 +10,7 @@ import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/Blan
 import { useMeQuery } from '@/services/auth'
 import { useGetProfileWithPostsQuery } from '@/services/profile'
 import { useGetPublicProfileQuery } from '@/services/publicUser'
+import { useFollowingMutation } from '@/services/usersFollowingAndFollowersService'
 import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 import { useRouter } from 'next/router'
 
@@ -31,6 +32,7 @@ export const Profile = () => {
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(profileInfo?.userName ?? '', {
     skip: !profileInfo?.userName || !isAuth,
   })
+  const [following] = useFollowingMutation()
 
   const { t } = useTranslation()
   const followArray = [
@@ -47,6 +49,10 @@ export const Profile = () => {
   const isFollowing = profileWithPosts?.isFollowing
 
   const [isOpen, setIsOpen] = useState(false)
+
+  const followingHandler = () => {
+    following({ selectedUserId: Number(id) })
+  }
 
   useEffect(() => {
     if (!postId) {
@@ -90,7 +96,10 @@ export const Profile = () => {
               </Button>
             )}
             {isShowFollowUnfollowButton && (
-              <Button variant={isFollowing ? 'outlined' : 'primary'}>
+              <Button
+                onClick={isFollowing ? () => {} : followingHandler}
+                variant={isFollowing ? 'outlined' : 'primary'}
+              >
                 {isFollowing ? t.profile.unfollow : t.profile.follow}
               </Button>
             )}

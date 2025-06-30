@@ -20,7 +20,7 @@ const profileService = baseApi.injectEndpoints({
     }),
 
     getProfileWithPosts: builder.query<GetProfileWithPostsResponse, string>({
-      providesTags: ['Me'],
+      providesTags: ['Me', 'Profile'],
       query: userId => ({ url: `v1/users/${userId}` }),
     }),
     updateProfile: builder.mutation<void, UpdateProfile>({
