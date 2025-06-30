@@ -46,7 +46,7 @@ export const Profile = () => {
     <div className={s.wrapper}>
       <ProfileModal isMyProfile={isMyProfile} postId={postId} userId={userId} />
       <div className={s.infoWrapper}>
-        <ProfileAvatar />
+        <ProfileAvatar avatarSrc={avatarSrc} />
         <div className={s.profileWrapper}>
           <div className={s.userNameWrapper}>
             <Typography variant={'h1'}>{userName}</Typography>
@@ -71,12 +71,10 @@ export const Profile = () => {
               ))}
             </ul>
           </div>
-          <div>
-            <Typography className={s.aboutMe}>{aboutMe}</Typography>
-          </div>
+          <Typography className={s.aboutMe}>{aboutMe}</Typography>
         </div>
       </div>
-      <div className={s.userPostsContainer}>{userName && <UserPosts userName={userName} />}</div>
+      {userName && <UserPosts userName={userName} />}
     </div>
   )
 }

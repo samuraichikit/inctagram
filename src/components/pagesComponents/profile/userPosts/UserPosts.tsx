@@ -21,6 +21,7 @@ type Props = {
 export const UserPosts = ({ userName }: Props) => {
   const classNames = {
     container: s.container,
+    userPostsContainer: s.userPostsContainer,
   }
 
   const router = useRouter()
@@ -106,7 +107,7 @@ export const UserPosts = ({ userName }: Props) => {
   }, [isSetNextPage])
 
   return (
-    <>
+    <div className={s.userPostsContainer}>
       {(pageNumber === 1 ? publicPosts : posts).map((post, index) => (
         <div
           className={classNames.container}
@@ -118,6 +119,6 @@ export const UserPosts = ({ userName }: Props) => {
           </Link>
         </div>
       ))}
-    </>
+    </div>
   )
 }
