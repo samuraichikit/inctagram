@@ -42,6 +42,7 @@ export const Profile = () => {
   const aboutMe = profileInfo?.aboutMe
   const avatarSrc = profileInfo?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
   const profileId = profileInfo?.id ?? ''
+  const isShowButtonFollow = !isMyProfile && meInfo?.userId
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -86,6 +87,7 @@ export const Profile = () => {
                 {t.profile.settings.profileSettings}
               </Button>
             )}
+            {isShowButtonFollow && <Button>Follow</Button>}
           </div>
           <div className={s.followInfoWrapper}>
             <ul className={s.followInfoList}>

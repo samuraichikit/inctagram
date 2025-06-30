@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useDebounce } from '@/common/hooks/useDebounce'
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { useGetUsersProfilesQuery } from '@/services/usersService'
+import { useGetUsersProfilesQuery } from '@/services/usersFollowingAndFollowersService'
 import { TextField, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './userSearchPage.module.scss'

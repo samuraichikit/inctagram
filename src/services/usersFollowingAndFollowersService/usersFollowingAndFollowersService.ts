@@ -1,5 +1,5 @@
 import { baseApi } from '../baseApi'
-import { GetUsersProfilesArgs, UsersProfiles } from './usersService.types'
+import { GetUsersProfilesArgs, UsersProfiles } from './usersFollowingAndFollowersService.types'
 
 const usersService = baseApi.injectEndpoints({
   endpoints: builder => ({
