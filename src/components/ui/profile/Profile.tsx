@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react'
-
 import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { FollowUnfollowButton } from '@/components/pagesComponents/profile/followUnfollowButton'
-import { PostModal } from '@/components/pagesComponents/profile/postModal/PostModal'
+import { ProfileModal } from '@/components/pagesComponents/profile/profileModal'
 import { UserPosts } from '@/components/pagesComponents/profile/userPosts'
-import { PublicPostModal } from '@/components/pagesComponents/publicProfile/publicPostModal'
 import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
 import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
 import { useMeQuery } from '@/services/auth'
@@ -18,7 +15,6 @@ import s from './profile.module.scss'
 
 export const Profile = () => {
   const router = useRouter()
-  const { push } = router
   const { id } = router.query
   const userId = id?.[0] ?? ''
   const postId = id?.[1] ?? ''
@@ -47,28 +43,9 @@ export const Profile = () => {
   const isShowFollowUnfollowButton = !isMyProfile && isAuth
   const isFollowing = profileWithPosts?.isFollowing
 
-  const [isOpen, setIsOpen] = useState(false)
-
-  useEffect(() => {
-    if (!postId) {
-      return
-    }
-    setIsOpen(true)
-    push(ROUTES.PROFILE.USER_POST({ id: userId, postId }), undefined, { shallow: true })
-  }, [postId])
-
-  const closeHandler = () => {
-    setIsOpen(false)
-    push(ROUTES.PROFILE.USER_PROFILE(userId), undefined, { shallow: true })
-  }
-
   return (
     <div className={s.wrapper}>
-      {isMyProfile ? (
-        <PostModal isOpen={isOpen} onClose={closeHandler} />
-      ) : (
-        postId && <PublicPostModal isOpen={isOpen} onClose={closeHandler} postId={postId} />
-      )}
+      <ProfileModal isMyProfile={isMyProfile} postId={postId} userId={userId} />
       <div className={s.infoWrapper}>
         {avatarSrc ? (
           <div>
