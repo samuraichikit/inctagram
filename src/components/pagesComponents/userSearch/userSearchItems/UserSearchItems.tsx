@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { USER_SEARCH_ITEMS_COUNT } from '@/common/constants'
 import { useDebounce } from '@/common/hooks/useDebounce'
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { useGetUsersProfilesQuery } from '@/services/usersFollowingAndFollowersService'
@@ -7,6 +8,7 @@ import { useGetUsersProfilesQuery } from '@/services/usersFollowingAndFollowersS
 import s from './userSearchItems.module.scss'
 
 import { UserSearchItem } from '../userSearchItem/UserSearchItem'
+import { UserSearchItemsSkeleton } from './UserSearchItemsSkeleton'
 
 type Props = {
   search: string
@@ -23,8 +25,8 @@ export const UserSearchItems = ({ search }: Props) => {
   const prevInViewRef = useRef(false)
   const debouncedSearch = useDebounce(search)
 
-  const { data } = useGetUsersProfilesQuery(
-    { cursor, pageSize: 14, search: debouncedSearch },
+  const { data, isLoading } = useGetUsersProfilesQuery(
+    { cursor, pageSize: USER_SEARCH_ITEMS_COUNT, search: debouncedSearch },
 
     { skip: !debouncedSearch }
   )
@@ -46,6 +48,10 @@ export const UserSearchItems = ({ search }: Props) => {
     }
     prevInViewRef.current = isInView
   }, [isInView, nextCursor])
+
+  if (isLoading) {
+    return <UserSearchItemsSkeleton itemsCount={USER_SEARCH_ITEMS_COUNT} />
+  }
 
   return (
     <div className={classNames.usersProfilesContainer}>
