@@ -21,15 +21,15 @@ export const Profile = () => {
   const { id } = router.query
   const userId = id?.[0] ?? ''
   const postId = id?.[1] ?? ''
-
   const { data: meInfo } = useMeQuery()
-  const isMyProfile = meInfo?.userId === Number(userId)
+
+  const isAuth = !!meInfo?.userId
   const { data: profileInfo } = useGetPublicProfileQuery(
     { profileId: userId },
     { skip: router.isFallback }
   )
-  const { data: profileWithPosts } = useGetProfileWithPostsQuery(profileInfo?.userName as string, {
-    skip: !profileInfo?.userName || !isMyProfile,
+  const { data: profileWithPosts } = useGetProfileWithPostsQuery(profileInfo?.userName ?? '', {
+    skip: !profileInfo?.userName || !isAuth,
   })
 
   const { t } = useTranslation()
@@ -38,11 +38,13 @@ export const Profile = () => {
     profileInfo?.userMetadata.followers ?? profileWithPosts?.followersCount,
     profileInfo?.userMetadata.publications ?? profileWithPosts?.publicationsCount,
   ]
+  const isMyProfile = meInfo?.userId === Number(userId)
   const userName = profileInfo?.userName
   const aboutMe = profileInfo?.aboutMe
   const avatarSrc = profileInfo?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
   const profileId = profileInfo?.id ?? ''
-  const isShowButtonFollow = !isMyProfile && meInfo?.userId
+  const isShowFollowUnfollowButton = !isMyProfile && isAuth
+  const isFollowing = profileWithPosts?.isFollowing
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -87,7 +89,11 @@ export const Profile = () => {
                 {t.profile.settings.profileSettings}
               </Button>
             )}
-            {isShowButtonFollow && <Button>Follow</Button>}
+            {isShowFollowUnfollowButton && (
+              <Button variant={isFollowing ? 'outlined' : 'primary'}>
+                {isFollowing ? t.profile.unfollow : t.profile.follow}
+              </Button>
+            )}
           </div>
           <div className={s.followInfoWrapper}>
             <ul className={s.followInfoList}>

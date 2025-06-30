@@ -148,6 +148,7 @@ export const en: Locale = {
     aboutMe: 'About me',
     dOB: 'Date of Birth',
     firstName: 'First Name',
+    follow: 'Follow',
     followers: 'Followers',
     following: 'Following',
     lastName: 'Last Name',
@@ -169,6 +170,7 @@ export const en: Locale = {
       profileSavePhoto: 'Save',
       profileSettings: 'Profile Settings',
     },
+    unfollow: 'Unfollow',
   },
   publicPosts: {
     getCount(count: number) {
