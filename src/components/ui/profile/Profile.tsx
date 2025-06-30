@@ -1,15 +1,13 @@
-import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { FollowUnfollowButton } from '@/components/pagesComponents/profile/followUnfollowButton'
 import { GeneralSettingsButton } from '@/components/pagesComponents/profile/generalSettingsButton'
+import { ProfileAvatar } from '@/components/pagesComponents/profile/profileAvatar'
 import { ProfileModal } from '@/components/pagesComponents/profile/profileModal'
 import { UserPosts } from '@/components/pagesComponents/profile/userPosts'
-import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
-import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
 import { useMeQuery } from '@/services/auth'
 import { useGetProfileWithPostsQuery } from '@/services/profile'
 import { useGetPublicProfileQuery } from '@/services/publicUser'
-import { Button, Typography } from '@samuraichikit/inc-ui-kit'
+import { Typography } from '@samuraichikit/inc-ui-kit'
 import { useRouter } from 'next/router'
 
 import s from './profile.module.scss'
@@ -48,15 +46,7 @@ export const Profile = () => {
     <div className={s.wrapper}>
       <ProfileModal isMyProfile={isMyProfile} postId={postId} userId={userId} />
       <div className={s.infoWrapper}>
-        {avatarSrc ? (
-          <div>
-            <Avatar size={192} src={avatarSrc} />
-          </div>
-        ) : (
-          <div>
-            <BlankCover />
-          </div>
-        )}
+        <ProfileAvatar />
         <div className={s.profileWrapper}>
           <div className={s.userNameWrapper}>
             <Typography variant={'h1'}>{userName}</Typography>
