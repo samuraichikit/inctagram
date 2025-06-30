@@ -1,6 +1,7 @@
 import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { FollowUnfollowButton } from '@/components/pagesComponents/profile/followUnfollowButton'
+import { GeneralSettingsButton } from '@/components/pagesComponents/profile/generalSettingsButton'
 import { ProfileModal } from '@/components/pagesComponents/profile/profileModal'
 import { UserPosts } from '@/components/pagesComponents/profile/userPosts'
 import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
@@ -49,7 +50,7 @@ export const Profile = () => {
       <div className={s.infoWrapper}>
         {avatarSrc ? (
           <div>
-            <Avatar size={192} src={avatarSrc ?? null} />
+            <Avatar size={192} src={avatarSrc} />
           </div>
         ) : (
           <div>
@@ -59,14 +60,7 @@ export const Profile = () => {
         <div className={s.profileWrapper}>
           <div className={s.userNameWrapper}>
             <Typography variant={'h1'}>{userName}</Typography>
-            {isMyProfile && (
-              <Button
-                onClick={() => router.push(ROUTES.PROFILE.SETTINGS.GENERAL(profileId))}
-                variant={'secondary'}
-              >
-                {t.profile.settings.profileSettings}
-              </Button>
-            )}
+            <GeneralSettingsButton isMyProfile={isMyProfile} profileId={profileId} />
             <FollowUnfollowButton
               isFollowing={isFollowing}
               isShowFollowUnfollowButton={isShowFollowUnfollowButton}
