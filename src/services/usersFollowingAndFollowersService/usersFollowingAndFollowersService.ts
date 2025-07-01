@@ -22,10 +22,12 @@ const usersService = baseApi.injectEndpoints({
         if (!arg.cursor) {
           return newData
         }
-        const existingIds = new Set(currentCache.items.map(item => item.id))
-        const filteredItems = newData.items.filter(item => !existingIds.has(item.id))
+        const currentCashItems = currentCache?.items ?? []
+        const newDataItems = newData?.items ?? []
+        const existingIds = new Set(currentCashItems.map(item => item.id))
+        const filteredItems = newDataItems.filter(item => !existingIds.has(item.id))
 
-        currentCache.items.push(...filteredItems)
+        currentCache.items = [...currentCashItems, ...filteredItems]
         currentCache.nextCursor = newData.nextCursor
       },
 
