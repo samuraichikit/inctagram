@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
 import TimeAgo from 'react-timeago'
 
 import { Typography } from '@samuraichikit/inc-ui-kit'
@@ -16,6 +18,8 @@ export const TimeAgoDisplay = ({ className, date }: Props) => {
     timeAgo: className,
   }
 
+  const [isClient, setIsClient] = useState(false)
+
   const router = useRouter()
   const { locale } = router
 
@@ -23,6 +27,14 @@ export const TimeAgoDisplay = ({ className, date }: Props) => {
   const ruFormatter = buildFormatter(ruStrings)
 
   const formatter = locale === 'ru' ? ruFormatter : enFormatter
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) {
+    return <Skeleton height={16} width={65} />
+  }
 
   return (
     <Typography className={classNames.timeAgo} variant={'small_text'}>
