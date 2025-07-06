@@ -20,17 +20,15 @@ const usersService = baseApi.injectEndpoints({
         currentArg?.cursor !== previousArg?.cursor || currentArg?.search !== previousArg?.search,
       merge: (currentCache, newData, { arg }) => {
         if (!arg.cursor) {
-          return newData
-        }
-        const currentCashItems = currentCache?.items ?? []
-        const newDataItems = newData?.items ?? []
-        const existingIds = new Set(currentCashItems.map(item => item.id))
-        const filteredItems = newDataItems.filter(item => !existingIds.has(item.id))
+          Object.assign(currentCache, newData)
+        } else {
+          const currentCacheItems = currentCache.items ?? []
+          const newDataItems = newData.items ?? []
+          const ids = new Set(currentCacheItems.map(item => item.id))
+          const filtered = newDataItems.filter(item => !ids.has(item.id))
 
-        return {
-          ...currentCache,
-          items: [...currentCashItems, ...filteredItems],
-          nextCursor: newData.nextCursor,
+          currentCache.items = [...currentCacheItems, ...filtered]
+          currentCache.nextCursor = newData.nextCursor
         }
       },
 
