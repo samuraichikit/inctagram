@@ -27,8 +27,11 @@ const usersService = baseApi.injectEndpoints({
         const existingIds = new Set(currentCashItems.map(item => item.id))
         const filteredItems = newDataItems.filter(item => !existingIds.has(item.id))
 
-        currentCache.items = [...currentCashItems, ...filteredItems]
-        currentCache.nextCursor = newData.nextCursor
+        return {
+          ...currentCache,
+          items: [...currentCashItems, ...filteredItems],
+          nextCursor: newData.nextCursor,
+        }
       },
 
       query: params => ({
