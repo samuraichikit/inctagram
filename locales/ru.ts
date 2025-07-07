@@ -145,6 +145,7 @@ export const ru = {
     aboutMe: 'Обо мне',
     dOB: 'Дата рождения',
     firstName: 'Имя',
+    follow: 'Подписаться',
     followers: 'Подписчики',
     following: 'Подписан',
     lastName: 'Фамилия',
@@ -166,6 +167,7 @@ export const ru = {
       profileSavePhoto: 'Сохранить',
       profileSettings: 'Настройки профиля',
     },
+    unfollow: 'Отменить подписку',
   },
   publicPosts: {
     getCount(count: number) {
@@ -195,6 +197,9 @@ export const ru = {
     minPassword: 'Минимальное число символов - 6',
     passwordContain: 'Пароль должен содержать ',
     passwordMatch: 'Пароли должны совпадать',
+  },
+  searchPage: {
+    search: 'Поиск',
   },
   sideBar: {
     confirmButton: 'Да',

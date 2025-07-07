@@ -60,8 +60,8 @@ export const MainSidebar = () => {
             <MessengerIcon />
             {t.mainSidebar.messenger}
           </SidebarItem>
-          <SidebarItem href={'#'}>
-            <SearchIcon className={''} />
+          <SidebarItem href={ROUTES.USER_SEARCH}>
+            <SearchIcon />
             {t.mainSidebar.search}
           </SidebarItem>
         </ul>

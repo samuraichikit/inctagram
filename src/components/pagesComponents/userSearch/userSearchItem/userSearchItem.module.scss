@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  gap: 12px;
+
+  width: max-content;
+
+  color: var(--color-light-100);
+  text-decoration: none;
+}
+
+.defaultAvatar {
+  width: 48px;
+}
+
+.userName {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.userFullname {
+  color: var(--color-light-900);
+}

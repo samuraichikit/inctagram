@@ -42,10 +42,3 @@
 
   list-style-type: none;
 }
-
-.userPostsContainer {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-top: 48px;
-}
