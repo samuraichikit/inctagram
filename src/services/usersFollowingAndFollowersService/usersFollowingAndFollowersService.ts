@@ -16,29 +16,29 @@ const usersService = baseApi.injectEndpoints({
       }),
     }),
     getUsersProfiles: builder.query<UsersProfiles, GetUsersProfilesArgs>({
-      forceRefetch: ({ currentArg, previousArg }) =>
-        currentArg?.cursor !== previousArg?.cursor || currentArg?.search !== previousArg?.search,
-      merge: (currentCache, newData, { arg }) => {
-        if (!arg.cursor) {
-          Object.assign(currentCache, newData)
-        } else {
-          const currentCacheItems = currentCache.items ?? []
-          const newDataItems = newData.items ?? []
-          const ids = new Set(currentCacheItems.map(item => item.id))
-          const filtered = newDataItems.filter(item => !ids.has(item.id))
+      // forceRefetch: ({ currentArg, previousArg }) =>
+      //   currentArg?.cursor !== previousArg?.cursor || currentArg?.search !== previousArg?.search,
+      // merge: (currentCache, newData, { arg }) => {
+      //   if (arg.cursor === 0) {
+      //     return newData
+      //   } else {
+      //     const currentCacheItems = currentCache.items ?? []
+      //     const newDataItems = newData.items ?? []
+      //     const ids = new Set(currentCacheItems.map(item => item.id))
+      //     const filtered = newDataItems.filter(item => !ids.has(item.id))
 
-          currentCache.items = [...currentCacheItems, ...filtered]
-          currentCache.nextCursor = newData.nextCursor
-        }
-      },
+      //     currentCache.items = [...currentCacheItems, ...filtered]
+      //     currentCache.nextCursor = newData.nextCursor
+      //   }
+      // },
 
       query: params => ({
         params,
         url: 'v1/users',
       }),
-      serializeQueryArgs: ({ endpointName, queryArgs }) => {
-        return `${endpointName}-${queryArgs?.search}`
-      },
+      // serializeQueryArgs: ({ endpointName, queryArgs }) => {
+      //   return `${endpointName}-${queryArgs?.search}`
+      // },
     }),
   }),
 })
