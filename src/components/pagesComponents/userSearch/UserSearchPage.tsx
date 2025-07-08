@@ -1,13 +1,15 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 
+import { USER_SEARCH_ITEMS_COUNT } from '@/common/constants'
 import { useDebounce } from '@/common/hooks/useDebounce'
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { useGetUsersProfilesQuery } from '@/services/usersFollowingAndFollowers'
 import { TextField, Typography } from '@samuraichikit/inc-ui-kit'
 
-import s from './userSearch.module.scss'
+import s from './userSearchPage.module.scss'
 
+import { UserSearchItemsSkeleton } from './UserSearchItemsSkeleton'
 import { UserSearchItem } from './userSearchItem'
 
 export const UserSearchPage = () => {
@@ -20,7 +22,7 @@ export const UserSearchPage = () => {
   const prevInViewRef = useRef(false)
   const { t } = useTranslation()
   const debouncedSearch = useDebounce(search)
-  const { data } = useGetUsersProfilesQuery(
+  const { data, isLoading } = useGetUsersProfilesQuery(
     { cursor, pageSize: 14, search: debouncedSearch },
     { skip: !debouncedSearch }
   )
@@ -60,18 +62,22 @@ export const UserSearchPage = () => {
         type={'search'}
         value={search}
       />
-      <div className={classNames.usersProfilesContainer}>
-        {itemsToRender?.map(({ avatars, firstName, id, lastName, userName }, index) => (
-          <UserSearchItem
-            firsName={firstName}
-            id={id}
-            key={id}
-            lastName={lastName}
-            src={avatars[0]?.url}
-            userName={userName}
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <UserSearchItemsSkeleton itemsCount={USER_SEARCH_ITEMS_COUNT} />
+      ) : (
+        <div className={classNames.usersProfilesContainer}>
+          {itemsToRender?.map(({ avatars, firstName, id, lastName, userName }) => (
+            <UserSearchItem
+              firsName={firstName}
+              id={id}
+              key={id}
+              lastName={lastName}
+              src={avatars[0]?.url}
+              userName={userName}
+            />
+          ))}
+        </div>
+      )}
       {isDisplayDivWithRef && <div ref={targetRef} />}
     </>
   )

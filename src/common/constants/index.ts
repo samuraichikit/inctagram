@@ -1,6 +1,6 @@
 export * from './authConstants'
+export * from './pagesConstants'
 export * from './paginationConstants'
-export * from './publicPageConstants'
 export * from './routes'
 export * from './skeletonSizesConstants'
 export * from './urlConstants'
