@@ -1,6 +1,9 @@
 .container {
   display: flex;
   gap: 12px;
+
+  width: max-content;
+
   color: var(--color-light-100);
   text-decoration: none;
 }
