@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react'
 
+import { useDebounce } from '@/common/hooks/useDebounce'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { useGetUsersProfilesQuery } from '@/services/usersFollowingAndFollowers'
 import { TextField, Typography } from '@samuraichikit/inc-ui-kit'
@@ -15,7 +16,9 @@ export const UserSearchPage = () => {
   }
   const [search, setSearch] = useState('')
   const { t } = useTranslation()
-  const { data } = useGetUsersProfilesQuery({ pageSize: 14, search }, { skip: !search })
+  const debouncedSearch = useDebounce(search)
+  const { data } = useGetUsersProfilesQuery({ pageSize: 14, search }, { skip: !debouncedSearch })
+
   const usersProfiles = data?.items
 
   const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
