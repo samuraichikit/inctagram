@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { ROUTES } from '@/common/constants'
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { FollowUnfollowButton } from '@/components/pagesComponents/profile/followUnfollowButton'
 import { PostModal } from '@/components/pagesComponents/profile/postModal/PostModal'
 import { UserPosts } from '@/components/pagesComponents/profile/userPosts'
 import { PublicPostModal } from '@/components/pagesComponents/publicProfile/publicPostModal'
@@ -23,13 +24,15 @@ export const Profile = () => {
   const postId = id?.[1] ?? ''
 
   const { data: meInfo } = useMeQuery()
+  const isAuth = !!meInfo?.userId
   const isMyProfile = meInfo?.userId === Number(userId)
+
   const { data: profileInfo } = useGetPublicProfileQuery(
     { profileId: userId },
     { skip: router.isFallback }
   )
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(profileInfo?.userName as string, {
-    skip: !profileInfo?.userName || !isMyProfile,
+    skip: !profileInfo?.userName || !isAuth,
   })
 
   const { t } = useTranslation()
@@ -42,6 +45,8 @@ export const Profile = () => {
   const aboutMe = profileInfo?.aboutMe
   const avatarSrc = profileInfo?.avatars[0]?.url ?? profileWithPosts?.avatars[0]?.url
   const profileId = profileInfo?.id ?? ''
+  const isShowFollowUnfollowButton = !isMyProfile && isAuth
+  const isFollowing = profileWithPosts?.isFollowing
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -86,6 +91,11 @@ export const Profile = () => {
                 {t.profile.settings.profileSettings}
               </Button>
             )}
+            <FollowUnfollowButton
+              isFollowing={isFollowing}
+              isShowFollowUnfollowButton={isShowFollowUnfollowButton}
+              selectedUserId={Number(id)}
+            />
           </div>
           <div className={s.followInfoWrapper}>
             <ul className={s.followInfoList}>
@@ -110,5 +120,3 @@ export const Profile = () => {
     </div>
   )
 }
-
-//rollback-to-INC-220

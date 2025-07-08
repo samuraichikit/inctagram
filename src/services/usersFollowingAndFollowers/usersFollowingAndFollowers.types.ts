@@ -31,3 +31,7 @@ export type GetUsersProfilesArgs = {
   pageSize?: number
   search?: string
 }
+
+export type FollowingArgs = {
+  selectedUserId: number
+}
