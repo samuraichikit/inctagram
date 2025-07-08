@@ -1,7 +1,7 @@
 import Skeleton from 'react-loading-skeleton'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { useFollowingMutation } from '@/services/usersFollowingAndFollowers'
+import { useFollowMutation, useUnfollowMutation } from '@/services/usersFollowingAndFollowers'
 import { Button } from '@samuraichikit/inc-ui-kit'
 
 type Props = {
@@ -16,13 +16,18 @@ export const FollowUnfollowButton = ({
   selectedUserId,
 }: Props) => {
   const { t } = useTranslation()
-  const [follow, { isLoading }] = useFollowingMutation()
+  const [follow, { isLoading: isFollowLoading }] = useFollowMutation()
+  const [unfollow, { isLoading: isUnfollowLoading }] = useUnfollowMutation()
+
+  const isLoading = isFollowLoading || isUnfollowLoading
 
   const followHandler = () => {
     follow({ selectedUserId })
   }
 
-  const unFollowHandler = () => {}
+  const unFollowHandler = () => {
+    unfollow({ userId: selectedUserId })
+  }
 
   if (isFollowing === undefined) {
     return <Skeleton height={36} width={150} />
