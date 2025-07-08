@@ -1,3 +1,5 @@
+import Skeleton from 'react-loading-skeleton'
+
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { useFollowingMutation } from '@/services/usersFollowingAndFollowers'
 import { Button } from '@samuraichikit/inc-ui-kit'
@@ -21,6 +23,10 @@ export const FollowUnfollowButton = ({
   }
 
   const unFollowHandler = () => {}
+
+  if (isFollowing === undefined) {
+    return <Skeleton height={36} width={150} />
+  }
 
   return (
     <>
