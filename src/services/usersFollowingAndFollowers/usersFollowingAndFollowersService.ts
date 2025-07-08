@@ -1,13 +1,14 @@
 import { baseApi } from '../baseApi'
 import {
-  FollowingArgs,
+  FollowArgs,
   GetUsersProfilesArgs,
+  UnfollowArgs,
   UsersProfiles,
 } from './usersFollowingAndFollowers.types'
 
 const usersService = baseApi.injectEndpoints({
   endpoints: builder => ({
-    following: builder.mutation<void, FollowingArgs>({
+    follow: builder.mutation<void, FollowArgs>({
       invalidatesTags: ['Profile'],
       query: body => ({
         body,
@@ -34,7 +35,14 @@ const usersService = baseApi.injectEndpoints({
         search: queryArgs.search,
       }),
     }),
+    unfollow: builder.mutation<void, UnfollowArgs>({
+      invalidatesTags: ['Profile'],
+      query: ({ userId }) => ({
+        method: 'DELETE',
+        url: `v1/users/follower/${userId}`,
+      }),
+    }),
   }),
 })
 
-export const { useFollowingMutation, useGetUsersProfilesQuery } = usersService
+export const { useFollowMutation, useGetUsersProfilesQuery, useUnfollowMutation } = usersService

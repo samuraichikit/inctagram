@@ -32,6 +32,10 @@ export type GetUsersProfilesArgs = {
   search?: string
 }
 
-export type FollowingArgs = {
+export type FollowArgs = {
   selectedUserId: number
+}
+
+export type UnfollowArgs = {
+  userId: number
 }
