@@ -1,6 +1,7 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 
 import { useDebounce } from '@/common/hooks/useDebounce'
+import { useElementInView } from '@/common/hooks/useElementInView'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { useGetUsersProfilesQuery } from '@/services/usersFollowingAndFollowers'
 import { TextField, Typography } from '@samuraichikit/inc-ui-kit'
@@ -15,15 +16,37 @@ export const UserSearchPage = () => {
     usersProfilesContainer: s.usersProfilesContainer,
   }
   const [search, setSearch] = useState('')
+  const [cursor, setCursor] = useState(0)
+  const prevInViewRef = useRef(false)
   const { t } = useTranslation()
   const debouncedSearch = useDebounce(search)
-  const { data } = useGetUsersProfilesQuery({ pageSize: 14, search }, { skip: !debouncedSearch })
+  const { data } = useGetUsersProfilesQuery(
+    { cursor, pageSize: 14, search: debouncedSearch },
+    { skip: !debouncedSearch }
+  )
+  const { isInView, targetRef } = useElementInView({ threshold: 0.5 })
 
   const usersProfiles = data?.items
+  const nextCursor = data?.nextCursor ?? 0
+  const itemsToRender = debouncedSearch ? usersProfiles : []
+  const isDisplayDivWithRef = itemsToRender && itemsToRender?.length > 0
 
   const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.currentTarget.value)
   }
+
+  useEffect(() => {
+    setCursor(0)
+    prevInViewRef.current = false
+  }, [debouncedSearch])
+
+  useEffect(() => {
+    if (isInView && nextCursor && !prevInViewRef.current) {
+      setCursor(nextCursor)
+    }
+
+    prevInViewRef.current = isInView
+  }, [isInView, nextCursor])
 
   return (
     <>
@@ -38,7 +61,7 @@ export const UserSearchPage = () => {
         value={search}
       />
       <div className={classNames.usersProfilesContainer}>
-        {usersProfiles?.map(({ avatars, firstName, id, lastName, userName }) => (
+        {itemsToRender?.map(({ avatars, firstName, id, lastName, userName }, index) => (
           <UserSearchItem
             firsName={firstName}
             id={id}
@@ -49,6 +72,7 @@ export const UserSearchPage = () => {
           />
         ))}
       </div>
+      {isDisplayDivWithRef && <div ref={targetRef} />}
     </>
   )
 }
