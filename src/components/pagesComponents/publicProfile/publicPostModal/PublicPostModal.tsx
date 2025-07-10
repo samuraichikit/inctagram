@@ -1,3 +1,4 @@
+import { CommentForm } from '@/components/ui/commentForm'
 import { useGetCommentsQuery, useGetPublicPostQuery } from '@/services/publicPosts'
 import { Modal } from '@samuraichikit/inc-ui-kit'
 
@@ -49,6 +50,7 @@ export const PublicPostModal = ({ isOpen, onClose, postId }: Props) => {
             userName={userName}
           />
           <PostLikes avatarsSrc={avatarWhoLikes} createdAt={createdAt} likesCount={likesCount} />
+          <CommentForm postId={Number(postId)} />
         </div>
       </div>
     </Modal>
