@@ -8,8 +8,9 @@ import { DeletePost } from '@/components/pagesComponents/profile/postModal/delet
 import { EditPost } from '@/components/pagesComponents/profile/postModal/editPost'
 import { PostComments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComments'
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
+import { CommentForm } from '@/components/ui/commentForm'
 import { useGetPostByIdQuery, useGetPostMessageByIdQuery } from '@/services/posts'
-import { Button, Modal, Typography } from '@samuraichikit/inc-ui-kit'
+import { Modal } from '@samuraichikit/inc-ui-kit'
 import { useParams } from 'next/navigation'
 
 import s from './postModal.module.scss'
@@ -26,16 +27,17 @@ type Props = {
 export const PostModal = ({ isOpen, onClose }: Props) => {
   const params = useParams()
 
+  const postId = params?.id[1] ?? ''
+
   const { data: postById } = useGetPostByIdQuery(params?.id[1] as string, {
     refetchOnMountOrArgChange: true,
   })
-  const { data: comments } = useGetPostMessageByIdQuery(params?.id[0] as string, {
+  const { data: comments } = useGetPostMessageByIdQuery(postId, {
     refetchOnMountOrArgChange: true,
   })
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [description, setDescription] = useState<string>('')
-  const { t } = useTranslation()
 
   useEffect(() => {
     if (postById && postById.description !== description) {
@@ -84,7 +86,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
                 postId={id.toString()}
               />
             ) : (
-              <div className={s.aboutPost}>
+              <>
                 <PostComments
                   avatarSrc={avatarOwner}
                   comments={comments?.items ?? []}
@@ -105,13 +107,8 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
                   createdAt={createdAt}
                   likesCount={likesCount}
                 />
-                <div className={s.addComment}>
-                  <Typography className={s.addText} variant={'regular_text_14'}>
-                    {t.postModal.addComment}
-                  </Typography>
-                  <Button variant={'text'}>{t.postModal.publishMsg}</Button>
-                </div>
-              </div>
+                <CommentForm postId={Number(postId)} />
+              </>
             )}
           </div>
         </div>

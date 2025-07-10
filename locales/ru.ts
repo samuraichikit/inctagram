@@ -19,6 +19,10 @@ export const ru = {
     ExpireAt: 'Первый платеж',
     NextPayment: 'Следующий платеж',
   },
+  commentForm: {
+    addComment: 'Добавить комментарий',
+    publish: 'Опубликовать',
+  },
   commonTableWithPagination: {
     noData: 'Данных нет',
   },

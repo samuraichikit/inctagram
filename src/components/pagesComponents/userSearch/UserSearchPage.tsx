@@ -4,6 +4,7 @@ import { USER_SEARCH_ITEMS_COUNT } from '@/common/constants'
 import { useDebounce } from '@/common/hooks/useDebounce'
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { CommentForm } from '@/components/ui/commentForm/CommentForm'
 import { useGetUsersProfilesQuery } from '@/services/usersFollowingAndFollowers'
 import { TextField, Typography } from '@samuraichikit/inc-ui-kit'
 

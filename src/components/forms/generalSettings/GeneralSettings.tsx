@@ -18,7 +18,7 @@ import {
   useUpdateProfileMutation,
 } from '@/services/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Datepicker, Typography } from '@samuraichikit/inc-ui-kit'
+import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 import Link from 'next/link'
 import router from 'next/router'
 import { z } from 'zod'
@@ -219,7 +219,7 @@ export const GeneralSettings = () => {
                 mandatory
                 name={'lastName'}
               />
-              <div>
+              {/* <div>
                 <Typography asChild className={s.dateOfBirthLabel} variant={'regular_text_14'}>
                   <label>{t.profile.dOB}</label>
                 </Typography>
@@ -250,7 +250,7 @@ export const GeneralSettings = () => {
                     )
                   }}
                 />
-              </div>
+              </div> */}
               <div className={s.locationWrapper}>
                 <CountryAndCity
                   changeCitySelect={changeCitySelect}
