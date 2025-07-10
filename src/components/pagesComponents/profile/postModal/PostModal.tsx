@@ -86,7 +86,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
                 postId={id.toString()}
               />
             ) : (
-              <div className={s.aboutPost}>
+              <>
                 <PostComments
                   avatarSrc={avatarOwner}
                   comments={comments?.items ?? []}
@@ -108,7 +108,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
                   likesCount={likesCount}
                 />
                 <CommentForm postId={Number(postId)} />
-              </div>
+              </>
             )}
           </div>
         </div>
