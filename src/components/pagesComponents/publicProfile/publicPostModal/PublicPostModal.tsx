@@ -20,6 +20,7 @@ export const PublicPostModal = ({ isOpen, onClose, postId }: Props) => {
     container: s.container,
     images: s.images,
     postDetails: s.postDetails,
+    postLikes: s.postLikes,
     userInfoContainer: s.userInfoContainer,
   }
 
@@ -49,7 +50,12 @@ export const PublicPostModal = ({ isOpen, onClose, postId }: Props) => {
             description={description}
             userName={userName}
           />
-          <PostLikes avatarsSrc={avatarWhoLikes} createdAt={createdAt} likesCount={likesCount} />
+          <PostLikes
+            avatarsSrc={avatarWhoLikes}
+            className={classNames.postLikes}
+            createdAt={createdAt}
+            likesCount={likesCount}
+          />
           <CommentForm postId={Number(postId)} />
         </div>
       </div>

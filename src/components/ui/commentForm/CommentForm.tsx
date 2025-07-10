@@ -25,6 +25,7 @@ export const CommentForm = ({ postId }: Props) => {
     control,
     formState: { isValid },
     handleSubmit,
+    reset,
   } = useForm<FormValues>({
     defaultValues: {
       content: '',
@@ -35,6 +36,7 @@ export const CommentForm = ({ postId }: Props) => {
 
   const submitHandler = ({ content }: FormValues) => {
     addComment({ content, postId })
+    reset()
   }
 
   return (
