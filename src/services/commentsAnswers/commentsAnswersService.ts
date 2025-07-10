@@ -4,11 +4,11 @@ import { AddCommentArgs, CommentData } from './commentsAnswers.types'
 const usersService = baseApi.injectEndpoints({
   endpoints: builder => ({
     addComment: builder.mutation<CommentData, AddCommentArgs>({
-      invalidatesTags: ['Profile'],
-      query: body => ({
-        body,
+      invalidatesTags: ['Comments'],
+      query: ({ content, postId }) => ({
+        body: { content },
         method: 'POST',
-        url: 'v1/users/following',
+        url: `v1/posts/${postId}/comments`,
       }),
     }),
   }),

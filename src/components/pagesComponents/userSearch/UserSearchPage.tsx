@@ -63,7 +63,6 @@ export const UserSearchPage = () => {
         type={'search'}
         value={search}
       />
-      <CommentForm />
       {isLoading ? (
         <UserSearchItemsSkeleton itemsCount={USER_SEARCH_ITEMS_COUNT} />
       ) : (
