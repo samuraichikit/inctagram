@@ -29,7 +29,7 @@ export const FollowUnfollowButton = ({
     unfollow({ userId: selectedUserId })
   }
 
-  if (isFollowing === undefined) {
+  if (isFollowing === undefined && isShowFollowUnfollowButton) {
     return <Skeleton height={36} width={150} />
   }
 
