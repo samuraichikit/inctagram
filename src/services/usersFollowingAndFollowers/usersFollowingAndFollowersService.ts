@@ -23,7 +23,9 @@ const usersService = baseApi.injectEndpoints({
         )
       },
       merge: (currentCache, newPage) => {
-        currentCache.items.push(...newPage.items)
+        const items = Array.isArray(newPage.items) ? newPage.items : []
+
+        currentCache.items.push(...items)
         currentCache.nextCursor = newPage.nextCursor
       },
       query: params => ({
