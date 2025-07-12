@@ -14,15 +14,11 @@ export const baseApi = createApi({
   endpoints: () => ({}),
   extractRehydrationInfo(action, { reducerPath }): any {
     if (isHydrateAction(action)) {
-      const payloadForSlice = action.payload?.[reducerPath]
-
-      console.log(`[HYDRATE] payload for ${reducerPath}:`, payloadForSlice)
-
-      if (payloadForSlice == null || typeof payloadForSlice !== 'object') {
-        return undefined
+      if (reducerPath === 'baseApi') {
+        return
       }
 
-      return payloadForSlice
+      return action.payload[reducerPath]
     }
   },
   reducerPath: 'baseApi',
