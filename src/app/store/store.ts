@@ -7,10 +7,15 @@ import { countryAndCity } from '@/services/countryAndCity/countryAndCityService'
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 
+import { reducerErrorLogger } from './reducerErrorLogger'
+
 const makeStore = () =>
   configureStore({
     middleware: getDefaultMiddleware =>
-      getDefaultMiddleware().concat(baseApi.middleware).prepend(countryAndCity.middleware),
+      getDefaultMiddleware()
+        .concat(reducerErrorLogger)
+        .concat(baseApi.middleware)
+        .prepend(countryAndCity.middleware),
     reducer: {
       [appSlice.name]: appSlice.reducer,
       [baseApi.reducerPath]: baseApi.reducer,
