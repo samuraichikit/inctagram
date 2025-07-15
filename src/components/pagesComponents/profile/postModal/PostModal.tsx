@@ -107,12 +107,6 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
                   createdAt={createdAt}
                   likesCount={likesCount}
                 />
-                <div className={s.addComment}>
-                  <Typography className={s.addText} variant={'regular_text_14'}>
-                    {t.postModal.addComment}
-                  </Typography>
-                  <Button variant={'text'}>{t.postModal.publishMsg}</Button>
-                </div>
                 <CommentForm postId={Number(postId)} />
               </>
             )}
