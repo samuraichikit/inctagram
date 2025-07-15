@@ -33,13 +33,6 @@
   width: 70px;
 }
 
-.aboutPost {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
 .addText {
   color: var(--color-light-900);
 }
@@ -56,5 +49,5 @@
 
 .postLikes {
   padding: 0 25px 5px;
-  border: none;
+  border-bottom: 1px solid var(--color-dark-100);
 }
