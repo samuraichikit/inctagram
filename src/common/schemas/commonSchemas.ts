@@ -89,3 +89,7 @@ export const aboutMeSchema = (t: Locale) => {
 }
 
 export const agreesToTOSSchema = z.boolean().refine(value => value)
+
+export const commentSchema = z.object({
+  content: z.string().min(1, { message: '' }).max(300, { message: '' }),
+})

@@ -21,6 +21,10 @@ export const en: Locale = {
     ExpireAt: 'First payment',
     NextPayment: 'Next payment',
   },
+  commentForm: {
+    addComment: 'Add a Comment',
+    publish: 'Publish',
+  },
   commonTableWithPagination: {
     noData: 'No data',
   },
