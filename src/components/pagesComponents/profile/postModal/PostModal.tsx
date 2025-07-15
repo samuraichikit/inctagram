@@ -8,6 +8,7 @@ import { DeletePost } from '@/components/pagesComponents/profile/postModal/delet
 import { EditPost } from '@/components/pagesComponents/profile/postModal/editPost'
 import { PostComments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComments'
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
+import { CommentForm } from '@/components/ui/commentForm'
 import { useGetPostByIdQuery, useGetPostMessageByIdQuery } from '@/services/posts'
 import { Button, Modal, Typography } from '@samuraichikit/inc-ui-kit'
 import { useParams } from 'next/navigation'
@@ -25,11 +26,12 @@ type Props = {
 
 export const PostModal = ({ isOpen, onClose }: Props) => {
   const params = useParams()
+  const postId = params?.id[1] ?? ''
 
   const { data: postById } = useGetPostByIdQuery(params?.id[1] as string, {
     refetchOnMountOrArgChange: true,
   })
-  const { data: comments } = useGetPostMessageByIdQuery(params?.id[0] as string, {
+  const { data: comments } = useGetPostMessageByIdQuery(postId, {
     refetchOnMountOrArgChange: true,
   })
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
@@ -84,7 +86,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
                 postId={id.toString()}
               />
             ) : (
-              <div className={s.aboutPost}>
+              <>
                 <PostComments
                   avatarSrc={avatarOwner}
                   comments={comments?.items ?? []}
@@ -111,7 +113,8 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
                   </Typography>
                   <Button variant={'text'}>{t.postModal.publishMsg}</Button>
                 </div>
-              </div>
+                <CommentForm postId={Number(postId)} />
+              </>
             )}
           </div>
         </div>
