@@ -27,7 +27,11 @@ const postService = baseApi.injectEndpoints({
       }),
     }),
     getPostMessageById: builder.query<CommentsResponse, string>({
-      providesTags: ['Comments'],
+      providesTags: result =>
+        Array.isArray(result)
+          ? [...result.map(({ id }) => ({ id, type: 'Comments' as const })), 'Comments']
+          : ['Comments'],
+
       query: postId => ({
         url: `/v1/posts/${postId}/comments`,
       }),

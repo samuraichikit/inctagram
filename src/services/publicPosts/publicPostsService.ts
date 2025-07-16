@@ -12,7 +12,10 @@ import {
 export const publicPostsService = baseApi.injectEndpoints({
   endpoints: builder => ({
     getComments: builder.query<CommentsResponse, GetCommentsArgs>({
-      providesTags: ['Comments'],
+      providesTags: result =>
+        Array.isArray(result)
+          ? [...result.map(({ id }) => ({ id, type: 'Comments' as const })), 'Comments']
+          : ['Comments'],
       query: ({ postId, ...params }) => ({ params, url: `v1/public-posts/${postId}/comments` }),
     }),
     getPublicPost: builder.query<PublicPostResponse, GetPublicPostArgs>({
