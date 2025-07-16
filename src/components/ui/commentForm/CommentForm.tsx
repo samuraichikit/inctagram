@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { commentSchema } from '@/common/schemas'
 import { FormTextArea } from '@/components/controlled/formTextArea'
+import { useMeQuery } from '@/services/auth'
 import { useAddCommentMutation } from '@/services/commentsAnswers'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@samuraichikit/inc-ui-kit'
@@ -32,11 +33,17 @@ export const CommentForm = ({ postId }: Props) => {
     },
     resolver: zodResolver(commentSchema),
   })
+  const { data } = useMeQuery()
   const [addComment] = useAddCommentMutation()
+  const isAuth = data?.userId
 
   const submitHandler = ({ content }: FormValues) => {
     addComment({ content, postId })
     reset()
+  }
+
+  if (!isAuth) {
+    return null
   }
 
   return (
