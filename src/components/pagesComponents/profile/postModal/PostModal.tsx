@@ -10,7 +10,7 @@ import { PostComments } from '@/components/pagesComponents/publicProfile/publicP
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
 import { CommentForm } from '@/components/ui/commentForm'
 import { useGetPostByIdQuery, useGetPostMessageByIdQuery } from '@/services/posts'
-import { Button, Modal, Typography } from '@samuraichikit/inc-ui-kit'
+import { Modal } from '@samuraichikit/inc-ui-kit'
 import { useParams } from 'next/navigation'
 
 import s from './postModal.module.scss'
