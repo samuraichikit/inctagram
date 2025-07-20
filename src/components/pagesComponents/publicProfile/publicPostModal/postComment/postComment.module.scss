@@ -52,3 +52,37 @@
     background-color: var(--color-light-900);
   }
 }
+
+.commentLike {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+
+  > svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.commentInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  margin-top: 2px;
+
+  :last-child {
+    cursor: pointer;
+  }
+
+  p {
+    color: var(--color-light-900);
+  }
+}
+
+.button {
+  width: 130px;
+  height: 30px
+}

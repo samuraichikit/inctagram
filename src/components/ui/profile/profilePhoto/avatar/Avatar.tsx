@@ -7,8 +7,9 @@ type Props = {
   className?: string
   size: number
   src?: null | string
+  userName?: string
 }
-export const Avatar = ({ className, size, src }: Props) => {
+export const Avatar = ({ className, size, src, userName }: Props) => {
   const classNames = {
     image: s.image,
     root: clsx(s.root, className),
@@ -17,8 +18,19 @@ export const Avatar = ({ className, size, src }: Props) => {
 
   return (
     <div className={classNames.root} style={{ height: `${size}px`, width: `${size}px` }}>
+      {!src && (
+        <span className={classNames.userName} style={{ fontSize: `${10 + size / 8}px` }}>
+          {userName}
+        </span>
+      )}
       {src && (
-        <Image alt={'Avatar'} className={classNames.image} height={size} src={src} width={size} />
+        <Image
+          alt={`${userName} avatar`}
+          className={classNames.image}
+          height={size}
+          src={src}
+          width={size}
+        />
       )}
     </div>
   )

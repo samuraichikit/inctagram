@@ -1,3 +1,4 @@
+import { Comments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/answer/Comments'
 import { CommentForm } from '@/components/ui/commentForm'
 import { useGetCommentsQuery, useGetPublicPostQuery } from '@/services/publicPosts'
 import { Modal } from '@samuraichikit/inc-ui-kit'
@@ -6,7 +7,6 @@ import s from './publicPostModal.module.scss'
 
 import { PostImages } from '../../publicPage/publicPosts/postImages'
 import { UserInfo } from '../../publicPage/publicPosts/userInfo'
-import { PostComments } from './postComments'
 import { PostLikes } from './postLikes'
 
 type Props = {
@@ -43,13 +43,7 @@ export const PublicPostModal = ({ isOpen, onClose, postId }: Props) => {
           <div className={classNames.userInfoContainer}>
             <UserInfo src={avatarOwner} userName={userName} />
           </div>
-          <PostComments
-            avatarSrc={avatarOwner}
-            comments={comments}
-            createdAt={createdAt}
-            description={description}
-            userName={userName}
-          />
+          <Comments comments={comments} />
           <PostLikes
             avatarsSrc={avatarWhoLikes}
             className={classNames.postLikes}
