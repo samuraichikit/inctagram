@@ -3,7 +3,7 @@
   gap: 12px;
 }
 
-.container + .container {
+.container {
   margin-top: 15px;
 }
 
@@ -84,5 +84,5 @@
 
 .button {
   width: 130px;
-  height: 30px
+  height: 30px;
 }
