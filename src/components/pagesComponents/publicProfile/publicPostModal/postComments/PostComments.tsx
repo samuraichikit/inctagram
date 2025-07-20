@@ -21,24 +21,21 @@ export const PostComments = ({ avatarSrc, comments, createdAt, description, user
   return (
     <ScrollArea>
       <div className={classNames.container}>
-        {description && (
-          <PostComment
-            avatarSrc={avatarSrc}
-            comment={description}
-            createdAt={createdAt}
-            userName={userName}
-          />
-        )}
-        {comments.map(({ answerCount, content, createdAt, from, id }) => (
-          <PostComment
-            answerCount={answerCount}
-            avatarSrc={from.avatars[0]?.url}
-            comment={content}
-            createdAt={createdAt}
-            key={id}
-            userName={from.username}
-          />
-        ))}
+        {description &&
+          comments.map(({ answerCount, content, createdAt, from, id, likeCount, postId }) => (
+            <PostComment
+              answerCount={answerCount}
+              avatarSrc={from.avatars[0]?.url}
+              content={content}
+              createdAt={createdAt}
+              id={id}
+              isLiked
+              key={id}
+              likesCount={likeCount}
+              postId={postId}
+              userName={from.username}
+            />
+          ))}
       </div>
     </ScrollArea>
   )

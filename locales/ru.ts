@@ -21,7 +21,11 @@ export const ru = {
   },
   commentForm: {
     addComment: 'Добавить комментарий',
+    answer: 'Ответить',
+    hideAnswer: 'Скрыть ответ',
+    like: 'Нравится',
     publish: 'Опубликовать',
+    showAnswer: 'Показать ответ',
   },
   commonTableWithPagination: {
     noData: 'Данных нет',

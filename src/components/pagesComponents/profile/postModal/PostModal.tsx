@@ -6,10 +6,11 @@ import { PaperPlaneIcon } from '@/assets/icons/PaperPlaneIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { DeletePost } from '@/components/pagesComponents/profile/postModal/deletePost/DeletePost'
 import { EditPost } from '@/components/pagesComponents/profile/postModal/editPost'
-import { PostComments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComments'
+import { Comments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/answer/Comments'
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
 import { CommentForm } from '@/components/ui/commentForm'
-import { useGetPostByIdQuery, useGetPostMessageByIdQuery } from '@/services/posts'
+import { useGetPostByIdQuery } from '@/services/posts'
+import { useGetCommentsQuery } from '@/services/publicPosts'
 import { Modal } from '@samuraichikit/inc-ui-kit'
 import { useParams } from 'next/navigation'
 
@@ -31,9 +32,9 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
   const { data: postById } = useGetPostByIdQuery(params?.id[1] as string, {
     refetchOnMountOrArgChange: true,
   })
-  const { data: comments } = useGetPostMessageByIdQuery(postId, {
-    refetchOnMountOrArgChange: true,
-  })
+  const { data: commentsData } = useGetCommentsQuery({ postId })
+  const comments = commentsData?.items ?? []
+
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [description, setDescription] = useState<string>('')
@@ -87,13 +88,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
               />
             ) : (
               <>
-                <PostComments
-                  avatarSrc={avatarOwner}
-                  comments={comments?.items ?? []}
-                  createdAt={createdAt}
-                  description={description}
-                  userName={userName}
-                />
+                <Comments comments={comments} />
                 <div className={s.icon3}>
                   <div className={s.icon2}>
                     <HeartIcon />

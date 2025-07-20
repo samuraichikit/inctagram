@@ -23,7 +23,11 @@ export const en: Locale = {
   },
   commentForm: {
     addComment: 'Add a Comment',
+    answer: 'Answer',
+    hideAnswer: 'Hide Answer',
+    like: 'Like',
     publish: 'Publish',
+    showAnswer: 'Show Answer',
   },
   commonTableWithPagination: {
     noData: 'No data',
