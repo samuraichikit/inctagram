@@ -48,7 +48,7 @@ export const en: Locale = {
   mainSidebar: {
     create: 'Create',
     favorites: 'Favorites',
-    home: 'Home',
+    feed: 'Feed',
     messenger: 'Messenger',
     myProfile: 'My Profile',
     search: 'Search',

@@ -34,9 +34,9 @@ export const MainSidebar = () => {
     <Sidebar className={classNames.sidebar}>
       <div>
         <ul className={classNames.mainItems}>
-          <SidebarItem href={ROUTES.MAIN}>
+          <SidebarItem href={ROUTES.FEED}>
             <HomeOutlineIcon />
-            {t.mainSidebar.home}
+            {t.mainSidebar.feed}
           </SidebarItem>
           <SidebarItem href={'#'}>
             <PlusSquareOutlineIcon
