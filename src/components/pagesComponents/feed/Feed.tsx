@@ -1,3 +1,6 @@
+import { useEffect, useRef, useState } from 'react'
+
+import { useElementInView } from '@/common/hooks/useElementInView'
 import { useGetFollowersPublicationsQuery } from '@/services/pageHomeService'
 
 import s from './feed.module.scss'
@@ -8,8 +11,22 @@ export const Feed = () => {
   const classNames = {
     container: s.container,
   }
-  const { data } = useGetFollowersPublicationsQuery({})
+  const skipFirstScroll = useRef(true)
+  const [endCursorPostId, setEndCursorPostId] = useState(0)
+  const { isInView, targetRef } = useElementInView({ threshold: 0.5 })
+
+  const { data } = useGetFollowersPublicationsQuery({ endCursorPostId })
   const publications = data?.items
+
+  useEffect(() => {
+    if (isInView && data?.nextCursor) {
+      if (skipFirstScroll.current) {
+        skipFirstScroll.current = false
+      } else {
+        setEndCursorPostId(data.nextCursor)
+      }
+    }
+  }, [isInView, data?.nextCursor])
 
   return (
     <div className={classNames.container}>
@@ -26,6 +43,7 @@ export const Feed = () => {
           userName={publication.userName}
         />
       ))}
+      <div ref={targetRef} />
     </div>
   )
 }
