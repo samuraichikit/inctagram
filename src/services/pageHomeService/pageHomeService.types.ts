@@ -1,7 +1,7 @@
 export type GetFollowersPublicationsArgs = {
-  endCursorPostId: number
-  pageNumber: number
-  pageSize: number
+  endCursorPostId?: number
+  pageNumber?: number
+  pageSize?: number
 }
 
 export type GetFollowersPublications = {
@@ -16,7 +16,7 @@ export type GetFollowersPublications = {
 
 type Post = {
   avatarOwner: string
-  avatarWhoLikes: boolean
+  avatarWhoLikes: string[]
   createdAt: string
   description: string
   id: number

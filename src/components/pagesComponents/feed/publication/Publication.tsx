@@ -9,27 +9,27 @@ import { PublicationHeader } from '../publicationHeader'
 import { ViewAllCommentsButton } from '../viewAllCommentsButton'
 
 type Props = {
+  avatarOwner: string
   avatarsSrc: string[]
   createdAt: string
   images: UserImage[]
   likesCount: number
   postId: number
-  src: string
   userName: string
 }
 
 export const Publication = ({
+  avatarOwner,
   avatarsSrc,
   createdAt,
   images,
   likesCount,
   postId,
-  src,
   userName,
 }: Props) => {
   return (
     <>
-      <PublicationHeader createAt={createdAt} src={src} userName={userName} />
+      <PublicationHeader createAt={createdAt} src={avatarOwner} userName={userName} />
       <PostImages height={504} images={images} width={491} />
       <ActionBar />
       <PostDescription />

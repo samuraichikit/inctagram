@@ -1,7 +1,8 @@
+import { Feed } from '@/components/pagesComponents/feed'
 import { getBaseLayout } from '@/components/ui/layout'
 import { NextPageWithLayout } from '@/pages/_app'
 
-const Feed: NextPageWithLayout = () => <>Feed</>
+const FeedPage: NextPageWithLayout = () => <Feed />
 
-Feed.getLayout = getBaseLayout
+FeedPage.getLayout = getBaseLayout
 export default Feed
