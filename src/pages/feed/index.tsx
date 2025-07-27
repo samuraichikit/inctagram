@@ -5,4 +5,4 @@ import { NextPageWithLayout } from '@/pages/_app'
 const FeedPage: NextPageWithLayout = () => <Feed />
 
 FeedPage.getLayout = getBaseLayout
-export default Feed
+export default FeedPage
