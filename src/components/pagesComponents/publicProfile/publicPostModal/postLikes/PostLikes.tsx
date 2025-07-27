@@ -9,7 +9,7 @@ import s from './postLikes.module.scss'
 type Props = {
   avatarsSrc: string[]
   className?: string
-  createdAt: string
+  createdAt?: string
   likesCount: number
 }
 
@@ -47,9 +47,11 @@ export const PostLikes = ({ avatarsSrc, className, createdAt, likesCount }: Prop
       ) : (
         <Typography variant={'regular_text_14'}> {t.publicPosts.getCount(0)}</Typography>
       )}
-      <Typography className={classNames.date} variant={'small_text'}>
-        {formatDate(createdAt)}
-      </Typography>
+      {createdAt && (
+        <Typography className={classNames.date} variant={'small_text'}>
+          {formatDate(createdAt)}
+        </Typography>
+      )}
     </div>
   )
 }
