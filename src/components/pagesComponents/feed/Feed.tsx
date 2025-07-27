@@ -18,6 +18,7 @@ export const Feed = () => {
           avatarOwner={publication.avatarOwner}
           avatarsSrc={publication.avatarWhoLikes}
           createdAt={publication.createdAt}
+          description={publication.description}
           images={publication.images}
           key={publication.id}
           likesCount={publication.likesCount}
