@@ -1,9 +1,10 @@
-import { Button, TimeAgoDisplay } from '@samuraichikit/inc-ui-kit'
+import { TimeAgoDisplay } from '@samuraichikit/inc-ui-kit'
 import { useRouter } from 'next/router'
 
 import s from './publicationHeader.module.scss'
 
 import { UserInfo } from '../../publicPage/publicPosts/userInfo'
+import { PublicationDropdown } from './publicationDropdown'
 
 type Props = {
   createAt: string
@@ -28,7 +29,7 @@ export const PublicationHeader = ({ createAt, src, userName }: Props) => {
         <span className={classNames.circle} />
         <TimeAgoDisplay className={classNames.timeAgo} date={createAt} locale={safeLocale} />
       </div>
-      <Button variant={'icon'}>...</Button>
+      <PublicationDropdown />
     </div>
   )
 }
