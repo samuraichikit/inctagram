@@ -14,6 +14,7 @@ export const ROUTES = {
     SIGN_UP: '/auth/signUp',
     TERMS_OF_SERVICE: '/auth/termsOfService',
   },
+  FEED: '/feed',
   MAIN: '/',
   PROFILE: {
     SETTINGS: {

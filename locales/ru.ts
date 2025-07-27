@@ -46,7 +46,7 @@ export const ru = {
   mainSidebar: {
     create: 'Создать',
     favorites: 'Избранное',
-    home: 'Главная',
+    feed: 'Лента',
     messenger: 'Сообщения',
     myProfile: 'Мой профиль',
     search: 'Поиск',

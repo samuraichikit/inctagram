@@ -14,6 +14,7 @@ export const Header = () => {
     buttonsContainer: s.buttonsContainer,
     container: s.container,
     header: s.header,
+    logo: s.logo,
     navContainer: s.navContainer,
   }
 
@@ -28,7 +29,9 @@ export const Header = () => {
   return (
     <header className={classNames.header}>
       <div className={classNames.container}>
-        <Typography variant={'large'}>Inctagram</Typography>
+        <Typography asChild className={classNames.logo} variant={'large'}>
+          <Link href={ROUTES.MAIN}>Inctagram</Link>
+        </Typography>
         <div className={classNames.navContainer}>
           {data && <NotificationsDropDown notifications={notifications} />}
           <LangSelect />
