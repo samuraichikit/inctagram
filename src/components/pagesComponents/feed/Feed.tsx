@@ -11,20 +11,20 @@ export const Feed = () => {
   const classNames = {
     container: s.container,
   }
-  const skipFirstScroll = useRef(true)
+  const prevIsInView = useRef(false)
   const [endCursorPostId, setEndCursorPostId] = useState(0)
   const { isInView, targetRef } = useElementInView({ threshold: 0.5 })
 
   const { data } = useGetFollowersPublicationsQuery({ endCursorPostId })
-  const publications = data?.items
+  const publications = data?.items ?? []
+  const isDisplayDivWithRef = publications?.length > 0
 
   useEffect(() => {
-    if (isInView && data?.nextCursor) {
-      if (skipFirstScroll.current) {
-        skipFirstScroll.current = false
-      } else {
-        setEndCursorPostId(data.nextCursor)
-      }
+    if (isInView && data?.nextCursor && !prevIsInView.current) {
+      setEndCursorPostId(data.nextCursor)
+      prevIsInView.current = isInView
+    } else if (!isInView) {
+      prevIsInView.current = false
     }
   }, [isInView, data?.nextCursor])
 
@@ -43,7 +43,7 @@ export const Feed = () => {
           userName={publication.userName}
         />
       ))}
-      <div ref={targetRef} />
+      {isDisplayDivWithRef && <div ref={targetRef} />}
     </div>
   )
 }
