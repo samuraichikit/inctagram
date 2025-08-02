@@ -40,7 +40,7 @@ export const ViewAllCommentsButton = ({ postId }: Props) => {
   }, [isInView, postId])
 
   if (isLoading) {
-    return <Skeleton height={14} width={250} />
+    return <Skeleton className={classNames.text} height={14} width={250} />
   }
 
   if (isShowComments) {
