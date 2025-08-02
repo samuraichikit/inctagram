@@ -37,6 +37,10 @@ export const en: Locale = {
     msg: 'Looks like the verification link has expired. Not to worry, we can send the link again',
     resendMsg: 'Resend verification link',
   },
+  feed: {
+    noComments: 'No comments yet',
+    viewAllComments: 'View all comments',
+  },
   generalSettings: {
     notAvailable: 'Error! Server is not available!',
     savedSettings: 'Your settings are saved!',
