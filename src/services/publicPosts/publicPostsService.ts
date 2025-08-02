@@ -37,5 +37,6 @@ export const {
   useGetPublicPostQuery,
   useGetPublicPostsByUserIdQuery,
   useGetPublicPostsQuery,
+  useLazyGetCommentsQuery,
   useLazyGetPublicPostsByUserIdQuery,
 } = publicPostsService

@@ -1,5 +1,5 @@
 import { HeartIcon } from '@/assets/icons/HeartIcon'
-import { PaperPlaneIcon } from '@radix-ui/react-icons'
+import { PaperPlaneIcon } from '@/assets/icons/PaperPlaneIcon'
 import { BookmarkOutlineIcon, Button, MessengerIcon } from '@samuraichikit/inc-ui-kit'
 
 import s from './actionBar.module.scss'

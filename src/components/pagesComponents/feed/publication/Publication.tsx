@@ -36,7 +36,7 @@ export const Publication = ({
       <ActionBar />
       <PostDescription avatarSrc={avatarOwner} description={description} userName={userName} />
       <PostLikes avatarsSrc={avatarsSrc} likesCount={likesCount} />
-      <ViewAllCommentsButton />
+      <ViewAllCommentsButton postId={postId.toString()} />
       <CommentForm postId={postId} />
     </>
   )
