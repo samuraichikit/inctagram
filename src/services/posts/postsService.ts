@@ -3,6 +3,7 @@ import { CommentsResponse } from '@/services/publicPosts'
 import { baseApi } from '../baseApi'
 import {
   GetUserPostsArgs,
+  LikeStatus,
   PostItemResponse,
   PostUpdate,
   PostsByUserNameResponse,
@@ -45,6 +46,17 @@ const postService = baseApi.injectEndpoints({
         url: `v1/posts/${userName}`,
       }),
     }),
+    updateLikeStatus: builder.mutation<void, { likeStatus: LikeStatus; postId: number }>({
+      invalidatesTags: (result, error, { postId }) => [{ id: postId, type: 'Posts' }],
+      query: ({ likeStatus, postId }) => ({
+        body: { likeStatus },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'PUT',
+        url: `/v1/posts/${postId}/like-status`,
+      }),
+    }),
     updatePost: builder.mutation<void, PostUpdate>({
       invalidatesTags: (result, error, { postId }) => [{ id: postId, type: 'Posts' }],
       query: ({ description, postId }) => ({
@@ -66,4 +78,5 @@ export const {
   useGetUserPostsQuery,
   useLazyGetUserPostsQuery,
   useUpdatePostMutation,
+  useUpdateLikeStatusMutation,
 } = postService

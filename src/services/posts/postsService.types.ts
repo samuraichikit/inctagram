@@ -65,3 +65,9 @@ export interface PostItemResponse {
   updatedAt: string
   userName: string
 }
+
+export enum LikeStatus {
+  DISLIKE = 'DISLIKE',
+  LIKE = 'LIKE',
+  NONE = 'NONE',
+}
