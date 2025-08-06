@@ -34,7 +34,6 @@ export const CommentsWithAnswers = ({ comment }: Props) => {
         isLiked={comment.isLiked}
         likesCount={comment.likeCount}
         postId={comment.postId}
-        userName={comment.from.username}
       />
       <div className={s.answers}>
         {answersToComment &&

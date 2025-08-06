@@ -16,14 +16,12 @@ import s from './postComment.module.scss'
 
 type Props = {
   answerCount?: number
-  avatarSrc?: string
   content: string
   createdAt: string
   id: number
   isLiked: boolean
   likesCount: number
   postId: number
-  userName: string
 }
 
 const LIKE_STATUS = {
@@ -33,14 +31,12 @@ const LIKE_STATUS = {
 
 export const PostComment = ({
   answerCount = 0,
-  avatarSrc,
   content,
   createdAt,
   id,
   isLiked,
   likesCount,
   postId,
-  userName,
 }: Props) => {
   const { data: postById } = useGetPostByIdQuery(postId.toString(), {
     refetchOnMountOrArgChange: true,
