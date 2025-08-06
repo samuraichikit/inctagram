@@ -6,14 +6,13 @@ import s from './postComments.module.scss'
 import { PostComment } from '../postComment'
 
 type Props = {
-  avatarSrc: string
   comments: Comment[]
   createdAt: string
   description: string
   userName: string
 }
 
-export const PostComments = ({ avatarSrc, comments, createdAt, description, userName }: Props) => {
+export const PostComments = ({ comments, description }: Props) => {
   const classNames = {
     container: s.container,
   }
@@ -22,10 +21,9 @@ export const PostComments = ({ avatarSrc, comments, createdAt, description, user
     <ScrollArea>
       <div className={classNames.container}>
         {description &&
-          comments.map(({ answerCount, content, createdAt, from, id, likeCount, postId }) => (
+          comments.map(({ answerCount, content, createdAt, id, likeCount, postId }) => (
             <PostComment
               answerCount={answerCount}
-              avatarSrc={from.avatars[0]?.url}
               content={content}
               createdAt={createdAt}
               id={id}
@@ -33,7 +31,6 @@ export const PostComments = ({ avatarSrc, comments, createdAt, description, user
               key={id}
               likesCount={likeCount}
               postId={postId}
-              userName={from.username}
             />
           ))}
       </div>

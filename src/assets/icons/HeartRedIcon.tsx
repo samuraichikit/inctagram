@@ -9,6 +9,7 @@ export const HeartRedIcon = (props: Props) => {
       viewBox={'0 0 14 12'}
       width={'14'}
       xmlns={'http://www.w3.org/2000/svg'}
+      {...props}
     >
       <path
         d={

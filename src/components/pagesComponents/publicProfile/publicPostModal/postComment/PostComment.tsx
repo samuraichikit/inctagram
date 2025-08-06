@@ -9,20 +9,19 @@ import {
   useCreateNewAnswerToCommentMutation,
   useUpdateCommentLikeStatusMutation,
 } from '@/services/commentPost/commentPostService'
+import { useGetPostByIdQuery } from '@/services/posts'
 import { Button, TextArea, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './postComment.module.scss'
 
 type Props = {
   answerCount?: number
-  avatarSrc?: string
   content: string
   createdAt: string
   id: number
   isLiked: boolean
   likesCount: number
   postId: number
-  userName: string
 }
 
 const LIKE_STATUS = {
@@ -32,15 +31,17 @@ const LIKE_STATUS = {
 
 export const PostComment = ({
   answerCount = 0,
-  avatarSrc,
   content,
   createdAt,
   id,
   isLiked,
   likesCount,
   postId,
-  userName,
 }: Props) => {
+  const { data: postById } = useGetPostByIdQuery(postId.toString(), {
+    refetchOnMountOrArgChange: true,
+  })
+
   const classNames = {
     answers: s.answers,
     avatar: s.avatar,
@@ -69,7 +70,7 @@ export const PostComment = ({
   const toggleLikeComment = () => {
     updateLikeStatus({
       commentId: id,
-      likeStatus: isLiked ? LIKE_STATUS.UNLIKE : LIKE_STATUS.LIKE,
+      likeStatus: isLikeds ? LIKE_STATUS.UNLIKE : LIKE_STATUS.LIKE,
       postId: postId,
     })
       .unwrap()
@@ -93,11 +94,11 @@ export const PostComment = ({
 
   return (
     <div className={classNames.container}>
-      <Avatar className={classNames.avatar} height={36} src={avatarSrc} width={36} />
+      <Avatar className={classNames.avatar} height={36} src={postById?.avatarOwner} width={36} />
       <div>
         <div className={classNames.userAndComment}>
           <Typography className={classNames.userName} variant={'bold_text_14'}>
-            {userName}
+            {postById?.userName}
           </Typography>{' '}
           <Typography className={classNames.comment} variant={'regular_text_14'}>
             {content}
