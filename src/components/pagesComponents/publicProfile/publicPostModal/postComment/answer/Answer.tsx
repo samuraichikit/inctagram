@@ -50,11 +50,7 @@ export const Answer = ({ answer, postId }: Props) => {
           <div>
             <Typography variant={'bold_text_14'}>{`${answer.from.username} `}</Typography>
             <Typography variant={'regular_text_14'}>{answer.content}</Typography>
-            <div>
-              <Typography className={s.commentCreatedAt} variant={'small_text'}>
-                <TimeAgoDisplay date={answer.createdAt} />
-              </Typography>
-            </div>
+            <TimeAgoDisplay className={s.commentCreatedAt} date={answer.createdAt} />
           </div>
         </div>
         <span className={s.commentLike} onClick={toggleLikeAnswer}>

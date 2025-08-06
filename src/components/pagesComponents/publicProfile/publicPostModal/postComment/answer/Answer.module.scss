@@ -8,10 +8,11 @@
 
   height: 100%;
   margin-top: 15px;
-  padding: 0;
+  padding: 0 20px;
 }
 
 .commentWrapper {
+  margin-top: 10px;
   display: flex;
   column-gap: 12px;
   justify-content: space-between;
@@ -27,7 +28,7 @@
   flex-direction: row;
   gap: 10px;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: center;
 
   margin-top: 2px;
 
@@ -68,7 +69,6 @@
 
     p {
       cursor: pointer;
-      margin-bottom: 12px;
       margin-left: 6px;
       color: var(--color-light-900);
     }

@@ -4,7 +4,6 @@ import { BookmarkIcon } from '@/assets/icons/BookmarkIcon'
 import { HeartIcon } from '@/assets/icons/HeartIcon'
 import { HeartRedIcon } from '@/assets/icons/HeartRedIcon'
 import { PaperPlaneIcon } from '@/assets/icons/PaperPlaneIcon'
-import { useTranslation } from '@/common/hooks/useTranslation'
 import { DeletePost } from '@/components/pagesComponents/profile/postModal/deletePost/DeletePost'
 import { EditPost } from '@/components/pagesComponents/profile/postModal/editPost'
 import { Comments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/answer/Comments'
@@ -40,7 +39,6 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [description, setDescription] = useState<string>('')
-  const { t } = useTranslation()
 
   useEffect(() => {
     if (postById && postById.description !== description) {
