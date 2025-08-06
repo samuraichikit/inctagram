@@ -77,6 +77,6 @@ export const {
   useGetPostMessageByIdQuery,
   useGetUserPostsQuery,
   useLazyGetUserPostsQuery,
-  useUpdatePostMutation,
   useUpdateLikeStatusMutation,
+  useUpdatePostMutation,
 } = postService
