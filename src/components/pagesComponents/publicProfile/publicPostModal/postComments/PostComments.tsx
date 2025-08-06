@@ -25,7 +25,6 @@ export const PostComments = ({ avatarSrc, comments, createdAt, description, user
           comments.map(({ answerCount, content, createdAt, from, id, likeCount, postId }) => (
             <PostComment
               answerCount={answerCount}
-              avatarSrc={from.avatars[0]?.url}
               content={content}
               createdAt={createdAt}
               id={id}
@@ -33,7 +32,6 @@ export const PostComments = ({ avatarSrc, comments, createdAt, description, user
               key={id}
               likesCount={likeCount}
               postId={postId}
-              userName={from.username}
             />
           ))}
       </div>
