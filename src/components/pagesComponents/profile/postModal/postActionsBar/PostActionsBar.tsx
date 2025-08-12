@@ -1,4 +1,3 @@
-import { BookmarkIcon } from '@/assets/icons/BookmarkIcon'
 import { HeartIcon } from '@/assets/icons/HeartIcon'
 import { HeartRedIcon } from '@/assets/icons/HeartRedIcon'
 import { PaperPlaneIcon } from '@/assets/icons/PaperPlaneIcon'
