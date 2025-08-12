@@ -1,7 +1,7 @@
 import { baseApi } from '../baseApi'
 import { GetFollowersPublications, GetFollowersPublicationsArgs } from './pageHomeService.types'
 
-const pageHomeService = baseApi.injectEndpoints({
+export const pageHomeService = baseApi.injectEndpoints({
   endpoints: builder => ({
     getFollowersPublications: builder.query<GetFollowersPublications, GetFollowersPublicationsArgs>(
       {

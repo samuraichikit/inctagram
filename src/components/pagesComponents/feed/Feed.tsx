@@ -37,6 +37,7 @@ export const Feed = () => {
           createdAt={publication.createdAt}
           description={publication.description}
           images={publication.images}
+          isLiked={publication.isLiked}
           key={publication.id}
           likesCount={publication.likesCount}
           postId={publication.id}

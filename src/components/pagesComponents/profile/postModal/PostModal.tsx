@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react'
 
-import { BookmarkIcon } from '@/assets/icons/BookmarkIcon'
-import { HeartIcon } from '@/assets/icons/HeartIcon'
-import { HeartRedIcon } from '@/assets/icons/HeartRedIcon'
-import { PaperPlaneIcon } from '@/assets/icons/PaperPlaneIcon'
 import { DeletePost } from '@/components/pagesComponents/profile/postModal/deletePost/DeletePost'
 import { EditPost } from '@/components/pagesComponents/profile/postModal/editPost'
+import { PostActionsBar } from '@/components/pagesComponents/profile/postModal/postActionsBar'
 import { Comments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/answer/Comments'
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
 import { CommentForm } from '@/components/ui/commentForm'
-import { LikeStatus, useGetPostByIdQuery, useUpdateLikeStatusMutation } from '@/services/posts'
+import { useGetPostByIdQuery } from '@/services/posts'
 import { useGetCommentsQuery } from '@/services/publicPosts'
 import { Modal } from '@samuraichikit/inc-ui-kit'
 import { useParams } from 'next/navigation'
@@ -32,7 +29,6 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
   const { data: postById } = useGetPostByIdQuery(params?.id[1] as string, {
     refetchOnMountOrArgChange: true,
   })
-  const [updateLikeStatus] = useUpdateLikeStatusMutation()
   const { data: commentsData } = useGetCommentsQuery({ postId })
   const comments = commentsData?.items ?? []
 
@@ -51,13 +47,6 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
   }
   const handleUpdateDescription = (newDescription: string) => {
     setDescription(newDescription)
-  }
-
-  const handleLike = () => {
-    updateLikeStatus({
-      likeStatus: postById?.isLiked ? LikeStatus.NONE : LikeStatus.LIKE,
-      postId: Number(postId),
-    })
   }
 
   if (!postById || !params?.id) {
@@ -96,17 +85,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
             ) : (
               <>
                 <Comments comments={comments} />
-                <div className={s.icon3}>
-                  <div className={s.icon2}>
-                    {postById.isLiked ? (
-                      <HeartRedIcon height={24} onClick={handleLike} width={24} />
-                    ) : (
-                      <HeartIcon onClick={handleLike} />
-                    )}
-                    <PaperPlaneIcon />
-                  </div>
-                  <BookmarkIcon />
-                </div>
+                <PostActionsBar isLiked={postById.isLiked} postId={+postId} />
                 <PostLikes
                   avatarsSrc={avatarWhoLikes}
                   className={s.postLikes}
