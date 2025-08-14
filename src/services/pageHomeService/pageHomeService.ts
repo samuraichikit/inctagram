@@ -9,9 +9,22 @@ export const pageHomeService = baseApi.injectEndpoints({
           return currentArg?.endCursorPostId !== previousArg?.endCursorPostId
         },
         merge: (currentCache, newPage) => {
-          currentCache.items.push(...newPage.items)
+          const existingIds = new Set(currentCache.items.map(p => p.id))
+          const newItems = newPage.items.filter(p => !existingIds.has(p.id))
+
+          currentCache.items.push(...newItems)
           currentCache.nextCursor = newPage.nextCursor
         },
+        providesTags: result =>
+          result
+            ? [
+                { id: 'LIST', type: 'FollowersPublications' },
+                ...result.items.map(pub => ({
+                  id: pub.id,
+                  type: 'FollowersPublications' as const,
+                })),
+              ]
+            : [{ id: 'LIST', type: 'FollowersPublications' }],
         query: params => ({
           params,
           url: `v1/home/publications-followers`,
