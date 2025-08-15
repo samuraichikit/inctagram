@@ -9,7 +9,7 @@ import s from './postLikes.module.scss'
 type Props = {
   avatarsSrc: string[]
   className?: string
-  createdAt?: string
+  createdAt: string
   likesCount: number
 }
 
@@ -23,7 +23,7 @@ export const PostLikes = ({ avatarsSrc, className, createdAt, likesCount }: Prop
   }
   const { t } = useTranslation()
   const shouldDisplayAvatars = avatarsSrc?.length > 0
-  const avatars = avatarsSrc?.slice(0, AVATARS_COUNT_WHO_LIKES).reverse()
+  const avatars = avatarsSrc?.slice(0, AVATARS_COUNT_WHO_LIKES)
 
   return (
     <div className={classNames.container && className}>
