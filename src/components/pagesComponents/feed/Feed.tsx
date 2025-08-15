@@ -36,6 +36,7 @@ export const Feed = () => {
           avatarsSrc={publication.avatarWhoLikes}
           createdAt={publication.createdAt}
           description={publication.description}
+          endCursorPostId={endCursorPostId}
           images={publication.images}
           isLiked={publication.isLiked}
           key={publication.id}

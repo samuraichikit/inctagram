@@ -13,6 +13,7 @@ type Props = {
   avatarsSrc: string[]
   createdAt: string
   description: string
+  endCursorPostId: number
   images: UserImage[]
   isLiked: boolean
   likesCount: number
@@ -25,6 +26,7 @@ export const Publication = ({
   avatarsSrc,
   createdAt,
   description,
+  endCursorPostId,
   images,
   isLiked,
   likesCount,
@@ -35,9 +37,9 @@ export const Publication = ({
     <>
       <PublicationHeader createAt={createdAt} src={avatarOwner} userName={userName} />
       <PostImages height={504} images={images} width={491} />
-      <PostActionsBar isLiked={isLiked} message postId={postId} />
+      <PostActionsBar endCursorPostId={endCursorPostId} isLiked={isLiked} message postId={postId} />
       <PostDescription avatarSrc={avatarOwner} description={description} userName={userName} />
-      <PostLikes avatarsSrc={avatarsSrc} likesCount={likesCount} />
+      <PostLikes avatarsSrc={avatarsSrc} createdAt={createdAt} likesCount={likesCount} />
       <ViewAllCommentsButton postId={postId.toString()} />
       <CommentForm postId={postId} />
     </>

@@ -22,6 +22,7 @@ export const Avatar = ({ className, height, src, width }: Props) => {
       alt={'user avatar'}
       className={classNames.avatar}
       height={height}
+      loading={'lazy'}
       src={src ?? defaultAvatar}
       width={width}
     />
