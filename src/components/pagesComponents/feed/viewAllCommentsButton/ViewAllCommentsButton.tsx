@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { useTranslation } from '@/common/hooks/useTranslation'
-import { useGetCommentsQuery, useLazyGetCommentsQuery } from '@/services/publicPosts'
+import { useLazyGetCommentsQuery } from '@/services/publicPosts'
 import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './viewAllComments.module.scss'

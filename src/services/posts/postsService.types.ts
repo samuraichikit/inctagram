@@ -1,3 +1,5 @@
+import { UserFollowingFollowersViewModel } from '@/services/commentPost/commentPostService.types'
+
 export type GetUserPostsArgs = {
   pageNumber?: number
   pageSize?: number
@@ -70,4 +72,11 @@ export enum LikeStatus {
   DISLIKE = 'DISLIKE',
   LIKE = 'LIKE',
   NONE = 'NONE',
+}
+
+export type PostLikesResponse = {
+  items: Array<UserFollowingFollowersViewModel>
+  notReadCount: number
+  pageSize: number
+  totalCount: number
 }

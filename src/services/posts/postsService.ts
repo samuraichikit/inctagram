@@ -1,3 +1,4 @@
+import { pageHomeService } from '@/services/pageHomeService'
 import { CommentsResponse } from '@/services/publicPosts'
 
 import { baseApi } from '../baseApi'
@@ -5,12 +6,10 @@ import {
   GetUserPostsArgs,
   LikeStatus,
   PostItemResponse,
+  PostLikesResponse,
   PostUpdate,
   PostsByUserNameResponse,
 } from './postsService.types'
-import { pageHomeService } from '@/services/pageHomeService'
-import { MeResponse } from '@/services/auth'
-import { GetPublicProfileResponse } from '@/services/profile'
 
 const postService = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -28,6 +27,12 @@ const postService = baseApi.injectEndpoints({
       providesTags: (result, error, postId) => (result ? [{ id: postId, type: 'Posts' }] : []),
       query: postId => ({
         url: `/v1/posts/id/${postId}`,
+      }),
+    }),
+    getPostLikes: builder.query<PostLikesResponse, { postId: number }>({
+      providesTags: (result, error, { postId }) => [{ id: postId, type: 'Likes' }],
+      query: ({ postId }) => ({
+        url: `/v1/posts/${postId}/likes`,
       }),
     }),
     getPostMessageById: builder.query<CommentsResponse, string>({
@@ -49,36 +54,36 @@ const postService = baseApi.injectEndpoints({
         url: `v1/posts/${userName}`,
       }),
     }),
-    updateLikeStatus: builder.mutation<void, { likeStatus: LikeStatus; postId: number }>({
-      invalidatesTags: (result, error, { postId }) => [{ id: postId, type: 'Posts' }],
-      async onQueryStarted({ likeStatus, postId }, { dispatch, getState, queryFulfilled }) {
-        const state = getState()
-
-        const currentUserId = (
-          state.baseApi.queries['me(undefined)']?.data as MeResponse
-        )?.userId.toString()
-        const avatars = (
-          state.baseApi.queries[`getPublicProfile({"profileId":"2798"})`]
-            ?.data as GetPublicProfileResponse
-        )?.avatars[1]
-
+    updateLikeStatus: builder.mutation<
+      void,
+      { endCursorPostId: number; likeStatus: LikeStatus; likedAvatarUser: string; postId: number }
+    >({
+      invalidatesTags: (result, error, { postId }) => [
+        { id: postId, type: 'Likes' },
+        { id: postId, type: 'Posts' },
+        { id: postId, type: 'FollowersPublications' },
+      ],
+      async onQueryStarted(
+        { endCursorPostId, likeStatus, likedAvatarUser, postId },
+        { dispatch, queryFulfilled }
+      ) {
         const patchResult = dispatch(
           pageHomeService.util.updateQueryData(
             'getFollowersPublications',
-            { endCursorPostId: 0 },
+            { endCursorPostId },
             draft => {
-              const post = draft.items.find(p => p.id === postId)
+              const pub = draft.items.find(p => p.id === postId)
 
-              if (post) {
-                post.isLiked = likeStatus === LikeStatus.LIKE
-                post.likesCount += likeStatus === LikeStatus.LIKE ? 1 : -1
+              if (pub) {
+                pub.isLiked = likeStatus === 'LIKE'
+                pub.likesCount += likeStatus === 'LIKE' ? 1 : -1
 
-                if (likeStatus === LikeStatus.LIKE) {
-                  if (!post.avatarWhoLikes.includes(avatars.url)) {
-                    post.avatarWhoLikes.unshift(avatars.url)
+                if (likeStatus === 'LIKE') {
+                  if (!pub.avatarWhoLikes.includes(likedAvatarUser)) {
+                    pub.avatarWhoLikes.push(likedAvatarUser)
                   }
                 } else {
-                  post.avatarWhoLikes = post.avatarWhoLikes.filter(src => src !== avatars.url)
+                  pub.avatarWhoLikes = pub.avatarWhoLikes.filter(url => url !== likedAvatarUser)
                 }
               }
             }
@@ -117,6 +122,7 @@ const postService = baseApi.injectEndpoints({
 export const {
   useDeletePostMutation,
   useGetPostByIdQuery,
+  useGetPostLikesQuery,
   useGetPostMessageByIdQuery,
   useGetUserPostsQuery,
   useLazyGetUserPostsQuery,
