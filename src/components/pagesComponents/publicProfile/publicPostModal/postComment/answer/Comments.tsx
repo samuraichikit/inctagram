@@ -14,14 +14,15 @@ type Props = {
 export const Comments = ({ avatarOwner, comments, userName }: Props) => {
   return (
     <div className={s.comments}>
-      {(comments ?? []).map(comment => (
-        <CommentsWithAnswers
-          avatarOwner={avatarOwner}
-          comment={comment}
-          key={comment.id}
-          userName={userName}
-        />
-      ))}
+      {comments?.length > 0 &&
+        comments.map(comment => (
+          <CommentsWithAnswers
+            avatarOwner={avatarOwner}
+            comment={comment}
+            key={comment.id}
+            userName={userName}
+          />
+        ))}
     </div>
   )
 }
