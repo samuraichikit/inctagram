@@ -21,7 +21,7 @@ export const PostComments = ({ comments, description }: Props) => {
     <ScrollArea>
       <div className={classNames.container}>
         {description &&
-          comments.map(({ answerCount, content, createdAt, id, likeCount, postId }) => (
+          (comments ?? []).map(({ answerCount, content, createdAt, id, likeCount, postId }) => (
             <PostComment
               answerCount={answerCount}
               avatarOwner={''}

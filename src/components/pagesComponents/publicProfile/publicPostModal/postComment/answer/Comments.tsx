@@ -14,7 +14,7 @@ type Props = {
 export const Comments = ({ avatarOwner, comments, userName }: Props) => {
   return (
     <div className={s.comments}>
-      {comments.map(comment => (
+      {(comments ?? []).map(comment => (
         <CommentsWithAnswers
           avatarOwner={avatarOwner}
           comment={comment}
