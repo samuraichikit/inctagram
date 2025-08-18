@@ -40,7 +40,11 @@ export const Publication = ({
       <PostActionsBar endCursorPostId={endCursorPostId} isLiked={isLiked} message postId={postId} />
       <PostDescription avatarSrc={avatarOwner} description={description} userName={userName} />
       <PostLikes avatarsSrc={avatarsSrc} createdAt={createdAt} likesCount={likesCount} />
-      <ViewAllCommentsButton postId={postId.toString()} />
+      <ViewAllCommentsButton
+        avatarOwner={avatarOwner}
+        postId={postId.toString()}
+        userName={userName}
+      />
       <CommentForm postId={postId} />
     </>
   )
