@@ -58,7 +58,7 @@ export const PostComment = ({
   const [isLikeds, setIsLiked] = useState<boolean>(isLiked)
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
-  const [publishAnswerToComment, data] = useCreateNewAnswerToCommentMutation()
+  const [publishAnswerToComment] = useCreateNewAnswerToCommentMutation()
   const [updateLikeStatus] = useUpdateCommentLikeStatusMutation()
 
   const addAnswerToComment = () => {
