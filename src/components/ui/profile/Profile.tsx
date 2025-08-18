@@ -65,10 +65,9 @@ export const Profile = () => {
 
   return (
     <div className={s.wrapper}>
-      {isMyProfile ? (
-        <PostModal isOpen={isOpen} onClose={closeHandler} />
-      ) : (
-        postId && <PublicPostModal isOpen={isOpen} onClose={closeHandler} postId={postId} />
+      {isMyProfile && isOpen && <PostModal isOpen={isOpen} onClose={closeHandler} />}
+      {!isMyProfile && postId && isOpen && (
+        <PublicPostModal isOpen={isOpen} onClose={closeHandler} postId={postId} />
       )}
       <div className={s.infoWrapper}>
         {avatarSrc ? (

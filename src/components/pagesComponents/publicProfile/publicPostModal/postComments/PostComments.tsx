@@ -24,6 +24,7 @@ export const PostComments = ({ comments, description }: Props) => {
           comments.map(({ answerCount, content, createdAt, id, likeCount, postId }) => (
             <PostComment
               answerCount={answerCount}
+              avatarOwner={''}
               content={content}
               createdAt={createdAt}
               id={id}
@@ -31,6 +32,7 @@ export const PostComments = ({ comments, description }: Props) => {
               key={id}
               likesCount={likeCount}
               postId={postId}
+              userName={''}
             />
           ))}
       </div>

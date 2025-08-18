@@ -10,10 +10,12 @@ import { Typography } from '@samuraichikit/inc-ui-kit'
 import s from './Answer.module.scss'
 
 type Props = {
+  avatarOwner: string
   comment: CommentsViewModel
+  userName: string
 }
 
-export const CommentsWithAnswers = ({ comment }: Props) => {
+export const CommentsWithAnswers = ({ avatarOwner, comment, userName }: Props) => {
   const { t } = useTranslation()
   const { data: answersToComment } = useGetAnswersToPostCommentQuery({
     commentId: comment.id,
@@ -28,12 +30,14 @@ export const CommentsWithAnswers = ({ comment }: Props) => {
   return (
     <div className={s.commentsWithAnswers}>
       <PostComment
+        avatarOwner={avatarOwner}
         content={comment.content}
         createdAt={comment.createdAt}
         id={comment.id}
         isLiked={comment.isLiked}
         likesCount={comment.likeCount}
         postId={comment.postId}
+        userName={userName}
       />
       <div className={s.answers}>
         {answersToComment &&

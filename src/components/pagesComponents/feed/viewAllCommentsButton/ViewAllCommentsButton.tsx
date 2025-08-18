@@ -11,10 +11,12 @@ import s from './viewAllComments.module.scss'
 import { Comments } from '../../publicProfile/publicPostModal/postComment/answer/Comments'
 
 type Props = {
+  avatarOwner: string
   postId: string
+  userName: string
 }
 
-export const ViewAllCommentsButton = ({ postId }: Props) => {
+export const ViewAllCommentsButton = ({ avatarOwner, postId, userName }: Props) => {
   const classNames = {
     buttonView: s.buttonView,
     text: s.text,
@@ -44,7 +46,7 @@ export const ViewAllCommentsButton = ({ postId }: Props) => {
   }
 
   if (isShowComments) {
-    return <Comments comments={comments} />
+    return <Comments avatarOwner={avatarOwner} comments={comments} userName={userName} />
   }
 
   return (
