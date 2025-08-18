@@ -22,7 +22,7 @@ export const PostActionsBar = ({ endCursorPostId = 0, isLiked, message, postId }
     updateLikeStatus({
       endCursorPostId: endCursorPostId,
       likeStatus: isLiked ? LikeStatus.NONE : LikeStatus.LIKE,
-      likedAvatarUser: data?.avatars[0].url ?? '',
+      likedAvatarUser: data?.avatars?.[0]?.url ?? '',
       postId: Number(postId),
     })
   }
