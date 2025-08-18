@@ -43,7 +43,7 @@ export const PublicPostModal = ({ isOpen, onClose, postId }: Props) => {
           <div className={classNames.userInfoContainer}>
             <UserInfo src={avatarOwner} userName={userName} />
           </div>
-          <Comments comments={comments} />
+          <Comments avatarOwner={''} comments={comments} userName={''} />
           <PostLikes
             avatarsSrc={avatarWhoLikes}
             className={classNames.postLikes}
