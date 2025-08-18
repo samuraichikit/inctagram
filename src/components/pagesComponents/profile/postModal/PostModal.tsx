@@ -52,10 +52,20 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
   if (!postById || !params?.id) {
     return
   }
-  const { avatarOwner, avatarWhoLikes, createdAt, id, images, likesCount, userName } = postById
+
+  const {
+    avatarOwner = '',
+    avatarWhoLikes = [],
+    createdAt = '',
+    id = 0,
+    images = [],
+    isLiked = false,
+    likesCount = 0,
+    userName = '',
+  } = postById
 
   return (
-    postById?.id === +params?.id[1] && (
+    id === +params?.id[1] && (
       <Modal onOpenChange={onClose} open={isOpen}>
         <div className={s.container}>
           <PostImages className={s.images} height={562} images={images} width={490} />
@@ -84,12 +94,8 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
               />
             ) : (
               <>
-                <Comments
-                  avatarOwner={postById.avatarOwner}
-                  comments={comments}
-                  userName={postById.userName}
-                />
-                <PostActionsBar isLiked={postById.isLiked} postId={+postId} />
+                <Comments avatarOwner={avatarOwner} comments={comments} userName={userName} />
+                <PostActionsBar isLiked={isLiked} postId={+postId} />
                 <PostLikes
                   avatarsSrc={avatarWhoLikes}
                   className={s.postLikes}
