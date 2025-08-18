@@ -33,7 +33,7 @@ export const PublicPostModal = ({ isOpen, onClose, postId }: Props) => {
     return null
   }
 
-  const { avatarOwner, avatarWhoLikes, createdAt, description, images, likesCount, userName } = post
+  const { avatarOwner, avatarWhoLikes, createdAt, images, likesCount, userName } = post
 
   return (
     <Modal onOpenChange={onClose} open={isOpen}>
