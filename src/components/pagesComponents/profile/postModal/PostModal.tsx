@@ -84,7 +84,11 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
               />
             ) : (
               <>
-                <Comments comments={comments} />
+                <Comments
+                  avatarOwner={postById.avatarOwner}
+                  comments={comments}
+                  userName={postById.userName}
+                />
                 <PostActionsBar isLiked={postById.isLiked} postId={+postId} />
                 <PostLikes
                   avatarsSrc={avatarWhoLikes}
