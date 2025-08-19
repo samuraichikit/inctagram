@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 import { DeletePost } from '@/components/pagesComponents/profile/postModal/deletePost/DeletePost'
 import { EditPost } from '@/components/pagesComponents/profile/postModal/editPost'
@@ -26,10 +27,18 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
   const params = useParams()
   const postId = params?.id[1] ?? ''
 
-  const { data: postById } = useGetPostByIdQuery(params?.id[1] as string, {
+  const {
+    data: postById,
+    isFetching: isPostFetching,
+    isLoading: isPostLoading,
+  } = useGetPostByIdQuery(params?.id[1] as string, {
     refetchOnMountOrArgChange: true,
+    skip: !postId,
   })
-  const { data: commentsData } = useGetCommentsQuery({ postId })
+  const { data: commentsData, isLoading: isCommentsLoading } = useGetCommentsQuery(
+    { postId },
+    { skip: !postId }
+  )
   const comments = commentsData?.items ?? []
 
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
@@ -49,8 +58,16 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
     setDescription(newDescription)
   }
 
+  if (isPostLoading || isPostFetching || isCommentsLoading) {
+    return (
+      <Modal onOpenChange={onClose} open={isOpen}>
+        <Skeleton className={s.postDetails} height={562} />
+      </Modal>
+    )
+  }
+
   if (!postById || !params?.id) {
-    return
+    return null
   }
 
   const {
