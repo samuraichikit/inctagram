@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { HeartIcon } from '@/assets/icons/HeartIcon'
 import { HeartRedIcon } from '@/assets/icons/HeartRedIcon'
+import { useTranslation } from '@/common/hooks/useTranslation'
 import { Avatar } from '@/components/ui/profile/profilePhoto/avatar'
 import { TimeAgoDisplay } from '@/components/ui/timeAgoDisplay'
 import { useUpdateAnswerLikeStatusMutation } from '@/services/commentPost/commentPostService'
@@ -21,6 +22,7 @@ const LIKE_STATUS = {
 }
 
 export const Answer = ({ answer, postId }: Props) => {
+  const { t } = useTranslation()
   const [isLiked, setIsLiked] = useState<boolean>(answer.isLiked)
   const [updateLikeAnswerStatus] = useUpdateAnswerLikeStatusMutation()
   const toggleLikeAnswer = () => {
@@ -50,7 +52,15 @@ export const Answer = ({ answer, postId }: Props) => {
           <div>
             <Typography variant={'bold_text_14'}>{`${answer.from.username} `}</Typography>
             <Typography variant={'regular_text_14'}>{answer.content}</Typography>
-            <TimeAgoDisplay className={s.commentCreatedAt} date={answer.createdAt} />
+            <div className={s.commentInfo}>
+              <TimeAgoDisplay className={s.commentCreatedAt} date={answer.createdAt} />
+              {answer.likeCount !== 0 && (
+                <Typography variant={'small_text'}>
+                  {t.commentForm.like}: {answer.likeCount}
+                </Typography>
+              )}
+              <Typography variant={'semi-bold_small_text'}>{t.commentForm.answer}</Typography>
+            </div>
           </div>
         </div>
         <span className={s.commentLike} onClick={toggleLikeAnswer}>
