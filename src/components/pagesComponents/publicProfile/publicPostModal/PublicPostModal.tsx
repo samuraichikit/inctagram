@@ -1,6 +1,4 @@
-import { Comments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/answer/Comments'
-import { CommentForm } from '@/components/ui/commentForm'
-import { useGetCommentsQuery, useGetPublicPostQuery } from '@/services/publicPosts'
+import { useGetPublicPostQuery } from '@/services/publicPosts'
 import { Modal } from '@samuraichikit/inc-ui-kit'
 
 import s from './publicPostModal.module.scss'
@@ -24,10 +22,10 @@ export const PublicPostModal = ({ isOpen, onClose, postId }: Props) => {
     userInfoContainer: s.userInfoContainer,
   }
 
-  const { data: commentsData } = useGetCommentsQuery({ postId })
+  // const { data: commentsData } = useGetCommentsQuery({ postId })
   const { data: post } = useGetPublicPostQuery({ postId })
 
-  const comments = commentsData?.items ?? []
+  // const comments = commentsData?.items ?? []
 
   if (!post) {
     return null
@@ -43,14 +41,14 @@ export const PublicPostModal = ({ isOpen, onClose, postId }: Props) => {
           <div className={classNames.userInfoContainer}>
             <UserInfo src={avatarOwner} userName={userName} />
           </div>
-          <Comments avatarOwner={''} comments={comments} userName={''} />
+          {/*<Comments avatarOwner={''} comments={comments} userName={''} />*/}
           <PostLikes
             avatarsSrc={avatarWhoLikes}
             className={classNames.postLikes}
             createdAt={createdAt}
             likesCount={likesCount}
           />
-          <CommentForm postId={Number(postId)} />
+          {/*<CommentForm postId={Number(postId)} />*/}
         </div>
       </div>
     </Modal>

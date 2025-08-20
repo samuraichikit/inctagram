@@ -4,11 +4,8 @@ import Skeleton from 'react-loading-skeleton'
 import { DeletePost } from '@/components/pagesComponents/profile/postModal/deletePost/DeletePost'
 import { EditPost } from '@/components/pagesComponents/profile/postModal/editPost'
 import { PostActionsBar } from '@/components/pagesComponents/profile/postModal/postActionsBar'
-import { Comments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/answer/Comments'
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
-import { CommentForm } from '@/components/ui/commentForm'
 import { useGetPostByIdQuery } from '@/services/posts'
-import { useGetCommentsQuery } from '@/services/publicPosts'
 import { Modal } from '@samuraichikit/inc-ui-kit'
 import { useParams } from 'next/navigation'
 
@@ -35,11 +32,11 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
     refetchOnMountOrArgChange: true,
     skip: !postId,
   })
-  const { data: commentsData, isLoading: isCommentsLoading } = useGetCommentsQuery(
-    { postId },
-    { skip: !postId }
-  )
-  const comments = commentsData?.items ?? []
+  // const { data: commentsData, isLoading: isCommentsLoading } = useGetCommentsQuery(
+  //   { postId },
+  //   { skip: !postId }
+  // )
+  // const comments = commentsData?.items ?? []
 
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
@@ -58,7 +55,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
     setDescription(newDescription)
   }
 
-  if (isPostLoading || isPostFetching || isCommentsLoading) {
+  if (isPostLoading || isPostFetching) {
     return (
       <Modal onOpenChange={onClose} open={isOpen}>
         <Skeleton className={s.postDetails} height={562} />
@@ -111,7 +108,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
               />
             ) : (
               <>
-                <Comments avatarOwner={avatarOwner} comments={comments} userName={userName} />
+                {/*<Comments avatarOwner={avatarOwner} comments={comments} userName={userName} />*/}
                 <PostActionsBar isLiked={isLiked} postId={+postId} />
                 <PostLikes
                   avatarsSrc={avatarWhoLikes}
@@ -119,7 +116,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
                   createdAt={createdAt}
                   likesCount={likesCount}
                 />
-                <CommentForm postId={Number(postId)} />
+                {/*<CommentForm postId={Number(postId)} />*/}
               </>
             )}
           </div>
