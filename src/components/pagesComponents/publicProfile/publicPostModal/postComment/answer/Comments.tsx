@@ -14,7 +14,8 @@ type Props = {
 export const Comments = ({ avatarOwner, comments, userName }: Props) => {
   return (
     <div className={s.comments}>
-      {comments?.length > 0 &&
+      {Array.isArray(comments) &&
+        comments.length > 0 &&
         comments.map(comment => (
           <CommentsWithAnswers
             avatarOwner={avatarOwner}

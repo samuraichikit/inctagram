@@ -40,20 +40,19 @@ export const CommentsWithAnswers = ({ avatarOwner, comment, userName }: Props) =
         userName={userName}
       />
       <div className={s.answers}>
-        {answersToComment &&
-          answersToComment.items.length !== 0 &&
+        {(answersToComment?.items ?? []).length > 0 &&
           (isShowAnswers ? (
             <div>
               <Typography onClick={toggleShowAnswer} variant={'semi-bold_small_text'}>
-                {t.commentForm.hideAnswer} ({answersToComment.items.length})
+                {t.commentForm.hideAnswer} ({answersToComment?.items?.length ?? 0})
               </Typography>
-              {answersToComment.items.map(answer => (
+              {(answersToComment?.items ?? []).map(answer => (
                 <Answer answer={answer} key={answer.id} postId={comment.postId} />
-              ))}{' '}
+              ))}
             </div>
           ) : (
             <Typography onClick={toggleShowAnswer} variant={'semi-bold_small_text'}>
-              {t.commentForm.showAnswer} ({answersToComment.items.length})
+              {t.commentForm.showAnswer} ({answersToComment?.items?.length ?? 0})
             </Typography>
           ))}
       </div>
