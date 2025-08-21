@@ -15,7 +15,8 @@ const nextConfig = {
             },
         ],
     },
-    reactStrictMode: true,
+    productionBrowserSourceMaps: true,
+    reactStrictMode: true
 };
 
 
