@@ -14,22 +14,28 @@ type Params = {
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
   (store: AppStore) =>
     async ({ params }) => {
-      const { id } = params as Params
-      const [userId, postId] = id
+      try {
+        const { id } = params as Params
+        const [userId, postId] = id
 
-      store.dispatch(publicUserService.endpoints.getPublicProfile.initiate({ profileId: userId }))
-      store.dispatch(
-        publicPostsService.endpoints.getPublicPostsByUserId.initiate({ pageSize: 8, userId })
-      )
-      if (postId) {
-        store.dispatch(publicPostsService.endpoints.getPublicPost.initiate({ postId }))
-        store.dispatch(publicPostsService.endpoints.getComments.initiate({ postId }))
-      }
+        store.dispatch(publicUserService.endpoints.getPublicProfile.initiate({ profileId: userId }))
+        store.dispatch(
+          publicPostsService.endpoints.getPublicPostsByUserId.initiate({ pageSize: 8, userId })
+        )
+        if (postId) {
+          store.dispatch(publicPostsService.endpoints.getPublicPost.initiate({ postId }))
+          store.dispatch(publicPostsService.endpoints.getComments.initiate({ postId }))
+        }
 
-      await Promise.all(store.dispatch(baseApi.util.getRunningQueriesThunk()))
+        await Promise.all(store.dispatch(baseApi.util.getRunningQueriesThunk()))
 
-      return {
-        props: {},
+        return {
+          props: {},
+        }
+      } catch (error) {
+        console.log(error)
+
+        return { props: {} }
       }
     }
 )
