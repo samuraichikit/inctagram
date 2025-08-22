@@ -1,16 +1,85 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Profile } from './Profile'
+import { Profile, UserProfileProps } from './Profile'
 
-const meta = {
-  argTypes: {},
+// const meta = {
+//   argTypes: {},
+//   component: Profile,
+//   tags: ['autodocs'],
+//   title: 'Components/Profile',
+// } satisfies Meta<typeof Profile>
+//
+// export default meta
+// type Story = StoryObj<typeof meta>
+
+const meta: Meta<UserProfileProps> = {
   component: Profile,
   tags: ['autodocs'],
   title: 'Components/Profile',
-} satisfies Meta<typeof Profile>
+}
 
 export default meta
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<UserProfileProps>
+
+// Тип для аватаров комментатора
+type AvatarType = {
+  createdAt: string
+  fileSize: number
+  height: number
+  url: string
+  width: number
+}
+
+// Тип комментария
+export type CommentType = {
+  answerCount: number
+  content: string
+  createdAt: string
+  from: {
+    avatars: AvatarType[]
+    id: number
+    username: string
+  }
+  id: number
+  isLiked: boolean
+  likeCount: number
+  postId: number
+}
+
+// Тип картинки поста
+type PostImageType = {
+  createdAt: string
+  fileSize: number
+  height: number
+  uploadId: string
+  url: string
+  width: number
+}
+
+// Тип поста
+export type PostType = {
+  avatarOwner: string
+  avatarWhoLikes: string[]
+  createdAt: string
+  description: string
+  id: number
+  images: PostImageType[]
+  isLiked: boolean
+  likesCount: number
+  location: string
+  owner: { firstName: string; lastName: string }
+  ownerId: number
+  updatedAt: string
+  userName: string
+}
+
+// Пропсы компонента для Storybook
+type ProfileStoryProps = {
+  comments: CommentType[]
+  post: PostType
+  postId: string
+  userId: string
+}
 
 export const ProfileStory: Story = {
   args: {
@@ -66,5 +135,7 @@ export const ProfileStory: Story = {
       updatedAt: '2024-11-14T15:42:20.142Z',
       userName: 'Alex',
     },
+    postId: '1',
+    userId: '42',
   },
 }

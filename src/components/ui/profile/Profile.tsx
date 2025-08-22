@@ -6,6 +6,7 @@ import { FollowUnfollowButton } from '@/components/pagesComponents/profile/follo
 import { PostModal } from '@/components/pagesComponents/profile/postModal/PostModal'
 import { UserPosts } from '@/components/pagesComponents/profile/userPosts'
 import { PublicPostModal } from '@/components/pagesComponents/publicProfile/publicPostModal'
+import { CommentType, PostType } from '@/components/ui/profile/profile.stories'
 import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
 import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
 import { useMeQuery } from '@/services/auth'
@@ -17,6 +18,8 @@ import { useRouter } from 'next/router'
 import s from './profile.module.scss'
 
 export type UserProfileProps = {
+  comments?: CommentType[]
+  post?: PostType
   postId?: null | string
   userId?: null | string
 }
