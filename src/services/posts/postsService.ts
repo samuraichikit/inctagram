@@ -23,30 +23,40 @@ const postService = baseApi.injectEndpoints({
         url: `/v1/posts/${postId}`,
       }),
     }),
+
     getPostById: builder.query<PostItemResponse, string>({
       providesTags: (result, error, postId) => (result ? [{ id: postId, type: 'Posts' }] : []),
       query: postId => ({
         url: `/v1/posts/id/${postId}`,
       }),
     }),
+
     getPostLikes: builder.query<PostLikesResponse, { postId: number }>({
-      providesTags: (result, error, { postId }) => [{ id: postId, type: 'Likes' }],
+      providesTags: (result, error, { postId }) => (result ? [{ id: postId, type: 'Likes' }] : []),
       query: ({ postId }) => ({
         url: `/v1/posts/${postId}/likes`,
       }),
     }),
+
     getPostMessageById: builder.query<CommentsResponse, string>({
-      providesTags: ['Comments'],
+      providesTags: (result, error, postId) => (result ? [{ id: postId, type: 'Comments' }] : []),
       query: postId => ({
         url: `/v1/posts/${postId}/comments`,
       }),
     }),
+
     getUserPosts: builder.query<PostsByUserNameResponse, GetUserPostsArgs>({
       providesTags: result =>
         result
           ? [
               { id: 'LIST', type: 'Posts' },
-              ...result.items.map(post => ({ id: post.id.toString(), type: 'Posts' }) as const),
+              ...result.items.map(
+                post =>
+                  ({
+                    id: post.id.toString(),
+                    type: 'Posts',
+                  }) as const
+              ),
             ]
           : [{ id: 'LIST', type: 'Posts' }],
       query: ({ userName, ...params }) => ({
@@ -54,6 +64,7 @@ const postService = baseApi.injectEndpoints({
         url: `v1/posts/${userName}`,
       }),
     }),
+
     updateLikeStatus: builder.mutation<
       void,
       { endCursorPostId: number; likeStatus: LikeStatus; likedAvatarUser: string; postId: number }
@@ -77,7 +88,6 @@ const postService = baseApi.injectEndpoints({
               if (pub) {
                 pub.isLiked = likeStatus === 'LIKE'
                 pub.likesCount += likeStatus === 'LIKE' ? 1 : -1
-
                 if (likeStatus === 'LIKE') {
                   if (!pub.avatarWhoLikes.includes(likedAvatarUser)) {
                     pub.avatarWhoLikes.push(likedAvatarUser)
@@ -98,20 +108,17 @@ const postService = baseApi.injectEndpoints({
       },
       query: ({ likeStatus, postId }) => ({
         body: { likeStatus },
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         method: 'PUT',
         url: `/v1/posts/${postId}/like-status`,
       }),
     }),
+
     updatePost: builder.mutation<void, PostUpdate>({
       invalidatesTags: (result, error, { postId }) => [{ id: postId, type: 'Posts' }],
       query: ({ description, postId }) => ({
         body: { description },
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         method: 'PUT',
         url: `/v1/posts/${postId}`,
       }),
