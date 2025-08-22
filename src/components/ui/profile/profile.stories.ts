@@ -73,14 +73,6 @@ export type PostType = {
   userName: string
 }
 
-// Пропсы компонента для Storybook
-type ProfileStoryProps = {
-  comments: CommentType[]
-  post: PostType
-  postId: string
-  userId: string
-}
-
 export const ProfileStory: Story = {
   args: {
     comments: [
