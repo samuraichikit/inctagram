@@ -16,19 +16,27 @@ import { useRouter } from 'next/router'
 
 import s from './profile.module.scss'
 
-export const Profile = () => {
+export type UserProfileProps = {
+  postId?: null | string
+  userId?: null | string
+}
+
+export const Profile = ({ postId, userId }: UserProfileProps) => {
   const router = useRouter()
   const { push } = router
-  const { id } = router.query
-  const userId = id?.[0] ?? ''
-  const postId = id?.[1] ?? ''
+
+  const safePostId = postId ?? ''
+  const safeUserId = userId ?? ''
+  // const { id } = router.query
+  // const userId = id?.[0] ?? ''
+  // const postId = id?.[1] ?? ''
 
   const { data: meInfo } = useMeQuery()
   const isAuth = !!meInfo?.userId
   const isMyProfile = meInfo?.userId === Number(userId)
 
   const { data: profileInfo } = useGetPublicProfileQuery(
-    { profileId: userId },
+    { profileId: safeUserId },
     { skip: router.isFallback }
   )
   const { data: profileWithPosts } = useGetProfileWithPostsQuery(profileInfo?.userName as string, {
@@ -48,26 +56,30 @@ export const Profile = () => {
   const isShowFollowUnfollowButton = !isMyProfile && isAuth
   const isFollowing = profileWithPosts?.isFollowing
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(!!safePostId)
 
   useEffect(() => {
     if (!postId) {
       return
     }
     setIsOpen(true)
-    push(ROUTES.PROFILE.USER_POST({ id: userId, postId }), undefined, { shallow: true })
-  }, [postId])
+    push(ROUTES.PROFILE.USER_POST({ id: safeUserId, postId: safePostId }), undefined, {
+      shallow: true,
+    })
+  }, [safePostId, safeUserId])
 
   const closeHandler = () => {
     setIsOpen(false)
-    push(ROUTES.PROFILE.USER_PROFILE(userId), undefined, { shallow: true })
+    push(ROUTES.PROFILE.USER_PROFILE(safeUserId), undefined, { shallow: true })
   }
 
   return (
     <div className={s.wrapper}>
-      {isMyProfile && isOpen && <PostModal isOpen={isOpen} onClose={closeHandler} />}
-      {!isMyProfile && postId && isOpen && (
-        <PublicPostModal isOpen={isOpen} onClose={closeHandler} postId={postId} />
+      {isMyProfile && isOpen && (
+        <PostModal isOpen={isOpen} onClose={closeHandler} postId={safePostId} />
+      )}
+      {!isMyProfile && safePostId && isOpen && (
+        <PublicPostModal isOpen={isOpen} onClose={closeHandler} postId={safePostId} />
       )}
       <div className={s.infoWrapper}>
         {avatarSrc ? (
@@ -93,7 +105,7 @@ export const Profile = () => {
             <FollowUnfollowButton
               isFollowing={isFollowing}
               isShowFollowUnfollowButton={isShowFollowUnfollowButton}
-              selectedUserId={Number(id)}
+              selectedUserId={Number(safeUserId)}
             />
           </div>
           <div className={s.followInfoWrapper}>

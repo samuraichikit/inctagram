@@ -21,18 +21,15 @@ import { UserInfo } from '../../publicPage/publicPosts/userInfo'
 type Props = {
   isOpen: boolean
   onClose: () => void
+  postId: string
 }
 
-export const PostModal = ({ isOpen, onClose }: Props) => {
-  const params = useParams()
-  const postId = params?.id[1] ?? ''
-
-  console.log('params in PostModal:', params)
+export const PostModal = ({ isOpen, onClose, postId }: Props) => {
   const {
     data: postById,
     isFetching: isPostFetching,
     isLoading: isPostLoading,
-  } = useGetPostByIdQuery(params?.id[1] as string, {
+  } = useGetPostByIdQuery(postId, {
     refetchOnMountOrArgChange: true,
     skip: !postId,
   })
@@ -67,7 +64,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
     )
   }
 
-  if (!postById || !params?.id) {
+  if (!postById || !postId) {
     return null
   }
 
@@ -83,7 +80,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
   } = postById
 
   return (
-    id === +params?.id[1] && (
+    id === +postId && (
       <Modal onOpenChange={onClose} open={isOpen}>
         <div className={s.container}>
           <PostImages className={s.images} height={562} images={images} width={490} />
