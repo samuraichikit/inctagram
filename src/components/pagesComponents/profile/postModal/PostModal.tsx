@@ -27,6 +27,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
   const params = useParams()
   const postId = params?.id[1] ?? ''
 
+  console.log('params in PostModal:', params)
   const {
     data: postById,
     isFetching: isPostFetching,
