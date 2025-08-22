@@ -69,11 +69,7 @@ const postService = baseApi.injectEndpoints({
       void,
       { endCursorPostId: number; likeStatus: LikeStatus; likedAvatarUser: string; postId: number }
     >({
-      invalidatesTags: (result, error, { postId }) => [
-        { id: postId, type: 'Likes' },
-        { id: postId, type: 'Posts' },
-        { id: postId, type: 'FollowersPublications' },
-      ],
+      invalidatesTags: ['Likes', 'Posts', 'FollowersPublications'],
       async onQueryStarted(
         { endCursorPostId, likeStatus, likedAvatarUser, postId },
         { dispatch, queryFulfilled }
@@ -115,7 +111,7 @@ const postService = baseApi.injectEndpoints({
     }),
 
     updatePost: builder.mutation<void, PostUpdate>({
-      invalidatesTags: (result, error, { postId }) => [{ id: postId, type: 'Posts' }],
+      invalidatesTags: ['Posts'],
       query: ({ description, postId }) => ({
         body: { description },
         headers: { 'Content-Type': 'application/json' },

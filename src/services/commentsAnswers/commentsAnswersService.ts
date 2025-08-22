@@ -4,10 +4,7 @@ import { AddCommentArgs, CommentData } from './commentsAnswers.types'
 const usersService = baseApi.injectEndpoints({
   endpoints: builder => ({
     addComment: builder.mutation<CommentData, AddCommentArgs>({
-      invalidatesTags: (result, error, { postId }) => [
-        { id: postId, type: 'Comments' },
-        { id: 'LIST', type: 'Comments' },
-      ],
+      invalidatesTags: ['Comments'],
       query: ({ content, postId }) => ({
         body: { content },
         method: 'POST',

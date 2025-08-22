@@ -18,7 +18,7 @@ import {
 const commentsApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     createNewAnswerToComment: builder.mutation<CommentsViewModel, CreateAnswerToCommentRequest>({
-      invalidatesTags: (result, error, { commentId }) => [{ id: commentId, type: 'Answer' }],
+      invalidatesTags: ['Answer'],
       query: ({ commentId, postId, ...body }) => ({
         body,
         method: 'POST',
@@ -27,7 +27,7 @@ const commentsApi = baseApi.injectEndpoints({
     }),
 
     createNewComment: builder.mutation<CommentsViewModel, CreateCommentRequest>({
-      invalidatesTags: (result, error, { postId }) => [{ id: postId, type: 'Comments' }],
+      invalidatesTags: ['Comments'],
       query: ({ postId, ...body }) => ({
         body,
         method: 'POST',
@@ -47,8 +47,7 @@ const commentsApi = baseApi.injectEndpoints({
       GetAnswersToPostCommentsResponse,
       GetAnswersToPostCommentRequest
     >({
-      providesTags: (result, error, { commentId }) =>
-        result ? [{ id: commentId, type: 'Answer' }] : [],
+      providesTags: ['Answer'],
       query: ({ commentId, postId, ...args }) => ({
         method: 'GET',
         params: args,
@@ -65,8 +64,7 @@ const commentsApi = baseApi.injectEndpoints({
     }),
 
     getPostComments: builder.query<GetPostCommentsResponse, GetPostCommentsRequest>({
-      providesTags: (result, error, { postId }) =>
-        result ? [{ id: postId, type: 'Comments' }] : [{ id: 'LIST', type: 'Comments' }],
+      providesTags: ['Comments'],
       query: ({ postId, ...args }) => ({
         method: 'GET',
         params: args,
@@ -75,7 +73,7 @@ const commentsApi = baseApi.injectEndpoints({
     }),
 
     updateAnswerLikeStatus: builder.mutation<void, UpdateAnswerLikeStatusRequest>({
-      invalidatesTags: (result, error, { commentId }) => [{ id: commentId, type: 'Answer' }],
+      invalidatesTags: ['Answer'],
       query: ({ answerId, commentId, postId, ...body }) => ({
         body,
         method: 'PUT',
@@ -84,7 +82,7 @@ const commentsApi = baseApi.injectEndpoints({
     }),
 
     updateCommentLikeStatus: builder.mutation<void, UpdateLikeStatusRequest>({
-      invalidatesTags: (result, error, { postId }) => [{ id: postId, type: 'Comments' }],
+      invalidatesTags: ['Comments'],
       query: ({ commentId, postId, ...body }) => ({
         body,
         method: 'PUT',
