@@ -10,7 +10,6 @@ import { CommentForm } from '@/components/ui/commentForm'
 import { useGetPostByIdQuery } from '@/services/posts'
 import { useGetCommentsQuery } from '@/services/publicPosts'
 import { Modal } from '@samuraichikit/inc-ui-kit'
-import { useParams } from 'next/navigation'
 
 import s from './postModal.module.scss'
 
