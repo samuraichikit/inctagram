@@ -27,14 +27,13 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
   const params = useParams()
   const postId = params?.id[1] ?? ''
 
-  const {
-    data: postById,
-    isFetching: isPostFetching,
-    isLoading: isPostLoading,
-  } = useGetPostByIdQuery(params?.id[1] as string, {
-    refetchOnMountOrArgChange: true,
-    skip: !postId,
-  })
+  const { data: postById, isLoading: isPostLoading } = useGetPostByIdQuery(
+    params?.id[1] as string,
+    {
+      refetchOnMountOrArgChange: true,
+      skip: !postId,
+    }
+  )
   const { data: commentsData, isLoading: isCommentsLoading } = useGetCommentsQuery(
     { postId },
     { skip: !postId }
@@ -58,7 +57,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
     setDescription(newDescription)
   }
 
-  if (isPostLoading || isPostFetching || isCommentsLoading) {
+  if (isPostLoading || isCommentsLoading) {
     return (
       <Modal onOpenChange={onClose} open={isOpen}>
         <Skeleton className={s.postDetails} height={562} />

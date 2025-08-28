@@ -1,4 +1,5 @@
 import { pageHomeService } from '@/services/pageHomeService'
+import { GetFollowersPublications } from '@/services/pageHomeService/pageHomeService.types'
 import { CommentsResponse } from '@/services/publicPosts'
 
 import { baseApi } from '../baseApi'
@@ -10,6 +11,33 @@ import {
   PostUpdate,
   PostsByUserNameResponse,
 } from './postsService.types'
+
+function applyLikeUpdate(draft: PostItemResponse, likeStatus: LikeStatus, likedAvatarUser: string) {
+  draft.isLiked = likeStatus === LikeStatus.LIKE
+  draft.likesCount += likeStatus === LikeStatus.LIKE ? 1 : -1
+
+  if (likeStatus === LikeStatus.LIKE) {
+    if (!draft.avatarWhoLikes.includes(likedAvatarUser)) {
+      draft.avatarWhoLikes.push(likedAvatarUser)
+    }
+  } else {
+    draft.avatarWhoLikes = draft.avatarWhoLikes.filter(url => url !== likedAvatarUser)
+  }
+}
+
+function applyLikeUpdateToList(
+  draft: GetFollowersPublications,
+  postId: number,
+  likeStatus: LikeStatus,
+  likedAvatarUser: string
+) {
+  const post = draft.items.find(p => p.id === postId)
+
+  if (!post) {
+    return
+  }
+  applyLikeUpdate(post, likeStatus, likedAvatarUser)
+}
 
 const postService = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -71,22 +99,13 @@ const postService = baseApi.injectEndpoints({
           pageHomeService.util.updateQueryData(
             'getFollowersPublications',
             { endCursorPostId },
-            draft => {
-              const pub = draft.items.find(p => p.id === postId)
+            draft => applyLikeUpdateToList(draft, postId, likeStatus, likedAvatarUser)
+          )
+        )
 
-              if (pub) {
-                pub.isLiked = likeStatus === 'LIKE'
-                pub.likesCount += likeStatus === 'LIKE' ? 1 : -1
-
-                if (likeStatus === 'LIKE') {
-                  if (!pub.avatarWhoLikes.includes(likedAvatarUser)) {
-                    pub.avatarWhoLikes.push(likedAvatarUser)
-                  }
-                } else {
-                  pub.avatarWhoLikes = pub.avatarWhoLikes.filter(url => url !== likedAvatarUser)
-                }
-              }
-            }
+        const patchPost = dispatch(
+          postService.util.updateQueryData('getPostById', postId.toString(), draft =>
+            applyLikeUpdate(draft, likeStatus, likedAvatarUser)
           )
         )
 
@@ -94,6 +113,7 @@ const postService = baseApi.injectEndpoints({
           await queryFulfilled
         } catch {
           patchResult.undo()
+          patchPost.undo()
         }
       },
       query: ({ likeStatus, postId }) => ({
