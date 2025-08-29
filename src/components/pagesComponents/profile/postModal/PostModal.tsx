@@ -27,13 +27,10 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
   const params = useParams()
   const postId = params?.id[1] ?? ''
 
-  const { data: postById, isLoading: isPostLoading } = useGetPostByIdQuery(
-    params?.id[1] as string,
-    {
-      refetchOnMountOrArgChange: true,
-      skip: !postId,
-    }
-  )
+  const { data: postById, isLoading: isPostLoading } = useGetPostByIdQuery(postId, {
+    refetchOnMountOrArgChange: true,
+    skip: !postId,
+  })
   const { data: commentsData, isLoading: isCommentsLoading } = useGetCommentsQuery(
     { postId },
     { skip: !postId }
@@ -69,16 +66,8 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
     return null
   }
 
-  const {
-    avatarOwner = '',
-    avatarWhoLikes = [],
-    createdAt = '',
-    id = 0,
-    images = [],
-    isLiked = false,
-    likesCount = 0,
-    userName = '',
-  } = postById
+  const { avatarOwner, avatarWhoLikes, createdAt, id, images, isLiked, likesCount, userName } =
+    postById
 
   return (
     id === +params?.id[1] && (

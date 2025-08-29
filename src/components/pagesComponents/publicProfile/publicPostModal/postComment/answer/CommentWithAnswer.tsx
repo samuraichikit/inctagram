@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { PostComment } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment'
 import { Answer } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/answer/Answer'
+import { CommentByEkate } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/comment/CommentByEkate'
 import { useGetAnswersToPostCommentQuery } from '@/services/commentPost/commentPostService'
 import { CommentsViewModel } from '@/services/commentPost/commentPostService.types'
 import { Typography } from '@samuraichikit/inc-ui-kit'
@@ -17,28 +18,31 @@ type Props = {
 
 export const CommentsWithAnswers = ({ avatarOwner, comment, userName }: Props) => {
   const { t } = useTranslation()
-  const { data: answersToComment } = useGetAnswersToPostCommentQuery({
-    commentId: comment.id,
-    postId: comment.postId,
-  })
   const [isShowAnswers, setIsShowAnswers] = useState(true)
-
+  const { data: answersToComment } = useGetAnswersToPostCommentQuery(
+    {
+      commentId: comment.id,
+      postId: comment.postId,
+    },
+    { skip: !isShowAnswers }
+  )
   const toggleShowAnswer = () => {
     setIsShowAnswers(!isShowAnswers)
   }
 
   return (
     <div className={s.commentsWithAnswers}>
-      <PostComment
-        avatarOwner={avatarOwner}
-        content={comment.content}
-        createdAt={comment.createdAt}
-        id={comment.id}
-        isLiked={comment.isLiked}
-        likesCount={comment.likeCount}
-        postId={comment.postId}
-        userName={userName}
-      />
+      <CommentByEkate comment={comment} />
+      {/*<PostComment*/}
+      {/*  avatarOwner={avatarOwner}*/}
+      {/*  content={comment.content}*/}
+      {/*  createdAt={comment.createdAt}*/}
+      {/*  id={comment.id}*/}
+      {/*  isLiked={comment.isLiked}*/}
+      {/*  likesCount={comment.likeCount}*/}
+      {/*  postId={comment.postId}*/}
+      {/*  userName={userName}*/}
+      {/*/>*/}
       <div className={s.answers}>
         {(answersToComment?.items ?? []).length > 0 &&
           (isShowAnswers ? (
@@ -47,7 +51,8 @@ export const CommentsWithAnswers = ({ avatarOwner, comment, userName }: Props) =
                 {t.commentForm.hideAnswer} ({answersToComment?.items?.length ?? 0})
               </Typography>
               {(answersToComment?.items ?? []).map(answer => (
-                <Answer answer={answer} key={answer.id} postId={comment.postId} />
+                <CommentByEkate comment={answer} key={answer.id} />
+                // <Answer answer={answer} key={answer.id} postId={comment.postId} />
               ))}
             </div>
           ) : (
