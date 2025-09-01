@@ -7,6 +7,7 @@ import { PostActionsBar } from '@/components/pagesComponents/profile/postModal/p
 import { Comments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/answer/Comments'
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
 import { CommentForm } from '@/components/ui/commentForm'
+import { useGetPostCommentsQuery } from '@/services/commentPost/commentPostService'
 import { useGetPostByIdQuery } from '@/services/posts'
 import { useGetCommentsQuery } from '@/services/publicPosts'
 import { Modal } from '@samuraichikit/inc-ui-kit'
@@ -26,15 +27,21 @@ type Props = {
 export const PostModal = ({ isOpen, onClose }: Props) => {
   const params = useParams()
   const postId = params?.id[1] ?? ''
+  const postIdNum = Number(postId)
 
   const { data: postById, isLoading: isPostLoading } = useGetPostByIdQuery(postId, {
     refetchOnMountOrArgChange: true,
     skip: !postId,
   })
-  const { data: commentsData, isLoading: isCommentsLoading } = useGetCommentsQuery(
-    { postId },
+
+  const { data: commentsData, isLoading: isCommentsLoading } = useGetPostCommentsQuery(
+    { postId: postIdNum },
     { skip: !postId }
   )
+  // const { data: commentsData, isLoading: isCommentsLoading } = useGetCommentsQuery(
+  //   { postId },
+  //   { skip: !postId }
+  // )
   const comments = commentsData?.items ?? []
 
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
@@ -99,7 +106,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
               />
             ) : (
               <>
-                <Comments avatarOwner={avatarOwner} comments={comments} userName={userName} />
+                <Comments comments={comments} />
                 <PostActionsBar isLiked={isLiked} postId={+postId} />
                 <PostLikes
                   avatarsSrc={avatarWhoLikes}

@@ -6,24 +6,49 @@ import { useTranslation } from '@/common/hooks/useTranslation'
 import { Avatar } from '@/components/ui/profile/profilePhoto/avatar'
 import { TimeAgoDisplay } from '@/components/ui/timeAgoDisplay'
 import {
+  useUpdateAnswerLikeStatusMutation,
+  useUpdateCommentLikeStatusMutation,
+} from '@/services/commentPost/commentPostService'
+import {
   AnswersViewModel,
   CommentsViewModel,
 } from '@/services/commentPost/commentPostService.types'
+import { LikeStatus } from '@/services/posts'
 import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './CommentByEkate.module.scss'
 
 type Props = {
   comment: AnswersViewModel | CommentsViewModel
+  postId: number
 }
 
-export const CommentByEkate = ({ comment }: Props) => {
+export const CommentByEkate = ({ comment, postId }: Props) => {
   const { t } = useTranslation()
-  const [isLiked, setIsLiked] = useState<boolean>(comment.isLiked)
 
-  const toggleLikeAnswer = () => {
-    setIsLiked(prevState => !prevState)
-    alert(isLiked)
+  const [updateLikeCommentStatus] = useUpdateCommentLikeStatusMutation()
+  const [updateLikeAnswerStatus] = useUpdateAnswerLikeStatusMutation()
+
+  const handleLike = async () => {
+    if ('postId' in comment) {
+      try {
+        await updateLikeCommentStatus({
+          commentId: comment.id,
+          likeStatus: comment.isLiked ? 'NONE' : 'LIKE',
+          postId,
+        }).unwrap()
+        console.log('Лайк обновлён на сервере')
+      } catch (err) {
+        console.error('Ошибка лайка комментария', err)
+      }
+    } else {
+      updateLikeAnswerStatus({
+        answerId: comment.id,
+        commentId: comment.commentId,
+        likeStatus: comment.isLiked ? LikeStatus.NONE : LikeStatus.LIKE,
+        postId,
+      })
+    }
   }
 
   return (
@@ -58,8 +83,12 @@ export const CommentByEkate = ({ comment }: Props) => {
           </div>
         </div>
       </div>
-      <Button onClick={toggleLikeAnswer} variant={'icon'}>
-        {isLiked ? <HeartRedIcon height={'16px'} /> : <HeartIcon height={'16px'} />}
+      <Button variant={'icon'}>
+        {comment.isLiked ? (
+          <HeartRedIcon onClick={handleLike} />
+        ) : (
+          <HeartIcon height={'16px'} onClick={handleLike} />
+        )}
       </Button>
     </div>
   )

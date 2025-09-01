@@ -6,23 +6,14 @@ import { CommentsViewModel } from '@/services/commentPost/commentPostService.typ
 import s from './Answer.module.scss'
 
 type Props = {
-  avatarOwner: string
   comments: CommentsViewModel[]
-  userName: string
 }
 
-export const Comments = ({ avatarOwner, comments, userName }: Props) => {
+export const Comments = ({ comments }: Props) => {
   return (
     <div className={s.comments}>
       {comments.length > 0 &&
-        comments.map(comment => (
-          <CommentsWithAnswers
-            avatarOwner={avatarOwner}
-            comment={comment}
-            key={comment.id}
-            userName={userName}
-          />
-        ))}
+        comments.map(comment => <CommentsWithAnswers comment={comment} key={comment.id} />)}
     </div>
   )
 }

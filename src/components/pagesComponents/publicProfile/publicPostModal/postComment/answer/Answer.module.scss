@@ -60,15 +60,17 @@
     font-size: var(--font-size-s);
   }
 }
+.answers {
+  margin: 10px auto 0 42px;
+}
 
+.showAnswer{
+  cursor: pointer;
+  margin-left: 6px;
+  color: var(--color-light-900);
+}
 .commentsWithAnswers {
-  .answers {
-    margin: 10px auto 0 42px;
-
     p {
-      cursor: pointer;
-      margin-left: 6px;
-      color: var(--color-light-900);
+
     }
-  }
 }

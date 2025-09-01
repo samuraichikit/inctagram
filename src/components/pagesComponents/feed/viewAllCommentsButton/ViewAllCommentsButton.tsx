@@ -3,6 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 
 import { useElementInView } from '@/common/hooks/useElementInView'
 import { useTranslation } from '@/common/hooks/useTranslation'
+import { useLazyGetPostCommentsQuery } from '@/services/commentPost/commentPostService'
 import { useLazyGetCommentsQuery } from '@/services/publicPosts'
 import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 
@@ -11,12 +12,10 @@ import s from './viewAllComments.module.scss'
 import { Comments } from '../../publicProfile/publicPostModal/postComment/answer/Comments'
 
 type Props = {
-  avatarOwner: string
-  postId: string
-  userName: string
+  postId: number
 }
 
-export const ViewAllCommentsButton = ({ avatarOwner, postId, userName }: Props) => {
+export const ViewAllCommentsButton = ({ postId }: Props) => {
   const classNames = {
     buttonView: s.buttonView,
     text: s.text,
@@ -25,7 +24,7 @@ export const ViewAllCommentsButton = ({ avatarOwner, postId, userName }: Props) 
   const [isShowComments, setIsShowComments] = useState(false)
   const { isInView, targetRef } = useElementInView({})
 
-  const [getPostComments, { data, isLoading }] = useLazyGetCommentsQuery()
+  const [getPostComments, { data, isLoading }] = useLazyGetPostCommentsQuery()
   const { t } = useTranslation()
 
   const comments = data?.items ?? []
@@ -46,7 +45,7 @@ export const ViewAllCommentsButton = ({ avatarOwner, postId, userName }: Props) 
   }
 
   if (isShowComments) {
-    return <Comments avatarOwner={avatarOwner} comments={comments} userName={userName} />
+    return <Comments comments={comments} />
   }
 
   return (
