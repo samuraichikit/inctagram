@@ -6,7 +6,7 @@
   flex-direction: column;
 
   height: 100%;
-  margin: 15px 20px 15px 20px;
+  margin: 15px 20px;
 }
 
 .commentWrapper {
@@ -60,11 +60,12 @@
     font-size: var(--font-size-s);
   }
 }
+
 .answers {
   margin: 10px auto 0 42px;
 }
 
-.showAnswer{
+.showAnswer {
   cursor: pointer;
   margin-left: 6px;
   color: var(--color-light-900);
@@ -76,21 +77,23 @@
   justify-content: space-between;
   margin-top: 10px;
 }
-.modal{
-  padding: 30px;
-  height: 150px;
+
+.modal {
   width: 400px;
+  height: 150px;
+  padding: 30px;
 }
 
-.avatar{
+.avatar {
   flex: 0 0 auto;
 }
 
 .leftBlock {
   display: flex;
-  align-items: flex-start;
   gap: 12px;
+  align-items: flex-start;
 }
+
 .username,
 .content {
   display: inline;
@@ -107,7 +110,8 @@
 .content {
   word-break: break-word;
 }
-.comment{
+
+.comment {
   display: flex;
   flex-direction: column;
 }
@@ -122,4 +126,3 @@
     color: var(--color-light-900);
   }
 }
-
