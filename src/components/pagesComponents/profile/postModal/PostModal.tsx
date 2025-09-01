@@ -9,7 +9,6 @@ import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPost
 import { CommentForm } from '@/components/ui/commentForm'
 import { useGetPostCommentsQuery } from '@/services/commentPost/commentPostService'
 import { useGetPostByIdQuery } from '@/services/posts'
-import { useGetCommentsQuery } from '@/services/publicPosts'
 import { Modal } from '@samuraichikit/inc-ui-kit'
 import { useParams } from 'next/navigation'
 

@@ -1,5 +1,3 @@
-import { LikeStatus } from '@/services/posts'
-
 export type CreateCommentRequest = {
   content: string
   postId: number

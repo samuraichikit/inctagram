@@ -1,5 +1,5 @@
 import { baseApi } from '@/services/baseApi'
-import { LikeStatus, PostItemResponse } from '@/services/posts'
+import { LikeStatus } from '@/services/posts'
 
 import {
   CommentsViewModel,

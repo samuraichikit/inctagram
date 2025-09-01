@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { HeartIcon } from '@/assets/icons/HeartIcon'
 import { HeartRedIcon } from '@/assets/icons/HeartRedIcon'
