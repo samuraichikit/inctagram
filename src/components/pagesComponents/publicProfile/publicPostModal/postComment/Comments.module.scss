@@ -16,29 +16,6 @@
   margin-top: 10px;
 }
 
-.comment {
-  display: flex;
-  column-gap: 12px;
-}
-
-.commentInfo {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  align-items: flex-start;
-  justify-content: center;
-
-  margin-top: 2px;
-
-  :last-child {
-    cursor: pointer;
-  }
-
-  p {
-    color: var(--color-light-900);
-  }
-}
-
 .commentLike {
   cursor: pointer;
   padding-top: 15px;
@@ -69,13 +46,6 @@
   cursor: pointer;
   margin-left: 6px;
   color: var(--color-light-900);
-}
-
-.commentWrapper {
-  display: flex;
-  gap: 20px;
-  justify-content: space-between;
-  margin-top: 10px;
 }
 
 .modal {
