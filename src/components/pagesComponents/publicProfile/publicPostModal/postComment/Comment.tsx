@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { HeartIcon } from '@/assets/icons/HeartIcon'
 import { HeartRedIcon } from '@/assets/icons/HeartRedIcon'
@@ -6,6 +6,7 @@ import { useTranslation } from '@/common/hooks/useTranslation'
 import { Avatar } from '@/components/ui/profile/profilePhoto/avatar'
 import { TimeAgoDisplay } from '@/components/ui/timeAgoDisplay'
 import {
+  useCreateNewAnswerToCommentMutation,
   useUpdateAnswerLikeStatusMutation,
   useUpdateCommentLikeStatusMutation,
 } from '@/services/commentPost/commentPostService'
@@ -14,33 +15,41 @@ import {
   CommentsViewModel,
 } from '@/services/commentPost/commentPostService.types'
 import { LikeStatus } from '@/services/posts'
-import { Button, Typography } from '@samuraichikit/inc-ui-kit'
+import { Button, Modal, TextArea, Typography } from '@samuraichikit/inc-ui-kit'
 
-import s from './CommentByEkate.module.scss'
+import s from './Comments.module.scss'
 
-type Props = {
-  comment: AnswersViewModel | CommentsViewModel
-  postId: number
+export enum CommentType {
+  ANSWER = 'answer',
+  COMMENT = 'comment',
 }
 
-export const CommentByEkate = ({ comment, postId }: Props) => {
-  const { t } = useTranslation()
+type Props =
+  | {
+      comment: AnswersViewModel
+      commentType: CommentType.ANSWER
+      postId: number
+    }
+  | {
+      comment: CommentsViewModel
+      commentType: CommentType.COMMENT
+      postId: number
+    }
 
+export const Comment = ({ comment, commentType, postId }: Props) => {
+  const { t } = useTranslation()
+  const [isShowInput, setIsShowInput] = useState(false)
+  const [commentValue, setCommentValue] = useState<string>('')
   const [updateLikeCommentStatus] = useUpdateCommentLikeStatusMutation()
   const [updateLikeAnswerStatus] = useUpdateAnswerLikeStatusMutation()
-
-  const handleLike = async () => {
-    if ('postId' in comment) {
-      try {
-        await updateLikeCommentStatus({
-          commentId: comment.id,
-          likeStatus: comment.isLiked ? 'NONE' : 'LIKE',
-          postId,
-        }).unwrap()
-        console.log('Лайк обновлён на сервере')
-      } catch (err) {
-        console.error('Ошибка лайка комментария', err)
-      }
+  const [publishAnswerToComment] = useCreateNewAnswerToCommentMutation()
+  const handleLike = () => {
+    if (commentType === CommentType.COMMENT) {
+      updateLikeCommentStatus({
+        commentId: comment.id,
+        likeStatus: comment.isLiked ? 'NONE' : 'LIKE',
+        postId,
+      })
     } else {
       updateLikeAnswerStatus({
         answerId: comment.id,
@@ -48,6 +57,21 @@ export const CommentByEkate = ({ comment, postId }: Props) => {
         likeStatus: comment.isLiked ? LikeStatus.NONE : LikeStatus.LIKE,
         postId,
       })
+    }
+  }
+
+  const addCommentToComment = async () => {
+    try {
+      await publishAnswerToComment({
+        commentId: comment.id,
+        content: commentValue.trim(),
+        postId,
+      }).unwrap()
+
+      setCommentValue('')
+      setIsShowInput(false)
+    } catch (err) {
+      console.error(err)
     }
   }
 
@@ -77,19 +101,27 @@ export const CommentByEkate = ({ comment, postId }: Props) => {
                 {t.commentForm.like}: {comment.likeCount}
               </Typography>
             )}
-            <Button variant={'text'}>
+            <Button onClick={() => setIsShowInput(true)} variant={'text'}>
               <Typography variant={'semi-bold_small_text'}>{t.commentForm.answer}</Typography>
             </Button>
           </div>
         </div>
       </div>
-      <Button variant={'icon'}>
-        {comment.isLiked ? (
-          <HeartRedIcon onClick={handleLike} />
-        ) : (
-          <HeartIcon height={'16px'} onClick={handleLike} />
-        )}
+      <Button onClick={handleLike} variant={'icon'}>
+        {comment.isLiked ? <HeartRedIcon /> : <HeartIcon height={'16px'} />}
       </Button>
+      <Modal className={s.modal} onOpenChange={setIsShowInput} open={isShowInput}>
+        <TextArea onValueChange={setCommentValue} value={commentValue} />
+        <Button
+          disabled={commentValue.trim().length === 0}
+          fullWidth
+          onClick={addCommentToComment}
+          type={'button'}
+          variant={'primary'}
+        >
+          {t.commentForm.publish}
+        </Button>
+      </Modal>
     </div>
   )
 }

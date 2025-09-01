@@ -8,7 +8,7 @@ import { Button, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './viewAllComments.module.scss'
 
-import { Comments } from '../../publicProfile/publicPostModal/postComment/answer/Comments'
+import { Comments } from '../../publicProfile/publicPostModal/postComment/Comments'
 
 type Props = {
   postId: number

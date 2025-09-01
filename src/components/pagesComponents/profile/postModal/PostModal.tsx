@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import { DeletePost } from '@/components/pagesComponents/profile/postModal/deletePost/DeletePost'
 import { EditPost } from '@/components/pagesComponents/profile/postModal/editPost'
 import { PostActionsBar } from '@/components/pagesComponents/profile/postModal/postActionsBar'
-import { Comments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/answer/Comments'
+import { Comments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/Comments'
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
 import { CommentForm } from '@/components/ui/commentForm'
 import { useGetPostCommentsQuery } from '@/services/commentPost/commentPostService'
@@ -37,10 +37,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
     { postId: postIdNum },
     { skip: !postId }
   )
-  // const { data: commentsData, isLoading: isCommentsLoading } = useGetCommentsQuery(
-  //   { postId },
-  //   { skip: !postId }
-  // )
+
   const comments = commentsData?.items ?? []
 
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)

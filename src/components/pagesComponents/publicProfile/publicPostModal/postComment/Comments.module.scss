@@ -69,8 +69,57 @@
   margin-left: 6px;
   color: var(--color-light-900);
 }
-.commentsWithAnswers {
-    p {
 
-    }
+.commentWrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-top: 10px;
 }
+.modal{
+  padding: 30px;
+  height: 150px;
+  width: 400px;
+}
+
+.avatar{
+  flex: 0 0 auto;
+}
+
+.leftBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.username,
+.content {
+  display: inline;
+}
+
+.textComment {
+  display: block;
+}
+
+.username {
+  white-space: nowrap;
+}
+
+.content {
+  word-break: break-word;
+}
+.comment{
+  display: flex;
+  flex-direction: column;
+}
+
+.commentInfo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+
+  p {
+    color: var(--color-light-900);
+  }
+}
+

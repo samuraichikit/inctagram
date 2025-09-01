@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { CommentsWithAnswers } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/answer/CommentWithAnswer'
+import { CommentsWithAnswers } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/CommentWithAnswer'
 import { CommentsViewModel } from '@/services/commentPost/commentPostService.types'
 
-import s from './Answer.module.scss'
+import s from './Comments.module.scss'
 
 type Props = {
   comments: CommentsViewModel[]
