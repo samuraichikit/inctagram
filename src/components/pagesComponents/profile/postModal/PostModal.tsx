@@ -4,11 +4,11 @@ import Skeleton from 'react-loading-skeleton'
 import { DeletePost } from '@/components/pagesComponents/profile/postModal/deletePost/DeletePost'
 import { EditPost } from '@/components/pagesComponents/profile/postModal/editPost'
 import { PostActionsBar } from '@/components/pagesComponents/profile/postModal/postActionsBar'
-import { Comments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/answer/Comments'
+import { Comments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/Comments'
 import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
 import { CommentForm } from '@/components/ui/commentForm'
+import { useGetPostCommentsQuery } from '@/services/commentPost/commentPostService'
 import { useGetPostByIdQuery } from '@/services/posts'
-import { useGetCommentsQuery } from '@/services/publicPosts'
 import { Modal } from '@samuraichikit/inc-ui-kit'
 import { useParams } from 'next/navigation'
 
@@ -26,19 +26,18 @@ type Props = {
 export const PostModal = ({ isOpen, onClose }: Props) => {
   const params = useParams()
   const postId = params?.id[1] ?? ''
+  const postIdNum = Number(postId)
 
-  const {
-    data: postById,
-    isFetching: isPostFetching,
-    isLoading: isPostLoading,
-  } = useGetPostByIdQuery(params?.id[1] as string, {
+  const { data: postById, isLoading: isPostLoading } = useGetPostByIdQuery(postId, {
     refetchOnMountOrArgChange: true,
     skip: !postId,
   })
-  const { data: commentsData, isLoading: isCommentsLoading } = useGetCommentsQuery(
-    { postId },
+
+  const { data: commentsData, isLoading: isCommentsLoading } = useGetPostCommentsQuery(
+    { postId: postIdNum },
     { skip: !postId }
   )
+
   const comments = commentsData?.items ?? []
 
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
@@ -58,7 +57,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
     setDescription(newDescription)
   }
 
-  if (isPostLoading || isPostFetching || isCommentsLoading) {
+  if (isPostLoading || isCommentsLoading) {
     return (
       <Modal onOpenChange={onClose} open={isOpen}>
         <Skeleton className={s.postDetails} height={562} />
@@ -70,16 +69,8 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
     return null
   }
 
-  const {
-    avatarOwner = '',
-    avatarWhoLikes = [],
-    createdAt = '',
-    id = 0,
-    images = [],
-    isLiked = false,
-    likesCount = 0,
-    userName = '',
-  } = postById
+  const { avatarOwner, avatarWhoLikes, createdAt, id, images, isLiked, likesCount, userName } =
+    postById
 
   return (
     id === +params?.id[1] && (
@@ -111,7 +102,7 @@ export const PostModal = ({ isOpen, onClose }: Props) => {
               />
             ) : (
               <>
-                <Comments avatarOwner={avatarOwner} comments={comments} userName={userName} />
+                <Comments comments={comments} />
                 <PostActionsBar isLiked={isLiked} postId={+postId} />
                 <PostLikes
                   avatarsSrc={avatarWhoLikes}
