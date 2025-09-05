@@ -19,99 +19,92 @@ type Props = {
 }
 
 export const UserPosts = ({ userName }: Props) => {
-  const classNames = {
-    container: s.container,
-  }
-
   const router = useRouter()
   const { id } = router.query
   const userId = id?.[0] ?? ''
-
-  const [pageNumber, setPageNumber] = useState(1)
-  const [posts, setPosts] = useState<PostResponse[]>([])
-  const endCursorPostIdRef = useRef<null | string>(null)
 
   const { data: meData } = useMeQuery()
   const isMyProfile = meData?.userId === Number(userId)
 
   const { data: postsByUserName } = useGetUserPostsQuery(
-    {
-      pageNumber,
-      pageSize: 8,
-      userName,
-    },
+    { pageNumber: 1, pageSize: 8, userName },
     { skip: !isMyProfile }
   )
 
   const { data: publicPostsByUserId } = useGetPublicPostsByUserIdQuery(
     { pageSize: 8, userId },
-    { skip: router.isFallback || pageNumber > 1 }
+    { skip: router.isFallback || isMyProfile }
   )
+
+  const [extraPosts, setExtraPosts] = useState<PostResponse[]>([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
 
   const [getNextPosts] = useLazyGetUserPostsQuery()
   const [getNextPublicPosts] = useLazyGetPublicPostsByUserIdQuery()
 
   const { isInView, targetRef } = useElementInView({ threshold: 0.6 })
+  const endCursorPostIdRef = useRef<null | string>(null)
+
+  const firstPagePosts = isMyProfile
+    ? (postsByUserName?.items ?? [])
+    : (publicPostsByUserId?.items ?? [])
 
   const totalCount = publicPostsByUserId?.totalCount ?? postsByUserName?.totalCount ?? 0
-  const totalPages = Math.ceil(totalCount / 8)
-  const isSetNextPage = isInView && pageNumber < totalPages
-  const initialPosts = publicPostsByUserId?.items ?? postsByUserName?.items
-  const publicPosts = publicPostsByUserId?.items || []
+
+  const allPosts = [...firstPagePosts, ...extraPosts]
 
   useEffect(() => {
-    endCursorPostIdRef.current = posts[posts.length - 1]?.id.toString()
-  }, [posts])
-
-  useEffect(() => {
-    if (pageNumber === 1 && initialPosts) {
-      setPosts([...initialPosts])
+    if (allPosts.length) {
+      endCursorPostIdRef.current = allPosts[allPosts.length - 1]?.id.toString()
     }
-  }, [pageNumber, initialPosts])
+  }, [allPosts])
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const { data } = await getNextPosts({ pageNumber, pageSize: 8, userName })
+    const totalPages = Math.ceil(totalCount / 8)
 
-      if (data) {
-        setPosts(prev => [...prev, ...data.items])
-      }
+    if (!isInView || isLoadingMore || currentPage >= totalPages) {
+      return
     }
 
-    const fetchPublicPosts = async () => {
-      const { data } = await getNextPublicPosts({
-        endCursorPostId: endCursorPostIdRef.current ?? undefined,
-        pageSize: 8,
-        userId,
+    setIsLoadingMore(true)
+    const nextPage = currentPage + 1
+
+    const load = isMyProfile
+      ? getNextPosts({ pageNumber: nextPage, pageSize: 8, userName }).unwrap()
+      : getNextPublicPosts({
+          endCursorPostId: endCursorPostIdRef.current ?? undefined,
+          pageSize: 8,
+          userId,
+        }).unwrap()
+
+    load
+      .then(res => {
+        setExtraPosts(prev => [...prev, ...res.items])
+        setCurrentPage(nextPage)
       })
-
-      if (data) {
-        setPosts(prev => [...prev, ...data.items])
-      }
-    }
-
-    if (pageNumber > 1 && pageNumber <= totalPages) {
-      if (isMyProfile) {
-        fetchPosts()
-      } else {
-        fetchPublicPosts()
-      }
-    }
-  }, [pageNumber, getNextPosts, totalPages, userName, userId, getNextPublicPosts, isMyProfile])
-
-  useEffect(() => {
-    if (isSetNextPage) {
-      setPageNumber(prev => prev + 1)
-    }
-  }, [isSetNextPage])
+      .finally(() => {
+        setTimeout(() => setIsLoadingMore(false), 100)
+      })
+  }, [
+    isInView,
+    isLoadingMore,
+    currentPage,
+    totalCount,
+    isMyProfile,
+    userName,
+    userId,
+    getNextPosts,
+    getNextPublicPosts,
+  ])
 
   return (
     <>
-      {(pageNumber === 1 ? publicPosts : posts).map((post, index) => (
+      {allPosts.map((post, index) => (
         <div
-          className={classNames.container}
+          className={s.container}
           key={post.id}
-          ref={index === (pageNumber === 1 ? publicPosts : posts).length - 1 ? targetRef : null}
+          ref={index === allPosts.length - 1 ? targetRef : null}
         >
           <Link href={ROUTES.PROFILE.USER_POST({ id: post.ownerId, postId: post.id })}>
             <PostImages fill images={post.images} />
