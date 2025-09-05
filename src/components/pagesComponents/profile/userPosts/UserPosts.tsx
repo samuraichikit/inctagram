@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { ROUTES } from '@/common/constants'
 import { useElementInView } from '@/common/hooks/useElementInView'
@@ -46,13 +46,15 @@ export const UserPosts = ({ userName }: Props) => {
   const { isInView, targetRef } = useElementInView({ threshold: 0.6 })
   const endCursorPostIdRef = useRef<null | string>(null)
 
-  const firstPagePosts = isMyProfile
-    ? (postsByUserName?.items ?? [])
-    : (publicPostsByUserId?.items ?? [])
-
   const totalCount = publicPostsByUserId?.totalCount ?? postsByUserName?.totalCount ?? 0
 
-  const allPosts = [...firstPagePosts, ...extraPosts]
+  const allPosts = useMemo(() => {
+    const firstPage = isMyProfile
+      ? (postsByUserName?.items ?? [])
+      : (publicPostsByUserId?.items ?? [])
+
+    return [...firstPage, ...extraPosts]
+  }, [isMyProfile, postsByUserName?.items, publicPostsByUserId?.items, extraPosts])
 
   useEffect(() => {
     if (allPosts.length) {
