@@ -39,7 +39,7 @@ function applyLikeUpdateToList(
   applyLikeUpdate(post, likeStatus, likedAvatarUser)
 }
 
-const postService = baseApi.injectEndpoints({
+export const postsService = baseApi.injectEndpoints({
   endpoints: builder => ({
     deletePost: builder.mutation<void, string>({
       invalidatesTags: (result, error, postId) => [
@@ -104,7 +104,7 @@ const postService = baseApi.injectEndpoints({
         )
 
         const patchPost = dispatch(
-          postService.util.updateQueryData('getPostById', postId.toString(), draft =>
+          postsService.util.updateQueryData('getPostById', postId.toString(), draft =>
             applyLikeUpdate(draft, likeStatus, likedAvatarUser)
           )
         )
@@ -148,4 +148,4 @@ export const {
   useLazyGetUserPostsQuery,
   useUpdateLikeStatusMutation,
   useUpdatePostMutation,
-} = postService
+} = postsService
