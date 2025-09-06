@@ -49,12 +49,12 @@ export const UserPosts = ({ userName }: Props) => {
   const totalCount = publicPostsByUserId?.totalCount ?? postsByUserName?.totalCount ?? 0
 
   const allPosts = useMemo(() => {
-    const firstPage = isMyProfile
-      ? (postsByUserName?.items ?? [])
-      : (publicPostsByUserId?.items ?? [])
+    const posts = postsByUserName?.items ?? []
+    const publicPosts = publicPostsByUserId?.items ?? []
+    const firstPage = isMyProfile ? posts : publicPosts
 
     return [...firstPage, ...extraPosts]
-  }, [isMyProfile, postsByUserName?.items, publicPostsByUserId?.items, extraPosts])
+  }, [isMyProfile, extraPosts, postsByUserName?.items, publicPostsByUserId?.items])
 
   useEffect(() => {
     if (allPosts.length) {
