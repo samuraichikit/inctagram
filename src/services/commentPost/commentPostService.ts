@@ -1,4 +1,5 @@
 import { baseApi } from '@/services/baseApi'
+import { LikeStatus } from '@/services/posts'
 
 import {
   CommentsViewModel,
@@ -46,7 +47,6 @@ const commentsApi = baseApi.injectEndpoints({
         }
       },
     }),
-
     getAnswersToPostComment: builder.query<
       GetAnswersToPostCommentsResponse,
       GetAnswersToPostCommentRequest
@@ -81,19 +81,61 @@ const commentsApi = baseApi.injectEndpoints({
     }),
     updateAnswerLikeStatus: builder.mutation<void, UpdateAnswerLikeStatusRequest>({
       invalidatesTags: ['Answer'],
-      query: ({ answerId, commentId, postId, ...body }) => {
+      async onQueryStarted(
+        { answerId, commentId, likeStatus, postId },
+        { dispatch, queryFulfilled }
+      ) {
+        const patchResult = dispatch(
+          commentsApi.util.updateQueryData(
+            'getAnswersToPostComment',
+            { commentId, postId },
+            draft => {
+              const answer = draft.items.find(a => a.id === answerId)
+
+              if (answer) {
+                answer.isLiked = likeStatus === LikeStatus.LIKE
+                answer.likeCount += likeStatus === LikeStatus.LIKE ? 1 : -1
+              }
+            }
+          )
+        )
+
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
+        }
+      },
+      query: ({ answerId, commentId, likeStatus, postId }) => {
         return {
-          body,
+          body: { likeStatus },
           method: 'PUT',
           url: `/v1/posts/${postId}/comments/${commentId}/answers/${answerId}/like-status`,
         }
       },
     }),
     updateCommentLikeStatus: builder.mutation<void, UpdateLikeStatusRequest>({
-      invalidatesTags: ['Comments'],
-      query: ({ commentId, postId, ...body }) => {
+      async onQueryStarted({ commentId, likeStatus, postId }, { dispatch, queryFulfilled }) {
+        const patchComments = dispatch(
+          commentsApi.util.updateQueryData('getPostComments', { postId }, draft => {
+            const comment = draft.items.find(c => c.id === commentId)
+
+            if (comment) {
+              comment.isLiked = likeStatus === LikeStatus.LIKE
+              comment.likeCount += likeStatus === LikeStatus.LIKE ? 1 : -1
+            }
+          })
+        )
+
+        try {
+          await queryFulfilled
+        } catch {
+          patchComments.undo()
+        }
+      },
+      query: ({ commentId, likeStatus, postId }) => {
         return {
-          body,
+          body: { likeStatus },
           method: 'PUT',
           url: `/v1/posts/${postId}/comments/${commentId}/like-status`,
         }
@@ -109,7 +151,7 @@ export const {
   useGetAnswersToPostCommentQuery,
   useGetCommentLikesQuery,
   useGetPostCommentsQuery,
+  useLazyGetPostCommentsQuery,
   useUpdateAnswerLikeStatusMutation,
-
   useUpdateCommentLikeStatusMutation,
 } = commentsApi
