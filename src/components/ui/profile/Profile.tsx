@@ -6,6 +6,7 @@ import { FollowUnfollowButton } from '@/components/pagesComponents/profile/follo
 import { PostModal } from '@/components/pagesComponents/profile/postModal/PostModal'
 import { UserPosts } from '@/components/pagesComponents/profile/userPosts'
 import { PublicPostModal } from '@/components/pagesComponents/publicProfile/publicPostModal'
+import FollowUnfollowList from '@/components/ui/profile/FollowUnfollowList'
 import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
 import { BlankCover } from '@/components/ui/profile/profilePhoto/blankCover/BlankCover'
 import { useMeQuery } from '@/services/auth'
@@ -49,6 +50,18 @@ export const Profile = () => {
   const isFollowing = profileWithPosts?.isFollowing
 
   const [isOpen, setIsOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalContentType, setModalContentType] = useState<'followers' | 'following'>('following')
+
+  const handleFollowItemClick = (index: number) => {
+    if (index === 1) {
+      setModalContentType('following')
+      setIsModalOpen(true)
+    } else if (index === 0) {
+      setModalContentType('followers')
+      setIsModalOpen(true)
+    }
+  }
 
   useEffect(() => {
     if (!postId) {
@@ -99,7 +112,12 @@ export const Profile = () => {
           <div className={s.followInfoWrapper}>
             <ul className={s.followInfoList}>
               {followArray.map((el, i) => (
-                <li className={s.followInfoItem} key={i}>
+                <li
+                  className={s.followInfoItem}
+                  key={i}
+                  onClick={() => handleFollowItemClick(i)}
+                  style={{ cursor: i !== 2 ? 'pointer' : 'default' }}
+                >
                   <Typography variant={'bold_text_14'}>{el}</Typography>
                   <Typography variant={'regular_text_14'}>
                     {i === 0 && t.profile.following}
@@ -110,6 +128,13 @@ export const Profile = () => {
               ))}
             </ul>
           </div>
+          {isModalOpen && (
+            <FollowUnfollowList
+              initialTab={modalContentType}
+              onClose={() => setIsModalOpen(false)}
+              userName={userName}
+            />
+          )}
           <div>
             <Typography className={s.aboutMe}>{aboutMe}</Typography>
           </div>
