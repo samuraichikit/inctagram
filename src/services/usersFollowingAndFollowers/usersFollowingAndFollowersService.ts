@@ -1,6 +1,7 @@
 import { baseApi } from '../baseApi'
 import {
   FollowArgs,
+  GetUserFollowArgs,
   GetUsersProfilesArgs,
   UnfollowArgs,
   UsersProfiles,
@@ -15,6 +16,24 @@ const usersService = baseApi.injectEndpoints({
         method: 'POST',
         url: 'v1/users/following',
       }),
+    }),
+    getUserFollowers: builder.query<UsersProfiles, GetUserFollowArgs>({
+      query: ({ userName, ...args }) => {
+        return {
+          method: 'GET',
+          params: args,
+          url: `v1/users/${userName}/following`,
+        }
+      },
+    }),
+    getUserFollowing: builder.query<UsersProfiles, GetUserFollowArgs>({
+      query: ({ userName, ...args }) => {
+        return {
+          method: 'GET',
+          params: args,
+          url: `v1/users/${userName}/followers`,
+        }
+      },
     }),
     getUsersProfiles: builder.query<UsersProfiles, GetUsersProfilesArgs>({
       forceRefetch({ currentArg, previousArg }) {
@@ -45,4 +64,10 @@ const usersService = baseApi.injectEndpoints({
   }),
 })
 
-export const { useFollowMutation, useGetUsersProfilesQuery, useUnfollowMutation } = usersService
+export const {
+  useFollowMutation,
+  useGetUserFollowersQuery,
+  useGetUserFollowingQuery,
+  useGetUsersProfilesQuery,
+  useUnfollowMutation,
+} = usersService
