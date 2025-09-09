@@ -16,6 +16,7 @@ export const ROUTES = {
   },
   FEED: '/feed',
   MAIN: '/',
+  MESSENGER: '/messenger',
   PROFILE: {
     SETTINGS: {
       DEVICES: (id: number | string) => `/profile/settings/devices/${id}`,

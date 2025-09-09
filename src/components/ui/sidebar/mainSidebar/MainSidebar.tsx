@@ -56,7 +56,7 @@ export const MainSidebar = () => {
             <MyProfileIcon />
             {t.mainSidebar.myProfile}
           </SidebarItem>
-          <SidebarItem href={'#'}>
+          <SidebarItem href={ROUTES.MESSENGER}>
             <MessengerIcon />
             {t.mainSidebar.messenger}
           </SidebarItem>
