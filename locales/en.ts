@@ -58,6 +58,12 @@ export const en: Locale = {
     search: 'Search',
     statistics: 'Statistics',
   },
+  messenger: {
+    inputSearch: 'Search',
+    openChat: 'Choose who you would like to talk to',
+    placeholder: 'Type Message...',
+    title: 'Messenger',
+  },
   modalMessage: {
     Error: {
       message: 'Transaction failed, please try again',

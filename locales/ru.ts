@@ -56,6 +56,12 @@ export const ru = {
     search: 'Поиск',
     statistics: 'Статистика',
   },
+  messenger: {
+    inputSearch: 'Поиск',
+    openChat: 'Выберите, с кем вы хотите поговорить',
+    placeholder: 'Введите Сообщение',
+    title: 'Мессенджер',
+  },
   modalMessage: {
     Error: {
       message: 'Транзакция не удалась, попробуйте еще раз',
