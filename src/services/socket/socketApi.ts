@@ -29,11 +29,11 @@ class SocketApi {
     this.socket = null
   }
 
-  emit(event: string, data?: any) {
-    this.socket?.emit(event, data)
+  emit(event: string, data?: any, callback?: (...args: any[]) => void) {
+    this.socket?.emit(event, data, callback)
   }
 
-  off(event: string, callback: (...args: any[]) => void) {
+  off(event: string, callback?: (...args: any[]) => void) {
     this.socket?.off(event, callback)
   }
 
