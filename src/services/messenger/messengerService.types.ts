@@ -39,9 +39,9 @@ export type GetMessagesResponse = {
 }
 
 export type GetMessagesRequest = {
-  cursor: string
-  pageSize: number
-  searchName: string
+  cursor?: string
+  pageSize?: number
+  searchName?: string
 }
 
 export type UpdateMessagesStatusResponse = {
