@@ -11,9 +11,6 @@ import s from './Messenger.module.scss'
 
 const Messenger = () => {
   const { t } = useTranslation()
-  const { data } = useGetMessagesQuery({})
-
-  console.log('messages', data)
 
   return (
     <div className={s.messengerWrapper}>
