@@ -11,7 +11,6 @@ export const registerSocketListeners = () => {
   const cleanup = () => {
     socketApi.off(WS_EVENT_PATH.MESSAGE_SEND)
     socketApi.off(WS_EVENT_PATH.RECEIVE_MESSAGE)
-    socketApi.off(WS_EVENT_PATH.NOTIFICATIONS)
   }
 
   cleanup()
