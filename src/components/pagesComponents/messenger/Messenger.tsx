@@ -4,12 +4,16 @@ import { useTranslation } from '@/common/hooks/useTranslation'
 import OpenChat from '@/components/pagesComponents/messenger/chat/OpenChat'
 import Chats from '@/components/pagesComponents/messenger/chats/Chats'
 import { Avatar } from '@/components/ui/avatar'
+import { useGetMessagesQuery } from '@/services/messenger'
 import { Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './Messenger.module.scss'
 
 const Messenger = () => {
   const { t } = useTranslation()
+  const { data } = useGetMessagesQuery({})
+
+  console.log('messages', data)
 
   return (
     <div className={s.messengerWrapper}>
