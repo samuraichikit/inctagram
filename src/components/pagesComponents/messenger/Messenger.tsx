@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Avatar } from '@/components/ui/avatar'
 import { Typography } from '@samuraichikit/inc-ui-kit'
 

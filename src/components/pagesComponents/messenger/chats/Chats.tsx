@@ -22,6 +22,7 @@ export const Chats = () => {
           return (
             <LatestChat
               createdAt={latestMessageData.createdAt}
+              id={latestMessageData.ownerId}
               key={latestMessageData.id}
               messageText={latestMessageData.messageText}
               src={latestMessageData.avatars[0]?.url}
