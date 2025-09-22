@@ -1,6 +1,7 @@
 import React, { PropsWithChildren, ReactElement } from 'react'
 
 import { ROUTES } from '@/common/constants'
+import { useConnectSocket } from '@/common/hooks/useConnectSocket'
 import { useMeQuery } from '@/services/auth'
 import clsx from 'clsx'
 import { NextPage } from 'next'
@@ -16,6 +17,8 @@ export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
   const path = usePathname()
   const { isError, isLoading } = useMeQuery()
   const router = useRouter()
+
+  useConnectSocket()
 
   const isMyProfile = !isLoading && !isError && router.pathname !== ROUTES.AUTH.SIGN_IN
 

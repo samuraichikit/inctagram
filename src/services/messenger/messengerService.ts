@@ -13,7 +13,7 @@ import {
   UpdateMessagesStatusResponse,
 } from './messengerService.types'
 
-const messengerService = baseApi.injectEndpoints({
+export const messengerService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       deleteMessageById: builder.mutation<void, DeleteMessageByIdRequest>({
