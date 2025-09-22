@@ -12,7 +12,7 @@ type Props = {
   userName: string
 }
 
-const LatestChat = ({ createdAt, messageText, src, userName }: Props) => {
+export const LatestChat = ({ createdAt, messageText, src, userName }: Props) => {
   return (
     <div className={s.latestChatWrapper}>
       <Avatar height={48} src={src} width={48} />
@@ -26,5 +26,3 @@ const LatestChat = ({ createdAt, messageText, src, userName }: Props) => {
     </div>
   )
 }
-
-export default LatestChat

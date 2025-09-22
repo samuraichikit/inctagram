@@ -7,7 +7,7 @@ import { TextField } from '@samuraichikit/inc-ui-kit'
 
 import s from './OpenChat.module.scss'
 
-const OpenChat = () => {
+export const OpenChat = () => {
   const { t } = useTranslation()
 
   return (
@@ -27,5 +27,3 @@ const OpenChat = () => {
     </div>
   )
 }
-
-export default OpenChat

@@ -1,13 +1,14 @@
 import React from 'react'
 
 import { useTranslation } from '@/common/hooks/useTranslation'
-import LatestChat from '@/components/pagesComponents/messenger/chats/latestChat/LatestChat'
 import { useGetMessagesQuery } from '@/services/messenger'
 import { TextField } from '@samuraichikit/inc-ui-kit'
 
 import s from './Chats.module.scss'
 
-const Chats = () => {
+import { LatestChat } from './latestChat'
+
+export const Chats = () => {
   const { t } = useTranslation()
   const { data: latestMessagesData } = useGetMessagesQuery({})
 
@@ -32,5 +33,3 @@ const Chats = () => {
     </div>
   )
 }
-
-export default Chats
