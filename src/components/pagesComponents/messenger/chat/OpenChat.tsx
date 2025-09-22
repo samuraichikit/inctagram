@@ -17,8 +17,9 @@ export const OpenChat = () => {
   const { id } = query
   const dialoguePartnerId = Number(id) ?? ''
   const isTextMessage = message.trim().length > 0
+  const isSkip = !dialoguePartnerId
 
-  const { data } = useGetMessagesByIdQuery({ dialoguePartnerId })
+  const { data } = useGetMessagesByIdQuery({ dialoguePartnerId }, { skip: isSkip })
   const [sendMessage] = useSendMessageMutation()
 
   const changeMessageHandler = (e: ChangeEvent<HTMLInputElement>) => {
