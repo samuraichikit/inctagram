@@ -62,7 +62,7 @@ export const OpenChat = () => {
         />
         <div className={s.inputActions}>
           {isTextMessage ? (
-            <Button onClick={sendMessageHandler} variant={'outlined'}>
+            <Button onClick={sendMessageHandler} variant={'text'}>
               Send message
             </Button>
           ) : (
