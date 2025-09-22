@@ -25,7 +25,7 @@ export const Chats = () => {
               id={latestMessageData.ownerId}
               key={latestMessageData.id}
               messageText={latestMessageData.messageText}
-              src={latestMessageData.avatars[0]?.url}
+              src={latestMessageData.avatars?.[0]?.url}
               userName={latestMessageData.userName}
             />
           )

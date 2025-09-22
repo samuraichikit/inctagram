@@ -72,5 +72,6 @@ export const {
   useDeleteMessageByIdMutation,
   useGetMessagesByIdQuery,
   useGetMessagesQuery,
+  useSendMessageMutation,
   useUpdateMessageStatusMutation,
 } = messengerService
