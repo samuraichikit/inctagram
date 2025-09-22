@@ -1,12 +1,17 @@
+import { WS_EVENT_PATH } from '@/common/constants/wsEventPath'
 import { baseApi } from '@/services/baseApi'
+
+import { socketApi } from '../socket/socketApi'
 import {
   DeleteMessageByIdRequest,
   GetMessagesByIdRequest,
   GetMessagesByIdResponse,
   GetMessagesRequest,
   GetMessagesResponse,
+  Message,
+  SendMessageArgs,
   UpdateMessagesStatusResponse,
-} from '@/services/messenger/messengerService.types'
+} from './messengerService.types'
 
 const messengerService = baseApi.injectEndpoints({
   endpoints: builder => {
@@ -38,6 +43,19 @@ const messengerService = baseApi.injectEndpoints({
           }
         },
       }),
+      sendMessage: builder.mutation<Message, SendMessageArgs>({
+        queryFn: async ({ message, receiverId }) => {
+          return await new Promise(resolve => {
+            socketApi.emit(
+              WS_EVENT_PATH.RECEIVE_MESSAGE,
+              { message, receiverId },
+              (savedMessage: Message) => {
+                resolve({ data: savedMessage })
+              }
+            )
+          })
+        },
+      }),
       updateMessageStatus: builder.mutation<UpdateMessagesStatusResponse, void>({
         query: () => {
           return {
@@ -54,5 +72,6 @@ export const {
   useDeleteMessageByIdMutation,
   useGetMessagesByIdQuery,
   useGetMessagesQuery,
+  useSendMessageMutation,
   useUpdateMessageStatusMutation,
 } = messengerService

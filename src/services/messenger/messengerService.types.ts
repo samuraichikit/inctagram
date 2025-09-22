@@ -1,3 +1,8 @@
+export type SendMessageArgs = {
+  message: string
+  receiverId: number
+}
+
 export enum MessageType {
   IMAGE = 'IMAGE',
   TEXT = 'TEXT',
@@ -54,7 +59,6 @@ export type Message = {
   messageText: string
   messageType: MessageType
   ownerId: number
-
   receiverId: number
   status: MessageStatus
   updatedAt: string
