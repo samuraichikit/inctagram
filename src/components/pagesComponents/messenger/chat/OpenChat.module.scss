@@ -25,6 +25,7 @@
     border-radius: 8px;
   }
 
+
   .inputWrapper {
     position: relative;
     margin-top: auto;
@@ -58,4 +59,52 @@
       }
     }
   }
+}
+
+.messagesWrapper{
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: auto;
+  height: 600px;
+  padding: 0;
+}
+.message {
+  display: flex;
+  align-items: flex-end;
+  margin: 8px 25px 0 25px;
+
+  &.myMessage {
+    justify-content: flex-end;
+
+    .bubble {
+      background: var(--color-accent-900);
+      text-align: right;
+    }
+  }
+
+  &.theirMessage {
+    justify-content: flex-start;
+
+    .bubble {
+      background: var(--color-dark-300);
+    }
+  }
+}
+
+.bubble {
+  max-width: 60%;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-radius: 8px;
+  color: white;
+  margin-left: 12px;
+}
+
+.time {
+  font-size: 12px;
+  opacity: 0.7;
+  align-self: flex-end;
+  color: var(--color-light-900);
 }

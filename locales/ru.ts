@@ -60,6 +60,7 @@ export const ru = {
     inputSearch: 'Поиск',
     openChat: 'Выберите, с кем вы хотите поговорить',
     placeholder: 'Введите Сообщение',
+    sendMessage: 'Отправить сообщение',
     title: 'Мессенджер',
   },
   modalMessage: {
