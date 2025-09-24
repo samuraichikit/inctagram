@@ -59,3 +59,56 @@
     }
   }
 }
+
+.messagesWrapper {
+  overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
+
+  height: 600px;
+  padding: 0;
+}
+
+.bubble {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  max-width: 60%;
+  margin-left: 12px;
+  padding: 10px 14px;
+
+  color: white;
+
+  border-radius: 8px;
+}
+
+.message {
+  display: flex;
+  align-items: flex-end;
+  margin: 8px 25px 0;
+
+  &.myMessage {
+    justify-content: flex-end;
+
+    .bubble {
+      text-align: right;
+      background: var(--color-accent-900);
+    }
+  }
+
+  &.theirMessage {
+    justify-content: flex-start;
+
+    .bubble {
+      background: var(--color-dark-300);
+    }
+  }
+}
+
+.time {
+  align-self: flex-end;
+  font-size: 12px;
+  color: var(--color-light-900);
+  opacity: 0.7;
+}

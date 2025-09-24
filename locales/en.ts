@@ -62,6 +62,7 @@ export const en: Locale = {
     inputSearch: 'Search',
     openChat: 'Choose who you would like to talk to',
     placeholder: 'Type Message...',
+    sendMessage: 'Send message',
     title: 'Messenger',
   },
   modalMessage: {
