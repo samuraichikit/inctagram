@@ -69,6 +69,20 @@
   padding: 0;
 }
 
+.bubble {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  max-width: 60%;
+  margin-left: 12px;
+  padding: 10px 14px;
+
+  color: white;
+
+  border-radius: 8px;
+}
+
 .message {
   display: flex;
   align-items: flex-end;
@@ -90,20 +104,6 @@
       background: var(--color-dark-300);
     }
   }
-}
-
-.bubble {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-
-  max-width: 60%;
-  margin-left: 12px;
-  padding: 10px 14px;
-
-  color: white;
-
-  border-radius: 8px;
 }
 
 .time {
