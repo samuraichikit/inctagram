@@ -4,11 +4,11 @@ import { MicrophoneIcon } from '@/assets/icons/MicrophoneIcon'
 import { PictureIcon } from '@/assets/icons/PictureIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { formatTime } from '@/common/utils'
+import { Avatar } from '@/components/ui/avatar'
 import { useGetMessagesByIdQuery, useSendMessageMutation } from '@/services/messenger'
 import { Button, TextField, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './OpenChat.module.scss'
-import { Avatar } from '@/components/ui/avatar'
 
 type Props = {
   dialoguePartnerId: number
