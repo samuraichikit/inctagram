@@ -8,6 +8,7 @@ import {
   useGetUserFollowersQuery,
   useGetUserFollowingQuery,
 } from '@/services/usersFollowingAndFollowers'
+import { ScrollArea } from '@samuraichikit/inc-ui-kit'
 
 import s from '@/components/ui/profile/followUnfollowList.module.scss'
 
@@ -37,26 +38,28 @@ const FollowUnfollowList = ({ initialTab, onClose, userName }: Props) => {
           <CrossIcon />
         </button>
       </div>
-      <div>
-        {currentData?.items.map(({ avatars, userName }, i) => {
-          return (
-            <ul className={s.list} key={i}>
-              <div className={s.wrapperUser}>
-                {avatars[0]?.url ? (
-                  <div>
-                    <Avatar size={54} src={avatars[0]?.url ?? null} />
-                  </div>
-                ) : (
-                  <div>
-                    <BlankCover className={s.blank} type={'circle'} />
-                  </div>
-                )}
-                <li>{userName}</li>
-              </div>
-            </ul>
-          )
-        })}
-      </div>
+      <ScrollArea className={s.ScrollArea} orientation={'vertical'}>
+        <div>
+          {currentData?.items.map(({ avatars, userName }, i) => {
+            return (
+              <ul className={s.list} key={i}>
+                <div className={s.wrapperUser}>
+                  {avatars[0]?.url ? (
+                    <div>
+                      <Avatar size={54} src={avatars[0]?.url ?? null} />
+                    </div>
+                  ) : (
+                    <div>
+                      <BlankCover className={s.blank} type={'circle'} />
+                    </div>
+                  )}
+                  <li>{userName}</li>
+                </div>
+              </ul>
+            )
+          })}
+        </div>
+      </ScrollArea>
     </div>
   )
 }
