@@ -44,7 +44,7 @@ export type GetMessagesResponse = {
 }
 
 export type GetMessagesRequest = {
-  cursor?: string
+  cursor?: number
   pageSize?: number
   searchName?: string
 }
