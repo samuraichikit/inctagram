@@ -1,13 +1,15 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
+import { CheckMark } from '@/assets/icons/CheckMark'
+import { CheckMarkDoneAll } from '@/assets/icons/CheckMarkDoneAll'
 import { MicrophoneIcon } from '@/assets/icons/MicrophoneIcon'
 import { PictureIcon } from '@/assets/icons/PictureIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { formatTime } from '@/common/utils'
 import { Avatar } from '@/components/ui/avatar'
 import { useGetMessagesByIdQuery, useSendMessageMutation } from '@/services/messenger'
-import { Message } from '@/services/messenger/messengerService.types'
+import { MessageStatus } from '@/services/messenger/messengerService.types'
 import { Button, TextField, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './OpenChat.module.scss'
@@ -19,7 +21,6 @@ type Props = {
 
 export const OpenChat = ({ dialoguePartnerId, partnerAvatar }: Props) => {
   const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState<Message[]>([])
   const [cursor, setCursor] = useState<number | undefined>()
 
   const { t } = useTranslation()
@@ -34,19 +35,11 @@ export const OpenChat = ({ dialoguePartnerId, partnerAvatar }: Props) => {
 
   useEffect(() => {
     setCursor(undefined)
-    setMessages([])
   }, [dialoguePartnerId])
-
-  useEffect(() => {
-    if (data?.items?.length) {
-      setMessages(prev => [...prev, ...data.items])
-    }
-  }, [data?.items])
 
   const changeMessageHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setMessage(e.currentTarget.value)
   }
-
   const sendMessageHandler = () => {
     if (!message.trim()) {
       return
@@ -57,8 +50,8 @@ export const OpenChat = ({ dialoguePartnerId, partnerAvatar }: Props) => {
   }
 
   const loadMoreMessages = () => {
-    if (!isFetching && messages.length) {
-      const lastMessage = messages[messages.length - 1]
+    if (!isFetching && data?.items?.length) {
+      const lastMessage = data.items[data.items.length - 1]
 
       setCursor(lastMessage?.id)
     }
@@ -70,14 +63,14 @@ export const OpenChat = ({ dialoguePartnerId, partnerAvatar }: Props) => {
         <div className={s.messagesWrapper} id={'scrollableDiv'}>
           <InfiniteScroll
             className={s.scroll}
-            dataLength={messages.length}
+            dataLength={data?.items?.length || 0}
             hasMore={data ? data.items.length < data.totalCount : false}
             inverse
             loader={<p>Загрузка...</p>}
             next={loadMoreMessages}
             scrollableTarget={'scrollableDiv'}
           >
-            {messages.map(messageData => {
+            {data?.items.map(messageData => {
               const isMe = messageData.ownerId !== dialoguePartnerId
 
               return (
@@ -90,6 +83,11 @@ export const OpenChat = ({ dialoguePartnerId, partnerAvatar }: Props) => {
                     <Typography variant={'regular_text_14'}>{messageData.messageText}</Typography>
                     <Typography className={s.time} variant={'small_text'}>
                       {formatTime(messageData.createdAt)}
+                      {messageData.status === MessageStatus.SENT ? (
+                        <CheckMark />
+                      ) : (
+                        <CheckMarkDoneAll />
+                      )}
                     </Typography>
                   </div>
                 </li>
