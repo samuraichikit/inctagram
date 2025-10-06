@@ -1,17 +1,15 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
+import { CheckMark } from '@/assets/icons/CheckMark'
+import { CheckMarkDoneAll } from '@/assets/icons/CheckMarkDoneAll'
 import { MicrophoneIcon } from '@/assets/icons/MicrophoneIcon'
 import { PictureIcon } from '@/assets/icons/PictureIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { formatTime } from '@/common/utils'
 import { Avatar } from '@/components/ui/avatar'
-import {
-  useDeleteMessageByIdMutation,
-  useGetMessagesByIdQuery,
-  useSendMessageMutation,
-} from '@/services/messenger'
-import { Message } from '@/services/messenger/messengerService.types'
+import { useGetMessagesByIdQuery, useSendMessageMutation } from '@/services/messenger'
+import { MessageStatus } from '@/services/messenger/messengerService.types'
 import { Button, TextField, Typography } from '@samuraichikit/inc-ui-kit'
 
 import s from './OpenChat.module.scss'
@@ -85,6 +83,11 @@ export const OpenChat = ({ dialoguePartnerId, partnerAvatar }: Props) => {
                     <Typography variant={'regular_text_14'}>{messageData.messageText}</Typography>
                     <Typography className={s.time} variant={'small_text'}>
                       {formatTime(messageData.createdAt)}
+                      {messageData.status === MessageStatus.SENT ? (
+                        <CheckMark />
+                      ) : (
+                        <CheckMarkDoneAll />
+                      )}
                     </Typography>
                   </div>
                 </li>

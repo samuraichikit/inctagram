@@ -1,6 +1,6 @@
 import { AppDispatch } from '@/app/store'
 import { WS_EVENT_PATH } from '@/common/constants/wsEventPath'
-import { Message } from '@/services/messenger/messengerService.types'
+import { Message, MessageStatus } from '@/services/messenger/messengerService.types'
 import { socketApi } from '@/services/socket/socketApi'
 
 import { messengerService } from '../messenger'
@@ -27,7 +27,7 @@ export const registerSocketListeners = (dispatch: AppDispatch) => {
           const index = draft.items.findIndex(m => m.id === message.id)
 
           if (index === -1) {
-            draft.items.unshift(message)
+            draft.items.unshift({ ...message, status: MessageStatus.SENT })
           } else {
             draft.items[index] = message
           }
@@ -46,10 +46,12 @@ export const registerSocketListeners = (dispatch: AppDispatch) => {
             message.ownerId === message.receiverId ? message.ownerId : message.receiverId,
         },
         draft => {
-          const exists = draft.items.some(m => m.id === message.id)
+          const existsIndex = draft.items.findIndex(m => m.id === message.id)
 
-          if (!exists) {
-            draft.items.unshift(message)
+          if (existsIndex === -1) {
+            draft.items.unshift({ ...message, status: MessageStatus.READ })
+          } else {
+            draft.items[existsIndex].status = MessageStatus.READ
           }
         }
       )
