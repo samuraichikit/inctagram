@@ -71,17 +71,17 @@
   flex-direction: column-reverse;
 
   height: 600px;
-  padding: 0;
+  padding: 0 0 15px 0;
 }
 
 .bubble {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 1px;
 
   max-width: 60%;
   margin-left: 12px;
-  padding: 10px 14px;
+  padding: 10px 14px 2px 14px;
 
   color: white;
 

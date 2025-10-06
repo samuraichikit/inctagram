@@ -35,14 +35,28 @@ export const messengerService = baseApi.injectEndpoints({
         },
       }),
       getMessagesById: builder.query<GetMessagesByIdResponse, GetMessagesByIdRequest>({
-        query: ({ dialoguePartnerId, ...args }) => {
-          return {
-            method: 'GET',
-            params: args,
-            url: `/v1/messenger/${dialoguePartnerId}`,
-          }
+        forceRefetch({ currentArg, previousArg }) {
+          return (
+            currentArg?.dialoguePartnerId !== previousArg?.dialoguePartnerId ||
+            currentArg?.cursor !== previousArg?.cursor
+          )
         },
+
+        merge: (currentCache, newCache) => {
+          currentCache.items.push(...newCache.items)
+          currentCache.totalCount = newCache.totalCount ?? currentCache.totalCount
+        },
+
+        query: ({ cursor, dialoguePartnerId }) => ({
+          method: 'GET',
+          params: cursor ? { cursor } : undefined,
+          url: `/v1/messenger/${dialoguePartnerId}`,
+        }),
+
+        serializeQueryArgs: ({ endpointName, queryArgs }) =>
+          `${endpointName}-${queryArgs.dialoguePartnerId}`, // один кэш на диалог
       }),
+
       sendMessage: builder.mutation<Message, SendMessageArgs>({
         queryFn: async ({ message, receiverId }) => {
           return await new Promise(resolve => {
