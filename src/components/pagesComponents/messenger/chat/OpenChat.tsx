@@ -8,7 +8,11 @@ import { PictureIcon } from '@/assets/icons/PictureIcon'
 import { useTranslation } from '@/common/hooks/useTranslation'
 import { formatTime } from '@/common/utils'
 import { Avatar } from '@/components/ui/avatar'
-import { useGetMessagesByIdQuery, useSendMessageMutation } from '@/services/messenger'
+import {
+  useGetMessagesByIdQuery,
+  useSendMessageMutation,
+  useUpdateMessageStatusMutation,
+} from '@/services/messenger'
 import { MessageStatus } from '@/services/messenger/messengerService.types'
 import { Button, TextField, Typography } from '@samuraichikit/inc-ui-kit'
 
@@ -32,6 +36,21 @@ export const OpenChat = ({ dialoguePartnerId, partnerAvatar }: Props) => {
     { skip: isSkip }
   )
   const [sendMessage] = useSendMessageMutation()
+
+  const [readMessages] = useUpdateMessageStatusMutation()
+
+  useEffect(() => {
+    const unreadIds = (data?.items ?? [])
+      .filter(m => m.status !== MessageStatus.READ)
+      .map(m => m.id)
+
+    if (unreadIds.length > 0) {
+      readMessages({
+        dialoguePartnerId,
+        ids: unreadIds,
+      })
+    }
+  }, [data, readMessages, dialoguePartnerId])
 
   useEffect(() => {
     setCursor(undefined)
@@ -83,11 +102,12 @@ export const OpenChat = ({ dialoguePartnerId, partnerAvatar }: Props) => {
                     <Typography variant={'regular_text_14'}>{messageData.messageText}</Typography>
                     <Typography className={s.time} variant={'small_text'}>
                       {formatTime(messageData.createdAt)}
-                      {messageData.status === MessageStatus.SENT ? (
-                        <CheckMark />
-                      ) : (
-                        <CheckMarkDoneAll />
-                      )}
+                      {isMe &&
+                        (messageData.status === MessageStatus.SENT ? (
+                          <CheckMark />
+                        ) : (
+                          <CheckMarkDoneAll />
+                        ))}
                     </Typography>
                   </div>
                 </li>

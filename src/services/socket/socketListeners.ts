@@ -14,6 +14,7 @@ export const registerSocketListeners = (dispatch: AppDispatch) => {
   const cleanup = () => {
     socketApi.off(WS_EVENT_PATH.MESSAGE_SEND)
     socketApi.off(WS_EVENT_PATH.RECEIVE_MESSAGE)
+    socketApi.off(WS_EVENT_PATH.MESSAGE_READ)
   }
 
   cleanup()
@@ -46,13 +47,27 @@ export const registerSocketListeners = (dispatch: AppDispatch) => {
             message.ownerId === message.receiverId ? message.ownerId : message.receiverId,
         },
         draft => {
-          const existsIndex = draft.items.findIndex(m => m.id === message.id)
+          const exists = draft.items.some(m => m.id === message.id)
 
-          if (existsIndex === -1) {
-            draft.items.unshift({ ...message, status: MessageStatus.READ })
-          } else {
-            draft.items[existsIndex].status = MessageStatus.READ
+          if (!exists) {
+            draft.items.unshift(message)
           }
+        }
+      )
+    )
+  })
+
+  socketApi.on(WS_EVENT_PATH.MESSAGE_READ, ({ messageIds, readerId }) => {
+    dispatch(
+      messengerService.util.updateQueryData(
+        'getMessagesById',
+        { dialoguePartnerId: readerId },
+        draft => {
+          draft.items.forEach(msg => {
+            if (messageIds.includes(msg.id)) {
+              msg.status = MessageStatus.READ
+            }
+          })
         }
       )
     )

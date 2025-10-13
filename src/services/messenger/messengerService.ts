@@ -10,7 +10,7 @@ import {
   GetMessagesResponse,
   Message,
   SendMessageArgs,
-  UpdateMessagesStatusResponse,
+  UpdateMessagesStatusRequest,
 } from './messengerService.types'
 
 export const messengerService = baseApi.injectEndpoints({
@@ -70,12 +70,19 @@ export const messengerService = baseApi.injectEndpoints({
           })
         },
       }),
-      updateMessageStatus: builder.mutation<UpdateMessagesStatusResponse, void>({
-        query: () => {
-          return {
+      updateMessageStatus: builder.mutation<void, UpdateMessagesStatusRequest>({
+        queryFn: async ({ dialoguePartnerId, ids }, _api, _extraOptions, baseQuery) => {
+          await new Promise(resolve => {
+            socketApi.emit(WS_EVENT_PATH.MESSAGE_READ, { dialoguePartnerId, ids })
+          })
+
+          await baseQuery({
+            body: { ids },
             method: 'PUT',
             url: `/v1/messenger`,
-          }
+          })
+
+          return { data: undefined }
         },
       }),
     }
