@@ -1,0 +1,119 @@
+import React from 'react'
+import { toast } from 'react-toastify'
+
+import { useAppDispatch, useAppSelector } from '@/app/store'
+import { useTranslation } from '@/common/hooks/useTranslation'
+import {
+  resetState,
+  setDescription,
+  setPrevStage,
+} from '@/components/pagesComponents/createPost/service/createPost.slice'
+import { isFetchBaseQueryError } from '@/components/pagesComponents/createPost/service/getFilteredImages'
+import { SliderPost } from '@/components/pagesComponents/createPost/slider/SliderPost'
+import { Avatar } from '@/components/ui/profile/profilePhoto/avatar/Avatar'
+import { useGetProfileQuery } from '@/services/profile'
+import { useCreatePostMutation } from '@/services/publicPosts/post-api'
+import { ArrowLeftIcon, Button, TextArea, Typography } from '@samuraichikit/inc-ui-kit'
+import NextImage from 'next/image'
+
+import s from './Publish.module.scss'
+
+type PublishProps = {
+  onCloseBtn: () => void
+}
+
+export const Publish = ({ onCloseBtn }: PublishProps) => {
+  const { data } = useGetProfileQuery()
+  const filteredImages = useAppSelector(state => state.createPostSlice.filteredPictures)
+  const description = useAppSelector(state => state.createPostSlice.description)
+  const dispatch = useAppDispatch()
+  const [createPost] = useCreatePostMutation()
+  const imagesIds = useAppSelector(state => state.createPostSlice.picturesIds)
+  const { t } = useTranslation()
+
+  const setPerv = () => {
+    dispatch(setPrevStage())
+  }
+
+  const changeDescHandler = (value: string) => {
+    dispatch(setDescription({ desc: value }))
+  }
+
+  const onPublishHandler = async () => {
+    try {
+      if (imagesIds.length) {
+        debugger
+        await createPost({ childrenMetadata: imagesIds, description })
+        dispatch(resetState())
+        onCloseBtn()
+
+        toast.success(t.postModal.postIsPublished)
+      }
+    } catch (error) {
+      if (isFetchBaseQueryError(error)) {
+        if (!Array.isArray(error.data.messages[0].message)) {
+          toast.error(error.data.messages[0].message)
+        }
+      }
+    }
+  }
+
+  return (
+    <div>
+      <div className={s.title}>
+        <button className={s.backBtn} onClick={setPerv} type={'button'}>
+          <ArrowLeftIcon />
+        </button>
+        <Typography variant={'h1'}>{t.postModal.publication}</Typography>
+        <Button
+          disabled={!imagesIds.length}
+          onClick={onPublishHandler}
+          style={{ padding: 'unset' }}
+          variant={'outlined'}
+        >
+          {t.postModal.publishMsg}
+        </Button>
+      </div>
+
+      <div className={s.body}>
+        <div className={s.sliderBlock}>
+          <SliderPost
+            isDots={filteredImages.length > 1}
+            sizeBtn={36}
+            sliderLength={filteredImages.length}
+          >
+            {filteredImages.map(pic => (
+              <div key={pic.id}>
+                <NextImage
+                  alt={'post image with filter'}
+                  height={499}
+                  src={pic.img}
+                  style={{ objectFit: 'contain' }}
+                  width={489}
+                />
+              </div>
+            ))}
+          </SliderPost>
+        </div>
+        <div className={s.publishBlock}>
+          <div className={s.userInfo}>
+            <Avatar size={36} src={data?.avatars[0]?.url} /*userName={`${data?.userName}`}*/ />
+            <Typography asChild>{data?.userName ?? 'URL Profile'}</Typography>
+          </div>
+          <TextArea
+            label={t.postModal.addPublicationDesc}
+            maxLength={500}
+            onValueChange={changeDescHandler}
+            placeholder={t.postModal.whatsNew}
+            value={description}
+          />
+          <Typography
+            asChild
+            className={s.counter}
+            variant={'small_text'}
+          >{`${description.length}/500`}</Typography>
+        </div>
+      </div>
+    </div>
+  )
+}

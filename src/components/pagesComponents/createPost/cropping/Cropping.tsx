@@ -1,0 +1,63 @@
+import React from 'react'
+
+import { useAppDispatch, useAppSelector } from '@/app/store'
+import { useTranslation } from '@/common/hooks/useTranslation'
+import { ImageCropper } from '@/components/pagesComponents/createPost/cropping/imageCropper/ImageCropper'
+import { SelectedImagesPreview } from '@/components/pagesComponents/createPost/cropping/selectedImagesPreview/SelectedImagesPreview'
+import {
+  setCroppedImages,
+  setNextStage,
+  setPrevStage,
+} from '@/components/pagesComponents/createPost/service/createPost.slice'
+import { getCroppedImage } from '@/components/pagesComponents/createPost/service/getCroppedImage'
+import { SliderPost } from '@/components/pagesComponents/createPost/slider/SliderPost'
+import { ArrowLeftIcon, Button, Typography } from '@samuraichikit/inc-ui-kit'
+
+import s from './Cropping.module.scss'
+
+export const Cropping = () => {
+  const photos = useAppSelector(state => state.createPostSlice.pictures)
+  const dispatch = useAppDispatch()
+  const { t } = useTranslation()
+
+  const savedImages = async () => {
+    const images: string[] = []
+
+    for (let i = 0; i < photos.length; i++) {
+      images.push(await getCroppedImage(photos[i]))
+    }
+
+    return images
+  }
+  const setPerv = () => {
+    dispatch(setPrevStage())
+  }
+  const setNext = async () => {
+    const croppedImages = await savedImages()
+
+    dispatch(setCroppedImages({ croppedImages }))
+    dispatch(setNextStage())
+  }
+
+  return (
+    <div>
+      <div className={s.title}>
+        <button className={s.backBtn} onClick={setPerv} type={'button'}>
+          <ArrowLeftIcon />
+        </button>
+        <Typography variant={'h1'}>{t.postModal.cropping}</Typography>
+        <Button onClick={setNext} style={{ padding: 'unset' }} variant={'outlined'}>
+          {t.postModal.next}
+        </Button>
+      </div>
+      <div className={s.body}>
+        <SliderPost isDots={photos.length > 1} sizeBtn={36} sliderLength={photos.length}>
+          {photos.map(photo => (
+            <ImageCropper key={photo.id} photo={photo} />
+          ))}
+        </SliderPost>
+        <SelectedImagesPreview />
+      </div>
+    </div>
+  )
+}

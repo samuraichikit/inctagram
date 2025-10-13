@@ -1,0 +1,121 @@
+import { useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
+
+import { DeletePost } from '@/components/pagesComponents/profile/postModal/deletePost/DeletePost'
+import { EditPost } from '@/components/pagesComponents/profile/postModal/editPost'
+import { PostActionsBar } from '@/components/pagesComponents/profile/postModal/postActionsBar'
+import { Comments } from '@/components/pagesComponents/publicProfile/publicPostModal/postComment/Comments'
+import { PostLikes } from '@/components/pagesComponents/publicProfile/publicPostModal/postLikes'
+import { CommentForm } from '@/components/ui/commentForm'
+import { useGetPostCommentsQuery } from '@/services/commentPost/commentPostService'
+import { useGetPostByIdQuery } from '@/services/posts'
+import { Modal } from '@samuraichikit/inc-ui-kit'
+import { useParams } from 'next/navigation'
+
+import s from './postModal.module.scss'
+
+import { PostActionsMenu } from '../../profile/postModal/postActionsMenu'
+import { PostImages } from '../../publicPage/publicPosts/postImages'
+import { UserInfo } from '../../publicPage/publicPosts/userInfo'
+
+type Props = {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export const PostModal = ({ isOpen, onClose }: Props) => {
+  const params = useParams()
+  const postId = params?.id[1] ?? ''
+  const postIdNum = Number(postId)
+
+  const { data: postById, isLoading: isPostLoading } = useGetPostByIdQuery(postId, {
+    refetchOnMountOrArgChange: true,
+    skip: !postId,
+  })
+
+  const { data: commentsData, isLoading: isCommentsLoading } = useGetPostCommentsQuery(
+    { postId: postIdNum },
+    { skip: !postId }
+  )
+
+  const comments = commentsData?.items ?? []
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
+  const [description, setDescription] = useState<string>('')
+
+  useEffect(() => {
+    if (postById && postById.description !== description) {
+      setDescription(postById.description)
+    }
+  }, [postById, description])
+
+  const handleSetEditPost = (isShow: boolean) => {
+    setIsEditModalOpen(isShow)
+  }
+  const handleUpdateDescription = (newDescription: string) => {
+    setDescription(newDescription)
+  }
+
+  if (isPostLoading || isCommentsLoading) {
+    return (
+      <Modal onOpenChange={onClose} open={isOpen}>
+        <Skeleton className={s.postDetails} height={562} />
+      </Modal>
+    )
+  }
+
+  if (!postById || !params?.id) {
+    return null
+  }
+
+  const { avatarOwner, avatarWhoLikes, createdAt, id, images, isLiked, likesCount, userName } =
+    postById
+
+  return (
+    id === +params?.id[1] && (
+      <Modal onOpenChange={onClose} open={isOpen}>
+        <div className={s.container}>
+          <PostImages className={s.images} height={562} images={images} width={490} />
+          <div className={s.postDetails}>
+            {!isEditModalOpen && (
+              <div className={s.userInfoContainer}>
+                <UserInfo src={avatarOwner} userName={userName} />
+                <PostActionsMenu
+                  showDeleteModal={isShow => setIsDeleteModalOpen(isShow)}
+                  showEditModal={isShow => handleSetEditPost(isShow)}
+                />
+              </div>
+            )}
+            {isDeleteModalOpen && (
+              <DeletePost
+                closeDeleteModal={isShow => setIsDeleteModalOpen(isShow)}
+                isOpen={isDeleteModalOpen}
+                onCloseModalPost={onClose}
+              />
+            )}
+            {isEditModalOpen ? (
+              <EditPost
+                closeEditModal={isShow => handleSetEditPost(isShow)}
+                onUpdateDescription={handleUpdateDescription}
+                postId={id.toString()}
+              />
+            ) : (
+              <>
+                <Comments comments={comments} />
+                <PostActionsBar isLiked={isLiked} postId={+postId} />
+                <PostLikes
+                  avatarsSrc={avatarWhoLikes}
+                  className={s.postLikes}
+                  createdAt={createdAt}
+                  likesCount={likesCount}
+                />
+                <CommentForm postId={Number(postId)} />
+              </>
+            )}
+          </div>
+        </div>
+      </Modal>
+    )
+  )
+}

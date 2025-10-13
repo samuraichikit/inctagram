@@ -1,0 +1,56 @@
+import { useEffect } from 'react'
+
+import { ROUTES } from '@/common/constants'
+import { useTranslation } from '@/common/hooks/useTranslation'
+import { useConfirmEmailMutation } from '@/services/auth'
+import { Button, Typography } from '@samuraichikit/inc-ui-kit'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
+import s from './confirmedEmail.module.scss'
+
+import confirmedBro from '../../../../../public/confirmedBro.png'
+import { VerificationLink } from '../verificationLink'
+
+export const ConfirmedEmail = () => {
+  const [confirmEmail, { error, isLoading }] = useConfirmEmailMutation()
+  const { t } = useTranslation()
+  const router = useRouter()
+  const { query } = router
+
+  const confirmationCode = query.code as string
+
+  useEffect(() => {
+    if (confirmationCode) {
+      confirmEmail({ confirmationCode })
+    }
+  }, [confirmationCode, confirmEmail])
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (error) {
+    return <VerificationLink />
+  }
+
+  return (
+    <div className={s.wrapper}>
+      <Typography className={s.title} variant={'h1'}>
+        {t.signUp.congratsMsg}
+      </Typography>
+      <Typography className={s.description} variant={'regular_text_16'}>
+        {t.signUp.emailConfirmed}
+      </Typography>
+      <div>
+        <Button asChild className={s.button}>
+          <Link href={ROUTES.AUTH.SIGN_IN}>{t.passwordForm.signIn}</Link>
+        </Button>
+      </div>
+      <div>
+        <Image alt={'confirmed email'} height={300} src={confirmedBro} width={432} />
+      </div>
+    </div>
+  )
+}

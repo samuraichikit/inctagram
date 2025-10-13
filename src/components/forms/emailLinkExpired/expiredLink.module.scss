@@ -1,0 +1,41 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 473px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 24px;
+
+  width: 300px;
+  margin-top: -24px;
+  padding-bottom: 24px;
+
+  text-align: center;
+}
+
+.buttonTextFieldContainer {
+  padding-right: 33px;
+  padding-left: 33px;
+  text-align: left;
+}
+
+.submitButton {
+  margin-top: 24px;
+}
+
+.modalContent {
+  display: grid;
+  row-gap: 18px;
+  padding: 30px 24px 36px;
+
+  & :last-child {
+    justify-self: end;
+    max-width: min-content;
+    padding: 6px 36px;
+  }
+}

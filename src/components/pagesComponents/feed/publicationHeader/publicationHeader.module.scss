@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.userInfoContainer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.circle {
+  width: 4px;
+  height: 4px;
+  background-color: var(--color-light-700);
+  border-radius: 100%;
+}
+
+.timeAgo {
+  color: var(--color-light-900);
+}

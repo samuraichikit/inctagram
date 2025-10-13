@@ -1,0 +1,50 @@
+.sliderDot {
+  all: unset;
+
+  cursor: pointer;
+
+  width: 20px;
+  height: 20px;
+  padding: 0 2px 4px;
+
+  font-size: 24px;
+  color: var(--color-light-900);
+  text-align: center;
+
+  transition: color 0.2s ease;
+
+  &.active {
+    color: var(--color-accent-500);
+  }
+
+  &:hover {
+    color: var(--color-accent-500);
+  }
+}
+
+.sliderBtn {
+  all: unset;
+
+  cursor: pointer;
+
+  position: absolute;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgb(35 35 35 / 85%);
+  border-radius: 2px;
+
+  transition: color 0.2s ease;
+
+  &:disabled {
+    cursor: not-allowed;
+    color: var(--color-light-900);
+  }
+
+  &:hover:not([disabled]) {
+    color: var(--color-accent-500);
+  }
+}

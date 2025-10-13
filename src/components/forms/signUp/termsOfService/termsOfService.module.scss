@@ -1,0 +1,25 @@
+.wrapper {
+  align-self: flex-start;
+}
+
+.linkWrapper {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  padding: 0;
+
+  text-decoration: none;
+}
+
+.title {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.text {
+  max-width: 960px;
+  margin: 24px auto;
+  padding: 0 10px;
+  text-align: center;
+}

@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  max-height: 565px;
+}
+
+.skeleton {
+  margin: 100px 50px;
+  color: var(--color-light-900);
+}
+
+.images {
+  max-width: 490px;
+}
+
+.postDetails {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.userInfoContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 11px 24px 12px;
+  border-bottom: 1px solid var(--color-dark-100);
+}
+
+.icon3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon2 {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  width: 70px;
+}
+
+.addText {
+  color: var(--color-light-900);
+}
+
+.postLikes {
+  padding: 0 25px 5px;
+  border-bottom: 1px solid var(--color-dark-100);
+}

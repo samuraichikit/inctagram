@@ -1,0 +1,10 @@
+.settingsList {
+  display: flex;
+  justify-content: space-between;
+}
+
+.settingsItem {
+  flex-basis: 25%;
+  padding: 6px 0;
+  text-align: center;
+}

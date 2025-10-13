@@ -1,0 +1,15 @@
+.filterCard {
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: var(--color-dark-100);
+  }
+
+  .image {
+    display: block;
+    margin-bottom: 6px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+}

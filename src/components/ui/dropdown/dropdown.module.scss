@@ -1,0 +1,81 @@
+.Content {
+  position: relative;
+  z-index: 9999;
+
+  overflow-y: auto;
+
+  max-width: 350px;
+  padding: 12px;
+
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-100);
+  border-radius: 4px;
+}
+
+.Trigger {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--color-dark-100);
+}
+
+.ScrollArea {
+  height: 200px;
+}
+
+.item {
+  cursor: pointer;
+  user-select: none;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: left;
+
+  margin-right: 6px;
+
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-s);
+  color: var(--color-light-100);
+
+  outline: none;
+
+  &:not(:last-of-type) {
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-dark-100);
+  }
+
+  &:not(:first-of-type) {
+    padding-top: 12px;
+  }
+
+  &[data-disabled] {
+    pointer-events: none;
+    color: var(--color-dark-300);
+  }
+
+  & > :not(:last-child) {
+    margin-right: 6px;
+  }
+
+  &[data-highlighted] {
+    color: var(--color-accent-500);
+  }
+}
+
+.Arrow {
+  position: absolute;
+  right: -5px;
+
+  visibility: visible;
+
+  fill: var(--color-dark-700);
+  stroke: var(--color-dark-500);
+}

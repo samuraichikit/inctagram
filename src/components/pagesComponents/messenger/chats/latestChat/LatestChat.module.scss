@@ -1,0 +1,37 @@
+.latestChatWrapper {
+  cursor: pointer;
+
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  padding: 12px;
+
+  text-decoration: none;
+
+  border-bottom: 1px solid var(--color-dark-300);
+
+  .latestChatInfo {
+    width: 100%;
+
+    .latestChatData {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .latestChatTime {
+        color: var(--color-light-900);
+      }
+    }
+
+    .latestChatText {
+      overflow: hidden;
+
+      width: 165px;
+
+      color: var(--color-light-900);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+.editModal {
+  position: absolute;
+  z-index: 1;
+  top: 50px;
+  right: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  width: auto;
+  height: 85px;
+  padding: 14px 12px;
+
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
+}
+
+.toggle {
+  position: relative;
+  font-size: var(--font-size-xxl);
+  color: var(--color-light-100);
+}
+
+.toggle:active {
+  color: var(--color-accent-900);
+}
+
+.btn {
+  margin-left: 0;
+  font-size: 14px;
+  font-weight: var(--font-weightregular);
+  line-height: var(--line-height-m);
+}
