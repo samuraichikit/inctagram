@@ -49,7 +49,8 @@ export type GetMessagesRequest = {
   searchName?: string
 }
 
-export type UpdateMessagesStatusResponse = {
+export type UpdateMessagesStatusRequest = {
+  dialoguePartnerId: number
   ids: number[]
 }
 
